@@ -7,7 +7,7 @@ COPY package.json ./
 
 RUN npm install --silent
 
-# 소스를 작업폴더로 복사하고 빌드
+# 소스를 작업폴더로 복사하고 빌드 
 COPY . .
 RUN npm run build
 
