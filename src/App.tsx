@@ -26,10 +26,10 @@ function App() {
         </p>
       </div>
       <p className="read-the-docs">Click on the Vite and React logos to learn more</p>
-      <Button variant="primary" size="sm" icon="r-arrow" onClick={() => {}} children={"테스트 버튼"} />
-      <Button variant="primary" size="md" icon="r-arrow" onClick={() => {}} children={"테스트 버튼"} />
-      <Button variant="primary" size="lg" icon="r-arrow" onClick={() => {}} children={"테스트 버튼"} disabled />
-      <Button variant="primary" size="xl" icon="r-arrow" onClick={() => {}} children={"테스트 버튼"} />
+      <Button variant="primary" size="sm" icon="rightArrow" onClick={() => {}} children={"테스트 버튼"} />
+      <Button variant="primary" size="md" icon="rightArrow" onClick={() => {}} children={"테스트 버튼"} />
+      <Button variant="primary" size="lg" icon="rightArrow" onClick={() => {}} children={"테스트 버튼"} disabled />
+      <Button variant="primary" size="xl" icon="rightArrow" onClick={() => {}} children={"테스트 버튼"} />
 
       <Button variant="secondary" size="sm" icon="search" onClick={() => {}} children={"테스트 버튼"} />
       <Button variant="secondary" size="md" icon="search" onClick={() => {}} children={"테스트 버튼"} disabled />

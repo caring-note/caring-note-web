@@ -5,7 +5,7 @@ import searchGray from "../assets/icon/searchGray.png";
 interface ButtonProps {
   variant?: "primary" | "secondary"; // primary : Primary Button, secondary : Secondary Button
   size?: "sm" | "md" | "lg" | "xl"; // sm : Small, md : Medium, lg : Large, xl : Extra Large
-  icon?: "none" | "r-arrow" | "search";
+  icon?: "none" | "rightArrow" | "search";
   disabled?: boolean;
   onClick: () => void;
   children: React.ReactNode;
@@ -84,7 +84,7 @@ const Button = ({ variant = "primary", size = "md", icon = "none", disabled = fa
     <button onClick={onClick} className={getButtonClasses(variant, size)} disabled={disabled}>
       {icon === "search" ? <img className={"mr-1" + getIconSizeClasses(size)} src={getSearchSrc(variant, disabled)} /> : null}
       {children}
-      {icon === "r-arrow" ? <img className={"ml-1" + getIconSizeClasses(size)} src={getRightArrowSrc(variant, disabled)} /> : null}
+      {icon === "rightArrow" ? <img className={"ml-1" + getIconSizeClasses(size)} src={getRightArrowSrc(variant, disabled)} /> : null}
     </button>
   );
 };
