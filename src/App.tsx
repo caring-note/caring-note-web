@@ -3,6 +3,7 @@ import Button from "./components/Button";
 import reactLogo from "./assets/react.svg";
 import viteLogo from "/vite.svg";
 import "./App.css";
+import Badge from "./components/Badge";
 
 function App() {
   const [count, setCount] = useState(0);
@@ -35,6 +36,24 @@ function App() {
       <Button variant="secondary" size="md" icon="search" onClick={() => {}} children={"테스트 버튼"} disabled />
       <Button variant="secondary" size="lg" icon="search" onClick={() => {}} children={"테스트 버튼"} />
       <Button variant="secondary" size="xl" icon="search" onClick={() => {}} children={"테스트 버튼"} />
+
+      <Badge variant="primary" size="sm" type="tint" />
+      <Badge variant="primary" size="md" type="tint" />
+      <Badge variant="primary" size="lg" type="tint" />
+      <Badge variant="primary" size="xl" type="tint" />
+      <Badge variant="primary" size="sm" type="outline" />
+      <Badge variant="primary" size="md" type="outline" />
+      <Badge variant="primary" size="lg" type="outline" />
+      <Badge variant="primary" size="xl" type="outline" />
+
+      <Badge variant="error" size="sm" type="tint" />
+      <Badge variant="error" size="md" type="tint" />
+      <Badge variant="error" size="lg" type="tint" />
+      <Badge variant="error" size="xl" type="tint" />
+      <Badge variant="error" size="sm" type="outline" />
+      <Badge variant="error" size="md" type="outline" />
+      <Badge variant="error" size="lg" type="outline" />
+      <Badge variant="error" size="xl" type="outline" />
     </>
   );
 }

@@ -82,9 +82,9 @@ const getRightArrowSrc = (variant: "primary" | "secondary", disabled: boolean) =
 const Button = ({ variant = "primary", size = "md", icon = "none", disabled = false, onClick, children }: ButtonProps) => {
   return (
     <button onClick={onClick} className={getButtonClasses(variant, size)} disabled={disabled}>
-      {icon === "search" ? <img className={"mr-1" + getIconSizeClasses(size)} src={getSearchSrc(variant, disabled)} /> : null}
+      {icon === "search" ? <img className={"mr-1 " + getIconSizeClasses(size)} src={getSearchSrc(variant, disabled)} /> : null}
       {children}
-      {icon === "rightArrow" ? <img className={"ml-1" + getIconSizeClasses(size)} src={getRightArrowSrc(variant, disabled)} /> : null}
+      {icon === "rightArrow" ? <img className={"ml-1 " + getIconSizeClasses(size)} src={getRightArrowSrc(variant, disabled)} /> : null}
     </button>
   );
 };
