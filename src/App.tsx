@@ -4,6 +4,7 @@ import reactLogo from "./assets/react.svg";
 import viteLogo from "/vite.svg";
 import "./App.css";
 import Badge from "./components/Badge";
+import Tooltip from "./components/Tooltip";
 
 function App() {
   const [count, setCount] = useState(0);
@@ -54,6 +55,9 @@ function App() {
       <Badge variant="error" size="md" type="outline" />
       <Badge variant="error" size="lg" type="outline" />
       <Badge variant="error" size="xl" type="outline" />
+
+      <Tooltip id="test-id" text="툴팁 테스트 호버" />
+      <Tooltip id="test-id-2" text="툴팁 테스트 클릭" eventType="click" />
     </>
   );
 }
