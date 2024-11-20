@@ -10,10 +10,10 @@ import Badge from "./components/Badge";
 import Button from "./components/Button";
 import NavigationLeft from "./components/NavigationLeft";
 import NavigationLeftMenu from "./components/NavigationLeftMenu";
+import NavigationRight from "./components/NavigationRight";
 import Tooltip from "./components/Tooltip";
 
 function App() {
-
   return (
     <div className="flex justify-start ">
       <div>
@@ -32,7 +32,8 @@ function App() {
         </NavigationLeft>
       </div>
 
-      <div>
+      {/* 오른쪽 네비게이션 바의 width와 같은 길이의 padding-right 필요 */}
+      <div className="pr-16">
         <p className="read-the-docs">힘내 진완아</p>
         <Button variant="primary" size="sm" icon="rightArrow" onClick={() => {}} children={"테스트 버튼"} />
         <Button variant="primary" size="md" icon="rightArrow" onClick={() => {}} children={"테스트 버튼"} />
@@ -44,27 +45,29 @@ function App() {
         <Button variant="secondary" size="lg" icon="search" onClick={() => {}} children={"테스트 버튼"} />
         <Button variant="secondary" size="xl" icon="search" onClick={() => {}} children={"테스트 버튼"} />
 
-        <Badge variant="primary" size="sm" type="tint" />
-        <Badge variant="primary" size="md" type="tint" />
-        <Badge variant="primary" size="lg" type="tint" />
-        <Badge variant="primary" size="xl" type="tint" />
-        <Badge variant="primary" size="sm" type="outline" />
-        <Badge variant="primary" size="md" type="outline" />
-        <Badge variant="primary" size="lg" type="outline" />
-        <Badge variant="primary" size="xl" type="outline" />
+        <Badge variant="primary" size="sm" type="tint" text="Badge"/>
+        <Badge variant="primary" size="md" type="tint" text="Badge"/>
+        <Badge variant="primary" size="lg" type="tint" text="Badge"/>
+        <Badge variant="primary" size="xl" type="tint" text="Badge"/>
+        <Badge variant="primary" size="sm" type="outline" text="Badge"/>
+        <Badge variant="primary" size="md" type="outline" text="Badge"/>
+        <Badge variant="primary" size="lg" type="outline" text="Badge"/>
+        <Badge variant="primary" size="xl" type="outline" text="Badge"/>
 
-        <Badge variant="error" size="sm" type="tint" />
-        <Badge variant="error" size="md" type="tint" />
-        <Badge variant="error" size="lg" type="tint" />
-        <Badge variant="error" size="xl" type="tint" />
-        <Badge variant="error" size="sm" type="outline" />
-        <Badge variant="error" size="md" type="outline" />
-        <Badge variant="error" size="lg" type="outline" />
-        <Badge variant="error" size="xl" type="outline" />
+        <Badge variant="error" size="sm" type="tint" text="Badge"/>
+        <Badge variant="error" size="md" type="tint" text="Badge"/>
+        <Badge variant="error" size="lg" type="tint" text="Badge"/>
+        <Badge variant="error" size="xl" type="tint" text="Badge"/>
+        <Badge variant="error" size="sm" type="outline" text="Badge"/>
+        <Badge variant="error" size="md" type="outline" text="Badge"/>
+        <Badge variant="error" size="lg" type="outline" text="Badge"/>
+        <Badge variant="error" size="xl" type="outline" text="Badge"/>
 
         <Tooltip id="test-id" text="툴팁 테스트 호버" />
         <Tooltip id="test-id-2" text="툴팁 테스트 클릭" eventType="click" />
       </div>
+
+      <NavigationRight />
     </div>
   );
 }
