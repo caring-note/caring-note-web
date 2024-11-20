@@ -31,15 +31,18 @@ const NavigationRight: React.FC<NavigationRightProps> = ({}) => {
     <div
       className={`fixed top-0 right-0 h-full ${isOpen ? "w-96" : "w-16"} bg-gray-100 ${
         isOpen ? "" : "hover:bg-blue-100"
-      } transition-width duration-300`}>
+      } transition-width duration-300`}
+      style={{
+        boxShadow: "-4px 0 8px rgba(0,0,0,0.2)",
+      }}>
       {!isOpen && defaultMenu()}
       {isOpen && (
         <div className="flex justify-start">
           {defaultMenu()}
           <div className="bg-white w-full border-l-2 border-gray-300">
             <div className="flex justify-between border-b-2 border-gray-100">
-                <span className="mt-8 mb-4 mx-8 text-lg text-black font-bold">타이틀</span>
-                <img  src={cancelBlack} alt="cancelBlack" className="mt-8 mb-4 mx-6 w-8 h-8" onClick={toggleMenu} />
+              <span className="mt-8 mb-4 mx-8 text-lg text-black font-bold">타이틀</span>
+              <img src={cancelBlack} alt="cancelBlack" className="mt-8 mb-4 mx-6 w-8 h-8" onClick={toggleMenu} />
             </div>
             <div className="h-screen"></div>
           </div>
