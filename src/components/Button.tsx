@@ -1,8 +1,10 @@
 import React from "react";
 import arrowRightBlack from "../assets/icon/arrowRightBlack.png";
 import searchGray from "../assets/icon/searchGray.png";
+import classNames from "classnames";
 
 interface ButtonProps {
+  _class?: string;
   variant?: "primary" | "secondary"; // primary : Primary Button, secondary : Secondary Button
   size?: "sm" | "md" | "lg" | "xl"; // sm : Small, md : Medium, lg : Large, xl : Extra Large
   icon?: "none" | "rightArrow" | "search";
@@ -79,9 +81,9 @@ const getRightArrowSrc = (variant: "primary" | "secondary", disabled: boolean) =
   }
 }
 
-const Button = ({ variant = "primary", size = "md", icon = "none", disabled = false, onClick, children }: ButtonProps) => {
+const Button = ({ _class="", variant = "primary", size = "md", icon = "none", disabled = false, onClick, children }: ButtonProps) => {
   return (
-    <button onClick={onClick} className={getButtonClasses(variant, size)} disabled={disabled}>
+    <button onClick={onClick} className={ classNames(getButtonClasses(variant, size), _class)} disabled={disabled}>
       {icon === "search" ? <img className={"mr-1 " + getIconSizeClasses(size)} src={getSearchSrc(variant, disabled)} /> : null}
       {children}
       {icon === "rightArrow" ? <img className={"ml-1 " + getIconSizeClasses(size)} src={getRightArrowSrc(variant, disabled)} /> : null}

@@ -4,12 +4,15 @@ import badgeBlue from "../assets/icon/badgeBlue.png";
 import badgeRed from "../assets/icon/badgeRed.png";
 
 interface BadgeProps {
+  _class?: string;
   variant: "primary" | "error";
   size: "sm" | "md" | "lg" | "xl";
   type: "tint" | "outline";
+  text: string;
+  isIcon?: boolean;
 }
 
-const Badge: React.FC<BadgeProps> = ({ variant, size, type }) => {
+const Badge: React.FC<BadgeProps> = ({ _class="", variant, size, type, text, isIcon = true }) => {
   const baseClasses = "flex items-center space-x-2 rounded-full font-semibold my-1 mx-1";
 
   const variantClasses = {
@@ -31,10 +34,14 @@ const Badge: React.FC<BadgeProps> = ({ variant, size, type }) => {
   };
 
   return (
-    <div className={"inline-flex " + classNames(baseClasses, variantClasses[variant][type], sizeClasses[size])}>
-      {variant === "primary" ? <img src={badgeBlue} alt="badgeBlue" className="w-4 h-4" /> : null}
-      {variant === "error" ? <img src={badgeRed} alt="badgeRed" className="w-4 h-4" /> : null}
-      <span>Badge</span>
+    <div className={"inline-flex " + classNames(_class, baseClasses, variantClasses[variant][type], sizeClasses[size])}>
+      {isIcon ?? (
+        <>
+          {variant === "primary" ? <img src={badgeBlue} alt="badgeBlue" className="w-4 h-4" /> : null}
+          {variant === "error" ? <img src={badgeRed} alt="badgeRed" className="w-4 h-4" /> : null}
+        </>
+      )}
+      <span>{text}</span>
     </div>
   );
 };
