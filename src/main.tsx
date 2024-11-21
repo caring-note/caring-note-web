@@ -4,17 +4,20 @@ import { createBrowserRouter, createRoutesFromElements, Route, RouterProvider } 
 import "./index.css";
 import AssistantHome from "./pages/assistant/AssistantHome";
 import AssistantRoot from "./pages/assistant/AssistantRoot";
-import Consult from "./pages/Consult";
+import Consult from "./pages/consult/Consult";
 import ErrorPage from "./pages/ErrorPage";
 import Home from "./pages/Home";
 import Root from "./pages/Root";
+import PastConsult from "./pages/consult/PastConsult";
 
 const router = createBrowserRouter(
   createRoutesFromElements([
     <Route path="/" element={<Root />} errorElement={<ErrorPage />}>
       <Route errorElement={<ErrorPage />}>
         <Route index element={<Home />} />
-        <Route path="consult" element={<Consult />} />
+        <Route path="consult" element={<Consult />}>
+          <Route path="pastConsult" element={<PastConsult />} />
+        </Route>
       </Route>
     </Route>,
 
