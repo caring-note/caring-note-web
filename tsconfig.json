@@ -1,11 +1,12 @@
 {
   "compilerOptions": {
-    "baseUrl": ".",
+    "baseUrl": "src", // 기준 경로 설정
     "paths": {
-      "@app/*": ["src/app/*"],
-      "@env/*": ["src/environments/*"],
-      "@node/*": ["src/node/*"]
-    }
+      "@components/*": ["components/*"], // 별칭 설정
+      "@pages/*": ["pages/*"],
+      "@assets/*": ["assets/*"],
+      "@icon/*": ["assets/icon/*"]
+    },
   },
   "files": [],
   "references": [
