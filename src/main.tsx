@@ -9,6 +9,12 @@ import ErrorPage from "./pages/ErrorPage";
 import Home from "./pages/Home";
 import Root from "./pages/Root";
 import PastConsult from "./pages/consult/PastConsult";
+import ConsultCard from "./pages/consult/ConsultCard";
+import MedicineMemo from "./pages/consult/MedicineMemo";
+import MedicineConsult from "./pages/consult/MedicineConsult";
+import DiscardMedicine from "./pages/consult/DiscardMedicine";
+import { Provider } from "react-redux";
+import store from "../store";
 
 const router = createBrowserRouter(
   createRoutesFromElements([
@@ -17,6 +23,10 @@ const router = createBrowserRouter(
         <Route index element={<Home />} />
         <Route path="consult" element={<Consult />}>
           <Route path="pastConsult" element={<PastConsult />} />
+          <Route path="consultCard" element={<ConsultCard />} />
+          <Route path="medicineMemo" element={<MedicineMemo />} />
+          <Route path="medicineConsult" element={<MedicineConsult />} />
+          <Route path="discardMedicine" element={<DiscardMedicine />} />
         </Route>
       </Route>
     </Route>,
@@ -38,6 +48,8 @@ const router = createBrowserRouter(
 
 createRoot(document.getElementById("root")!).render(
   <StrictMode>
-    <RouterProvider router={router} />
+    <Provider store={store}>
+      <RouterProvider router={router} />
+    </Provider>
   </StrictMode>,
 );

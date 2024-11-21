@@ -1,12 +1,27 @@
-import { Outlet } from "react-router-dom";
 import arrowHeadLeftGray from "@icon/arrowHeadLeftGray.png";
 import shareBlue from "@icon/shareBlue.png";
 import trashcanBlue from "@icon/trashcanBlue.png";
+import { Outlet, useNavigate } from "react-router-dom";
 import Button from "../../components/Button";
+import { useAppSelector, useAppDispatch } from "../../../hooks";
+import { changeActiveTab } from "../../reducers/tabReducer";
 
-const tabTitle = (text: string) => {
+const tabTitle = (text: string, goPage: string) => {
+  const navigate = useNavigate();
+  const activeTab = useAppSelector((state) => state.tab.activeTab);
+  const dispatch = useAppDispatch();
+
   return (
-    <p className="text-md font-extrabold text-gray-600 mr-10 hover:text-blue-500 hover:border-b-2 border-blue-500">
+    <p
+      className={`${
+        activeTab === goPage
+          ? "text-md font-extrabold text-blue-500 border-b-2 border-blue-500"
+          : "text-md font-extrabold text-gray-600"
+      } mr-10 hover:text-blue-500 hover:border-b-2 border-blue-500`}
+      onClick={() => {
+        dispatch(changeActiveTab(goPage));
+        navigate(goPage);
+      }}>
       {text}
     </p>
   );
@@ -35,11 +50,11 @@ function Consult() {
         </div>
       </div>
       <div className="flex flex-row items-center justify-start w-full h-14 pl-14 my-0 border-t-2 border-gray-200 border-b-2 border-b-gray-300">
-        {tabTitle("이전 상담 내역")}
-        {tabTitle("상담카드")}
-        {tabTitle("의약물 기록")}
-        {tabTitle("복약 상담")}
-        {tabTitle("폐의약품 처리")}
+        {tabTitle("이전 상담 내역", "/consult/pastConsult")}
+        {tabTitle("상담카드", "/consult/consultCard")}
+        {tabTitle("의약물 기록", "/consult/medicineMemo")}
+        {tabTitle("복약 상담", "/consult/medicineConsult")}
+        {tabTitle("폐의약품 처리", "/consult/discardMedicine")}
       </div>
       <Outlet />
     </div>
