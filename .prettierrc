@@ -8,5 +8,5 @@
   "arrowParens": "always",
   "endOfLine": "lf",
   "bracketSameLine": true,
-  "printWidth": 120
+  "printWidth": 80
 }
