@@ -12,14 +12,25 @@ const Tooltip: React.FC<TooltipProps> = ({ id, text, eventType = "hover" }) => {
   return (
     <>
       <div className="inline-block m-1">
-        <img data-tooltip-id={id} src={tooltipBlack} alt="tooltip" className="w-6 h-6" />
+        <img
+          data-tooltip-id={id}
+          src={tooltipBlack}
+          alt="tooltip"
+          className="w-4 h-4"
+        />
       </div>
       <ReactTooltip
         id={id}
         place="bottom-end"
         content={text}
-        openEvents={{ click: eventType === "click", mouseover: eventType === "hover" }}
-        closeEvents={{ click: eventType === "click", mouseout: eventType === "hover" }}
+        openEvents={{
+          click: eventType === "click",
+          mouseover: eventType === "hover",
+        }}
+        closeEvents={{
+          click: eventType === "click",
+          mouseout: eventType === "hover",
+        }}
       />
     </>
   );

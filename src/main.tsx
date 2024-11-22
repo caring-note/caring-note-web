@@ -22,6 +22,7 @@ const router = createBrowserRouter(
       <Route errorElement={<ErrorPage />}>
         <Route index element={<Home />} />
         <Route path="consult" element={<Consult />}>
+          <Route index element={<PastConsult />} />
           <Route path="pastConsult" element={<PastConsult />} />
           <Route path="consultCard" element={<ConsultCard />} />
           <Route path="medicineMemo" element={<MedicineMemo />} />

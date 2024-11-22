@@ -35,7 +35,7 @@ function Consult() {
           <img src={arrowHeadLeftGray} alt="arrowHeadLeftGray" className="w-6 h-6" />
         </div>
         <div className="flex flex-row items-center justify-start w-full h-8 mt-4 pl-6">
-          <p className="text-4xl text-black font-bold">박진완</p>
+          <p className="text-4xl text-black font-black">박진완</p>
           <img src={shareBlue} alt="shareBlue" className="w-8 h-8 ml-4" />
           <img src={trashcanBlue} alt="trashcanBlue" className="w-8 h-8 ml-4" />
           <Button _class="ml-4" variant="primary" onClick={() => {}}>
