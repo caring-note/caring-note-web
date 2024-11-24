@@ -1,0 +1,42 @@
+name: Build and Push Docker Image
+
+on:
+  pull_request:
+    branches:
+      - main
+    types:
+      - closed
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - name: 소스 코드 체크아웃
+        uses: actions/checkout@v3
+
+      - name: Node.js 설정
+        uses: actions/setup-node@v3
+        with:
+          node-version: "18.16.1" # 사용하는 Node.js 버전에 맞게 변경
+
+      - name: pnpm 설치
+        run: npm install -g pnpm
+
+      - name: 의존성 설치
+        run: pnpm install
+
+      - name: 프로젝트 빌드
+        run: pnpm build
+
+      - name: Docker Hub 로그인
+        uses: docker/login-action@v2
+        with:
+          username: ${{ secrets.DOCKER_USERNAME }} # GitHub Secrets에 DOCKER_USERNAME 추가
+          password: ${{ secrets.DOCKER_PASSWORD }} # GitHub Secrets에 DOCKER_PASSWORD 추가
+
+      - name: Docker 이미지 빌드 및 푸시
+        uses: docker/build-push-action@v4
+        with:
+          context: .
+          push: true
+          tags: bsh998/caring-note-web:latest # 실제 Docker Hub 사용자명과 저장소명으로 변경
