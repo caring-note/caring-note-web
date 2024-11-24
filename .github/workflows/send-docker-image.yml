@@ -31,8 +31,8 @@ jobs:
       - name: Docker Hub 로그인
         uses: docker/login-action@v2
         with:
-          username: ${{ secrets.DOCKER_USERNAME }} # GitHub Secrets에 DOCKER_USERNAME 추가
-          password: ${{ secrets.DOCKER_PASSWORD }} # GitHub Secrets에 DOCKER_PASSWORD 추가
+          username: ${{ secrets.DOCKERHUB_USERNAME }} # GitHub Secrets에 DOCKER_USERNAME 추가
+          password: ${{ secrets.DOCKERHUB_PASSWORD }} # GitHub Secrets에 DOCKER_PASSWORD 추가
 
       - name: Docker 이미지 빌드 및 푸시
         uses: docker/build-push-action@v4
