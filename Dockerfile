@@ -2,7 +2,7 @@ FROM node:18.16.1 as builder
 
 # 작업 폴더를 만들고 npm 설치
 WORKDIR /app
-COPY package.json ./
+COPY package*.json ./
 RUN npm install
 
 # 소스를 작업폴더로 복사하고 빌드 
