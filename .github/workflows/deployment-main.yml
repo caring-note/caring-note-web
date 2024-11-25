@@ -40,3 +40,15 @@ jobs:
           context: .
           push: true
           tags: bsh998/caring-note-web:latest # 실제 Docker Hub 사용자명과 저장소명으로 변경
+
+      - name: VM에 배포
+        uses: appleboy/ssh-action@v0.1.7
+        with:
+          host: ${{ secrets.VM_HOST }}
+          username: ${{ secrets.VM_USERNAME }}
+          key: ${{ secrets.VM_SSH_KEY }}
+          port: ${{ secrets.VM_PORT }}
+          script: |
+            cd /data/caring-note-deployment
+            kubectl delete -f api.yaml
+            kubectl apply -f web.yaml
