@@ -39,13 +39,20 @@ function Home() {
           </div>
         </div>
         <div className="flex flex-col items-center justify-center bg-blue-300 w-full px-20 pt-10">
-          <div
-            className="bg-gray-100 w-full h-screen rounded-xl cursor-pointer"
-            onClick={() => {
-              navigate("/consult");
-            }}>
-            <p className="text-3xl text-center mt-10">
-              본상담 화면으로 이동 (임시){" "}
+          <div className="bg-gray-100 w-full h-screen rounded-xl cursor-pointer">
+            <p
+              className="text-3xl text-center mt-10"
+              onClick={() => {
+                navigate("/consult");
+              }}>
+              박진완 : 본상담 화면으로 이동 (임시){" "}
+            </p>
+            <p
+              className="text-3xl text-center mt-10"
+              onClick={() => {
+                navigate("/assistant");
+              }}>
+              조영호 : 기초상담 화면으로 이동 (임시){" "}
             </p>
           </div>
         </div>
