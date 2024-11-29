@@ -17,7 +17,9 @@ const NavigationRight: React.FC<NavigationRightProps> = ({}) => {
   const defaultMenu = () => {
     return (
       <div
-        className={`flex flex-col items-center justify-start h-screen ${isOpen ? "w-20" : ""} py-4`}
+        className={`flex flex-col items-center justify-start h-screen ${
+          isOpen ? "w-20" : ""
+        } py-4`}
         onClick={toggleMenu}>
         <Badge variant="primary" size="sm" type="outline" text="녹음중" />
         <img src={micBlack} alt="micBlack" className="w-8 h-8" />
@@ -29,7 +31,9 @@ const NavigationRight: React.FC<NavigationRightProps> = ({}) => {
 
   return (
     <div
-      className={`fixed top-0 right-0 h-full ${isOpen ? "w-96" : "w-16"} bg-gray-100 ${
+      className={`fixed top-0 right-0 h-full ${
+        isOpen ? "w-96" : "w-16"
+      } bg-gray-100 ${
         isOpen ? "" : "hover:bg-blue-100"
       } transition-width duration-300`}
       style={{
@@ -41,10 +45,21 @@ const NavigationRight: React.FC<NavigationRightProps> = ({}) => {
           {defaultMenu()}
           <div className="bg-white w-full border-l-2 border-gray-300">
             <div className="flex justify-between border-b-2 border-gray-100">
-              <span className="mt-8 mb-4 mx-8 text-lg text-black font-bold">타이틀</span>
-              <img src={cancelBlack} alt="cancelBlack" className="mt-8 mb-4 mx-6 w-8 h-8" onClick={toggleMenu} />
+              <span className="mt-8 mb-4 mx-8 text-lg text-black font-bold">
+                상담기록
+              </span>
+              <img
+                src={cancelBlack}
+                alt="cancelBlack"
+                className="mt-8 mb-4 mx-6 w-8 h-8 cursor-pointer"
+                onClick={toggleMenu}
+              />
             </div>
-            <div className="h-screen"></div>
+            <div className="h-screen bg-red-100 pt-6 px-4">
+              <div className="w-full h-full bg-red-200">
+                {/* TODO : INPUT */}
+              </div>
+            </div>
           </div>
         </div>
       )}
