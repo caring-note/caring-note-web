@@ -2,6 +2,7 @@ import React from "react";
 import classNames from "classnames";
 import badgeBlue from "../assets/icon/badgeBlue.png";
 import badgeRed from "../assets/icon/badgeRed.png";
+import warningInfoBlue from "../assets/icon/warningInfoBlue.png";
 
 interface BadgeProps {
   _class?: string;
@@ -10,10 +11,20 @@ interface BadgeProps {
   type: "tint" | "outline";
   text: string;
   isIcon?: boolean;
+  isWarning?: boolean;
 }
 
-const Badge: React.FC<BadgeProps> = ({ _class="", variant, size, type, text, isIcon = true }) => {
-  const baseClasses = "flex items-center space-x-2 rounded-full font-semibold my-1 mx-1";
+const Badge: React.FC<BadgeProps> = ({
+  _class = "",
+  variant,
+  size,
+  type,
+  text,
+  isIcon = true,
+  isWarning,
+}) => {
+  const baseClasses =
+    "flex items-center space-x-2 rounded-full font-semibold my-1 mx-1";
 
   const variantClasses = {
     primary: {
@@ -34,13 +45,29 @@ const Badge: React.FC<BadgeProps> = ({ _class="", variant, size, type, text, isI
   };
 
   return (
-    <div className={"inline-flex " + classNames(_class, baseClasses, variantClasses[variant][type], sizeClasses[size])}>
+    <div
+      className={
+        "inline-flex " +
+        classNames(
+          _class,
+          baseClasses,
+          variantClasses[variant][type],
+          sizeClasses[size],
+        )
+      }>
       {isIcon ?? (
         <>
-          {variant === "primary" ? <img src={badgeBlue} alt="badgeBlue" className="w-4 h-4" /> : null}
-          {variant === "error" ? <img src={badgeRed} alt="badgeRed" className="w-4 h-4" /> : null}
+          {variant === "primary" ? (
+            <img src={badgeBlue} alt="badgeBlue" className="w-4 h-4" />
+          ) : null}
+          {variant === "error" ? (
+            <img src={badgeRed} alt="badgeRed" className="w-4 h-4" />
+          ) : null}
         </>
       )}
+      {isWarning ? (
+        <img src={warningInfoBlue} alt="warningInfoBlue" className="w-5 h-5" />
+      ) : null}
       <span>{text}</span>
     </div>
   );
