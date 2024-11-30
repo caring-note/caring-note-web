@@ -2,7 +2,7 @@ import { useEffect, useState } from "react";
 import { useAppDispatch } from "../../../hooks";
 import { changeActiveTab } from "../../reducers/tabReducer";
 import Badge from "../../components/Badge";
-import Card from "../../components/common/Card";
+import CardContainer from "../../components/common/CardContainer";
 import InputLayout from "../../components/layout/input/InputLayout";
 
 type option = {
@@ -89,6 +89,7 @@ const AssistantBasicInfo = () => {
       name: "latestCaringDate",
       label: "최근 상담일",
       value: assistantBasicInfo.latestCaringDate,
+      placeholder: "최근 상담일을 입력해주세요",
     },
   ];
   const onChange = (e: React.ChangeEvent<HTMLInputElement>) => {
@@ -110,7 +111,7 @@ const AssistantBasicInfo = () => {
         isIcon={true}
         isWarning={true}
       />
-      <Card
+      <CardContainer
         _class="border-t-8 border-gray-400"
         title={<p className="font-bold text-xl">기본정보</p>}>
         <div className="px-5">
@@ -120,8 +121,8 @@ const AssistantBasicInfo = () => {
             onSelect={onSelect}
           />
         </div>
-      </Card>
-      <Card
+      </CardContainer>
+      <CardContainer
         _class="border-gray-400"
         title={<p className="font-bold text-xl">상담 목적 및 특이사항</p>}>
         <div className="px-5">
@@ -216,7 +217,7 @@ const AssistantBasicInfo = () => {
             </div>
           </div>
         </div>
-      </Card>
+      </CardContainer>
     </div>
   );
 };
