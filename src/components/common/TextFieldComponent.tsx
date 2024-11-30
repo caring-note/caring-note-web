@@ -16,11 +16,11 @@ type TextFieldComponentProps = {
 };
 const TextFieldComponent = ({ option, onChange }: TextFieldComponentProps) => {
   return (
-    <div className="flex flex-row w-1/2">
+    <div className="flex justify-between w-full">
       <label className="flex pt-5 col-12 columns-sm text-lg-right">
         {option.label}
       </label>
-      <div className=" pl-10 flex pt-5 col-12 columns-sm text-lg-right w-60 relative">
+      <div className="flex pr-10 pt-5 col-12 columns-sm text-lg-right w-60 relative">
         <input
           type="text"
           name={option.name}

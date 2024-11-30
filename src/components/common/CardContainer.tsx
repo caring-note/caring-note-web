@@ -1,13 +1,13 @@
 import classNames from "classnames";
 import React from "react";
 
-interface ConsultCardContainerProps {
+interface CardContainerProps {
   _class?: string;
   title?: React.ReactElement;
   children: React.ReactNode;
 }
 
-const Card = ({ _class, title, children }: ConsultCardContainerProps) => {
+const CardContainer = ({ _class, title, children }: CardContainerProps) => {
   return (
     <div
       className={classNames(
@@ -20,4 +20,4 @@ const Card = ({ _class, title, children }: ConsultCardContainerProps) => {
   );
 };
 
-export default Card;
+export default CardContainer;

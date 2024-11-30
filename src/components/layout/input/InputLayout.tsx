@@ -19,7 +19,7 @@ type InputLayoutProps = {
 
 const InputLayout = ({ inputsRef, onChange, onSelect }: InputLayoutProps) => {
   return (
-    <div>
+    <div className="grid grid-cols-2">
       {inputsRef.map((element: element, index: number) => {
         return (
           <InputComponent
