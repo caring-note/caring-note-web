@@ -1,4 +1,4 @@
-import timeGray from "@icon/timeGray.png";
+import timeGray from "@assets/icon/timeGray.png";
 import { useEffect, useState } from "react";
 import ReactModal from "react-modal";
 import { useAppDispatch } from "../../../hooks";

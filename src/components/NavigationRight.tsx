@@ -1,12 +1,11 @@
-import React, { ReactEventHandler, useRef, useState } from "react";
-import cancelBlack from "../assets/icon/cancelBlack.png";
-import micBlack from "../assets/icon/micBlack.png";
-import pencilBlack from "../assets/icon/pencilBlack.png";
-import Badge from "./Badge";
-import HighlightInput from "./consult/HighlightInput";
-import { on } from "events";
+import React from "react";
+import cancelBlack from "@assets/icon/cancelBlack.png";
+import micBlack from "@assets/icon/micBlack.png";
+import pencilBlack from "@assets/icon/pencilBlack.png";
+import Badge from "@components/Badge";
+import HighlightInput from "@components/consult/HighlightInput";
 import { useAppDispatch, useAppSelector } from "../../hooks";
-import { toggleRightNavigation } from "../reducers/navigationReducer";
+import { toggleRightNavigation } from "@reducers/navigationReducer";
 
 interface NavigationRightProps {}
 

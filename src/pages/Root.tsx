@@ -1,6 +1,6 @@
 import { Outlet } from "react-router-dom";
-import NavigationLeft from "../components/NavigationLeft";
-import NavigationRight from "../components/NavigationRight";
+import NavigationLeft from "@components/NavigationLeft";
+import NavigationRight from "@components/NavigationRight";
 
 function Root() {
   return (

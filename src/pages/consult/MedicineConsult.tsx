@@ -1,9 +1,9 @@
 import { useEffect } from "react";
 import { useAppDispatch, useAppSelector } from "../../../hooks";
-import HighlightInput from "../../components/consult/HighlightInput";
-import TabContentContainer from "../../components/consult/TabContentContainer";
-import { changeActiveTab } from "../../reducers/tabReducer";
-import GrayContainer from "./GrayContainer";
+import HighlightInput from "@components/consult/HighlightInput";
+import TabContentContainer from "@components/consult/TabContentContainer";
+import { changeActiveTab } from "@reducers/tabReducer";
+import GrayContainer from "@pages/consult/GrayContainer";
 
 const MedicineConsult: React.FC = () => {
   const dispatch = useAppDispatch();
