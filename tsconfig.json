@@ -6,7 +6,7 @@
       "@pages/*": ["pages/*"],
       "@assets/*": ["assets/*"],
       "@icon/*": ["assets/icon/*"]
-    },
+    }
   },
   "files": [],
   "references": [

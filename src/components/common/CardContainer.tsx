@@ -11,7 +11,7 @@ const CardContainer = ({ _class, title, children }: CardContainerProps) => {
   return (
     <div
       className={classNames(
-        "py-10 w-full bg-gray-100 rounded-md mb-4 my-5",
+        "py-4 w-full bg-gray-100 rounded-md mb-4 my-5",
         _class,
       )}>
       <div className="px-5">{title}</div>
