@@ -22,7 +22,7 @@ const GrayContainer: React.FC<GrayContainerProps> = ({
         </div>
         {titleButton}
       </div>
-      <div className="h-auto mt-4 bg-gray-300">{children}</div>
+      <div className="h-auto mt-4 bg-gray-100">{children}</div>
     </div>
   );
 };
