@@ -1,52 +1,75 @@
-import React, { useState } from "react";
-import { Editor, EditorState, RichUtils, Modifier } from "draft-js";
+import { Editor, EditorState, Modifier } from "draft-js";
 import "draft-js/dist/Draft.css";
+import React from "react";
+import { useAppDispatch, useAppSelector } from "../../../hooks";
+import { changeEditorState } from "../../reducers/editorStateReducer";
 
 const HighlightInput: React.FC = () => {
-  const [editorState, setEditorState] = useState(() =>
-    EditorState.createEmpty(),
-  );
+  const dispatch = useAppDispatch();
+  const editorState = useAppSelector((state) => state.editorState.editorState);
+  const containerRef = React.useRef<HTMLDivElement>(null);
 
   // 하이라이트 버튼 핸들러
-  const handleHighlight = () => {
-    setEditorState(RichUtils.toggleInlineStyle(editorState, "HIGHLIGHT"));
+  const applyHighlight = () => {
+    const contentState = editorState.getCurrentContent();
+    const selectionState = editorState.getSelection();
+    if (selectionState.isCollapsed()) return;
+
+    // 아래 주석은 유지보수 때를 위해 남김. 10시간의 삽질 끝에 얻은 코드
+    // console.log("컨텐츠 스테이트:", contentState.getPlainText());
+    // console.log("selectionState:", selectionState.toString());
+    // console.log(
+    //   "방금 하이라이트한 텍스트:",
+    //   contentState
+    //     .getPlainText()
+    //     .substring(
+    //       selectionState.getAnchorOffset(),
+    //       selectionState.getFocusOffset(),
+    //     ),
+    // );
+
+    const newContentState = Modifier.applyInlineStyle(
+      contentState,
+      selectionState,
+      "HIGHLIGHT",
+    );
+    const newEditorState = EditorState.push(
+      editorState,
+      newContentState,
+      "change-inline-style",
+    );
+
+    // setEditorState(newEditorState);
+    dispatch(changeEditorState(newEditorState));
+  };
+
+  const styleMap = {
+    HIGHLIGHT: {
+      backgroundColor: "#FFBD14",
+    },
   };
 
   // 현재 하이라이트된 텍스트 추출
   const getHighlightedText = () => {
-    const contentState = editorState.getCurrentContent();
-    const selectionState = editorState.getSelection();
+    if (!containerRef.current) return;
 
-    if (selectionState.isCollapsed()) {
-      console.log("선택된 텍스트가 없습니다.");
-      return;
-    }
+    // container 내에서 background가 yellow(#FFBD14)인 span 요소만 선택
+    const yellowSpans = Array.from(
+      containerRef.current.querySelectorAll("span"),
+    ).filter(
+      (span: any) =>
+        getComputedStyle(span).backgroundColor === "rgb(255, 189, 20)", // #FFBD14
+    );
 
-    const startKey = selectionState.getStartKey();
-    const endKey = selectionState.getEndKey();
-    const startOffset = selectionState.getStartOffset();
-    const endOffset = selectionState.getEndOffset();
-
-    const blockMap = contentState.getBlockMap();
-    const highlightedText: string[] = [];
-
-    blockMap.forEach((block: any) => {
-      const key = block.getKey();
-      if (key === startKey || key === endKey) {
-        const text = block.getText();
-        const blockStartOffset = key === startKey ? startOffset : 0;
-        const blockEndOffset = key === endKey ? endOffset : text.length;
-        highlightedText.push(text.slice(blockStartOffset, blockEndOffset));
-      }
+    yellowSpans.forEach((span: any) => {
+      console.log("현재 하이라이트된 텍스트:", span.textContent);
     });
-
-    console.log("하이라이트된 텍스트:", highlightedText.join(" "));
   };
 
   return (
-    <div className="p-4 border rounded">
+    <div className="p-2 border rounded">
       <button
-        onClick={handleHighlight}
+        onClick={applyHighlight}
         className="bg-yellow-400 text-black px-3 py-1 rounded mb-4">
         형광펜 적용
       </button>
@@ -55,11 +78,18 @@ const HighlightInput: React.FC = () => {
         className="bg-blue-500 text-white px-3 py-1 rounded mb-4 ml-2">
         하이라이트 텍스트 출력
       </button>
-      <div className="border p-2 rounded">
+      <div ref={containerRef} className="border p-2 rounded">
         <Editor
           editorState={editorState}
-          onChange={setEditorState}
-          placeholder="텍스트를 입력하고 형광펜을 적용해보세요!"
+          placeholder="내용을 입력해주세요."
+          onChange={(editorState) => {
+            try {
+              dispatch(changeEditorState(editorState));
+            } catch (e) {
+              console.log(e);
+            }
+          }}
+          customStyleMap={styleMap}
         />
       </div>
     </div>

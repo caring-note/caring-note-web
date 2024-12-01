@@ -3,7 +3,7 @@ import { useEffect, useState } from "react";
 import ReactModal from "react-modal";
 import { useAppDispatch } from "../../../hooks";
 import Button from "../../components/Button";
-import ConsultCardContainer from "../../components/consult/ConsultCardContainer";
+import CardContainer from "../../components/common/CardContainer";
 import TabContentContainer from "../../components/consult/TabContentContainer";
 import TabContentTitle from "../../components/consult/TabContentTitle";
 import { changeActiveTab } from "../../reducers/tabReducer";
@@ -47,7 +47,7 @@ const ConsultCard: React.FC = () => {
   return (
     <>
       <TabContentContainer>
-        <div className="flex justify-between items-center mb-6">
+        <div className="flex justify-between items-center">
           <TabContentTitle text="상담카드" />
           <Button variant="secondary" onClick={() => {}}>
             수정하기
@@ -56,12 +56,12 @@ const ConsultCard: React.FC = () => {
 
         <div className="flex justify-between items-start space-x-4">
           <div id="consult-card-left" className="w-1/2">
-            <ConsultCardContainer
+            <CardContainer
               _class="border-t-4 border-gray-500"
               title={<p className="font-bold">기본정보</p>}>
               <div className="h-20 p-4">여러가지 정보들</div>
-            </ConsultCardContainer>
-            <ConsultCardContainer
+            </CardContainer>
+            <CardContainer
               title={
                 <div className="flex justify-item-center">
                   <span className="font-bold">기본정보</span>
@@ -72,19 +72,23 @@ const ConsultCard: React.FC = () => {
                   />
                 </div>
               }>
-              {"카드"}
-            </ConsultCardContainer>
-            <ConsultCardContainer>{"카드"}</ConsultCardContainer>
-            <ConsultCardContainer
+              <div></div>
+            </CardContainer>
+            <CardContainer>
+              <div></div>
+            </CardContainer>
+            <CardContainer
               _class="border-t-4 border-yellow-500"
               title={<p className="font-bold">기본정보</p>}>
               <div className="h-24 p-4">여러가지 정보들</div>
-            </ConsultCardContainer>
-            <ConsultCardContainer>{"카드"}</ConsultCardContainer>
+            </CardContainer>
+            <CardContainer>
+              <div></div>
+            </CardContainer>
           </div>
 
           <div id="consult-card-right" className="w-1/2">
-            <ConsultCardContainer
+            <CardContainer
               _class="border-t-4 border-blue-500"
               title={
                 <div className="flex justify-item-center">
@@ -97,11 +101,19 @@ const ConsultCard: React.FC = () => {
                 </div>
               }>
               <div className="h-16 p-4">여러가지 정보들</div>
-            </ConsultCardContainer>
-            <ConsultCardContainer>{"카드"}</ConsultCardContainer>
-            <ConsultCardContainer>{"카드"}</ConsultCardContainer>
-            <ConsultCardContainer>{"카드"}</ConsultCardContainer>
-            <ConsultCardContainer>{"카드"}</ConsultCardContainer>
+            </CardContainer>
+            <CardContainer>
+              <div></div>
+            </CardContainer>
+            <CardContainer>
+              <div></div>
+            </CardContainer>
+            <CardContainer>
+              <div></div>
+            </CardContainer>
+            <CardContainer>
+              <div></div>
+            </CardContainer>
           </div>
         </div>
       </TabContentContainer>

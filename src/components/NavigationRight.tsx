@@ -1,17 +1,23 @@
-import React, { useState } from "react";
-import Badge from "./Badge";
+import React, { ReactEventHandler, useRef, useState } from "react";
+import cancelBlack from "../assets/icon/cancelBlack.png";
 import micBlack from "../assets/icon/micBlack.png";
 import pencilBlack from "../assets/icon/pencilBlack.png";
-import cancelBlack from "../assets/icon/cancelBlack.png";
+import Badge from "./Badge";
+import HighlightInput from "./consult/HighlightInput";
+import { on } from "events";
+import { useAppDispatch, useAppSelector } from "../../hooks";
+import { toggleRightNavigation } from "../reducers/navigationReducer";
 
 interface NavigationRightProps {}
 
 const NavigationRight: React.FC<NavigationRightProps> = ({}) => {
-  const [isOpen, setIsOpen] = useState(false);
+  const isOpen = useAppSelector(
+    (state) => state.navigation.isOpenRightNavigation,
+  );
+  const dispatch = useAppDispatch();
 
   const toggleMenu = () => {
-    // TODO : Redux로 오른쪽 네비게이션 메뉴 상태 관리
-    setIsOpen(!isOpen);
+    dispatch(toggleRightNavigation());
   };
 
   const defaultMenu = () => {
@@ -55,10 +61,8 @@ const NavigationRight: React.FC<NavigationRightProps> = ({}) => {
                 onClick={toggleMenu}
               />
             </div>
-            <div className="h-screen bg-red-100 pt-6 px-4">
-              <div className="w-full h-full bg-red-200">
-                {/* TODO : INPUT */}
-              </div>
+            <div className="bg-red-000 pt-4 px-2">
+              <HighlightInput />
             </div>
           </div>
         </div>
