@@ -1,6 +1,6 @@
 import React from "react";
 import { Tooltip as ReactTooltip } from "react-tooltip";
-import tooltipBlack from "@assets/icon/tooltipBlack.png";
+import tooltipBlack from "../assets/icon/tooltipBlack.png";
 
 interface TooltipProps {
   id: string;

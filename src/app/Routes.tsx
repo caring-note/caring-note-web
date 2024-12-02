@@ -1,18 +1,18 @@
 import { Navigate, RouteObject, useRoutes } from "react-router-dom";
-import ErrorPage from "@pages/ErrorPage";
-import Root from "@pages/Root";
-import Home from "@pages/Home";
-import Consult from "@pages/consult/Consult";
-import PastConsult from "@pages/consult/PastConsult";
-import ConsultCard from "@pages/consult/ConsultCard";
-import MedicineMemo from "@pages/consult/MedicineMemo";
-import MedicineConsult from "@pages/consult/MedicineConsult";
-import DiscardMedicine from "@pages/consult/DiscardMedicine";
-import AssistantRoot from "@pages/assistant/AssistantRoot";
-import AssistantHome from "@pages/assistant/AssistantHome";
-import AssistantBasicInfo from "@pages/assistant/AssistantBasicInfo";
-import AssistantHealthInfo from "@pages/assistant/AssistantHealthInfo";
-import AssistantLifeInfo from "@pages/assistant/AssistantLifeInfo";
+import ErrorPage from "../pages/ErrorPage";
+import Root from "../pages/Root";
+import Home from "../pages/Home";
+import Consult from "../pages/consult/Consult";
+import PastConsult from "../pages/consult/PastConsult";
+import ConsultCard from "../pages/consult/ConsultCard";
+import MedicineMemo from "../pages/consult/MedicineMemo";
+import MedicineConsult from "../pages/consult/MedicineConsult";
+import DiscardMedicine from "../pages/consult/DiscardMedicine";
+import AssistantRoot from "../pages/assistant/AssistantRoot";
+import AssistantHome from "../pages/assistant/AssistantHome";
+import AssistantBasicInfo from "../pages/assistant/AssistantBasicInfo";
+import AssistantHealthInfo from "../pages/assistant/AssistantHealthInfo";
+import AssistantLifeInfo from "../pages/assistant/AssistantLifeInfo";
 
 const Routes = () => {
   const rootRoutes: RouteObject = {

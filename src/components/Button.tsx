@@ -1,6 +1,6 @@
 import React from "react";
-import arrowRightBlack from "@assets/icon/arrowRightBlack.png";
-import searchGray from "@assets/icon/searchGray.png";
+import arrowRightBlack from "../assets/icon/arrowRightBlack.png";
+import searchGray from "../assets/icon/searchGray.png";
 import classNames from "classnames";
 
 interface ButtonProps {
@@ -13,12 +13,8 @@ interface ButtonProps {
   children: React.ReactNode;
 }
 
-const getButtonClasses = (
-  variant: "primary" | "secondary",
-  size: "sm" | "md" | "lg" | "xl",
-) => {
-  const baseClasses =
-    "font-bold py-2 px-4 my-1 mx-1 rounded focus:outline-none focus:shadow-outline inline-flex items-center";
+const getButtonClasses = (variant: "primary" | "secondary", size: "sm" | "md" | "lg" | "xl") => {
+  const baseClasses = "font-bold py-2 px-4 my-1 mx-1 rounded focus:outline-none focus:shadow-outline inline-flex items-center";
 
   const variantClasses =
     variant === "primary"
@@ -51,70 +47,46 @@ const getIconSizeClasses = (size: "sm" | "md" | "lg" | "xl") => {
   }[size];
 
   return `${baseClasses} ${sizeClasses}`;
-};
+}
 
 // todo : 아이콘 이미지 경로 수정
 const getSearchSrc = (variant: "primary" | "secondary", disabled: boolean) => {
-  if (variant === "primary" && disabled === false) {
+  if(variant === "primary" && disabled === false) {
     return searchGray;
   }
-  if (variant === "primary" && disabled === true) {
+  if(variant === "primary" && disabled === true) {
     return searchGray;
   }
-  if (variant === "secondary" && disabled === false) {
+  if(variant === "secondary" && disabled === false) {
     return searchGray;
   }
-  if (variant === "secondary" && disabled === true) {
+  if(variant === "secondary" && disabled === true) {
     return searchGray;
   }
-};
+}
 
 // todo : 아이콘 이미지 경로 수정
-const getRightArrowSrc = (
-  variant: "primary" | "secondary",
-  disabled: boolean,
-) => {
-  if (variant === "primary" && disabled === false) {
+const getRightArrowSrc = (variant: "primary" | "secondary", disabled: boolean) => {
+  if(variant === "primary" && disabled === false) {
     return arrowRightBlack;
   }
-  if (variant === "primary" && disabled === true) {
+  if(variant === "primary" && disabled === true) {
     return arrowRightBlack;
   }
-  if (variant === "secondary" && disabled === false) {
+  if(variant === "secondary" && disabled === false) {
     return arrowRightBlack;
   }
-  if (variant === "secondary" && disabled === true) {
+  if(variant === "secondary" && disabled === true) {
     return arrowRightBlack;
   }
-};
+}
 
-const Button = ({
-  _class = "",
-  variant = "primary",
-  size = "md",
-  icon = "none",
-  disabled = false,
-  onClick,
-  children,
-}: ButtonProps) => {
+const Button = ({ _class="", variant = "primary", size = "md", icon = "none", disabled = false, onClick, children }: ButtonProps) => {
   return (
-    <button
-      onClick={onClick}
-      className={classNames(getButtonClasses(variant, size), _class)}
-      disabled={disabled}>
-      {icon === "search" ? (
-        <img
-          className={"mr-1 " + getIconSizeClasses(size)}
-          src={getSearchSrc(variant, disabled)}
-        />
-      ) : null}
+    <button onClick={onClick} className={ classNames(getButtonClasses(variant, size), _class)} disabled={disabled}>
+      {icon === "search" ? <img className={"mr-1 " + getIconSizeClasses(size)} src={getSearchSrc(variant, disabled)} /> : null}
       {children}
-      {icon === "rightArrow" ? (
-        <img
-          className={"ml-1 " + getIconSizeClasses(size)}
-          src={getRightArrowSrc(variant, disabled)}
-        />
-      ) : null}
+      {icon === "rightArrow" ? <img className={"ml-1 " + getIconSizeClasses(size)} src={getRightArrowSrc(variant, disabled)} /> : null}
     </button>
   );
 };

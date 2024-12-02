@@ -3,8 +3,8 @@ import { useAppDispatch } from "../../../hooks";
 import TabContentContainer from "../../components/consult/TabContentContainer";
 import TabContentTitle from "../../components/consult/TabContentTitle";
 import { changeActiveTab } from "../../reducers/tabReducer";
-import highlightpenBlue from "@assets/icon/highlightpenBlue.png";
-import listYellow from "@assets/icon/listYellow.png";
+import highlightpenBlue from "@icon/highlightpenBlue.png";
+import listYellow from "@icon/listYellow.png";
 
 const PastConsult: React.FC = () => {
   // 새로고침이 되었을 때도 active tab 을 잃지 않도록 컴포넌트 load 시 dispatch

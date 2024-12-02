@@ -1,10 +1,10 @@
-import arrowHeadLeftGray from "@assets/icon/arrowHeadLeftGray.png";
-import shareBlue from "@assets/icon/shareBlue.png";
-import trashcanBlue from "@assets/icon/trashcanBlue.png";
+import arrowHeadLeftGray from "@icon/arrowHeadLeftGray.png";
+import shareBlue from "@icon/shareBlue.png";
+import trashcanBlue from "@icon/trashcanBlue.png";
 import { Outlet, useNavigate } from "react-router-dom";
 import Button from "../../components/Button";
 import { useAppSelector, useAppDispatch } from "../../../hooks";
-import { changeActiveTab } from "@reducers/tabReducer";
+import { changeActiveTab } from "../../reducers/tabReducer";
 
 const tabTitle = (text: string, goPage: string) => {
   const navigate = useNavigate();
