@@ -1,16 +1,14 @@
 {
   "compilerOptions": {
     "baseUrl": "src", // 기준 경로 설정
+    // 별칭 설정
     "paths": {
-      "@components/*": ["components/*"], // 별칭 설정
+      "@app/*": ["app/*"],
+      "@reducers/*": ["reducers/*"],
+      "@components/*": ["components/*"],
       "@pages/*": ["pages/*"],
-      "@assets/*": ["assets/*"],
-      "@icon/*": ["assets/icon/*"]
+      "@assets/*": ["assets/*"]
     }
   },
-  "files": [],
-  "references": [
-    { "path": "./tsconfig.app.json" },
-    { "path": "./tsconfig.node.json" }
-  ]
+  "extends": ["./tsconfig.node.json"]
 }

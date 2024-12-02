@@ -1,8 +1,8 @@
 import React from "react";
 import classNames from "classnames";
-import badgeBlue from "../assets/icon/badgeBlue.png";
-import badgeRed from "../assets/icon/badgeRed.png";
-import warningInfoBlue from "../assets/icon/warningInfoBlue.png";
+import badgeBlue from "@assets/icon/badgeBlue.png";
+import badgeRed from "@assets/icon/badgeRed.png";
+import warningInfoBlue from "@assets/icon/warningInfoBlue.png";
 
 interface BadgeProps {
   _class?: string;
