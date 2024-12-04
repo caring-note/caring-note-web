@@ -1,9 +1,9 @@
 import { useEffect } from "react";
 import { useAppDispatch } from "../../../hooks";
-import { changeActiveTab } from "@reducers/tabReducer";
-import TabContentContainer from "@components/consult/TabContentContainer";
-import TabContentTitle from "@components/consult/TabContentTitle";
-import Button from "@components/Button";
+import { changeActiveTab } from "../../reducers/tabReducer";
+import TabContentContainer from "../../components/consult/TabContentContainer";
+import TabContentTitle from "../../components/consult/TabContentTitle";
+import Button from "../../components/Button";
 
 const DiscardMedicine: React.FC = () => {
   // 새로고침이 되었을 때도 active tab 을 잃지 않도록 컴포넌트 load 시 dispatch

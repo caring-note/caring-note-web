@@ -1,5 +1,5 @@
-import arrowHeadLeftGray from "@assets/icon/arrowHeadLeftGray.png";
-import { changeActiveTab } from "@reducers/tabReducer";
+import arrowHeadLeftGray from "@icon/arrowHeadLeftGray.png";
+import { changeActiveTab } from "../../reducers/tabReducer";
 import { Outlet, useNavigate } from "react-router-dom";
 import { useAppDispatch, useAppSelector } from "../../../hooks";
 import Button from "../../components/Button";

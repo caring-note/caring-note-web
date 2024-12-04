@@ -1,5 +1,5 @@
-import SelectComponent from "@components/common/SelectComponent";
-import TextFieldComponent from "@components/common/TextFieldComponent";
+import SelectComponent from "./SelectComponent";
+import TextFieldComponent from "./TextFieldComponent";
 type option = {
   val: string;
   name: string;

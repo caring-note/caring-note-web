@@ -2,10 +2,10 @@ import { Editor, EditorState, Modifier } from "draft-js";
 import "draft-js/dist/Draft.css";
 import React from "react";
 import { useAppDispatch, useAppSelector } from "../../../hooks";
-import { changeEditorState } from "@reducers/editorStateReducer";
-import highlightpenBlack from "@assets/icon/highlightpenBlack.png";
-import trashcanBlue from "@assets/icon/trashcanBlue.png";
-import "@assets/css/DraftJsCss.css";
+import { changeEditorState } from "../../reducers/editorStateReducer";
+import highlightpenBlack from "@icon/highlightpenBlack.png";
+import trashcanBlue from "@icon/trashcanBlue.png";
+import "../../assets/css/DraftJsCss.css";
 
 const HighlightInput: React.FC = () => {
   const dispatch = useAppDispatch();
