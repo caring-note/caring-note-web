@@ -6,7 +6,6 @@ import {
 } from "@mui/x-data-grid";
 import React from "react";
 import { useAppDispatch } from "../../../hooks";
-import { updatePrescribedMedicineRow } from "@reducers/tableRowStateReducer";
 
 type TableComponentProps = {
   rows: GridRowsProp;
@@ -24,6 +23,7 @@ const TableComponent: React.FC<TableComponentProps> = ({
   return (
     <div>
       <DataGrid
+        key={"prescribedMedicineTable"}
         className="!rounded-xl"
         classes={{
           columnHeader: "bg-blue-200",

@@ -1,37 +1,27 @@
 import TableComponent from "@components/common/TableComponent";
 import { GridColDef, GridRowModel, GridRowsProp } from "@mui/x-data-grid";
-import { useEffect } from "react";
+import {
+  addRow,
+  updateRowById,
+} from "@reducers/prescribedMedicineTableReducer";
+import { changeActiveTab } from "@reducers/tabReducer";
+import { useEffect, useMemo } from "react";
 import { useAppDispatch, useAppSelector } from "../../../hooks";
 import Button from "../../components/Button";
 import TabContentContainer from "../../components/consult/TabContentContainer";
-import {
-  addPrescribedMedicineRow,
-  deletePrescribedMedicineRow,
-  updatePrescribedMedicineRow,
-} from "../../reducers/tableRowStateReducer";
-import { changeActiveTab } from "../../reducers/tabReducer";
 import GrayContainer from "./GrayContainer";
 
 const MedicineMemo: React.FC = () => {
   const rows = useAppSelector(
-    (state) => state.tableRowState.prescribedMedicineRows,
+    (state) => state.prescribedMedicineTableState.rows,
   );
+  const memoizedRows = useMemo(() => rows, [rows]);
+
   // 새로고침이 되었을 때도 active tab 을 잃지 않도록 컴포넌트 load 시 dispatch
   const dispatch = useAppDispatch();
   useEffect(() => {
     dispatch(changeActiveTab("/consult/medicineMemo")); // 해당 tab의 url
   }, []);
-
-  const testRows: GridRowsProp = [
-    {
-      id: 1,
-      col1: "상시복용",
-      col2: "World",
-      name: "Hello World",
-    },
-    { id: 2, col1: "", col2: "is Awesome" },
-    { id: 3, col1: "", col2: "is Amazing", col3: "5" },
-  ];
 
   const columns: GridColDef[] = [
     {
@@ -41,11 +31,19 @@ const MedicineMemo: React.FC = () => {
       editable: true,
       type: "singleSelect",
       valueOptions: ["상시복용", "필요시 복용", "일시중단"],
-      valueFormatter: (params) => {
-        return params || "(선택하세요)";
+      renderCell: (params) => {
+        return params.value || <span className="text-gray-400">선택</span>;
       },
     },
-    { field: "col2", headerName: "Column 2", flex: 1, editable: true },
+    {
+      field: "col2",
+      headerName: "일반텍스트",
+      flex: 1,
+      editable: true,
+      renderCell: (params) => {
+        return params.value || <span className="text-gray-400">입력해</span>;
+      },
+    },
     {
       field: "col3",
       headerName: "처방일수",
@@ -53,8 +51,12 @@ const MedicineMemo: React.FC = () => {
       flex: 1,
       editable: true,
       type: "number",
-      valueFormatter: (params) => {
-        return `${params ?? "( ? )"} 일`;
+      renderCell: (params) => {
+        return params.value > 0 ? (
+          `${params.value} 일`
+        ) : (
+          <span className="text-gray-400">0</span>
+        );
       },
       align: "left",
     },
@@ -88,10 +90,10 @@ const MedicineMemo: React.FC = () => {
           }>
           <div className="h-auto">
             <TableComponent
-              rows={rows}
+              rows={memoizedRows}
               columns={columns}
               onUpdateCell={(update: GridRowModel) => {
-                dispatch(updatePrescribedMedicineRow(update));
+                dispatch(updateRowById(update));
               }}
             />
             <Button
@@ -99,10 +101,10 @@ const MedicineMemo: React.FC = () => {
               variant="secondary"
               onClick={() => {
                 dispatch(
-                  addPrescribedMedicineRow({
+                  addRow({
                     col1: "",
                     col2: "",
-                    col3: "( ? )",
+                    col3: null,
                     name: "",
                   }),
                 );
