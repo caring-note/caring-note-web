@@ -1,22 +1,28 @@
-import { useEffect } from "react";
-import { useAppDispatch } from "../../../hooks";
-import { changeActiveTab } from "../../reducers/tabReducer";
-import TabContentContainer from "../../components/consult/TabContentContainer";
-import Button from "../../components/Button";
-import GrayContainer from "./GrayContainer";
-import { Tab } from "@mui/material";
 import TableComponent from "@components/common/TableComponent";
-import { GridColDef, GridRowsProp } from "@mui/x-data-grid";
+import { GridColDef, GridRowModel, GridRowsProp } from "@mui/x-data-grid";
+import { useEffect } from "react";
+import { useAppDispatch, useAppSelector } from "../../../hooks";
+import Button from "../../components/Button";
+import TabContentContainer from "../../components/consult/TabContentContainer";
+import {
+  addPrescribedMedicineRow,
+  deletePrescribedMedicineRow,
+  updatePrescribedMedicineRow,
+} from "../../reducers/tableRowStateReducer";
+import { changeActiveTab } from "../../reducers/tabReducer";
+import GrayContainer from "./GrayContainer";
 
 const MedicineMemo: React.FC = () => {
+  const rows = useAppSelector(
+    (state) => state.tableRowState.prescribedMedicineRows,
+  );
   // 새로고침이 되었을 때도 active tab 을 잃지 않도록 컴포넌트 load 시 dispatch
   const dispatch = useAppDispatch();
   useEffect(() => {
     dispatch(changeActiveTab("/consult/medicineMemo")); // 해당 tab의 url
   }, []);
 
-  // TODO: redux로부터 받아온 데이터로 rows, columns를 구성해야 함
-  const rows: GridRowsProp = [
+  const testRows: GridRowsProp = [
     {
       id: 1,
       col1: "상시복용",
@@ -61,12 +67,48 @@ const MedicineMemo: React.FC = () => {
           title="처방 의약품"
           subTitle="최근 3개월 이내 복용 기준 약물 이용 내역"
           titleButton={
-            <Button variant="primary" onClick={() => {}} _class="">
-              수정하기
-            </Button>
+            <div className="inline-block">
+              <Button
+                variant="primary"
+                onClick={() => {
+                  console.log(rows);
+                }}
+                _class="">
+                저장하기 (로그확인)
+              </Button>
+              <Button
+                variant="secondary"
+                onClick={() => {
+                  // TODO: 선택된 row 삭제
+                }}
+                _class="">
+                삭제하기 TODO
+              </Button>
+            </div>
           }>
           <div className="h-auto">
-            <TableComponent rows={rows} columns={columns} />
+            <TableComponent
+              rows={rows}
+              columns={columns}
+              onUpdateCell={(update: GridRowModel) => {
+                dispatch(updatePrescribedMedicineRow(update));
+              }}
+            />
+            <Button
+              _class="mt-2"
+              variant="secondary"
+              onClick={() => {
+                dispatch(
+                  addPrescribedMedicineRow({
+                    col1: "",
+                    col2: "",
+                    col3: "( ? )",
+                    name: "",
+                  }),
+                );
+              }}>
+              + 새 의약품 추가하기
+            </Button>
           </div>
         </GrayContainer>
 
