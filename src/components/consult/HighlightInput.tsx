@@ -116,7 +116,7 @@ const HighlightInput: React.FC = () => {
       </div>
       <div>
         <img
-          className="w-10 h-8 cursor-pointer m-2 inline-block"
+          className="w-8 h-8 cursor-pointer m-2 inline-block"
           src={highlightpenBlack}
           alt="하이라이트"
           onClick={applyHighlight}
