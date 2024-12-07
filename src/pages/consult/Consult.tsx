@@ -42,7 +42,10 @@ function Consult() {
           <p className="text-4xl text-black font-black">박진완</p>
           <img src={shareBlue} alt="shareBlue" className="w-8 h-8 ml-4" />
           <img src={trashcanBlue} alt="trashcanBlue" className="w-8 h-8 ml-4" />
-          <Button _class="ml-4" variant="primary" onClick={() => {}}>
+          <Button _class="ml-4" variant="secondary" onClick={() => {}}>
+            임시저장
+          </Button>
+          <Button _class="ml-2" variant="primary" onClick={() => {}}>
             기록완료
           </Button>
         </div>
