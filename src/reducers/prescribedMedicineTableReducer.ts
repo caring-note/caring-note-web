@@ -4,11 +4,13 @@ import { createSlice, PayloadAction } from "@reduxjs/toolkit";
 // Define a type for the slice state
 interface PrescribedMedicineTableState {
   rows: GridRowsProp;
+  selectedRowIds: string[];
 }
 
 // Define the initial state using that type
 const initialState: PrescribedMedicineTableState = {
   rows: [],
+  selectedRowIds: [],
 };
 
 export const prescribedMedicineTableState = createSlice({
@@ -29,10 +31,13 @@ export const prescribedMedicineTableState = createSlice({
     deleteRowById: (state, action: PayloadAction<string[]>) => {
       // TODO : delete multiple rows
     },
+    setSelectedRowIds: (state, action: PayloadAction<string[]>) => {
+      state.selectedRowIds = action.payload;
+    },
   },
 });
 
-export const { addRow, updateRowById, deleteRowById } =
+export const { addRow, updateRowById, deleteRowById, setSelectedRowIds } =
   prescribedMedicineTableState.actions;
 
 export default prescribedMedicineTableState.reducer;

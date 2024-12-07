@@ -1,7 +1,12 @@
 import TableComponent from "@components/common/TableComponent";
-import { GridColDef, GridRowModel } from "@mui/x-data-grid";
+import {
+  GridColDef,
+  GridRowModel,
+  GridRowSelectionModel,
+} from "@mui/x-data-grid";
 import {
   addRow,
+  setSelectedRowIds,
   updateRowById,
 } from "@reducers/prescribedMedicineTableReducer";
 import { changeActiveTab } from "@reducers/tabReducer";
@@ -14,6 +19,9 @@ import GrayContainer from "./GrayContainer";
 const MedicineMemo: React.FC = () => {
   const rows = useAppSelector(
     (state) => state.prescribedMedicineTableState.rows,
+  );
+  const selectedRows = useAppSelector(
+    (state) => state.prescribedMedicineTableState.selectedRowIds,
   );
 
   // 새로고침이 되었을 때도 active tab 을 잃지 않도록 컴포넌트 load 시 dispatch
@@ -99,18 +107,14 @@ const MedicineMemo: React.FC = () => {
           subTitle="최근 3개월 이내 복용 기준 약물 이용 내역"
           titleButton={
             <div className="inline-block">
-              <Button
-                variant="secondary"
-                onClick={() => {
-                  // TODO: 선택된 row 삭제
-                }}
-                _class="">
+              <Button variant="secondary" onClick={() => {}} _class="">
                 삭제하기 TODO
               </Button>
               <Button
                 variant="primary"
                 onClick={() => {
                   console.log(rows);
+                  console.log(selectedRows);
                 }}
                 _class="">
                 저장하기 (로그확인)
@@ -123,6 +127,9 @@ const MedicineMemo: React.FC = () => {
               columns={columns}
               onUpdateCell={(update: GridRowModel) => {
                 dispatch(updateRowById(update));
+              }}
+              onRowSelectionModelChange={(selection: string[]) => {
+                dispatch(setSelectedRowIds(selection));
               }}
             />
             <Button
