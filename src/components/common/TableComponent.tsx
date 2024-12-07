@@ -49,6 +49,13 @@ const TableComponent: React.FC<TableComponentProps> = ({
         }}
         disableColumnMenu
         hideFooter
+        slots={{
+          noRowsOverlay: () => (
+            <div className="flex items-center justify-center w-full h-full bg-white">
+              <span className="text-gray-400">기록 내역이 없습니다</span>
+            </div>
+          ),
+        }}
       />
     </div>
   );
