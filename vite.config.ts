@@ -12,6 +12,7 @@ export default defineConfig({
     alias: {
       "@icon": path.resolve(__dirname, "./src/assets/icon"),
       "@components": path.resolve(__dirname, "./src/components"),
+      "@reducers": path.resolve(__dirname, "./src/reducers"),
     },
   },
   server: {

@@ -23,8 +23,4 @@ export const editorState = createSlice({
 });
 
 export const { changeEditorState } = editorState.actions;
-
-export const selectActiveTab = (state: RootState) =>
-  state.editorState.editorState;
-
 export default editorState.reducer;

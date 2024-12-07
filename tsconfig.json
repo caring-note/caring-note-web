@@ -5,7 +5,8 @@
       "@components/*": ["components/*"], // 별칭 설정
       "@pages/*": ["pages/*"],
       "@assets/*": ["assets/*"],
-      "@icon/*": ["assets/icon/*"]
+      "@icon/*": ["assets/icon/*"],
+      "@reducers/*": ["reducers/*"]
     }
   },
   "files": [],

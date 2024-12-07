@@ -9,6 +9,7 @@ import settingBlack from "@icon/settingBlack.png";
 import logoBlack from "../assets/logoBlack.png";
 import Button from "../components/Button";
 import NavigationLeftMenu from "../components/NavigationLeftMenu";
+import { useNavigate } from "react-router-dom";
 import noteBlue from "@icon/noteBlue.png";
 import paperPlaneBlack from "@icon/paperPlaneBlack.png";
 import paperPlaneBlue from "@icon/paperPlaneBlue.png";
@@ -16,10 +17,17 @@ import paperPlaneBlue from "@icon/paperPlaneBlue.png";
 interface NavigationLeftProps {}
 
 const NavigationLeft: React.FC<NavigationLeftProps> = ({}) => {
+  const navigate = useNavigate();
+
   return (
     <div className="w-64 h-auto relative py-4 z-1000">
       <div className="flex justify-center items-center">
-        <img src={logoBlack} alt="logo" className="" />
+        <img
+          className="hover:cursor-pointer"
+          src={logoBlack}
+          alt="logo"
+          onClick={() => navigate("/consult/home")}
+        />
       </div>
       <div className="flex justify-center items-center">
         <Button
