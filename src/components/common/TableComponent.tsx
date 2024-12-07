@@ -5,7 +5,6 @@ import {
   GridRowsProp,
 } from "@mui/x-data-grid";
 import React from "react";
-import { useAppDispatch } from "../../../hooks";
 
 type TableComponentProps = {
   rows: GridRowsProp;
@@ -18,7 +17,8 @@ const TableComponent: React.FC<TableComponentProps> = ({
   columns,
   onUpdateCell,
 }) => {
-  const dispatch = useAppDispatch();
+  const memoizedRows = React.useMemo(() => rows, [rows]);
+  const memoizedColumns = React.useMemo(() => columns, [columns]);
 
   return (
     <div>
@@ -29,8 +29,8 @@ const TableComponent: React.FC<TableComponentProps> = ({
           columnHeader: "bg-blue-200",
           cell: "bg-white",
         }}
-        rows={rows}
-        columns={columns}
+        rows={memoizedRows}
+        columns={memoizedColumns}
         checkboxSelection // 체크박스 추가
         disableRowSelectionOnClick // cell 클릭시 row 선택 안되도록
         processRowUpdate={(update) => {

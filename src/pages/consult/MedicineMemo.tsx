@@ -1,11 +1,11 @@
 import TableComponent from "@components/common/TableComponent";
-import { GridColDef, GridRowModel, GridRowsProp } from "@mui/x-data-grid";
+import { GridColDef, GridRowModel } from "@mui/x-data-grid";
 import {
   addRow,
   updateRowById,
 } from "@reducers/prescribedMedicineTableReducer";
 import { changeActiveTab } from "@reducers/tabReducer";
-import { useEffect, useMemo } from "react";
+import { useEffect } from "react";
 import { useAppDispatch, useAppSelector } from "../../../hooks";
 import Button from "../../components/Button";
 import TabContentContainer from "../../components/consult/TabContentContainer";
@@ -15,7 +15,6 @@ const MedicineMemo: React.FC = () => {
   const rows = useAppSelector(
     (state) => state.prescribedMedicineTableState.rows,
   );
-  const memoizedRows = useMemo(() => rows, [rows]);
 
   // 새로고침이 되었을 때도 active tab 을 잃지 않도록 컴포넌트 load 시 dispatch
   const dispatch = useAppDispatch();
@@ -90,7 +89,7 @@ const MedicineMemo: React.FC = () => {
           }>
           <div className="h-auto">
             <TableComponent
-              rows={memoizedRows}
+              rows={rows}
               columns={columns}
               onUpdateCell={(update: GridRowModel) => {
                 dispatch(updateRowById(update));
