@@ -31,20 +31,50 @@ const MedicineMemo: React.FC = () => {
       type: "singleSelect",
       valueOptions: ["상시복용", "필요시 복용", "일시중단"],
       renderCell: (params) => {
-        return params.value || <span className="text-gray-400">선택</span>;
+        return (
+          params.value || <span className="text-gray-400 italic">선택</span>
+        );
       },
     },
     {
       field: "col2",
-      headerName: "일반텍스트",
+      headerName: "성분명/상품명",
       flex: 1,
       editable: true,
       renderCell: (params) => {
-        return params.value || <span className="text-gray-400">입력해</span>;
+        return (
+          params.value || (
+            <span className="text-gray-400 italic">성분명/상품명</span>
+          )
+        );
       },
     },
     {
       field: "col3",
+      headerName: "약물 사용 목적",
+      flex: 1,
+      editable: true,
+      renderCell: (params) => {
+        return (
+          params.value || (
+            <span className="text-gray-400 italic">약물 사용 목적</span>
+          )
+        );
+      },
+    },
+    {
+      field: "col4",
+      headerName: "처방날짜",
+      flex: 1,
+      editable: true,
+      renderCell: (params) => {
+        return (
+          params.value || <span className="text-gray-400 italic">YYYYMMDD</span>
+        );
+      },
+    },
+    {
+      field: "col5",
       headerName: "처방일수",
       headerAlign: "left",
       flex: 1,
@@ -54,7 +84,7 @@ const MedicineMemo: React.FC = () => {
         return params.value > 0 ? (
           `${params.value} 일`
         ) : (
-          <span className="text-gray-400">0</span>
+          <span className="text-gray-400 italic">0</span>
         );
       },
       align: "left",
@@ -70,20 +100,20 @@ const MedicineMemo: React.FC = () => {
           titleButton={
             <div className="inline-block">
               <Button
-                variant="primary"
-                onClick={() => {
-                  console.log(rows);
-                }}
-                _class="">
-                저장하기 (로그확인)
-              </Button>
-              <Button
                 variant="secondary"
                 onClick={() => {
                   // TODO: 선택된 row 삭제
                 }}
                 _class="">
                 삭제하기 TODO
+              </Button>
+              <Button
+                variant="primary"
+                onClick={() => {
+                  console.log(rows);
+                }}
+                _class="">
+                저장하기 (로그확인)
               </Button>
             </div>
           }>
@@ -101,10 +131,11 @@ const MedicineMemo: React.FC = () => {
               onClick={() => {
                 dispatch(
                   addRow({
-                    col1: "",
-                    col2: "",
+                    col1: null,
+                    col2: null,
                     col3: null,
-                    name: "",
+                    col4: null,
+                    col5: null,
                   }),
                 );
               }}>
