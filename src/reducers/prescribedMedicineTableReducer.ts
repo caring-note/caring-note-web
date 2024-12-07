@@ -20,7 +20,7 @@ export const prescribedMedicineTableState = createSlice({
     addRow: (state, action: PayloadAction<GridRowModel>) => {
       state.rows.push({
         ...action.payload,
-        id: state?.rows?.length + 1,
+        id: Math.max(0, ...state.rows.map((row) => Number(row.id))) + 1,
       });
     },
     updateRowById: (state, action: PayloadAction<GridRowModel>) => {
