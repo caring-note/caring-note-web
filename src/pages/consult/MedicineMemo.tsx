@@ -145,10 +145,10 @@ const MedicineMemo: React.FC = () => {
               onClick={() => {
                 dispatch(
                   addRow({
-                    col1: null,
-                    col2: null,
-                    col3: null,
-                    col4: null,
+                    col1: "",
+                    col2: "",
+                    col3: "",
+                    col4: "",
                     col5: null,
                   }),
                 );
