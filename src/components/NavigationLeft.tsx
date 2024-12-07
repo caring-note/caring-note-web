@@ -17,7 +17,7 @@ interface NavigationLeftProps {}
 
 const NavigationLeft: React.FC<NavigationLeftProps> = ({}) => {
   return (
-    <div className="w-64 h-screen relative py-4 bg-gray-0 border-r border-gray-300 z-1000">
+    <div className="w-64 h-auto relative py-4 z-1000">
       <div className="flex justify-center items-center">
         <img src={logoBlack} alt="logo" className="" />
       </div>
