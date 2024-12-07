@@ -47,6 +47,8 @@ const TableComponent: React.FC<TableComponentProps> = ({
         onRowSelectionModelChange={(selection: GridRowSelectionModel) => {
           onRowSelectionModelChange?.(selection.map((s) => s.toString()));
         }}
+        disableColumnMenu
+        hideFooter
       />
     </div>
   );
