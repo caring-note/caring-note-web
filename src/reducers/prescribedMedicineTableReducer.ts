@@ -29,7 +29,11 @@ export const prescribedMedicineTableState = createSlice({
       );
     },
     deleteRowById: (state, action: PayloadAction<string[]>) => {
-      // TODO : delete multiple rows
+      state.rows = [
+        ...state.rows.filter(
+          (row) => !action.payload.includes(row.id.toString()),
+        ),
+      ];
     },
     setSelectedRowIds: (state, action: PayloadAction<string[]>) => {
       state.selectedRowIds = action.payload;

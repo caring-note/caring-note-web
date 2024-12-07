@@ -6,6 +6,7 @@ import {
 } from "@mui/x-data-grid";
 import {
   addRow,
+  deleteRowById,
   setSelectedRowIds,
   updateRowById,
 } from "@reducers/prescribedMedicineTableReducer";
@@ -107,17 +108,23 @@ const MedicineMemo: React.FC = () => {
           subTitle="최근 3개월 이내 복용 기준 약물 이용 내역"
           titleButton={
             <div className="inline-block">
-              <Button variant="secondary" onClick={() => {}} _class="">
-                삭제하기 TODO
+              <Button
+                variant="secondary"
+                onClick={() => {
+                  dispatch(deleteRowById(selectedRows));
+                }}
+                _class="">
+                삭제하기
               </Button>
               <Button
                 variant="primary"
                 onClick={() => {
+                  // TODO:  저장하기 버튼 클릭 시 API 연동
                   console.log(rows);
                   console.log(selectedRows);
                 }}
                 _class="">
-                저장하기 (로그확인)
+                저장하기
               </Button>
             </div>
           }>
