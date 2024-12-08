@@ -116,6 +116,7 @@ const MedicineMemo: React.FC = () => {
             <TableComponent
               rows={rows}
               columns={columns}
+              checkboxSelection={true}
               onUpdateCell={(update: GridRowModel) => {
                 dispatch(updateRowById(update));
               }}
