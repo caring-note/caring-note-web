@@ -150,7 +150,10 @@ const MedicineMemo: React.FC = () => {
               수정하기
             </Button>
           }>
-          <div className="h-96">테이블 컴포넌트</div>
+          <div className="h-96">
+            위 처방 의약품 테이블과 아주 동일하므로, 처방 의약품 테이블이 완전히
+            제대로 작동하는지 확인 후 개발
+          </div>
         </GrayContainer>
 
         <div>
