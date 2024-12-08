@@ -1,10 +1,17 @@
-import { useEffect } from "react";
+import React, { useEffect } from "react";
 import { useAppDispatch } from "../../../hooks";
 import TabContentContainer from "../../components/consult/TabContentContainer";
 import TabContentTitle from "../../components/consult/TabContentTitle";
 import { changeActiveTab } from "../../reducers/tabReducer";
 import highlightpenBlue from "@icon/highlightpenBlue.png";
 import listYellow from "@icon/listYellow.png";
+import TableComponent from "@components/common/TableComponent";
+import { GridColDef } from "@mui/x-data-grid";
+import {
+  createDefaultTextColumn,
+  createDefaultNumberColumn,
+  createDefaultDateColumn,
+} from "@utils/TableUtils";
 
 const PastConsult: React.FC = () => {
   // 새로고침이 되었을 때도 active tab 을 잃지 않도록 컴포넌트 load 시 dispatch
@@ -12,6 +19,28 @@ const PastConsult: React.FC = () => {
   useEffect(() => {
     dispatch(changeActiveTab("/consult/pastConsult")); // 해당 tab의 url
   }, []);
+
+  const columns: GridColDef[] = [
+    {
+      ...createDefaultNumberColumn({
+        field: "col1",
+        headerName: "상담횟수",
+        unitName: "회차",
+        isFirstColumn: true,
+      }),
+    },
+    {
+      ...createDefaultDateColumn({
+        field: "col2",
+        headerName: "상담일자",
+      }),
+    },
+    { ...createDefaultTextColumn({ field: "col3", headerName: "담당약사" }) },
+    {
+      ...createDefaultTextColumn({ field: "col4", headerName: "케어링메세지" }),
+    },
+  ];
+  const memoizedColumns = React.useMemo(() => columns, [columns]);
 
   return (
     <>
@@ -78,7 +107,35 @@ const PastConsult: React.FC = () => {
         <p className="text-lg font-medium text-gray-500 ">
           케어링 노트로 남긴 상담 내역이 노출됩니다
         </p>
-        <div className="mt-4 h-96 bg-gray-200">테이블</div>
+        <div className="h-auto mt-4">
+          {/* TODO: rows는 API로 받아와서 세팅 */}
+          <TableComponent
+            rows={[
+              {
+                id: 1,
+                col1: 1,
+                col2: "2021-09-01",
+                col3: "김약사",
+                col4: "약물 복용에 대한 상담이 이루어짐",
+              },
+              {
+                id: 2,
+                col1: 2,
+                col2: "2021-09-03",
+                col3: "박약사",
+                col4: "약물 복용에 대한 상담이 이루어짐",
+              },
+              {
+                id: 3,
+                col1: 3,
+                col2: "2021-09-05",
+                col3: "이약사",
+                col4: "약물 복용에 대한 상담이 이루어짐",
+              },
+            ]}
+            columns={memoizedColumns}
+          />
+        </div>
       </TabContentContainer>
     </>
   );
