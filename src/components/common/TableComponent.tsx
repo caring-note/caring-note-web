@@ -52,7 +52,7 @@ const TableComponent: React.FC<TableComponentProps> = ({
         slots={{
           noRowsOverlay: () => (
             <div className="flex items-center justify-center w-full h-full bg-white">
-              <span className="text-gray-400">기록 내역이 없습니다</span>
+              <span className="text-gray-400">항목이 존재하지 않습니다</span>
             </div>
           ),
         }}
