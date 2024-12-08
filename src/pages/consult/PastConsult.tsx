@@ -116,21 +116,21 @@ const PastConsult: React.FC = () => {
                 col1: 1,
                 col2: "2021-09-01",
                 col3: "김약사",
-                col4: "약물 복용에 대한 상담이 이루어짐",
+                col4: "(TODO)",
               },
               {
                 id: 2,
                 col1: 2,
                 col2: "2021-09-03",
                 col3: "박약사",
-                col4: "약물 복용에 대한 상담이 이루어짐",
+                col4: "(TODO)",
               },
               {
                 id: 3,
                 col1: 3,
                 col2: "2021-09-05",
                 col3: "이약사",
-                col4: "약물 복용에 대한 상담이 이루어짐",
+                col4: "(TODO)",
               },
             ]}
             columns={memoizedColumns}
