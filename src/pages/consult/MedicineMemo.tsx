@@ -47,12 +47,11 @@ const MedicineMemo: React.FC = () => {
       valueOptions: ["상시복용", "필요시 복용", "일시중단"],
       renderCell: (params) => {
         return (
-          params.value || (
-            <span className="text-gray-400 italic pl-4">선택</span>
-          )
+          params.value || <span className="text-gray-400 italic">선택</span>
         );
       },
       headerClassName: "!pl-6",
+      cellClassName: "!pl-6",
     },
     {
       ...createDefaultTextColumn({
