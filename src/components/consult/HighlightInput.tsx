@@ -103,11 +103,7 @@ const HighlightInput: React.FC = () => {
         onClick={getHighlightedText}>
         <Editor
           editorState={editorState}
-          placeholder={`2024.12.1 : 이슈 기록
-            0. 텍스트 선택시 그 위에 형광펜 띄우는건 불가능 (예상하셨겠지만..)
-            1. 형광펜 버튼 한개로 toggle 하는건 어려움 (지우기 버튼 임시로 만듬)
-            2. 여러 줄을 "잘라내기" 하는 경우 화이트스크린 발생 (이유는 모름)
-            `}
+          placeholder={`상담 내용을 기록하세요`}
           onChange={(editorState) => {
             dispatch(changeEditorState(editorState));
           }}
