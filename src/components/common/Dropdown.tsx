@@ -48,7 +48,7 @@ const Dropdown: React.FC<DropdownProps> = ({
       }`}>
       {/* 드롭다운 헤더 */}
       <div
-        className={`border rounded-[0.25rem] p-2 flex justify-between items-center cursor-pointer ${
+        className={`border rounded-[0.25rem] px-2 py-[0.375rem] flex justify-between items-center cursor-pointer ${
           disabled
             ? "border-grayscale-20 bg-grayscale-5"
             : isFocused
@@ -73,7 +73,7 @@ const Dropdown: React.FC<DropdownProps> = ({
           {selectedValue || placeholder}
         </span>
         <img
-          src={isOpen ? arrowDropDown : arrowDropUp}
+          src={isOpen ? arrowDropUp : arrowDropDown}
           alt={isOpen ? "Collapse" : "Expand"}
           className="w-[1.25rem] h-[1.25rem]"
         />
