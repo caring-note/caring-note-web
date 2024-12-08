@@ -1,5 +1,6 @@
+import arrowDropDown from "@icon/arrowdropdown.svg";
+import arrowDropUp from "@icon/arrowdropup.svg";
 import React, { useState } from "react";
-
 interface DropdownProps {
   options: string[]; // 드롭다운 항목 배열
   placeholder?: string; // 선택 전 기본 텍스트
@@ -50,7 +51,7 @@ const Dropdown: React.FC<DropdownProps> = ({
           disabled
             ? "bg-gray-100 text-gray-400"
             : isFocused
-            ? "border-blue-500 ring-1 ring-blue-500"
+            ? "border-blue-500 ring-1 ring-blue-500 border-2"
             : "border-gray-300 hover:border-gray-500"
         }`}
         onClick={handleToggle}
@@ -66,7 +67,11 @@ const Dropdown: React.FC<DropdownProps> = ({
           } font-medium text-base leading-6`}>
           {selectedValue || placeholder}
         </span>
-        <span>{isOpen ? "▲" : "▼"}</span>
+        <img
+          src={isOpen ? arrowDropDown : arrowDropUp}
+          alt={isOpen ? "Collapse" : "Expand"}
+          className="w-4 h-4"
+        />
       </div>
 
       {/* 드롭다운 리스트 */}
