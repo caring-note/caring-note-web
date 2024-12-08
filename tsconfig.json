@@ -6,7 +6,8 @@
       "@pages/*": ["pages/*"],
       "@assets/*": ["assets/*"],
       "@icon/*": ["assets/icon/*"],
-      "@reducers/*": ["reducers/*"]
+      "@reducers/*": ["reducers/*"],
+      "@utils/*": ["utils/*"]
     }
   },
   "files": [],

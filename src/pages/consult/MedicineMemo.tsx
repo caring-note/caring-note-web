@@ -16,6 +16,12 @@ import { useAppDispatch, useAppSelector } from "../../../hooks";
 import Button from "../../components/Button";
 import TabContentContainer from "../../components/consult/TabContentContainer";
 import GrayContainer from "./GrayContainer";
+import { create } from "domain";
+import {
+  createDefaultDateColumn,
+  createDefaultNumberColumn,
+  createDefaultTextColumn,
+} from "@utils/TableUtils";
 
 const MedicineMemo: React.FC = () => {
   const rows = useAppSelector(
@@ -44,59 +50,37 @@ const MedicineMemo: React.FC = () => {
           params.value || <span className="text-gray-400 italic">선택</span>
         );
       },
+      headerClassName: "!pl-6",
+      cellClassName: "!pl-6",
     },
     {
-      field: "col2",
-      headerName: "성분명/상품명",
-      flex: 1,
+      ...createDefaultTextColumn({
+        field: "col2",
+        headerName: "성분명 / 상품명",
+      }),
       editable: true,
-      renderCell: (params) => {
-        return (
-          params.value || (
-            <span className="text-gray-400 italic">성분명/상품명</span>
-          )
-        );
-      },
     },
     {
-      field: "col3",
-      headerName: "약물 사용 목적",
-      flex: 1,
+      ...createDefaultTextColumn({
+        field: "col3",
+        headerName: "약물 사용 목적",
+      }),
       editable: true,
-      renderCell: (params) => {
-        return (
-          params.value || (
-            <span className="text-gray-400 italic">약물 사용 목적</span>
-          )
-        );
-      },
     },
     {
-      field: "col4",
-      headerName: "처방날짜",
-      flex: 1,
+      ...createDefaultDateColumn({
+        field: "col4",
+        headerName: "처방 날짜",
+      }),
       editable: true,
-      renderCell: (params) => {
-        return (
-          params.value || <span className="text-gray-400 italic">YYYYMMDD</span>
-        );
-      },
     },
     {
-      field: "col5",
-      headerName: "처방일수",
-      headerAlign: "left",
-      flex: 1,
+      ...createDefaultNumberColumn({
+        field: "col5",
+        headerName: "처방 일수",
+        unitName: "일",
+      }),
       editable: true,
-      type: "number",
-      renderCell: (params) => {
-        return params.value > 0 ? (
-          `${params.value} 일`
-        ) : (
-          <span className="text-gray-400 italic">0</span>
-        );
-      },
-      align: "left",
     },
   ];
 
@@ -113,7 +97,8 @@ const MedicineMemo: React.FC = () => {
                 onClick={() => {
                   dispatch(deleteRowById(selectedRows));
                 }}
-                _class="">
+                _class=""
+                disabled={selectedRows.length == 0}>
                 삭제하기
               </Button>
               <Button
@@ -132,6 +117,7 @@ const MedicineMemo: React.FC = () => {
             <TableComponent
               rows={rows}
               columns={columns}
+              checkboxSelection={true}
               onUpdateCell={(update: GridRowModel) => {
                 dispatch(updateRowById(update));
               }}
@@ -166,7 +152,10 @@ const MedicineMemo: React.FC = () => {
               수정하기
             </Button>
           }>
-          <div className="h-96">테이블 컴포넌트</div>
+          <div className="h-96">
+            위 처방 의약품 테이블과 아주 동일하므로, 처방 의약품 테이블이 완전히
+            제대로 작동하는지 확인 후 개발
+          </div>
         </GrayContainer>
 
         <div>

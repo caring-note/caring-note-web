@@ -5,19 +5,20 @@ import {
   GridRowSelectionModel,
   GridRowsProp,
 } from "@mui/x-data-grid";
-import { on } from "events";
 import React from "react";
 
 type TableComponentProps = {
   rows: GridRowsProp;
   columns: GridColDef[];
-  onUpdateCell: (update: GridRowModel) => void;
+  checkboxSelection?: boolean;
+  onUpdateCell?: (update: GridRowModel) => void;
   onRowSelectionModelChange?: (selection: string[]) => void;
 };
 
 const TableComponent: React.FC<TableComponentProps> = ({
   rows,
   columns,
+  checkboxSelection = false,
   onUpdateCell,
   onRowSelectionModelChange,
 }) => {
@@ -30,15 +31,15 @@ const TableComponent: React.FC<TableComponentProps> = ({
         key={"prescribedMedicineTable"}
         className="!rounded-xl"
         classes={{
-          columnHeader: "bg-blue-200",
+          columnHeader: "bg-gray-200",
           cell: "bg-white",
         }}
         rows={memoizedRows}
         columns={memoizedColumns}
-        checkboxSelection // 체크박스 추가
+        checkboxSelection={checkboxSelection} // 체크박스 추가
         disableRowSelectionOnClick // cell 클릭시 row 선택 안되도록
         processRowUpdate={(update) => {
-          onUpdateCell(update);
+          onUpdateCell?.(update);
           return update;
         }}
         onProcessRowUpdateError={(error) => {
@@ -52,7 +53,7 @@ const TableComponent: React.FC<TableComponentProps> = ({
         slots={{
           noRowsOverlay: () => (
             <div className="flex items-center justify-center w-full h-full bg-white">
-              <span className="text-gray-400">기록 내역이 없습니다</span>
+              <span className="text-gray-400">항목이 존재하지 않습니다</span>
             </div>
           ),
         }}
