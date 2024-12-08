@@ -16,6 +16,12 @@ import { useAppDispatch, useAppSelector } from "../../../hooks";
 import Button from "../../components/Button";
 import TabContentContainer from "../../components/consult/TabContentContainer";
 import GrayContainer from "./GrayContainer";
+import { create } from "domain";
+import {
+  createDefaultDateColumn,
+  createDefaultNumberColumn,
+  createDefaultTextColumn,
+} from "@utils/TableUtils";
 
 const MedicineMemo: React.FC = () => {
   const rows = useAppSelector(
@@ -41,62 +47,41 @@ const MedicineMemo: React.FC = () => {
       valueOptions: ["상시복용", "필요시 복용", "일시중단"],
       renderCell: (params) => {
         return (
-          params.value || <span className="text-gray-400 italic">선택</span>
-        );
-      },
-    },
-    {
-      field: "col2",
-      headerName: "성분명/상품명",
-      flex: 1,
-      editable: true,
-      renderCell: (params) => {
-        return (
           params.value || (
-            <span className="text-gray-400 italic">성분명/상품명</span>
+            <span className="text-gray-400 italic pl-4">선택</span>
           )
         );
       },
+      headerClassName: "!pl-6",
     },
     {
-      field: "col3",
-      headerName: "약물 사용 목적",
-      flex: 1,
+      ...createDefaultTextColumn({
+        field: "col2",
+        headerName: "성분명 / 상품명",
+      }),
       editable: true,
-      renderCell: (params) => {
-        return (
-          params.value || (
-            <span className="text-gray-400 italic">약물 사용 목적</span>
-          )
-        );
-      },
     },
     {
-      field: "col4",
-      headerName: "처방날짜",
-      flex: 1,
+      ...createDefaultTextColumn({
+        field: "col3",
+        headerName: "약물 사용 목적",
+      }),
       editable: true,
-      renderCell: (params) => {
-        return (
-          params.value || <span className="text-gray-400 italic">YYYYMMDD</span>
-        );
-      },
     },
     {
-      field: "col5",
-      headerName: "처방일수",
-      headerAlign: "left",
-      flex: 1,
+      ...createDefaultDateColumn({
+        field: "col4",
+        headerName: "처방 날짜",
+      }),
       editable: true,
-      type: "number",
-      renderCell: (params) => {
-        return params.value > 0 ? (
-          `${params.value} 일`
-        ) : (
-          <span className="text-gray-400 italic">0</span>
-        );
-      },
-      align: "left",
+    },
+    {
+      ...createDefaultNumberColumn({
+        field: "col5",
+        headerName: "처방 일수",
+        unitName: "일",
+      }),
+      editable: true,
     },
   ];
 

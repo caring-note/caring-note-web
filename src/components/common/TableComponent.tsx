@@ -10,6 +10,7 @@ import React from "react";
 type TableComponentProps = {
   rows: GridRowsProp;
   columns: GridColDef[];
+  checkboxSelection?: boolean;
   onUpdateCell?: (update: GridRowModel) => void;
   onRowSelectionModelChange?: (selection: string[]) => void;
 };
@@ -17,6 +18,7 @@ type TableComponentProps = {
 const TableComponent: React.FC<TableComponentProps> = ({
   rows,
   columns,
+  checkboxSelection = false,
   onUpdateCell,
   onRowSelectionModelChange,
 }) => {
@@ -29,12 +31,12 @@ const TableComponent: React.FC<TableComponentProps> = ({
         key={"prescribedMedicineTable"}
         className="!rounded-xl"
         classes={{
-          columnHeader: "bg-blue-200",
+          columnHeader: "bg-gray-200",
           cell: "bg-white",
         }}
         rows={memoizedRows}
         columns={memoizedColumns}
-        checkboxSelection // 체크박스 추가
+        checkboxSelection={checkboxSelection} // 체크박스 추가
         disableRowSelectionOnClick // cell 클릭시 row 선택 안되도록
         processRowUpdate={(update) => {
           onUpdateCell?.(update);
