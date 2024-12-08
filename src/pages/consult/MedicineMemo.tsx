@@ -97,7 +97,8 @@ const MedicineMemo: React.FC = () => {
                 onClick={() => {
                   dispatch(deleteRowById(selectedRows));
                 }}
-                _class="">
+                _class=""
+                disabled={selectedRows.length == 0}>
                 삭제하기
               </Button>
               <Button
