@@ -1,4 +1,3 @@
-import DatePickerComponent from "@components/common/DatePickerComponent";
 import { useNavigate } from "react-router-dom";
 
 function Home() {
@@ -55,7 +54,6 @@ function Home() {
               }}>
               조영호 : 기초상담 화면으로 이동 (임시){" "}
             </p>
-            <DatePickerComponent></DatePickerComponent>
           </div>
         </div>
       </div>
