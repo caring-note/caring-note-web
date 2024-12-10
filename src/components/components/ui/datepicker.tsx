@@ -33,7 +33,7 @@ export function DatePickerComponent() {
         <Calendar
           mode="single"
           captionLayout="dropdown-buttons"
-          showOutsideDays={false}
+          showOutsideDays={true}
           selected={date}
           onSelect={setDate}
           fromYear={1960}
