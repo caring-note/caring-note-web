@@ -8,10 +8,14 @@ import {
   SelectValue,
 } from "@components/components/ui/select";
 import { cn } from "@components/lib/utils";
+import { format } from "date-fns";
 import { ko } from "date-fns/locale";
 import { ChevronLeft, ChevronRight } from "lucide-react";
 import * as React from "react";
 import { DayPicker, DropdownProps } from "react-day-picker";
+const formatCaption = (date: Date, options?: any) => {
+  return format(date, "yyyy LLLL", options);
+};
 
 export type CalendarProps = React.ComponentProps<typeof DayPicker>;
 function Calendar({
@@ -26,13 +30,17 @@ function Calendar({
       showOutsideDays={showOutsideDays}
       defaultMonth={new Date()}
       className={cn("p-3", className)}
+      formatters={{
+        formatCaption,
+      }}
       classNames={{
         months: "flex flex-col sm:flex-row space-y-4 sm:space-x-4 sm:space-y-0",
         month: "space-y-4",
         caption: "flex justify-center pt-1 relative items-center",
         caption_label: "text-body1 font-bold",
         vhidden: "vhidden hidden",
-        caption_dropdowns: "flex text-body1 font-bold justify-center gap-1",
+        caption_dropdowns:
+          "flex flex-row-reverse text-body1 font-bold justify-center gap-1",
         nav: "space-x-1 flex items-center",
         nav_button: cn(
           buttonVariants({ variant: "outline" }),
