@@ -40,8 +40,6 @@ jobs:
           context: .
           push: true
           tags: bsh998/caring-note-web:latest
-          cache-from: type=gha
-          cache-to: type=gha,mode=max
 
       - name: VM에 배포
         uses: appleboy/ssh-action@v0.1.7
