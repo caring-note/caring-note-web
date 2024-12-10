@@ -4,6 +4,7 @@ import { changeActiveTab } from "../../reducers/tabReducer";
 import Badge from "../../components/Badge";
 import CardContainer from "../../components/common/CardContainer";
 import InputLayout from "../../components/layout/input/InputLayout";
+import Dialog from "@components/common/Dialog";
 
 type option = {
   val: string;
@@ -24,6 +25,13 @@ const AssistantBasicInfo = () => {
   useEffect(() => {
     dispatch(changeActiveTab("/assistant/basicInfo")); // 해당 tab의 url
   }, []);
+  // Dialog 사용법
+  // isModalOpen state 선언
+  const [isModalOpen, setIsModalOpen] = useState<boolean>(false);
+  // closeModal 함수 닫기
+  const closeModal = () => {
+    setIsModalOpen(!isModalOpen);
+  };
   const [assistantBasicInfo, setAssistantBasicInfo] = useState({
     name: "",
     birthDate: "",
@@ -110,6 +118,22 @@ const AssistantBasicInfo = () => {
         text="이전 상담 노트에서 불러온 정보를 토대로 손쉽게 작성해보세요"
         isIcon={true}
         isWarning={true}
+      />
+      <button
+        className="text-3xl text-center mt-10"
+        onClick={() => setIsModalOpen(!isModalOpen)}>
+        모달
+      </button>
+      <Dialog
+        title="타이틀"
+        content="내용내용"
+        onCancel={closeModal}
+        onConfirm={closeModal}
+        cancelText="취소"
+        confirmText="삭제하기"
+        isDialogOpen={isModalOpen}
+        width="w-1/2" // TailwindCSS 클래스 사용 (50% 너비)
+        height="h-auto" // 고정 높이 24rem
       />
       <CardContainer
         _class="border-t-8 border-gray-400"
