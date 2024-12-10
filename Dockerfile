@@ -8,7 +8,7 @@ WORKDIR /app
 # package.json, pnpm-lock.yaml 등을 복사
 COPY package*.json ./
 # pnpm-lock.yaml 파일도 있으면 복사해주세요.
-# COPY pnpm-lock.yaml ./
+COPY pnpm-lock.yaml ./
 
 # 의존성 설치
 RUN pnpm install
