@@ -18,7 +18,9 @@ jobs:
         uses: actions/setup-node@v3
         with:
           node-version: "18.16.1"
-          cache: 'pnpm'
+          
+      - name: corepack 활성화
+        run: corepack enable
 
       - name: 의존성 설치
         run: pnpm install --frozen-lockfile
@@ -38,6 +40,8 @@ jobs:
           context: .
           push: true
           tags: bsh998/caring-note-web:latest
+          cache-from: type=gha
+          cache-to: type=gha,mode=max
 
       - name: VM에 배포
         uses: appleboy/ssh-action@v0.1.7
