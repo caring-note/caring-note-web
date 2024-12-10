@@ -1,13 +1,21 @@
 FROM node:18.16.1 as builder
 
-# 작업 폴더를 만들고 npm 설치
-WORKDIR /app
-COPY package*.json ./
-RUN npm install
+# pnpm 사용을 위해 corepack 활성화
+RUN corepack enable
 
-# 소스를 작업폴더로 복사하고 빌드 
+WORKDIR /app
+
+# package.json, pnpm-lock.yaml 등을 복사
+COPY package*.json ./
+# pnpm-lock.yaml 파일도 있으면 복사해주세요.
+# COPY pnpm-lock.yaml ./
+
+# 의존성 설치
+RUN pnpm install
+
+# 소스 복사 및 빌드
 COPY . .
-RUN npm run build
+RUN pnpm run build
 
 # 2. Nginx 스테이지
 FROM nginx:stable-alpine
@@ -18,6 +26,5 @@ COPY nginx.conf /etc/nginx/conf.d/default.conf
 # 빌드된 정적 파일 복사
 COPY --from=builder /app/dist /usr/share/nginx/html
 
-# 80포트 오픈하고 nginx를 백그라운드로 실행
 EXPOSE 80
 CMD ["nginx", "-g", "daemon off;"]
