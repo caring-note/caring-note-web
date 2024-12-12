@@ -1,3 +1,4 @@
+import { Button } from "@components/components/ui/button";
 import DatePickerComponent from "@components/components/ui/datepicker";
 import { useNavigate } from "react-router-dom";
 
@@ -56,6 +57,9 @@ function Home() {
               조영호 : 기초상담 화면으로 이동 (임시){" "}
             </p>
             <DatePickerComponent></DatePickerComponent>
+            <Button variant={"secondary"} disabled={true}>
+              wwwwww
+            </Button>
           </div>
         </div>
       </div>
