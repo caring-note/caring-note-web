@@ -1,4 +1,10 @@
+import { Checkbox } from "@components/components/ui/checkbox";
 import DatePickerComponent from "@components/components/ui/datepicker";
+import { Label } from "@components/components/ui/label";
+import {
+  RadioGroup,
+  RadioGroupItem,
+} from "@components/components/ui/radio-group";
 import { useNavigate } from "react-router-dom";
 
 function Home() {
@@ -56,6 +62,18 @@ function Home() {
               조영호 : 기초상담 화면으로 이동 (임시){" "}
             </p>
             <DatePickerComponent></DatePickerComponent>
+
+            <RadioGroup>
+              <div className="flex items-center space-x-2">
+                <RadioGroupItem value="option-one" id="option-one" />
+                <Label htmlFor="option-one">Option One</Label>
+              </div>
+              <div className="flex items-center space-x-2">
+                <RadioGroupItem value="option-two" id="option-two" />
+                <Label htmlFor="option-two">Option Two</Label>
+              </div>
+            </RadioGroup>
+            <Checkbox></Checkbox>
           </div>
         </div>
       </div>
