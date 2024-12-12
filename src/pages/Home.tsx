@@ -1,4 +1,10 @@
 import DatePickerComponent from "@components/components/ui/datepicker";
+import {
+  Tabs,
+  TabsContent,
+  TabsList,
+  TabsTrigger,
+} from "@components/components/ui/tabs";
 import { useNavigate } from "react-router-dom";
 
 function Home() {
@@ -56,6 +62,18 @@ function Home() {
               조영호 : 기초상담 화면으로 이동 (임시){" "}
             </p>
             <DatePickerComponent></DatePickerComponent>
+            <Tabs defaultValue="account" className="w-[400px]">
+              <TabsList>
+                <TabsTrigger value="account">Account</TabsTrigger>
+                <TabsTrigger value="password">Password</TabsTrigger>
+              </TabsList>
+              <TabsContent value="account">
+                Make changes to your account here.
+              </TabsContent>
+              <TabsContent value="password">
+                Change your password here.
+              </TabsContent>
+            </Tabs>
           </div>
         </div>
       </div>
