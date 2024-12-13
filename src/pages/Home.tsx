@@ -13,6 +13,7 @@ import {
   RadioGroupItem,
 } from "@components/components/ui/radio-group";
 import { useNavigate } from "react-router-dom";
+import Tooltip from "@components/Tooltip";
 
 function Home() {
   const navigate = useNavigate();
@@ -96,6 +97,9 @@ function Home() {
             <Button variant={"secondary"} disabled={true}>
               wwwwww
             </Button>
+
+            <Tooltip id="tooltip" text="This is a tooltip" eventType="hover" />
+            <Tooltip id="tooltip2" text="This is a tooltip" eventType="click" />
           </div>
         </div>
       </div>
