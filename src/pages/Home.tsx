@@ -1,6 +1,12 @@
 import { Checkbox } from "@components/components/ui/checkbox";
 import { Button } from "@components/components/ui/button";
 import DatePickerComponent from "@components/components/ui/datepicker";
+import {
+  Tabs,
+  TabsContent,
+  TabsList,
+  TabsTrigger,
+} from "@components/components/ui/tabs";
 import { Label } from "@components/components/ui/label";
 import {
   RadioGroup,
@@ -63,6 +69,18 @@ function Home() {
               조영호 : 기초상담 화면으로 이동 (임시){" "}
             </p>
             <DatePickerComponent></DatePickerComponent>
+            <Tabs defaultValue="account" className="w-[400px]">
+              <TabsList>
+                <TabsTrigger value="account">Account</TabsTrigger>
+                <TabsTrigger value="password">Password</TabsTrigger>
+              </TabsList>
+              <TabsContent value="account">
+                Make changes to your account here.
+              </TabsContent>
+              <TabsContent value="password">
+                Change your password here.
+              </TabsContent>
+            </Tabs>
 
             <RadioGroup>
               <div className="flex items-center space-x-2">
