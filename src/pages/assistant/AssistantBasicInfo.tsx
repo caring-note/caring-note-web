@@ -1,7 +1,7 @@
 import { useEffect, useState } from "react";
 import { useAppDispatch } from "../../../hooks";
 import { changeActiveTab } from "../../reducers/tabReducer";
-import Badge from "../../components/Badge";
+import Badge from "@components/common/Badge";
 import CardContainer from "../../components/common/CardContainer";
 import InputLayout from "../../components/layout/input/InputLayout";
 
@@ -103,14 +103,11 @@ const AssistantBasicInfo = () => {
   return (
     <div className="w-full h-auto pt-8 px-10">
       <Badge
-        _class=""
-        variant="primary"
-        size="xl"
-        type="tint"
-        text="이전 상담 노트에서 불러온 정보를 토대로 손쉽게 작성해보세요"
-        isIcon={true}
-        isWarning={true}
-      />
+        variant="outline"
+        color="primary"
+        customIcon={<>{/* 박진완 : 원하는 아이콘을 넣으세요 */}</>}>
+        이전 상담 노트에서 불러온 정보를 토대로 손쉽게 작성해보세요.
+      </Badge>
       <CardContainer
         _class="border-t-8 border-gray-400"
         title={<p className="font-bold text-xl">기본정보</p>}>

@@ -2,7 +2,7 @@ import React, { ReactEventHandler, useRef, useState } from "react";
 import cancelBlack from "../assets/icon/cancelBlack.png";
 import micBlack from "../assets/icon/micBlack.png";
 import pencilBlack from "../assets/icon/pencilBlack.png";
-import Badge from "./Badge";
+import Badge from "@components/common/Badge";
 import HighlightInput from "./consult/HighlightInput";
 import { on } from "events";
 import { useAppDispatch, useAppSelector } from "../../hooks";
