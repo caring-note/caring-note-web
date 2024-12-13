@@ -1,4 +1,5 @@
 import { Checkbox } from "@components/components/ui/checkbox";
+import { Button } from "@components/components/ui/button";
 import DatePickerComponent from "@components/components/ui/datepicker";
 import { Label } from "@components/components/ui/label";
 import {
@@ -74,6 +75,9 @@ function Home() {
               </div>
             </RadioGroup>
             <Checkbox></Checkbox>
+            <Button variant={"secondary"} disabled={true}>
+              wwwwww
+            </Button>
           </div>
         </div>
       </div>
