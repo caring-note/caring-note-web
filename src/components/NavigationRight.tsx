@@ -7,6 +7,9 @@ import HighlightInput from "./consult/HighlightInput";
 import { on } from "events";
 import { useAppDispatch, useAppSelector } from "../../hooks";
 import { toggleRightNavigation } from "../reducers/navigationReducer";
+import MicBlackIcon from "@icon/24/mic.filled.black.svg?react";
+import PencilBlackIcon from "@icon/24/create.filled.black.svg?react";
+import CloseBlackIcon from "@icon/24/close.outlined.black.svg?react";
 
 interface NavigationRightProps {}
 
@@ -27,10 +30,16 @@ const NavigationRight: React.FC<NavigationRightProps> = ({}) => {
           isOpen ? "w-20" : ""
         } py-4`}
         onClick={toggleMenu}>
-        <Badge variant="primary" size="sm" type="outline" text="녹음중" />
-        <img src={micBlack} alt="micBlack" className="w-8 h-8" />
+        <Badge
+          _class="mb-1"
+          variant="primary"
+          size="sm"
+          type="outline"
+          text="녹음중"
+        />
+        <MicBlackIcon width={24} height={24} />
         <div className="h-0.5 w-8 bg-grayscale-10 my-4" />
-        <img src={pencilBlack} alt="pencilBlack" className="w-8 h-8" />
+        <PencilBlackIcon width={24} height={24} />
       </div>
     );
   };
@@ -50,16 +59,11 @@ const NavigationRight: React.FC<NavigationRightProps> = ({}) => {
         <div className="flex justify-start">
           {defaultMenu()}
           <div className="bg-white w-full border-l-2 border-grayscale-10">
-            <div className="flex items-center justify-between border-b-2 border-grayscale-10">
-              <span className="mt-8 mb-4 mx-8 text-subtitle2 font-bold text-grayscale-90">
+            <div className="flex items-center justify-between border-b-2 border-grayscale-10 p-4 pt-8">
+              <span className="text-subtitle2 font-bold text-grayscale-90">
                 상담기록
               </span>
-              <img
-                src={cancelBlack}
-                alt="cancelBlack"
-                className="mt-8 mb-4 mx-6 w-8 h-8 cursor-pointer"
-                onClick={toggleMenu}
-              />
+              <CloseBlackIcon width={24} height={24} className="" />
             </div>
             <div className="bg-red-000 pt-4 px-2">
               <HighlightInput />

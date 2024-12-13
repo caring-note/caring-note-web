@@ -49,10 +49,10 @@ const Badge: React.FC<BadgeProps> = ({
       className={
         "inline-flex rounded-md" +
         classNames(
-          _class,
           baseClasses,
           variantClasses[variant][type],
           sizeClasses[size],
+          _class,
         )
       }>
       {isIcon ?? (
