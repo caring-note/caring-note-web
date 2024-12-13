@@ -30,13 +30,9 @@ const NavigationRight: React.FC<NavigationRightProps> = ({}) => {
           isOpen ? "w-20" : ""
         } py-4`}
         onClick={toggleMenu}>
-        <Badge
-          _class="mb-1"
-          variant="primary"
-          size="sm"
-          type="outline"
-          text="녹음중"
-        />
+        <Badge className="mb-1" variant="outline" size="small">
+          녹음중
+        </Badge>
         <MicBlackIcon width={24} height={24} />
         <div className="h-0.5 w-8 bg-grayscale-10 my-4" />
         <PencilBlackIcon width={24} height={24} />
