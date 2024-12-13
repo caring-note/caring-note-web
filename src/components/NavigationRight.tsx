@@ -2,7 +2,7 @@ import React, { ReactEventHandler, useRef, useState } from "react";
 import cancelBlack from "../assets/icon/cancelBlack.png";
 import micBlack from "../assets/icon/micBlack.png";
 import pencilBlack from "../assets/icon/pencilBlack.png";
-import Badge from "./Badge";
+import Badge from "@components/common/Badge";
 import HighlightInput from "./consult/HighlightInput";
 import { on } from "events";
 import { useAppDispatch, useAppSelector } from "../../hooks";
@@ -27,7 +27,13 @@ const NavigationRight: React.FC<NavigationRightProps> = ({}) => {
           isOpen ? "w-20" : ""
         } py-4`}
         onClick={toggleMenu}>
-        <Badge variant="primary" size="sm" type="outline" text="녹음중" />
+        <Badge
+          color="primary"
+          size="small"
+          variant="outline"
+          customIcon={<></>}>
+          녹음중
+        </Badge>
         <img src={micBlack} alt="micBlack" className="w-8 h-8" />
         <div className="h-0.5 w-8 bg-grayscale-10 my-4" />
         <img src={pencilBlack} alt="pencilBlack" className="w-8 h-8" />
