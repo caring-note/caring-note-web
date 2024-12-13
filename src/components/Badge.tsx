@@ -1,5 +1,5 @@
-import React from "react";
 import classNames from "classnames";
+import React from "react";
 import badgeBlue from "../assets/icon/badgeBlue.png";
 import badgeRed from "../assets/icon/badgeRed.png";
 import warningInfoBlue from "../assets/icon/warningInfoBlue.png";
@@ -47,7 +47,7 @@ const Badge: React.FC<BadgeProps> = ({
   return (
     <div
       className={
-        "inline-flex " +
+        "inline-flex rounded-md" +
         classNames(
           _class,
           baseClasses,
