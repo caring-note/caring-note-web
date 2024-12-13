@@ -9,6 +9,7 @@ type BadgeSize = "extra-large" | "large" | "medium" | "small";
 type BadgeColor = "primary" | "error";
 
 interface BadgeProps {
+  className?: string;
   variant?: BadgeVariant;
   size?: BadgeSize;
   color?: BadgeColor;
@@ -17,6 +18,7 @@ interface BadgeProps {
 }
 
 const Badge: React.FC<BadgeProps> = ({
+  className = "",
   variant = "filled",
   size = "medium",
   color = "primary",
@@ -72,6 +74,7 @@ const Badge: React.FC<BadgeProps> = ({
         sizeClasses[size],
         variantClasses[variant],
         // hoverClasses[variant],   // 배지는 인터렉션 없음
+        className,
       )}>
       {icon()}
       <span className="text-inherit">{children}</span>
