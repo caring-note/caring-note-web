@@ -1,3 +1,4 @@
+import { Button } from "@components/components/ui/button";
 import DatePickerComponent from "@components/components/ui/datepicker";
 import {
   Tabs,
@@ -74,6 +75,9 @@ function Home() {
                 Change your password here.
               </TabsContent>
             </Tabs>
+            <Button variant={"secondary"} disabled={true}>
+              wwwwww
+            </Button>
           </div>
         </div>
       </div>
