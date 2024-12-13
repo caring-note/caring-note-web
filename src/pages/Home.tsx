@@ -13,6 +13,7 @@ import {
   RadioGroupItem,
 } from "@components/components/ui/radio-group";
 import { useNavigate } from "react-router-dom";
+import Tooltip from "@components/Tooltip";
 import Badge from "@components/common/Badge";
 
 function Home() {
@@ -98,6 +99,9 @@ function Home() {
               wwwwww
             </Button>
 
+            <Tooltip id="tooltip" text="This is a tooltip" eventType="hover" />
+            <Tooltip id="tooltip2" text="This is a tooltip" eventType="click" />
+            
             <div className="grid grid-cols-4 gap-4 items-start">
               <div>
                 <Badge variant="filled" size="extra-large" color="primary">
