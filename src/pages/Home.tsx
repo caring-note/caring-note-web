@@ -22,6 +22,7 @@ import {
   createDefaultNumberColumn,
   createDefaultTextColumn,
 } from "@utils/TableUtils";
+import moment from "moment";
 
 function Home() {
   const navigate = useNavigate();
@@ -31,6 +32,14 @@ function Home() {
       field: "col1",
       headerName: "예약시간",
       flex: 1,
+      renderCell: (params) => {
+        const formattedDate = params.value
+          ? moment(params.value).format("HH:mm")
+          : null;
+        return (
+          formattedDate || <span className="text-gray-400 italic">HH:mm</span>
+        );
+      },
     },
     {
       ...createDefaultDateColumn({
@@ -79,7 +88,7 @@ function Home() {
   const testRows = [
     {
       id: "1",
-      col1: 1010,
+      col1: new Date(),
       col2: new Date(),
       col3: 1,
       col4: "김진영",
@@ -88,7 +97,7 @@ function Home() {
     },
     {
       id: "2",
-      col1: 1010,
+      col1: new Date(),
       col2: new Date(),
       col3: 1,
       col4: "김진영",
@@ -97,25 +106,7 @@ function Home() {
     },
     {
       id: "3",
-      col1: 1010,
-      col2: new Date(),
-      col3: 1,
-      col4: "김진영",
-      col5: "박진완",
-      col6: "조영호",
-    },
-    {
-      id: "4",
-      col1: 1010,
-      col2: new Date(),
-      col3: 1,
-      col4: "김진영",
-      col5: "박진완",
-      col6: "조영호",
-    },
-    {
-      id: "5",
-      col1: 1010,
+      col1: new Date(),
       col2: new Date(),
       col3: 1,
       col4: "김진영",
@@ -132,40 +123,60 @@ function Home() {
   return (
     <>
       <div className="flex flex-col items-center justify-center pt-20 bg-blue-100">
-        <p className="w-full text-4xl font-bold text-blue-600 pl-28">
+        <p className="w-full text-h2 font-bold text-primary-70 pl-28">
           박진완님, <br />
           오늘도 힘찬 하루를 보내세요!{" "}
         </p>
         <div className="flex flex-row items-center justify-center w-full px-24 mt-10 space-x-5">
-          <div className="w-1/2 h-32 bg-gray-100 border-4 border-white rounded-xl">
+          <div className="w-1/2 h-32 border-2 border-white rounded-xl bg-opacity-60 bg-white">
             <div className="flex flex-row w-full h-full">
               <div className="flex flex-col items-start justify-center w-1/2 pl-5 space-y-2">
-                <p>올해 케어링 메세지 공유 수</p>
-                <p className="text-3xl font-bold text-blue-500">{"1,234"}회</p>
+                <p className="text-body1 font-medium">
+                  올해 케어링 메세지 공유 수
+                </p>
+                <p className="text-h2 font-bold text-primary-50">{"1,234"}회</p>
               </div>
               <div className="flex flex-col items-start justify-center w-1/2 pl-5 space-y-2">
-                <p>올해 상담한 내담자 수</p>
-                <p className="text-3xl font-bold text-blue-500">{"201"}명</p>
+                <p className="text-body1 font-medium">올해 상담한 내담자 수</p>
+                <p className="text-h2 font-bold text-primary-50">{"201"}명</p>
               </div>
             </div>
           </div>
-          <div className="w-1/2 h-32 bg-gray-100 border-4 border-white rounded-xl">
+          <div className="w-1/2 h-32 border-2 border-white rounded-xl bg-opacity-60 bg-white">
             <div className="flex flex-row w-full h-full">
               <div className="flex flex-col items-start justify-center w-1/2 pl-5 space-y-2">
-                <p>올해 케어링 메세지 공유 수</p>
-                <p className="text-3xl font-bold text-yellow-500">
+                <p className="text-body1 font-medium">
+                  올해 케어링 메세지 공유 수
+                </p>
+                <p className="text-h2 font-bold text-secondary-50">
                   {"1,234"}회
                 </p>
               </div>
               <div className="flex flex-col items-start justify-center w-1/2 pl-5 space-y-2">
-                <p>올해 상담한 내담자 수</p>
-                <p className="text-3xl font-bold text-yellow-500">{"201"}명</p>
+                <p className="text-body1 font-medium">올해 상담한 내담자 수</p>
+                <p className="text-h2 font-bold text-secondary-50">{"201"}명</p>
               </div>
             </div>
           </div>
         </div>
-        <div className="flex flex-col items-center justify-center w-full px-20 pt-10 bg-blue-300">
-          <div className="w-full h-auto bg-gray-100 rounded-xl">
+        <div className="flex flex-col items-center justify-center w-full px-24 pt-10">
+          <div className="w-full h-auto bg-white rounded-xl p-10">
+            {/* 실제 코드 */}
+            <div className="w-full h-10 flex flex-row justify-between items-center">
+              <span className="text-h3 font-bold">오늘의 상담 일정</span>
+              <Button variant="secondary">전체 상담 노트 보기</Button>
+            </div>
+            <div className="mt-10">
+              <TableComponent
+                rows={testRows}
+                columns={columns}
+                checkboxSelection={false}
+                onUpdateCell={() => {}}
+                onRowSelectionModelChange={() => {}}
+              />
+            </div>
+
+            {/* 테스트 코드 */}
             <p
               className="mt-10 text-3xl text-center"
               onClick={() => {
@@ -181,22 +192,6 @@ function Home() {
               조영호 : 기초상담 화면으로 이동 (임시){" "}
             </p>
 
-            {/* 실제 코드 */}
-            <div className="w-full h-10 flex flex-row bg-red-100 justify-between items-center p-6">
-              <span className="text-h3 font-bold">오늘의 상담 일정</span>
-              <Button variant="secondary">전체 상담 노트 보기</Button>
-            </div>
-            <div className="mt-4">
-              <TableComponent
-                rows={testRows}
-                columns={columns}
-                checkboxSelection={false}
-                onUpdateCell={() => {}}
-                onRowSelectionModelChange={() => {}}
-              />
-            </div>
-
-            {/* 컴포넌트 테스트 */}
             <DatePickerComponent></DatePickerComponent>
             <Tabs defaultValue="account" className="w-[400px]">
               <TabsList>
