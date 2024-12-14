@@ -63,7 +63,7 @@ const NavigationRight: React.FC<NavigationRightProps> = ({}) => {
               <span className="text-subtitle2 font-bold text-grayscale-90">
                 상담기록
               </span>
-              <CloseBlackIcon width={24} height={24} className="" />
+              <CloseBlackIcon width={24} height={24} onClick={toggleMenu} />
             </div>
             <div className="bg-red-000 pt-4 px-2">
               <HighlightInput />
