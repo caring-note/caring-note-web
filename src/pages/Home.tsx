@@ -15,9 +15,119 @@ import {
 import { useNavigate } from "react-router-dom";
 import Tooltip from "@components/Tooltip";
 import Badge from "@components/common/Badge";
+import TableComponent from "@components/common/TableComponent";
+import { GridColDef } from "@mui/x-data-grid";
+import {
+  createDefaultDateColumn,
+  createDefaultNumberColumn,
+  createDefaultTextColumn,
+} from "@utils/TableUtils";
 
 function Home() {
   const navigate = useNavigate();
+
+  const columns: GridColDef[] = [
+    {
+      field: "col1",
+      headerName: "예약시간",
+      flex: 1,
+    },
+    {
+      ...createDefaultDateColumn({
+        field: "col2",
+        headerName: "상담일자",
+      }),
+    },
+    {
+      ...createDefaultNumberColumn({
+        field: "col3",
+        headerName: "상담횟수",
+        unitName: "회차",
+      }),
+    },
+    {
+      ...createDefaultTextColumn({
+        field: "col4",
+        headerName: "내담자명",
+      }),
+    },
+    {
+      ...createDefaultTextColumn({
+        field: "col5",
+        headerName: "담당약사",
+      }),
+    },
+    {
+      field: "col6",
+      headerName: "담당 할당",
+      flex: 1,
+      renderCell: (params) => {
+        // TODO : 할당 여부에 따라 버튼 diable 처리 (아래는 임시 코드)
+        return parseInt(params.id.toString()) % 2 === 1 ? (
+          <Button variant={"secondary"} onClick={handleClickAssignMe}>
+            나에게 할당
+          </Button>
+        ) : (
+          <Button variant={"secondary"} disabled>
+            할당 완료
+          </Button>
+        );
+      },
+    },
+  ];
+
+  const testRows = [
+    {
+      id: "1",
+      col1: 1010,
+      col2: new Date(),
+      col3: 1,
+      col4: "김진영",
+      col5: "박진완",
+      col6: "조영호",
+    },
+    {
+      id: "2",
+      col1: 1010,
+      col2: new Date(),
+      col3: 1,
+      col4: "김진영",
+      col5: "박진완",
+      col6: "조영호",
+    },
+    {
+      id: "3",
+      col1: 1010,
+      col2: new Date(),
+      col3: 1,
+      col4: "김진영",
+      col5: "박진완",
+      col6: "조영호",
+    },
+    {
+      id: "4",
+      col1: 1010,
+      col2: new Date(),
+      col3: 1,
+      col4: "김진영",
+      col5: "박진완",
+      col6: "조영호",
+    },
+    {
+      id: "5",
+      col1: 1010,
+      col2: new Date(),
+      col3: 1,
+      col4: "김진영",
+      col5: "박진완",
+      col6: "조영호",
+    },
+  ];
+
+  const handleClickAssignMe = () => {
+    console.log("할당하기 버튼 클릭");
+    // TODO : 할당하기 버튼 클릭 시 확인 Dialog 띄우기
+  };
 
   return (
     <>
@@ -55,7 +165,7 @@ function Home() {
           </div>
         </div>
         <div className="flex flex-col items-center justify-center w-full px-20 pt-10 bg-blue-300">
-          <div className="w-full h-screen bg-gray-100 cursor-pointer rounded-xl">
+          <div className="w-full h-auto bg-gray-100 rounded-xl">
             <p
               className="mt-10 text-3xl text-center"
               onClick={() => {
@@ -70,6 +180,23 @@ function Home() {
               }}>
               조영호 : 기초상담 화면으로 이동 (임시){" "}
             </p>
+
+            {/* 실제 코드 */}
+            <div className="w-full h-10 flex flex-row bg-red-100 justify-between items-center p-6">
+              <span className="text-h3 font-bold">오늘의 상담 일정</span>
+              <Button variant="secondary">전체 상담 노트 보기</Button>
+            </div>
+            <div className="mt-4">
+              <TableComponent
+                rows={testRows}
+                columns={columns}
+                checkboxSelection={false}
+                onUpdateCell={() => {}}
+                onRowSelectionModelChange={() => {}}
+              />
+            </div>
+
+            {/* 컴포넌트 테스트 */}
             <DatePickerComponent></DatePickerComponent>
             <Tabs defaultValue="account" className="w-[400px]">
               <TabsList>
@@ -101,7 +228,7 @@ function Home() {
 
             <Tooltip id="tooltip" text="This is a tooltip" eventType="hover" />
             <Tooltip id="tooltip2" text="This is a tooltip" eventType="click" />
-            
+
             <div className="grid grid-cols-4 gap-4 items-start">
               <div>
                 <Badge variant="filled" size="extra-large" color="primary">
