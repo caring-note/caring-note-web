@@ -108,9 +108,8 @@ const AssistantBasicInfo = () => {
         customIcon={<>{/* 박진완 : 원하는 아이콘을 넣으세요 */}</>}>
         이전 상담 노트에서 불러온 정보를 토대로 손쉽게 작성해보세요.
       </Badge>
-      <CardContainer
-        _class="border-t-8 border-gray-400"
-        title={<p className="font-bold text-xl">기본정보</p>}>
+      {/* 박진완 : CardContainer 리팩토링 완료! 사용법은 ConsultCard.tsx 를 참고하시면 편해용 */}
+      <CardContainer title={"기본정보"} variant="grayscale">
         <div className="px-5">
           <InputLayout
             inputsRef={inputsRef}
@@ -119,9 +118,7 @@ const AssistantBasicInfo = () => {
           />
         </div>
       </CardContainer>
-      <CardContainer
-        _class="border-gray-400"
-        title={<p className="font-bold text-xl">상담 목적 및 특이사항</p>}>
+      <CardContainer title={"상담 목적 및 특이사항"}>
         <div className="px-5">
           <div className="flex flex-col justify-start items-start self-stretch flex-grow-0 flex-shrink-0 gap-5 px-5 py-7">
             <div className="flex justify-start items-start flex-grow-0 flex-shrink-0 gap-10">

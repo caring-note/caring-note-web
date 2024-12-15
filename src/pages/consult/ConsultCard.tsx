@@ -7,42 +7,15 @@ import CardContainer from "../../components/common/CardContainer";
 import TabContentContainer from "../../components/consult/TabContentContainer";
 import TabContentTitle from "../../components/consult/TabContentTitle";
 import { changeActiveTab } from "../../reducers/tabReducer";
+import CardContent from "@components/common/CardContent";
+import { Card } from "@mui/material";
 
 const ConsultCard: React.FC = () => {
-  const [modalStyle, setModalStyle] = useState<ReactModal.Styles>({});
-  const [isHistoryModalOpen, setIsHistoryModalOpen] = useState(false);
-
   // 새로고침이 되었을 때도 active tab 을 잃지 않도록 컴포넌트 load 시 dispatch
   const dispatch = useAppDispatch();
   useEffect(() => {
     dispatch(changeActiveTab("/consult/consultCard")); // 해당 tab의 url
   }, []);
-
-  const openModalAtPosition = (
-    e: React.MouseEvent<HTMLImageElement>,
-    dir?: "left" | "right" | undefined,
-  ) => {
-    // 클릭한 위치에서 마우스 좌표를 가져옴
-    const { clientX, clientY } = e;
-
-    // 모달의 위치를 클릭한 위치로 설정
-    setModalStyle({
-      content: {
-        top: `${clientY + 10}px`, // 클릭 위치에서 10px 아래
-        left: `${dir === "right" ? clientX + 10 : clientX - 300}px`, // -300은 width와 같음
-        position: "absolute",
-        transform: "none", // transform은 사용하지 않음
-        padding: "20px",
-        borderRadius: "10px",
-        backgroundColor: "white",
-        width: "300px", // 원하는 너비 설정
-        height: "auto",
-      },
-      overlay: { backgroundColor: "rgba(0,0,0,0.1)" },
-    });
-
-    setIsHistoryModalOpen(true);
-  };
 
   return (
     <>
@@ -57,74 +30,72 @@ const ConsultCard: React.FC = () => {
         <div className="flex justify-between items-start space-x-4">
           <div id="consult-card-left" className="w-1/2">
             <CardContainer
-              _class="border-t-4 border-gray-500"
-              title={<p className="font-bold">기본정보</p>}>
-              <div className="h-20 p-4">여러가지 정보들</div>
-            </CardContainer>
-            <CardContainer
-              title={
-                <div className="flex justify-item-center">
-                  <span className="font-bold">기본정보</span>
-                  <img
-                    src={timeGray}
-                    className="w-6 h-6"
-                    onClick={(e) => openModalAtPosition(e, "right")}
-                  />
+              title="상담 내용"
+              titleIcon="clock"
+              variant="primary">
+              <div className="w-full flex-dir-row">
+                <div className="w-1/2 inline-block">
+                  <CardContent item="상담일" value="2021-08-01" />
+                  <CardContent item="상담시간" value="10:00 ~ 11:00" />
+                  <CardContent item="복용자 및 투약 보조자" value="김상담" />
+                  <CardContent item="복용자 및 투약 보조자" value="김상담" />
+                  <CardContent item="복용자 및 투약 보조자" value="김상담" />
+                  <CardContent item="복용자 및 투약 보조자" value="김상담" />
                 </div>
-              }>
-              <div></div>
+                <div className="w-1/2 inline-block align-top">
+                  <CardContent item="상담일" value="2021-08-01" />
+                  <CardContent item="상담시간" value="10:00 ~ 11:00" />
+                  <CardContent item="복용자 및 투약 보조자" value="김상담" />
+                </div>
+              </div>
             </CardContainer>
-            <CardContainer>
-              <div></div>
+            <CardContainer title="상담 내용" titleIcon="clock" variant="error">
+              <CardContent item="상담일" value="2021-08-01" />
+              <CardContent item="상담시간" value="10:00 ~ 11:00" />
+              <CardContent item="복용자 및 투약 보조자" value="김상담" />
             </CardContainer>
-            <CardContainer
-              _class="border-t-4 border-yellow-500"
-              title={<p className="font-bold">기본정보</p>}>
-              <div className="h-24 p-4">여러가지 정보들</div>
+            <CardContainer title="상담 내용">
+              <CardContent item="상담일" value="2021-08-01" />
             </CardContainer>
-            <CardContainer>
-              <div></div>
+            <CardContainer title="상담 내용">
+              <CardContent item="상담일" value="2021-08-01" />
+            </CardContainer>
+            <CardContainer title="상담 내용">
+              <CardContent item="상담일" value="2021-08-01" />
+            </CardContainer>
+            <CardContainer title="상담 내용">
+              <CardContent item="상담일" value="2021-08-01" />
             </CardContainer>
           </div>
-
           <div id="consult-card-right" className="w-1/2">
             <CardContainer
-              _class="border-t-4 border-blue-500"
-              title={
-                <div className="flex justify-item-center">
-                  <span className="font-bold">기본정보</span>
-                  <img
-                    src={timeGray}
-                    className="w-6 h-6"
-                    onClick={(e) => openModalAtPosition(e, "right")}
-                  />
+              title="상담 내용"
+              titleIcon="clock"
+              variant="grayscale">
+              <div className="w-full flex-dir-row">
+                <div className="w-1/2 inline-block">
+                  <CardContent item="상담일" value="2021-08-01" />
+                  <CardContent item="상담시간" value="10:00 ~ 11:00" />
+                  <CardContent item="복용자 및 투약 보조자" value="김상담" />
                 </div>
-              }>
-              <div className="h-16 p-4">여러가지 정보들</div>
+                <div className="w-1/2 inline-block">
+                  <CardContent item="상담일" value="2021-08-01" />
+                  <CardContent item="상담시간" value="10:00 ~ 11:00" />
+                  <CardContent item="복용자 및 투약 보조자" value="김상담" />
+                </div>
+              </div>
             </CardContainer>
-            <CardContainer>
-              <div></div>
-            </CardContainer>
-            <CardContainer>
-              <div></div>
-            </CardContainer>
-            <CardContainer>
-              <div></div>
-            </CardContainer>
-            <CardContainer>
-              <div></div>
+            <CardContainer
+              title="상담 내용"
+              titleIcon="clock"
+              variant="secondary">
+              <CardContent item="상담일" value="2021-08-01" />
+              <CardContent item="상담시간" value="10:00 ~ 11:00" />
+              <CardContent item="복용자 및 투약 보조자" value="김상담" />
             </CardContainer>
           </div>
         </div>
       </TabContentContainer>
-
-      <ReactModal
-        isOpen={isHistoryModalOpen}
-        style={modalStyle}
-        onRequestClose={() => setIsHistoryModalOpen(false)}>
-        <div>히스토리</div>
-        <div>다양한 정보들</div>
-      </ReactModal>
     </>
   );
 };

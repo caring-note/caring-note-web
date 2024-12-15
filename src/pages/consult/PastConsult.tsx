@@ -12,6 +12,7 @@ import {
   createDefaultNumberColumn,
   createDefaultDateColumn,
 } from "@utils/TableUtils";
+import GradationContainer from "@components/consult/GradationContainer";
 
 const PastConsult: React.FC = () => {
   // 새로고침이 되었을 때도 active tab 을 잃지 않도록 컴포넌트 load 시 dispatch
@@ -45,10 +46,10 @@ const PastConsult: React.FC = () => {
   return (
     <>
       <TabContentContainer>
-        <TabContentTitle text="최신 상담 내역" />
+        <TabContentTitle text="이전 상담 내용" />
         <div className="flex flex-row justify-between items-start space-x-4">
-          <div className="w-1/2 bg-gradient-to-b from-white to-blue-200 rounded-lg p-4 shadow-md">
-            <h2 className="text-lg font-semibold text-blue-600 flex items-center">
+          <GradationContainer variant="primary">
+            <h2 className="text-subtitle2 font-bold text-primary-70 flex items-center">
               <img
                 src={highlightpenBlue}
                 alt="highlightpenBlue"
@@ -56,7 +57,7 @@ const PastConsult: React.FC = () => {
               />
               상담 기록 하이라이트
             </h2>
-            <ul className="mt-3 text-sm space-y-2">
+            <ul className="mt-4 text-body1 font-medium space-y-2">
               <li className="border-l-2 border-blue-500 pl-2">
                 5년 전 우측 고관절에 골절상을 입음
               </li>
@@ -74,10 +75,10 @@ const PastConsult: React.FC = () => {
                 꾸준한 복약 상담 관찰이 필요
               </li>
             </ul>
-          </div>
+          </GradationContainer>
 
-          <div className="w-1/2 bg-gradient-to-b from-white to-yellow-200 rounded-lg p-4 shadow-md">
-            <h2 className="text-lg font-semibold text-yellow-600 flex items-center">
+          <GradationContainer variant="secondary">
+            <h2 className="text-subtitle2 font-bold text-secondary-70 flex items-center">
               <img
                 src={listYellow}
                 alt="listYellow"
@@ -85,7 +86,7 @@ const PastConsult: React.FC = () => {
               />
               상담노트 요약
             </h2>
-            <p className="whitespace-pre-wrap">
+            <p className="mt-4 whitespace-pre-wrap">
               [약 복용 및 관리] 내담자는 당뇨약과 혈압약을 복용 중이며,
               보건소에서 약 복용 여부에 대해 의견을 들었다고 언급. 혈압 수치
               (130-140)와 관련하여 약을 줄일 수 있는지질문. 약사는 재 복용 중인
@@ -100,11 +101,11 @@ const PastConsult: React.FC = () => {
               내담자에게 약 복용을 잘 유지하라고 조언하며, 건강한 생활을 위해
               주의할 점을 강조.
             </p>
-          </div>
+          </GradationContainer>
         </div>
 
-        <TabContentTitle _class="mt-6" text="이전 상담 내역" />
-        <p className="text-lg font-medium text-gray-500 ">
+        <TabContentTitle className="mt-6" text="상담 내역" />
+        <p className="text-body1 font-medium text-grayscale-70 ">
           케어링 노트로 남긴 상담 내역이 노출됩니다
         </p>
         <div className="h-auto mt-4">
