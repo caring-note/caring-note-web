@@ -2,14 +2,14 @@ import classNames from "classnames";
 import React from "react";
 
 interface TabTitleProps {
+  className?: string;
   text: string;
-  _class?: string;
 }
 
-const TabContentTitle: React.FC<TabTitleProps> = ({ text, _class = "" }) => {
+const TabContentTitle: React.FC<TabTitleProps> = ({ className = "", text }) => {
   return (
-    <div className={classNames("mb-4", _class)}>
-      <span className="text-3xl font-bold text-black">{text}</span>
+    <div className={classNames("mb-4", className)}>
+      <span className="text-subtitle1 font-bold text-grayscale-90">{text}</span>
     </div>
   );
 };
