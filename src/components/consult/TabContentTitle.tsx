@@ -8,7 +8,7 @@ interface TabTitleProps {
 
 const TabContentTitle: React.FC<TabTitleProps> = ({ className = "", text }) => {
   return (
-    <div className={classNames("mb-4", className)}>
+    <div className={classNames("mt-2 mb-6", className)}>
       <span className="text-subtitle1 font-bold text-grayscale-90">{text}</span>
     </div>
   );

@@ -109,7 +109,7 @@ const AssistantBasicInfo = () => {
         이전 상담 노트에서 불러온 정보를 토대로 손쉽게 작성해보세요.
       </Badge>
       <CardContainer
-        _class="border-t-8 border-gray-400"
+        className="border-t-8 border-gray-400"
         title={<p className="font-bold text-xl">기본정보</p>}>
         <div className="px-5">
           <InputLayout
@@ -120,7 +120,7 @@ const AssistantBasicInfo = () => {
         </div>
       </CardContainer>
       <CardContainer
-        _class="border-gray-400"
+        className="border-gray-400"
         title={<p className="font-bold text-xl">상담 목적 및 특이사항</p>}>
         <div className="px-5">
           <div className="flex flex-col justify-start items-start self-stretch flex-grow-0 flex-shrink-0 gap-5 px-5 py-7">
