@@ -10,9 +10,7 @@ const HistoryList: React.FC<HistoryListProps> = ({ date, items }) => {
   return (
     <div className="w-full mb-4 border-b border-grayscale-5">
       <div className="w-auto inline-block align-top mr-4">
-        <Badge variant="outline" customIcon={<></>} size="small">
-          {date}
-        </Badge>
+        <span className="text-body text-primary-60">{date}</span>
       </div>
       <div className="inline-block max-w-xs">
         {items.map((item, index) => (
