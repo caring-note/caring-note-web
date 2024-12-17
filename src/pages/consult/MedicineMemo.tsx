@@ -22,6 +22,7 @@ import {
   createDefaultNumberColumn,
   createDefaultTextColumn,
 } from "@utils/TableUtils";
+import NulpeumImg from "../../assets/temp-nulpeum.png";
 
 const MedicineMemo: React.FC = () => {
   const rows = useAppSelector(
@@ -159,8 +160,26 @@ const MedicineMemo: React.FC = () => {
         </GrayContainer>
 
         <div>
-          <p className="text-lg font-bold mt-8">유용한 사이트</p>
-          <div className="h-40 bg-green-100 mt-8">이미지들</div>
+          <p className="text-subtitle2 font-bold text-grayscale-90 mt-8">
+            유용한 사이트
+          </p>
+          <div className="mt-6">
+            <img
+              src={NulpeumImg}
+              alt="늘픔가치"
+              className="w-60 h-60 inline-block mr-4"
+            />
+            <img
+              src={NulpeumImg}
+              alt="늘픔가치"
+              className="w-60 h-60 inline-block mr-4"
+            />
+            <img
+              src={NulpeumImg}
+              alt="늘픔가치"
+              className="w-60 h-60 inline-block mr-4"
+            />
+          </div>
         </div>
       </TabContentContainer>
     </>

@@ -26,9 +26,10 @@ const MedicineConsult: React.FC = () => {
           {isRightNavigationOpen ? null : <HighlightInput />}
         </GrayContainer>
 
-        <GrayContainer title="상담 필요도">
+        {/* 늘픔가치 1차 인터뷰 이후 스펙아웃 */}
+        {/* <GrayContainer title="상담 필요도">
           <div className="h-96">라디오 버튼</div>
-        </GrayContainer>
+        </GrayContainer> */}
       </TabContentContainer>
     </>
   );

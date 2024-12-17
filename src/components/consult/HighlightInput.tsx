@@ -99,7 +99,7 @@ const HighlightInput: React.FC = () => {
     <div className="p-0 rounded-lg bg-white border-2 border-gray-300">
       <div
         ref={containerRef}
-        className="border-b p-2 min-h-32"
+        className="border-b p-2 min-h-64"
         onClick={getHighlightedText}>
         <Editor
           editorState={editorState}

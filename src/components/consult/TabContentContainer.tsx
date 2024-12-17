@@ -2,16 +2,16 @@ import classNames from "classnames";
 import React from "react";
 
 interface TabContentContainerProps {
-  _class?: string;
+  className?: string;
   children: React.ReactNode;
 }
 
 const TabContentContainer: React.FC<TabContentContainerProps> = ({
-  _class = "",
+  className = "",
   children,
 }) => {
   return (
-    <div className={classNames("w-full h-auto pt-8 px-10", _class)}>
+    <div className={classNames("w-full h-auto pt-8 px-10 mb-20", className)}>
       {children}
     </div>
   );
