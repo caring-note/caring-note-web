@@ -25,11 +25,14 @@ import {
 import moment from "moment";
 import {
   Dialog,
+  DialogOverlay,
   DialogContent,
   DialogDescription,
   DialogHeader,
   DialogTitle,
   DialogTrigger,
+  DialogClose,
+  DialogFooter,
 } from "@components/components/ui/dialog";
 
 function Home() {
@@ -276,14 +279,16 @@ function Home() {
             </div>
             <Dialog>
               <DialogTrigger>Open</DialogTrigger>
+              <DialogOverlay />
               <DialogContent>
                 <DialogHeader>
-                  <DialogTitle>Are you absolutely sure?</DialogTitle>
-                  <DialogDescription>
-                    This action cannot be undone. This will permanently delete
-                    your account and remove your data from our servers.
-                  </DialogDescription>
+                  <DialogTitle>타이틀</DialogTitle>
                 </DialogHeader>
+                <DialogDescription>내용을 넣어주세요</DialogDescription>
+                <DialogFooter>
+                  <DialogClose>취소</DialogClose>
+                  <DialogTrigger>확인</DialogTrigger>
+                </DialogFooter>
               </DialogContent>
             </Dialog>
           </div>
