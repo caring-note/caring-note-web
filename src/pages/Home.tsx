@@ -34,6 +34,7 @@ import {
   DialogClose,
   DialogFooter,
 } from "@components/components/ui/dialog";
+import { Input } from "@components/components/ui/input";
 
 function Home() {
   const navigate = useNavigate();
@@ -130,7 +131,10 @@ function Home() {
     console.log("할당하기 버튼 클릭");
     // TODO : 할당하기 버튼 클릭 시 확인 Dialog 띄우기
   };
-
+  const handleInputChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+    console.log("e.target.name::" + e.target.name);
+    console.log("e.target.value::" + e.target.value);
+  };
   return (
     <>
       <div className="flex flex-col items-center justify-center pt-20 bg-blue-100">
@@ -291,6 +295,12 @@ function Home() {
                 </DialogFooter>
               </DialogContent>
             </Dialog>
+            <Input
+              id="name"
+              name="name"
+              placeholder="이름"
+              onChange={handleInputChange}
+            />
           </div>
         </div>
       </div>
