@@ -168,7 +168,7 @@ const AssistantBasicInfo = () => {
 
         {/* 상담 목적 및 특이사항 */}
         <div className="flex items-start justify-between space-x-4 ">
-          <CardContainer title={"상담 목적 및 특이사항"} variant="grayscale">
+          <CardContainer title={"상담 목적 및 특이사항"}>
             {/* 상담 목적 */}
             <div className="inline-block p-4">
               <Label htmlFor="goal" className="font-bold">
