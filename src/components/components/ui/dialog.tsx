@@ -13,7 +13,7 @@ const DialogTrigger = React.forwardRef<
   <DialogPrimitive.Trigger
     ref={ref}
     className={cn(
-      "px-3 py-1 text-white border-2 bg-blue-500 border-blue-500 rounded font-bold hover:bg-opacity-80",
+      "px-3 py-1 text-white border-2 bg-primary-50 border-primary-50 rounded font-bold hover:bg-opacity-80 w-14 h-8 text-sm",
       className,
     )}
     {...props}
@@ -29,7 +29,7 @@ const DialogOverlay = React.forwardRef<
 >(({ className, ...props }, ref) => (
   <DialogPrimitive.Overlay
     ref={ref}
-    className={cn("fixed inset-0 bg-black bg-opacity-30", className)}
+    className={cn("fixed inset-0 bg-grayscale-100 bg-opacity-30", className)}
     {...props}
   />
 ));
@@ -42,7 +42,7 @@ const DialogClose = React.forwardRef<
   <DialogPrimitive.Close
     ref={ref}
     className={cn(
-      "px-3 py-1 text-blue-500 border-2 border-blue-500 rounded font-bold hover:bg-blue-100",
+      "px-3 py-1 text-primary-50 border-2 border-primary-50 rounded font-bold hover:bg-blue-100 w-14 h-8 text-sm",
       className,
     )}
     {...props}
@@ -103,7 +103,10 @@ const DialogTitle = React.forwardRef<
 >(({ className, ...props }, ref) => (
   <DialogPrimitive.Title
     ref={ref}
-    className={cn("text-lg pb-3 font-bold border-b-2", className)}
+    className={cn(
+      "text-lg pb-3 font-bold border-b-2 text-grayscale-90 font",
+      className,
+    )}
     {...props}
   />
 ));
@@ -115,7 +118,7 @@ const DialogDescription = React.forwardRef<
 >(({ className, ...props }, ref) => (
   <DialogPrimitive.Description
     ref={ref}
-    className={cn("text-sm mt-2 mb-4 text-gray-600", className)}
+    className={cn("text-sm mt-2 mb-4 text-grayscale-80", className)}
     {...props}
   />
 ));
