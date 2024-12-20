@@ -3,20 +3,21 @@ import { useAppDispatch } from "../../../hooks";
 import { changeActiveTab } from "../../reducers/tabReducer";
 import Badge from "@components/common/Badge";
 import CardContainer from "../../components/common/CardContainer";
-import InputLayout from "../../components/layout/input/InputLayout";
+import InfoBlueIcon from "@icon/24/info.filled.blue.svg";
+import TabContentContainer from "@components/consult/TabContentContainer";
+import { Label } from "@components/components/ui/label";
+import { Input } from "@components/components/ui/input";
+import { Button } from "@components/components/ui/button";
 
-type option = {
-  val: string;
-  name: string;
-};
-type element = {
-  type: string;
-  name: string;
-  label: string;
-  options?: option[];
-  value: string;
-  placeholder?: string;
-};
+const insuranceTypes = ["건강보험", "의료급여", "보훈", "비급여"];
+const consultationCounts = ["1회차", "2회차", "3회차", "4회차", "5회차 이상"];
+const consultationGoals = [
+  "약물 부작용 상담",
+  "생활습관 관리",
+  "증상/질병에 대한 이해",
+  "복용약물에 대한 검토",
+  "기타",
+];
 
 const AssistantBasicInfo = () => {
   // 새로고침이 되었을 때도 active tab 을 잃지 않도록 컴포넌트 load 시 dispatch
@@ -24,195 +25,209 @@ const AssistantBasicInfo = () => {
   useEffect(() => {
     dispatch(changeActiveTab("/assistant/basicInfo")); // 해당 tab의 url
   }, []);
-  const [assistantBasicInfo, setAssistantBasicInfo] = useState({
+
+  const [formData, setFormData] = useState({
     name: "",
     birthDate: "",
-    medicalWarantType: "",
-    caringNumber: "",
-    latestCaringDate: "",
+    insuranceType: "건강보험",
+    consultationCount: "2회차",
+    lastConsultationDate: "",
+    goals: [] as string[],
+    specialNotes: "",
+    medications: "",
   });
 
-  const inputsRef: element[] = [
-    {
-      // 성명
-      type: "text",
-      name: "name",
-      label: "성명",
-      value: assistantBasicInfo.name,
-      placeholder: "이름을 입력해주세요",
-    },
-    {
-      // 생년월일
-      type: "text",
-      name: "birthDate",
-      label: "생년월일",
-      value: assistantBasicInfo.birthDate,
-      placeholder: "생년월일을 입력해주세요",
-    },
-    {
-      // 의료보장형태
-      type: "select",
-      name: "medicalWarantType",
-      label: "의료보장형태",
-      options: [
-        {
-          val: "medicalfee1",
-          name: "의료급여1",
-        },
-        {
-          val: "medicalfee2",
-          name: "의료급여2",
-        },
-      ],
-      value: assistantBasicInfo.medicalWarantType,
-    },
-    {
-      // 상담차수
-      type: "select",
-      name: "caringNumber",
-      label: "상담차수",
-      options: [
-        {
-          val: "1",
-          name: "1차",
-        },
-        {
-          val: "2",
-          name: "2차",
-        },
-      ],
-      value: assistantBasicInfo.caringNumber,
-    },
-    {
-      // 최근 상담일
-      type: "text",
-      name: "latestCaringDate",
-      label: "최근 상담일",
-      value: assistantBasicInfo.latestCaringDate,
-      placeholder: "최근 상담일을 입력해주세요",
-    },
-  ];
-  const onChange = (e: React.ChangeEvent<HTMLInputElement>) => {
-    const { name, value } = e.target;
-    setAssistantBasicInfo({ ...assistantBasicInfo, [name]: value });
+  const toggleGoal = (goal: string) => {
+    setFormData((prev) => ({
+      ...prev,
+      goals: prev.goals.includes(goal)
+        ? prev.goals.filter((g) => g !== goal)
+        : [...prev.goals, goal],
+    }));
   };
-  const onSelect = (e: React.ChangeEvent<HTMLSelectElement>) => {
-    const { name, value } = e.target;
-    setAssistantBasicInfo({ ...assistantBasicInfo, [name]: value });
+
+  const handleInputChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+    setFormData({ ...formData, [e.target.name]: e.target.value });
   };
+
   return (
-    <div className="w-full h-auto pt-8 px-10">
-      <Badge
-        variant="outline"
-        color="primary"
-        customIcon={<>{/* 박진완 : 원하는 아이콘을 넣으세요 */}</>}>
-        이전 상담 노트에서 불러온 정보를 토대로 손쉽게 작성해보세요.
-      </Badge>
-      {/* 박진완 : CardContainer 리팩토링 완료! 사용법은 ConsultCard.tsx 를 참고하시면 편해용 */}
-      <CardContainer title={"기본정보"} variant="grayscale">
-        <div className="px-5">
-          <InputLayout
-            inputsRef={inputsRef}
-            onChange={onChange}
-            onSelect={onSelect}
-          />
+    <>
+      <TabContentContainer>
+        <div className="flex items-center justify-between">
+          <Badge
+            variant="tint"
+            color="primary"
+            className="mt-2 mb-6 bg-primary-5"
+            customIcon={<img src={InfoBlueIcon} />}>
+            이전 상담 노트에서 불러온 정보를 토대로 손쉽게 작성해보세요.
+          </Badge>
         </div>
-      </CardContainer>
-      <CardContainer title={"상담 목적 및 특이사항"}>
-        <div className="px-5">
-          <div className="flex flex-col justify-start items-start self-stretch flex-grow-0 flex-shrink-0 gap-5 px-5 py-7">
-            <div className="flex justify-start items-start flex-grow-0 flex-shrink-0 gap-10">
-              <div className="flex flex-col justify-start items-start flex-grow-0 flex-shrink-0 w-[164px] gap-3">
-                <div className="flex justify-start items-center self-stretch flex-grow-0 flex-shrink-0 relative gap-2.5">
-                  <svg
-                    width="16"
-                    height="16"
-                    viewBox="0 0 16 16"
-                    fill="none"
-                    xmlns="http://www.w3.org/2000/svg"
-                    className="flex-grow-0 flex-shrink-0 w-4 h-4 relative"
-                    preserveAspectRatio="xMidYMid meet">
-                    <rect width="16" height="16" rx="3.2" fill="#2888F6"></rect>
-                    <g clip-path="url(#clip0_2043_8221)">
-                      <path
-                        fill-rule="evenodd"
-                        clip-rule="evenodd"
-                        d="M13.0295 4.05938C13.4385 4.43059 13.469 5.06301 13.0978 5.47194L7.2882 11.8719C7.09866 12.0807 6.82977 12.1998 6.54777 12.1998C6.26577 12.1998 5.99688 12.0807 5.80734 11.8719L2.90252 8.67194C2.53131 8.26301 2.56189 7.63059 2.97082 7.25938C3.37975 6.88817 4.01218 6.91875 4.38338 7.32768L6.54777 9.71201L11.617 4.12768C11.9882 3.71875 12.6206 3.68817 13.0295 4.05938Z"
-                        fill="white"></path>
-                    </g>
-                    <defs>
-                      <clipPath id="clip0_2043_8221">
-                        <rect width="16" height="16" fill="white"></rect>
-                      </clipPath>
-                    </defs>
-                  </svg>
-                  <p className="flex-grow-0 flex-shrink-0 text-base font-medium text-left text-[#1b1b1c]">
-                    약물 부작용 상담
-                  </p>
-                </div>
-                <div className="flex justify-start items-center self-stretch flex-grow-0 flex-shrink-0 relative gap-2.5">
-                  <div className="flex-grow-0 flex-shrink-0 w-4 h-4 relative">
-                    <div className="w-4 h-4 absolute left-[-1.5px] top-[-1.5px] rounded bg-white border-2 border-[#909193]"></div>
-                  </div>
-                  <p className="flex-grow-0 flex-shrink-0 text-base font-medium text-left text-[#1b1b1c]">
-                    발병/질병에 대한 이해
-                  </p>
-                </div>
-              </div>
-              <div className="flex flex-col justify-start items-start flex-grow-0 flex-shrink-0 w-[164px] gap-3">
-                <div className="flex justify-start items-center self-stretch flex-grow-0 flex-shrink-0 relative gap-2.5">
-                  <svg
-                    width="16"
-                    height="16"
-                    viewBox="0 0 16 16"
-                    fill="none"
-                    xmlns="http://www.w3.org/2000/svg"
-                    className="flex-grow-0 flex-shrink-0 w-4 h-4 relative"
-                    preserveAspectRatio="xMidYMid meet">
-                    <rect width="16" height="16" rx="3.2" fill="#2888F6"></rect>
-                    <g clip-path="url(#clip0_2043_11025)">
-                      <path
-                        fill-rule="evenodd"
-                        clip-rule="evenodd"
-                        d="M13.0295 4.05938C13.4385 4.43059 13.469 5.06301 13.0978 5.47194L7.2882 11.8719C7.09866 12.0807 6.82977 12.1998 6.54777 12.1998C6.26577 12.1998 5.99688 12.0807 5.80734 11.8719L2.90252 8.67194C2.53131 8.26301 2.56189 7.63059 2.97082 7.25938C3.37975 6.88817 4.01218 6.91875 4.38338 7.32768L6.54777 9.71201L11.617 4.12768C11.9882 3.71875 12.6206 3.68817 13.0295 4.05938Z"
-                        fill="white"></path>
-                    </g>
-                    <defs>
-                      <clipPath id="clip0_2043_11025">
-                        <rect width="16" height="16" fill="white"></rect>
-                      </clipPath>
-                    </defs>
-                  </svg>
-                  <p className="flex-grow-0 flex-shrink-0 text-base font-medium text-left text-[#1b1b1c]">
-                    생활습관 관리
-                  </p>
-                </div>
-                <div className="flex justify-start items-center self-stretch flex-grow-0 flex-shrink-0 relative gap-2.5">
-                  <div className="flex-grow-0 flex-shrink-0 w-4 h-4 relative">
-                    <div className="w-4 h-4 absolute left-[-1.5px] top-[-1.5px] rounded bg-white border-2 border-[#909193]"></div>
-                  </div>
-                  <p className="flex-grow-0 flex-shrink-0 text-base font-medium text-left text-[#1b1b1c]">
-                    기타
-                  </p>
-                </div>
+
+        {/* 박진완 : CardContainer 리팩토링 완료! 사용법은 ConsultCard.tsx 를 참고하시면 편해용 */}
+        <div className="flex items-start justify-between space-x-4">
+          {/* 기본정보 입력 */}
+          <CardContainer title={"기본정보"} variant="grayscale">
+            {/* 성명 */}
+            <div className="inline-block w-1/4 p-4">
+              <Label htmlFor="name" className="font-bold">
+                성명
+              </Label>
+              <Input
+                id="name"
+                name="name"
+                placeholder="이름"
+                value={formData.name}
+                onChange={handleInputChange}
+                className="mt-3"
+              />
+            </div>
+
+            {/* 생년월일 */}
+            <div className="inline-block w-1/4 p-4">
+              <Label htmlFor="birthDate" className="font-bold">
+                생년월일
+              </Label>
+              <Input
+                id="birthDate"
+                name="birthDate"
+                placeholder="YYYYMMDD"
+                value={formData.birthDate}
+                onChange={handleInputChange}
+                className="mt-3"
+              />
+            </div>
+
+            {/* 의료보장형태 */}
+            <div className="p-4">
+              <Label htmlFor="insuranceType" className="font-bold">
+                의료보장형태
+              </Label>
+              <div className="flex gap-2">
+                {insuranceTypes.map((type) => (
+                  <Button
+                    key={type}
+                    id="insuranceType"
+                    type="button"
+                    variant={
+                      formData.insuranceType === type ? "secondary" : "outline"
+                    }
+                    className="p-3 mt-3 font-medium rounded-lg"
+                    size="lg"
+                    onClick={() =>
+                      setFormData({ ...formData, insuranceType: type })
+                    }>
+                    {type}
+                  </Button>
+                ))}
               </div>
             </div>
-            <div className="flex justify-start items-center flex-grow-0 flex-shrink-0 w-[600px] relative gap-8">
-              <p className="flex-grow-0 flex-shrink-0 text-sm font-medium text-left text-[#5e5f60]">
-                특이사항
+
+            {/* 상담차수  */}
+            <div className="p-4">
+              <Label htmlFor="consultationCount" className="font-bold">
+                상담차수
+              </Label>
+              <div className="flex gap-2">
+                {consultationCounts.map((count) => (
+                  <Button
+                    key={count}
+                    id="consultationCount"
+                    type="button"
+                    variant={
+                      formData.consultationCount === count
+                        ? "secondary"
+                        : "outline"
+                    }
+                    className="p-3 mt-3 font-medium rounded-lg"
+                    size="lg"
+                    onClick={() =>
+                      setFormData({ ...formData, consultationCount: count })
+                    }>
+                    {count}
+                  </Button>
+                ))}
+              </div>
+            </div>
+
+            {/* 최근 상담일 */}
+            <div className="w-1/4 p-4">
+              <Label htmlFor="lastConsultationDate" className="font-bold">
+                최근 상담일
+              </Label>
+              <Input
+                id="lastConsultationDate"
+                name="lastConsultationDate"
+                placeholder="YYYY-MM-DD"
+                value={formData.lastConsultationDate}
+                onChange={handleInputChange}
+                className="mt-3"
+              />
+            </div>
+          </CardContainer>
+        </div>
+
+        {/* 상담 목적 및 특이사항 */}
+        <div className="flex items-start justify-between space-x-4 ">
+          <CardContainer title={"상담 목적 및 특이사항"}>
+            {/* 상담 목적 */}
+            <div className="inline-block p-4">
+              <Label htmlFor="goal" className="font-bold">
+                상담 목적
+              </Label>
+              <p className="mt-3 mb-3 text-sm text-gray-500">
+                여러개를 동시에 선택할 수 있어요.
               </p>
-              <div className="flex flex-col justify-start items-start flex-grow-0 flex-shrink-0">
-                <div className="flex justify-center items-center self-stretch flex-grow-0 flex-shrink-0 relative overflow-hidden gap-2 px-2 py-1.5 rounded bg-white border border-[#a8aaaf]">
-                  <p className="flex-grow w-[444px] text-base font-medium text-left text-[#1b1b1c]">
-                    약물 복용 관련 질문이 있어 신청(혈압약 및 건강약 3가지)
-                  </p>
-                </div>
+              <div className="flex gap-2">
+                {consultationGoals.map((goal) => (
+                  <Button
+                    key={goal}
+                    id="goal"
+                    type="button"
+                    variant={
+                      formData.goals.includes(goal) ? "secondary" : "outline"
+                    }
+                    className="p-3 font-medium rounded-lg"
+                    size="lg"
+                    onClick={() => toggleGoal(goal)}>
+                    {goal}
+                  </Button>
+                ))}
               </div>
             </div>
-          </div>
+
+            {/* 특이사항 */}
+            <div className="p-4">
+              <Label htmlFor="specialNotes" className="font-bold">
+                특이사항
+              </Label>
+              <Input
+                id="specialNotes"
+                name="specialNotes"
+                placeholder="특이사항 혹은 약사에게 궁금한 점을 작성해주세요."
+                value={formData.specialNotes}
+                onChange={handleInputChange}
+                className="pt-5 mt-3 pb-36"
+              />
+            </div>
+
+            {/* 의약물 */}
+            <div className="p-4">
+              <Label htmlFor="medications" className="font-bold">
+                의약물
+              </Label>
+              <Input
+                id="medications"
+                name="medications"
+                placeholder="약사님께 전달해 드릴 의약물을 작성해 주세요."
+                value={formData.medications}
+                onChange={handleInputChange}
+                className="pt-5 mt-3 pb-36"
+              />
+            </div>
+          </CardContainer>
         </div>
-      </CardContainer>
-    </div>
+      </TabContentContainer>
+    </>
   );
 };
 export default AssistantBasicInfo;
