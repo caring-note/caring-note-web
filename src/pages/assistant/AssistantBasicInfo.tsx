@@ -45,9 +45,6 @@ const AssistantBasicInfo = () => {
         : [...prev.goals, goal],
     }));
   };
-  useEffect(() => {
-    console.log(formData);
-  }, [formData]);
 
   const handleInputChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     setFormData({ ...formData, [e.target.name]: e.target.value });
