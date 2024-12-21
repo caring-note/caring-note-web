@@ -1,25 +1,32 @@
+import { MedicationControllerApi } from "@api/api";
+import { createCustomConfiguration } from "@api/apiConfiguration";
+import TableComponent from "@components/common/TableComponent";
+import PastConsultContainer from "@components/consult/PastConsultContainer";
+import { GridColDef } from "@mui/x-data-grid";
+import {
+  createDefaultDateColumn,
+  createDefaultNumberColumn,
+  createDefaultTextColumn,
+} from "@utils/TableUtils";
 import React, { useEffect } from "react";
 import { useAppDispatch } from "../../../hooks";
 import TabContentContainer from "../../components/consult/TabContentContainer";
 import TabContentTitle from "../../components/consult/TabContentTitle";
 import { changeActiveTab } from "../../reducers/tabReducer";
-import highlightpenBlue from "@icon/highlightpenBlue.png";
-import listYellow from "@icon/listYellow.png";
-import TableComponent from "@components/common/TableComponent";
-import { GridColDef } from "@mui/x-data-grid";
-import {
-  createDefaultTextColumn,
-  createDefaultNumberColumn,
-  createDefaultDateColumn,
-} from "@utils/TableUtils";
-import GradationContainer from "@components/consult/PastConsultContainer";
-import PastConsultContainer from "@components/consult/PastConsultContainer";
 
 const PastConsult: React.FC = () => {
   // 새로고침이 되었을 때도 active tab 을 잃지 않도록 컴포넌트 load 시 dispatch
   const dispatch = useAppDispatch();
   useEffect(() => {
     dispatch(changeActiveTab("/consult/pastConsult")); // 해당 tab의 url
+
+    // TEST CODE : API 호출 테스트, 현재 작동하는 API가 이거뿐이라 의약물 검색으로 테스트
+    const medicationApi = new MedicationControllerApi(
+      createCustomConfiguration(),
+    );
+    medicationApi.searchMedication("아").then((res) => {
+      console.log(res.data);
+    });
   }, []);
 
   const columns: GridColDef[] = [

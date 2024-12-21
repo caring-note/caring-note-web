@@ -15,6 +15,8 @@ import logoBlack from "../assets/logoBlack.png";
 import NavigationLeftMenu from "../components/NavigationLeftMenu";
 import PatientBlackIcon from "@icon/24/patient.fiiled.black.svg?react";
 import PatientBlueIcon from "@icon/24/patient.fiiled.blue.svg?react";
+import { CounselorControllerApi } from "@api/api";
+import { setToken } from "@api/apiConfiguration";
 
 interface NavigationLeftProps {}
 
@@ -23,7 +25,21 @@ const NavigationLeft: React.FC<NavigationLeftProps> = ({}) => {
 
   return (
     <div className="w-52 h-auto bg-grayscale-3 relative py-0 z-1000">
-      <div className="flex justify-start items-end p-5">
+      <div
+        className="flex justify-start items-end p-5"
+        onClick={() => {
+          // TEST CODE : 박진완 로그인 API 호출 및 토큰 세팅
+          const counselorCountroller = new CounselorControllerApi();
+          counselorCountroller
+            .login({
+              email: "jw@jw.com",
+              password: "rksk12!@",
+            })
+            .then((response) => {
+              console.log(response);
+              setToken(response.headers.authorization.split(" ")[1]); // 토큰 저장
+            });
+        }}>
         <span className="text-subtitle2 font-bold mr-3">{"박진완"}</span>
         <span className="text-body1 font-medium">{`${"약사"}님`}</span>
       </div>
