@@ -35,6 +35,7 @@ import {
   DialogFooter,
 } from "@components/components/ui/dialog";
 import { Input } from "@components/components/ui/input";
+import SearchComponent from "@components/common/SearchComponent";
 
 function Home() {
   const navigate = useNavigate();
@@ -206,6 +207,11 @@ function Home() {
               }}>
               조영호 : 기초상담 화면으로 이동 (임시){" "}
             </p>
+
+            <SearchComponent
+              placeholder="입력해"
+              items={["asdf", "qwer", "zxcv"]}
+            />
 
             <DatePickerComponent></DatePickerComponent>
             <Tabs defaultValue="account" className="w-[400px]">
