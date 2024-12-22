@@ -29,7 +29,7 @@ const TableComponent: React.FC<TableComponentProps> = ({
     <div>
       <DataGrid
         key={"prescribedMedicineTable"}
-        className="!rounded-xl"
+        className="!rounded-xl !min-h-96"
         classes={{
           columnHeader: "bg-gray-200",
           cell: "bg-white",
