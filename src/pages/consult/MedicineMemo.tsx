@@ -48,7 +48,7 @@ const MedicineMemo: React.FC = () => {
 
     // 의약물 전체 목록을 가져와서 setSearchedMedicines
     // TODO? : 최초 렌더링에 의약물 전체를 가져온 뒤 Front에서 필터링하는 방식으로 구현
-    medicationApi.searchMedication("").then((res) => {
+    medicationApi.searchMedicationByKeyword("").then((res) => {
       console.log(res.data);
       setSearchedMedicines(
         res.data.data
