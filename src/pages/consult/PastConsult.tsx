@@ -19,14 +19,6 @@ const PastConsult: React.FC = () => {
   const dispatch = useAppDispatch();
   useEffect(() => {
     dispatch(changeActiveTab("/consult/pastConsult")); // 해당 tab의 url
-
-    // TEST CODE : API 호출 테스트, 현재 작동하는 API가 이거뿐이라 의약물 검색으로 테스트
-    const medicationApi = new MedicationControllerApi(
-      createCustomConfiguration(),
-    );
-    medicationApi.searchMedication("아").then((res) => {
-      console.log(res.data);
-    });
   }, []);
 
   const columns: GridColDef[] = [

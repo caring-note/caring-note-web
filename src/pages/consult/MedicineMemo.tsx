@@ -58,9 +58,7 @@ const MedicineMemo: React.FC = () => {
     });
   }, []);
 
-  const medicationApi = new MedicationControllerApi(
-    createCustomConfiguration(),
-  );
+  const medicationApi = new MedicationControllerApi();
 
   const columns: GridColDef[] = [
     {
