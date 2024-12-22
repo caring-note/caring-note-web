@@ -1,21 +1,5 @@
-import { Checkbox } from "@components/components/ui/checkbox";
-import { Button } from "@components/components/ui/button";
-import DatePickerComponent from "@components/components/ui/datepicker";
-import {
-  Tabs,
-  TabsContent,
-  TabsList,
-  TabsTrigger,
-} from "@components/components/ui/tabs";
-import { Label } from "@components/components/ui/label";
-import {
-  RadioGroup,
-  RadioGroupItem,
-} from "@components/components/ui/radio-group";
-import { useNavigate } from "react-router-dom";
-import Tooltip from "@components/Tooltip";
-import Badge from "@components/common/Badge";
 import TableComponent from "@components/common/TableComponent";
+import { Button } from "@components/components/ui/button";
 import { GridColDef } from "@mui/x-data-grid";
 import {
   createDefaultDateColumn,
@@ -23,19 +7,7 @@ import {
   createDefaultTextColumn,
 } from "@utils/TableUtils";
 import moment from "moment";
-import {
-  Dialog,
-  DialogOverlay,
-  DialogContent,
-  DialogDescription,
-  DialogHeader,
-  DialogTitle,
-  DialogTrigger,
-  DialogClose,
-  DialogFooter,
-} from "@components/components/ui/dialog";
-import { Input } from "@components/components/ui/input";
-import SearchComponent from "@components/common/SearchComponent";
+import { useNavigate } from "react-router-dom";
 
 function Home() {
   const navigate = useNavigate();
@@ -130,7 +102,6 @@ function Home() {
 
   const handleClickAssignMe = () => {
     console.log("할당하기 버튼 클릭");
-    // TODO : 할당하기 버튼 클릭 시 확인 Dialog 띄우기
   };
   const handleInputChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     console.log("e.target.name::" + e.target.name);
@@ -191,122 +162,6 @@ function Home() {
                 onRowSelectionModelChange={() => {}}
               />
             </div>
-
-            {/* 테스트 코드 */}
-            <p
-              className="mt-10 text-3xl text-center"
-              onClick={() => {
-                navigate("/consult");
-              }}>
-              박진완 : 본상담 화면으로 이동 (임시){" "}
-            </p>
-            <p
-              className="mt-10 text-3xl text-center"
-              onClick={() => {
-                navigate("/assistant");
-              }}>
-              조영호 : 기초상담 화면으로 이동 (임시){" "}
-            </p>
-
-            <SearchComponent
-              placeholder="입력해"
-              items={["asdf", "qwer", "zxcv"]}
-            />
-
-            <DatePickerComponent></DatePickerComponent>
-            <Tabs defaultValue="account" className="w-[400px]">
-              <TabsList>
-                <TabsTrigger value="account">Account</TabsTrigger>
-                <TabsTrigger value="password">Password</TabsTrigger>
-              </TabsList>
-              <TabsContent value="account">
-                Make changes to your account here.
-              </TabsContent>
-              <TabsContent value="password">
-                Change your password here.
-              </TabsContent>
-            </Tabs>
-
-            <RadioGroup>
-              <div className="flex items-center space-x-2">
-                <RadioGroupItem value="option-one" id="option-one" />
-                <Label htmlFor="option-one">Option One</Label>
-              </div>
-              <div className="flex items-center space-x-2">
-                <RadioGroupItem value="option-two" id="option-two" />
-                <Label htmlFor="option-two">Option Two</Label>
-              </div>
-            </RadioGroup>
-            <Checkbox></Checkbox>
-            <Button variant={"secondary"} disabled={true}>
-              wwwwww
-            </Button>
-
-            <Tooltip id="tooltip" text="This is a tooltip" eventType="hover" />
-            <Tooltip id="tooltip2" text="This is a tooltip" eventType="click" />
-
-            <div className="grid items-start grid-cols-4 gap-4">
-              <div>
-                <Badge variant="filled" size="extra-large" color="primary">
-                  Badge
-                </Badge>
-              </div>
-              <div>
-                <Badge variant="tint" size="large" color="primary">
-                  Badge
-                </Badge>
-              </div>
-              <div>
-                <Badge variant="outline" size="medium" color="primary">
-                  Badge
-                </Badge>
-              </div>
-              <div>
-                <Badge variant="ghost" size="small" color="primary">
-                  Badge
-                </Badge>
-              </div>
-              <div>
-                <Badge variant="filled" size="extra-large" color="error">
-                  Badge
-                </Badge>
-              </div>
-              <div>
-                <Badge variant="tint" size="large" color="error">
-                  Badge
-                </Badge>
-              </div>
-              <div>
-                <Badge variant="outline" size="medium" color="error">
-                  Badge
-                </Badge>
-              </div>
-              <div>
-                <Badge variant="ghost" size="small" color="error">
-                  Badge
-                </Badge>
-              </div>
-            </div>
-            <Dialog>
-              <DialogTrigger>Open</DialogTrigger>
-              <DialogOverlay />
-              <DialogContent>
-                <DialogHeader>
-                  <DialogTitle>타이틀</DialogTitle>
-                </DialogHeader>
-                <DialogDescription>내용을 넣어주세요</DialogDescription>
-                <DialogFooter>
-                  <DialogClose>취소</DialogClose>
-                  <DialogTrigger>확인</DialogTrigger>
-                </DialogFooter>
-              </DialogContent>
-            </Dialog>
-            <Input
-              id="name"
-              name="name"
-              placeholder="이름"
-              onChange={handleInputChange}
-            />
           </div>
         </div>
       </div>
