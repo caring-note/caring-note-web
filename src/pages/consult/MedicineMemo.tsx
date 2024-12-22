@@ -11,7 +11,7 @@ import {
   updateRowById,
 } from "@reducers/prescribedMedicineTableReducer";
 import { changeActiveTab } from "@reducers/tabReducer";
-import { useEffect } from "react";
+import { useEffect, useState } from "react";
 import { useAppDispatch, useAppSelector } from "../../../hooks";
 import Button from "../../components/Button";
 import TabContentContainer from "../../components/consult/TabContentContainer";
@@ -23,8 +23,16 @@ import {
   createDefaultTextColumn,
 } from "@utils/TableUtils";
 import NulpeumImg from "../../assets/temp-nulpeum.png";
+import { Search } from "lucide-react";
+import SearchComponent from "@components/common/SearchComponent";
+import { MedicationControllerApi } from "@api/api";
+import { createCustomConfiguration } from "@api/apiConfiguration";
 
 const MedicineMemo: React.FC = () => {
+  const [searchedMedicines, setSearchedMedicines] = useState<string[]>([
+    "Loading...",
+  ]);
+
   const rows = useAppSelector(
     (state) => state.prescribedMedicineTableState.rows,
   );
@@ -32,11 +40,27 @@ const MedicineMemo: React.FC = () => {
     (state) => state.prescribedMedicineTableState.selectedRowIds,
   );
 
-  // 새로고침이 되었을 때도 active tab 을 잃지 않도록 컴포넌트 load 시 dispatch
   const dispatch = useAppDispatch();
+
   useEffect(() => {
+    // 새로고침이 되었을 때도 active tab 을 잃지 않도록 컴포넌트 load 시 dispatch
     dispatch(changeActiveTab("/consult/medicineMemo")); // 해당 tab의 url
+
+    // 의약물 전체 목록을 가져와서 setSearchedMedicines
+    // TODO? : 최초 렌더링에 의약물 전체를 가져온 뒤 Front에서 필터링하는 방식으로 구현
+    medicationApi.searchMedication("").then((res) => {
+      console.log(res.data);
+      setSearchedMedicines(
+        res.data.data
+          ?.map((d) => d.itemName)
+          .filter((item): item is string => item !== undefined) || [],
+      );
+    });
   }, []);
+
+  const medicationApi = new MedicationControllerApi(
+    createCustomConfiguration(),
+  );
 
   const columns: GridColDef[] = [
     {
@@ -55,11 +79,46 @@ const MedicineMemo: React.FC = () => {
       cellClassName: "!pl-6",
     },
     {
-      ...createDefaultTextColumn({
-        field: "col2",
-        headerName: "성분명 / 상품명",
-      }),
+      field: "col2",
+      headerName: "성분명 / 상품명",
+      flex: 1,
+      cellClassName: "!relative !h-full !overflow-visible",
       editable: true,
+      renderCell: (params) => {
+        return (
+          <div className="truncate max-w-full">
+            {params.value || (
+              <span className="text-gray-400 italic">{"성분명 / 상품명"}</span>
+            )}
+          </div>
+        );
+      },
+      renderEditCell: (params) => {
+        return (
+          <SearchComponent
+            items={searchedMedicines}
+            placeholder="성분명 / 상품명"
+            onSelect={(item) => {
+              params.api.setEditCellValue({
+                id: params.id,
+                field: params.field,
+                value: item,
+              });
+            }}
+            // onChangeInputValue={(value) => {
+            //   // 300ms 디바운스로 의약물 검색하여 setSearchedMedicines
+            //   medicationApi.searchMedication(value).then((res) => {
+            //     console.log(res.data);
+            //     setSearchedMedicines(
+            //       res.data.data
+            //         ?.map((d) => d.itemName)
+            //         .filter((item): item is string => item !== undefined) || [],
+            //     );
+            //   });
+            // }}
+          />
+        );
+      },
     },
     {
       ...createDefaultTextColumn({
@@ -84,6 +143,18 @@ const MedicineMemo: React.FC = () => {
       editable: true,
     },
   ];
+
+  const handleClickAddMedicine = () => {
+    dispatch(
+      addRow({
+        col1: "",
+        col2: "",
+        col3: "",
+        col4: "",
+        col5: null,
+      }),
+    );
+  };
 
   return (
     <>
@@ -129,17 +200,7 @@ const MedicineMemo: React.FC = () => {
             <Button
               _class="mt-2"
               variant="secondary"
-              onClick={() => {
-                dispatch(
-                  addRow({
-                    col1: "",
-                    col2: "",
-                    col3: "",
-                    col4: "",
-                    col5: null,
-                  }),
-                );
-              }}>
+              onClick={handleClickAddMedicine}>
               + 새 의약품 추가하기
             </Button>
           </div>
