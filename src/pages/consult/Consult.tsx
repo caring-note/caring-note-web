@@ -1,12 +1,12 @@
+import { CounselSessionControllerApi } from "@api/api";
 import arrowHeadLeftGray from "@icon/arrowHeadLeftGray.png";
-import shareBlue from "@icon/shareBlue.png";
-import trashcanBlue from "@icon/trashcanBlue.png";
+import { useEffect, useState } from "react";
 import { Outlet, useNavigate } from "react-router-dom";
+import { useAppDispatch, useAppSelector } from "../../../hooks";
 import Button from "../../components/Button";
-import { useAppSelector, useAppDispatch } from "../../../hooks";
 import { changeActiveTab } from "../../reducers/tabReducer";
 
-const tabTitle = (text: string, goPage: string) => {
+const tabTitle = (text: string, goPage: string, isHidden?: boolean) => {
   const navigate = useNavigate();
   const activeTab = useAppSelector((state) => state.tab.activeTab);
   const dispatch = useAppDispatch();
@@ -17,6 +17,8 @@ const tabTitle = (text: string, goPage: string) => {
         activeTab === goPage
           ? "text-body2 font-bold text-primary-50 border-b-2 border-primary-50"
           : "text-body2 font-medium text-grayscale-50"
+      } ${
+        isHidden ? "hidden" : ""
       } mr-10 py-3 h-full flex items-center hover:text-primary-50 hover:border-b-2 border-primary-50 cursor-pointer`}
       onClick={() => {
         dispatch(changeActiveTab(goPage));
@@ -28,6 +30,25 @@ const tabTitle = (text: string, goPage: string) => {
 };
 
 function Consult() {
+  const navigate = useNavigate();
+  const [hidePastConsultTab, sethidePastConsultTab] = useState(true);
+
+  const counselSessionControllerApi = new CounselSessionControllerApi();
+  useEffect(() => {
+    counselSessionControllerApi
+      .selectPreviousCounselSessionList("TEST-COUNSEL-SESSION-01") // TODO: input counselSessionId
+      .then((res) => {
+        console.log(res.data);
+        if (res.data.data?.length || 0 > 0) {
+          sethidePastConsultTab(false);
+          navigate("/consult/pastConsult");
+        } else {
+          sethidePastConsultTab(true);
+          navigate("/consult/consultCard");
+        }
+      });
+  }, []);
+
   return (
     <div>
       <div className="flex flex-col items-center justify-start w-full h-fit px-8 py-4">
@@ -61,7 +82,7 @@ function Consult() {
         </div>
       </div>
       <div className="flex flex-row items-center justify-start w-full h-auto pl-14 my-0 border-t-2 border-b-2 border-grayscale-5 ">
-        {tabTitle("이전 상담 내역", "/consult/pastConsult")}
+        {tabTitle("이전 상담 내역", "/consult/pastConsult", hidePastConsultTab)}
         {tabTitle("상담카드", "/consult/consultCard")}
         {tabTitle("의약물 기록", "/consult/medicineMemo")}
         {tabTitle("복약 상담", "/consult/medicineConsult")}
