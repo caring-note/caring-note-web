@@ -1,5 +1,9 @@
-import { MedicationControllerApi } from "@api/api";
-import { createCustomConfiguration } from "@api/apiConfiguration";
+import {
+  CounselSessionControllerApi,
+  MedicationCounselControllerApi,
+  SelectPreviousCounselSessionListRes,
+  SelectPreviousMedicationCounselRes,
+} from "@api/api";
 import TableComponent from "@components/common/TableComponent";
 import PastConsultContainer from "@components/consult/PastConsultContainer";
 import { GridColDef } from "@mui/x-data-grid";
@@ -8,17 +12,45 @@ import {
   createDefaultNumberColumn,
   createDefaultTextColumn,
 } from "@utils/TableUtils";
-import React, { useEffect } from "react";
+import moment from "moment";
+import React, { useEffect, useState } from "react";
 import { useAppDispatch } from "../../../hooks";
 import TabContentContainer from "../../components/consult/TabContentContainer";
 import TabContentTitle from "../../components/consult/TabContentTitle";
 import { changeActiveTab } from "../../reducers/tabReducer";
 
 const PastConsult: React.FC = () => {
+  const counselSessionControllerApi = new CounselSessionControllerApi();
+  const medicationCounselControllerApi = new MedicationCounselControllerApi();
+
+  const [previousCounselSessionList, setPreviousCounselSessionList] = useState<
+    SelectPreviousCounselSessionListRes[]
+  >([]);
+  const [previousMedicationCounsel, setPreviousMedicationCounsel] =
+    useState<SelectPreviousMedicationCounselRes>({});
+
   // 새로고침이 되었을 때도 active tab 을 잃지 않도록 컴포넌트 load 시 dispatch
   const dispatch = useAppDispatch();
+
+  // TODO: 로그인 후 redux로 관리된 counselSessionId를 가져오도록 수정
+  const counselSessionId = "TEST-COUNSEL-SESSION-01";
+
   useEffect(() => {
     dispatch(changeActiveTab("/consult/pastConsult")); // 해당 tab의 url
+
+    counselSessionControllerApi
+      .selectPreviousCounselSessionList(counselSessionId)
+      .then((res) => {
+        console.log(res.data);
+        setPreviousCounselSessionList([...(res.data.data || [])]);
+      });
+
+    medicationCounselControllerApi
+      .selectPreviousMedicationCounsel(counselSessionId)
+      .then((res) => {
+        console.log(res.data);
+        setPreviousMedicationCounsel(res.data.data || {});
+      });
   }, []);
 
   const columns: GridColDef[] = [
@@ -43,6 +75,14 @@ const PastConsult: React.FC = () => {
   ];
   const memoizedColumns = React.useMemo(() => columns, [columns]);
 
+  const pastConsultRows = previousCounselSessionList.map((counsel, index) => ({
+    id: index + 1,
+    col1: index + 1,
+    col2: moment(counsel.counselSessionDate).format("YYYY-MM-DD"),
+    col3: counsel.counselorName,
+    col4: counsel.isShardCaringMessage ? "공유완료" : "-",
+  }));
+
   return (
     <>
       <TabContentContainer>
@@ -50,7 +90,18 @@ const PastConsult: React.FC = () => {
         <div className="flex flex-row justify-between items-start space-x-4">
           <PastConsultContainer title="상담 기록 하이라이트" variant="primary">
             <ul className="mt-4 text-body1 font-medium space-y-2">
-              <li className="border-l-2 border-grayscale-10 pl-2">
+              {previousMedicationCounsel?.counselRecordHighlights?.map(
+                (item, index) => {
+                  return (
+                    <li
+                      key={index}
+                      className="border-l-2 border-grayscale-10 pl-2">
+                      {item}
+                    </li>
+                  );
+                },
+              )}
+              {/* <li className="border-l-2 border-grayscale-10 pl-2">
                 5년 전 우측 고관절에 골절상을 입음
               </li>
               <li className="border-l-2 border-grayscale-10 pl-2">고지혈증</li>
@@ -73,14 +124,15 @@ const PastConsult: React.FC = () => {
               <li className="border-l-2 border-grayscale-10 pl-2">
                 당뇨약과 혈압약을 복용 중이나, 지속적인 약 수급에 문제가 있음.
                 꾸준한 복약 상담 관찰이 필요
-              </li>
+              </li> */}
             </ul>
           </PastConsultContainer>
 
           <PastConsultContainer title="상담노트 요약" variant="secondary">
             <h2 className="text-subtitle2 font-bold text-secondary-70 flex items-center"></h2>
             <p className="mt-4 whitespace-pre-wrap">
-              [약 복용 및 관리] 내담자는 당뇨약과 혈압약을 복용 중이며,
+              {previousMedicationCounsel.counselNoteSummary}
+              {/* [약 복용 및 관리] 내담자는 당뇨약과 혈압약을 복용 중이며,
               보건소에서 약 복용 여부에 대해 의견을 들었다고 언급. 혈압 수치
               (130-140)와 관련하여 약을 줄일 수 있는지질문. 약사는 재 복용 중인
               약이 뇌졸중 예방에 중요하다고 설명. 2. **혈압 및 당뇨 관리**: -
@@ -92,43 +144,17 @@ const PastConsult: React.FC = () => {
               뇌졸중 예방을 위한 약물 복용의 필요성에 대해 논의. 4. **상담
               마무리**: - 내담자는 약물 복용을 계속할 것이라고 응답. - 약사는
               내담자에게 약 복용을 잘 유지하라고 조언하며, 건강한 생활을 위해
-              주의할 점을 강조.
+              주의할 점을 강조. */}
             </p>
           </PastConsultContainer>
         </div>
 
-        <TabContentTitle className="mt-12" text="상담 내역" />
+        <TabContentTitle className="mt-14" text="상담 내역" />
         <p className="text-body1 font-medium text-grayscale-70 ">
           케어링 노트로 남긴 상담 내역이 노출됩니다
         </p>
         <div className="h-auto mt-4">
-          {/* TODO: rows는 API로 받아와서 세팅 */}
-          <TableComponent
-            rows={[
-              {
-                id: 1,
-                col1: 1,
-                col2: "2021-09-01",
-                col3: "김약사",
-                col4: "(TODO)",
-              },
-              {
-                id: 2,
-                col1: 2,
-                col2: "2021-09-03",
-                col3: "박약사",
-                col4: "(TODO)",
-              },
-              {
-                id: 3,
-                col1: 3,
-                col2: "2021-09-05",
-                col3: "이약사",
-                col4: "(TODO)",
-              },
-            ]}
-            columns={memoizedColumns}
-          />
+          <TableComponent rows={pastConsultRows} columns={memoizedColumns} />
         </div>
       </TabContentContainer>
     </>
