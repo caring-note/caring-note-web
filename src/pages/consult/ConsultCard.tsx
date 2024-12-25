@@ -10,7 +10,7 @@ import TabContentTitle from "../../components/consult/TabContentTitle";
 import { changeActiveTab } from "../../reducers/tabReducer";
 
 const ConsultCard: React.FC = () => {
-  const counselSessionId = "TEST-COUNSEL-SESSION-01";
+  const counselSessionId = "TEST-COUNSEL-SESSION-01"; // TODO : 다른 곳에서 전달받아야됨
   const counselCardControllerApi = new CounselCardControllerApi();
 
   const selectCounselCard = async () => {
