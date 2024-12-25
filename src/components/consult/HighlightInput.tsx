@@ -1,11 +1,12 @@
+import eraserBlack from "@icon/eraserBlack.png";
+import highlightpenBlack from "@icon/highlightpenBlack.png";
 import { Editor, EditorState, Modifier } from "draft-js";
 import "draft-js/dist/Draft.css";
 import React from "react";
 import { useAppDispatch, useAppSelector } from "../../../hooks";
-import { changeEditorState } from "../../reducers/editorStateReducer";
-import highlightpenBlack from "@icon/highlightpenBlack.png";
-import trashcanBlue from "@icon/trashcanBlue.png";
 import "../../assets/css/DraftJsCss.css";
+import { changeEditorState } from "../../reducers/editorStateReducer";
+import Tooltip from "@components/Tooltip";
 
 const HighlightInput: React.FC = () => {
   const dispatch = useAppDispatch();
@@ -110,7 +111,7 @@ const HighlightInput: React.FC = () => {
           customStyleMap={styleMap}
         />
       </div>
-      <div>
+      <div className="flex items-center">
         <img
           className="w-8 h-8 cursor-pointer m-2 inline-block"
           src={highlightpenBlack}
@@ -119,9 +120,18 @@ const HighlightInput: React.FC = () => {
         />
         <img
           className="w-8 h-8 cursor-pointer inline-block"
-          src={trashcanBlue}
+          src={eraserBlack}
           alt="하이라이트 지우기"
           onClick={removeHighlight}
+        />
+        <Tooltip
+          className="ml-2"
+          id="highlight"
+          text={`왼쪽 형광펜으로 원하는 내용을 강조하고, 
+          오른쪽 지우개로 다시 지울 수 있어요`}
+          eventType="hover"
+          key={"highlight"}
+          place="right"
         />
       </div>
     </div>
