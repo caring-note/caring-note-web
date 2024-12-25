@@ -1,6 +1,6 @@
 import { CounselCardControllerApi } from "@api/api";
 import CardContent from "@components/common/CardContent";
-import { useMutation, useQueryClient } from "@tanstack/react-query";
+import { useMutation, useQuery, useQueryClient } from "@tanstack/react-query";
 import { useEffect } from "react";
 import { useAppDispatch } from "../../../hooks";
 import Button from "../../components/Button";
@@ -23,94 +23,11 @@ const ConsultCard: React.FC = () => {
 
   // tanstack/react-query 를 사용하여 데이터 fetch
   const queryClient = useQueryClient();
-  // const consultCardQuery = useQuery({
-  //   queryKey: ["consultCard"],
-  //   queryFn: selectCounselCard,
-  // });
-  const consultCardQuery = {
-    // 테스트용 데이터
-    data: {
-      data: {
-        counselCardId: "TEST-COUNSEL-CARD-01",
-        baseInformation: {
-          version: 1,
-          baseInfo: {
-            counseleeId: "string",
-            name: "김늘픔",
-            birthDate: "YYYY-MM-DD",
-            counselSessionOrder: "1회차",
-            lastCounselDate: "YYYY-MM-DD",
-          },
-          counselPurposeAndMomo: {
-            counselPurpose: "약물 부작용 상담",
-            SignificantNote: "특이사항",
-            MedicationNote: "복약 관련 메모",
-          },
-        },
-        healthInformation: {
-          version: 1,
-          diseaseInfo: {
-            diseases: ["고혈압", "고지혈증"],
-            historyNote: "고혈압, 당뇨, 고관절, 염증 수술",
-            mainInconvenienceNote: "고관절 통증으로 걷기가 힘듦",
-          },
-          allergy: {
-            isAllergy: true,
-            allergyNote: "땅콩, 돼지고기",
-          },
-          medicationSideEffect: {
-            isSideEffect: true,
-            suspectedMedicationNote: "타미플루",
-            symptomsNote: "온 몸이 붓고, 특히 얼굴이 가렵고 붉어짐",
-          },
-        },
-        livingInformation: {
-          version: 1,
-          smoking: {
-            isSmoking: true,
-            smokingPeriodNote: "10년 02개월",
-            smokingAmount: "1갑",
-          },
-          drinking: {
-            isDrinking: true,
-            drinkingAmount: "1회",
-          },
-          nutrition: {
-            mealPattern: "하루 한 끼 규칙적 식사",
-            nutritionNote: "잇몸 문제로 딱딱한 음식 섭취 어려움",
-          },
-          exercise: {
-            exercisePattern: "1회",
-            exerciseNote: "유산소 운동",
-          },
-          medicationManagement: {
-            isAlone: true,
-            houseMateNote: "아들, 딸",
-            medicationAssistants: ["본인", "배우자", "자녀", "본인"],
-          },
-        },
-        independentLifeInformation: {
-          version: 1,
-          walking: {
-            walkingMethods: ["와상 및 보행불가", "자립보행 가능"],
-            walkingEquipments: ["지팡이", "워커"],
-            etcNote: "",
-          },
-          evacuation: {
-            evacuationMethods: ["자립 화장실 사용", "화장실 유도"],
-            etcNote: "",
-          },
-          Communication: {
-            visibles: ["잘보임", "잘안보임", "안보임", "안경 사용"],
-            auditables: ["잘들림", "잘안들림", "안들림", "보청기 사용"],
-            Communications: ["소통 가능함", "대강 가능함", "불가능"],
-            Usingkoreans: ["읽기 가능", "쓰기 가능"],
-          },
-        },
-        cardRecordStatus: "RECORDED",
-      },
-    },
-  };
+  // 상담카드 API는 JSON Object 덩어리로 내려오므로 any 로 강제 type 해야 에러가 나지 않는다
+  const consultCardQuery: any = useQuery({
+    queryKey: ["consultCard"],
+    queryFn: selectCounselCard,
+  });
   // 상담카드 수정 시 사용
   const mutation = useMutation({
     mutationFn: async () => {},
@@ -141,7 +58,13 @@ const ConsultCard: React.FC = () => {
               title="기본 정보"
               titleIcon="clock"
               variant="grayscale">
-              <CardContent item="성별" value={"API : 성별 항목 없음!!"} />
+              <CardContent
+                item="성명"
+                value={
+                  consultCardQuery.data?.data?.baseInformation?.baseInfo
+                    ?.name || ""
+                }
+              />
               <CardContent
                 item="생년월일"
                 value={
