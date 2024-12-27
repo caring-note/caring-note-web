@@ -12,13 +12,9 @@ const CardContent: React.FC<CardContentProps> = ({
   value,
 }) => {
   return (
-    <div className="px-4 py-2">
-      <p className="text-body2 font-medium text-grayscale-60 inline-block w-32">
-        {item}
-      </p>
-      <span className="text-body1 font-medium text-grayscale-90 ml-4">
-        {value}
-      </span>
+    <div className="px-6 mt-8 mb-2 w-full">
+      <p className="text-body1 font-bold text-grayscale-90 mb-1">{item}</p>
+      <span className="text-body2 font-medium text-grayscale-70">{value}</span>
     </div>
   );
 };

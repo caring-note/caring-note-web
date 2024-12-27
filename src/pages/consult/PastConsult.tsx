@@ -154,7 +154,11 @@ const PastConsult: React.FC = () => {
           케어링 노트로 남긴 상담 내역이 노출됩니다
         </p>
         <div className="h-auto mt-4">
-          <TableComponent rows={pastConsultRows} columns={memoizedColumns} />
+          <TableComponent
+            key={"past-consult"}
+            rows={pastConsultRows}
+            columns={memoizedColumns}
+          />
         </div>
       </TabContentContainer>
     </>

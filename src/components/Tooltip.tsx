@@ -1,22 +1,30 @@
 import TooltipBlackIcon from "@icon/20/info.filled.black.svg?react";
 import React from "react";
-import { Tooltip as ReactTooltip } from "react-tooltip";
+import { PlacesType, Tooltip as ReactTooltip } from "react-tooltip";
 
 interface TooltipProps {
+  className?: string;
   id: string;
   text: string;
   eventType?: "hover" | "click";
+  place?: PlacesType;
 }
 
-const Tooltip: React.FC<TooltipProps> = ({ id, text, eventType = "hover" }) => {
+const Tooltip: React.FC<TooltipProps> = ({
+  className,
+  id,
+  text,
+  eventType = "hover",
+  place = "bottom-end",
+}) => {
   return (
     <>
-      <div className="inline-block m-1">
+      <div className={`inline-block m-1 ${className}`}>
         <TooltipBlackIcon width={20} height={20} data-tooltip-id={id} />
       </div>
       <ReactTooltip
         id={id}
-        place="bottom-end"
+        place={place}
         content={text}
         openEvents={{
           click: eventType === "click",
