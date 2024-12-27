@@ -154,6 +154,11 @@ const MedicineMemo: React.FC = () => {
     );
   };
 
+  const handleClickSavePrescribedMedicine = () => {
+    // TODO: rows를 서버로 보내어 저장하는 로직 추가
+    console.log(rows);
+  };
+
   return (
     <>
       <TabContentContainer>
@@ -173,11 +178,7 @@ const MedicineMemo: React.FC = () => {
               </Button>
               <Button
                 variant="primary"
-                onClick={() => {
-                  // TODO:  저장하기 버튼 클릭 시 API 연동
-                  console.log(rows);
-                  console.log(selectedRows);
-                }}
+                onClick={handleClickSavePrescribedMedicine}
                 _class="">
                 저장하기
               </Button>
