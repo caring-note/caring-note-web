@@ -185,7 +185,7 @@ const MedicineMemo: React.FC = () => {
           }>
           <div className="h-auto">
             <TableComponent
-              key="prescribedMedicineTable"
+              tableKey="prescribedMedicineTable"
               rows={rows}
               columns={columns}
               checkboxSelection={true}

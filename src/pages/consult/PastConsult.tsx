@@ -155,7 +155,7 @@ const PastConsult: React.FC = () => {
         </p>
         <div className="h-auto mt-4">
           <TableComponent
-            key={"past-consult"}
+            tableKey={"past-consult"}
             rows={pastConsultRows}
             columns={memoizedColumns}
           />
