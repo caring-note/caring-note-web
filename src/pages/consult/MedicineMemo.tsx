@@ -1,44 +1,46 @@
+import { MedicationControllerApi } from "@api/api";
+import SearchComponent from "@components/common/SearchComponent";
 import TableComponent from "@components/common/TableComponent";
 import {
-  GridColDef,
-  GridRowModel,
-  GridRowSelectionModel,
+  GridColDef
 } from "@mui/x-data-grid";
-import {
-  addRow,
-  deleteRowById,
-  setSelectedRowIds,
-  updateRowById,
-} from "@reducers/prescribedMedicineTableReducer";
 import { changeActiveTab } from "@reducers/tabReducer";
-import { useEffect, useState } from "react";
-import { useAppDispatch, useAppSelector } from "../../../hooks";
-import Button from "../../components/Button";
-import TabContentContainer from "../../components/consult/TabContentContainer";
-import GrayContainer from "./GrayContainer";
-import { create } from "domain";
+import useNomalMedicineTableStore from "@store/nomalMedicineTableStore";
+import usePrescribedMedicineTableStore from "@store/prescribedMedicineTableStore";
 import {
   createDefaultDateColumn,
   createDefaultNumberColumn,
   createDefaultTextColumn,
 } from "@utils/TableUtils";
+import { useEffect, useState } from "react";
+import { useAppDispatch } from "../../../hooks";
 import NulpeumImg from "../../assets/temp-nulpeum.png";
-import { Search } from "lucide-react";
-import SearchComponent from "@components/common/SearchComponent";
-import { MedicationControllerApi } from "@api/api";
-import { createCustomConfiguration } from "@api/apiConfiguration";
+import Button from "../../components/Button";
+import TabContentContainer from "../../components/consult/TabContentContainer";
+import GrayContainer from "./GrayContainer";
 
 const MedicineMemo: React.FC = () => {
   const [searchedMedicines, setSearchedMedicines] = useState<string[]>([
     "Loading...",
   ]);
 
-  const rows = useAppSelector(
-    (state) => state.prescribedMedicineTableState.rows,
-  );
-  const selectedRows = useAppSelector(
-    (state) => state.prescribedMedicineTableState.selectedRowIds,
-  );
+  const {
+    normalMedicineRows,
+    selectedNormalMedicineRowIds,
+    addNormalMedicineRow,
+    updateNormalMedicineRowById,
+    deleteNormalMedicineRowById,
+    setSelectedNormalMedicineRowIds,
+  } = useNomalMedicineTableStore();
+
+  const {
+    prescribedMedicineRows,
+    selectedPrescribedMedicineRowIds,
+    addPrescribedMedicineRow,
+    updatePrescribedMedicineRowById,
+    deletePrescribedMedicineRowById,
+    setSelectedPrescribedMedicineRowIds,
+  } = usePrescribedMedicineTableStore();
 
   const dispatch = useAppDispatch();
 
@@ -142,21 +144,14 @@ const MedicineMemo: React.FC = () => {
     },
   ];
 
-  const handleClickAddMedicine = () => {
-    dispatch(
-      addRow({
-        col1: "",
-        col2: "",
-        col3: "",
-        col4: "",
-        col5: null,
-      }),
-    );
+  // TODO: rows를 서버로 보내어 저장하는 로직 추가
+  const handleClickSavePrescribedMedicine = () => {
+    console.log(prescribedMedicineRows);
   };
 
-  const handleClickSavePrescribedMedicine = () => {
-    // TODO: rows를 서버로 보내어 저장하는 로직 추가
-    console.log(rows);
+  // TODO: rows를 서버로 보내어 저장하는 로직 추가
+  const handleClickSaveNormalMedicine = () => {
+    console.log(normalMedicineRows);
   };
 
   return (
@@ -169,11 +164,9 @@ const MedicineMemo: React.FC = () => {
             <div className="inline-block">
               <Button
                 variant="secondary"
-                onClick={() => {
-                  dispatch(deleteRowById(selectedRows));
-                }}
+                onClick={() => deletePrescribedMedicineRowById(selectedPrescribedMedicineRowIds)}
                 _class=""
-                disabled={selectedRows.length == 0}>
+                disabled={selectedPrescribedMedicineRowIds.length == 0}>
                 삭제하기
               </Button>
               <Button
@@ -187,20 +180,24 @@ const MedicineMemo: React.FC = () => {
           <div className="h-auto">
             <TableComponent
               tableKey="prescribedMedicineTable"
-              rows={rows}
+              rows={prescribedMedicineRows}
               columns={columns}
               checkboxSelection={true}
-              onUpdateCell={(update: GridRowModel) => {
-                dispatch(updateRowById(update));
-              }}
-              onRowSelectionModelChange={(selection: string[]) => {
-                dispatch(setSelectedRowIds(selection));
-              }}
+              onUpdateCell={updatePrescribedMedicineRowById}
+              onRowSelectionModelChange={setSelectedPrescribedMedicineRowIds}
             />
             <Button
               _class="mt-2"
               variant="secondary"
-              onClick={handleClickAddMedicine}>
+              onClick={() => {
+                addPrescribedMedicineRow({
+                  col1: "",
+                  col2: "",
+                  col3: "",
+                  col4: "",
+                  col5: null,
+                })
+              }}>
               + 새 의약품 추가하기
             </Button>
           </div>
@@ -208,15 +205,49 @@ const MedicineMemo: React.FC = () => {
 
         <GrayContainer
           title="일반 의약품"
-          subTitle="최근 3개월 이내 복용 기준 약물 이용 내역"
+          subTitle="가정 내 보관중인 모든 식품"
           titleButton={
-            <Button variant="primary" onClick={() => {}} _class="">
-              수정하기
-            </Button>
+            <div className="inline-block">
+              <Button
+                variant="secondary"
+                onClick={() => {
+                  deleteNormalMedicineRowById(selectedNormalMedicineRowIds);
+                }}
+                _class=""
+                disabled={selectedNormalMedicineRowIds.length == 0}>
+                삭제하기
+              </Button>
+              <Button
+                variant="primary"
+                onClick={handleClickSaveNormalMedicine}
+                _class="">
+                저장하기
+              </Button>
+            </div>
           }>
-          <div className="h-96">
-            위 처방 의약품 테이블과 아주 동일하므로, 처방 의약품 테이블이 완전히
-            제대로 작동하는지 확인 후 개발
+          <div className="h-auto">
+            <TableComponent
+              tableKey="nomalMedicineTable"
+              rows={normalMedicineRows}
+              columns={columns}
+              checkboxSelection={true}
+              onUpdateCell={updateNormalMedicineRowById}
+              onRowSelectionModelChange={setSelectedNormalMedicineRowIds}
+            />
+            <Button
+              _class="mt-2"
+              variant="secondary"
+              onClick={() => {
+                addNormalMedicineRow({
+                  col1: "",
+                  col2: "",
+                  col3: "",
+                  col4: "",
+                  col5: null,
+                });
+              }}>
+              + 새 의약품 추가하기
+            </Button>
           </div>
         </GrayContainer>
 
