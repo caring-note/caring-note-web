@@ -15,7 +15,7 @@ import {
   createDefaultTextColumn,
 } from "@utils/TableUtils";
 import moment from "moment";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import arrowForwardIcon from "@icon/24/arrowback.outlined.black.svg";
 import AgreementDetailsDialog from "./AgreementDetailsDialog";
 import AgreementDetails2Dialog from "./AgreementDetails2Dialog";
@@ -128,7 +128,10 @@ const AssistantView = () => {
   const handleOpen = () => {
     setIsOpen(!isOpen);
   };
-
+  useEffect(() => {
+    // data-scroll-locked 제거
+    document.body.removeAttribute("data-scroll-locked");
+  });
   return (
     <div>
       <div className="flex flex-col items-center justify-center pt-20 pb-20 bg-primary-30">
