@@ -13,6 +13,7 @@ import AssistantHome from "../pages/assistant/AssistantHome";
 import AssistantBasicInfo from "../pages/assistant/AssistantBasicInfo";
 import AssistantHealthInfo from "../pages/assistant/AssistantHealthInfo";
 import AssistantLifeInfo from "../pages/assistant/AssistantLifeInfo";
+import AssistantView from "@pages/assistant/AssistantView";
 
 const Routes = () => {
   const rootRoutes: RouteObject = {
@@ -59,12 +60,15 @@ const Routes = () => {
   };
 
   const assistantRoutes: RouteObject = {
-    path: "/",
+    path: "/assistant",
     element: <AssistantRoot />,
-
     children: [
       {
-        path: "assistant",
+        path: "view",
+        element: <AssistantView />,
+      },
+      {
+        path: "*",
         element: <AssistantHome />,
         children: [
           { index: true, element: <AssistantBasicInfo /> },
@@ -75,6 +79,7 @@ const Routes = () => {
       },
     ],
   };
+
   const routes = [
     rootRoutes,
     noMatchRoutes,
