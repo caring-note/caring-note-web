@@ -276,6 +276,88 @@ const ConsultCard: React.FC = () => {
                 }
               />
             </CardContainer>
+            {consultCardQuery.data?.data?.independentLifeInformation && (
+              <>
+                <CardContainer title="보행" titleIcon="clock" variant="error">
+                  <CardContent
+                    item="보행 여부"
+                    value={
+                      consultCardQuery.data?.data?.independentLifeInformation?.walking?.walkingMethods?.join(
+                        ", ",
+                      ) || "정보 없음"
+                    }
+                  />
+                  <CardContent
+                    item="이동 장비"
+                    value={
+                      consultCardQuery.data?.data?.independentLifeInformation?.walking?.walkingEquipments?.join(
+                        ", ",
+                      ) || "정보 없음"
+                    }
+                  />
+                  <CardContent
+                    item="기타"
+                    value={
+                      consultCardQuery.data?.data?.independentLifeInformation
+                        ?.walking?.etcNote || "정보 없음"
+                    }
+                  />
+                </CardContainer>
+
+                <CardContainer title="배변 처리" titleIcon="clock">
+                  <CardContent
+                    item="배변 처리 방식"
+                    value={
+                      consultCardQuery.data?.data?.independentLifeInformation?.evacuation?.evacuationMethods?.join(
+                        ", ",
+                      ) || "정보 없음"
+                    }
+                  />
+                  <CardContent
+                    item="기타"
+                    value={
+                      consultCardQuery.data?.data?.independentLifeInformation
+                        ?.evacuation?.etcNote || "정보 없음"
+                    }
+                  />
+                </CardContainer>
+
+                <CardContainer title="의사소통 정도" titleIcon="clock">
+                  <CardContent
+                    item="시력"
+                    value={
+                      consultCardQuery.data?.data?.independentLifeInformation?.Communication?.visibles?.join(
+                        ", ",
+                      ) || "정보 없음"
+                    }
+                  />
+                  <CardContent
+                    item="청력"
+                    value={
+                      consultCardQuery.data?.data?.independentLifeInformation?.Communication?.auditables?.join(
+                        ", ",
+                      ) || "정보 없음"
+                    }
+                  />
+                  <CardContent
+                    item="언어 소통"
+                    value={
+                      consultCardQuery.data?.data?.independentLifeInformation?.Communication?.Communications?.join(
+                        ", ",
+                      ) || "정보 없음"
+                    }
+                  />
+                  <CardContent
+                    item="한글 사용"
+                    value={
+                      consultCardQuery.data?.data?.independentLifeInformation?.Communication?.Usingkoreans?.join(
+                        ", ",
+                      ) || "정보 없음"
+                    }
+                  />
+                </CardContainer>
+              </>
+            )}
           </div>
         </div>
       </TabContentContainer>
