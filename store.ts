@@ -2,14 +2,12 @@ import { configureStore } from "@reduxjs/toolkit";
 import editorStateReducer from "./src/reducers/editorStateReducer";
 import navigationReducer from "./src/reducers/navigationReducer";
 import tabReducer from "./src/reducers/tabReducer";
-import prescribedMedicineTableStateReducer from "@reducers/prescribedMedicineTableReducer";
 
 const store = configureStore({
   reducer: {
     tab: tabReducer,
     navigation: navigationReducer,
     editorState: editorStateReducer,
-    prescribedMedicineTableState: prescribedMedicineTableStateReducer,
   },
   middleware: (getDefaultMiddleware) =>
     getDefaultMiddleware({

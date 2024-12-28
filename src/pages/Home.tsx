@@ -155,7 +155,7 @@ function Home() {
             </div>
             <div className="mt-10">
               <TableComponent
-                key="home-table"
+                tableKey="home-table"
                 rows={testRows}
                 columns={columns}
                 checkboxSelection={false}

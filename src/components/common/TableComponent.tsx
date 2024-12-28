@@ -8,7 +8,7 @@ import {
 import React from "react";
 
 type TableComponentProps = {
-  key: string;
+  tableKey: string;
   rows: GridRowsProp;
   columns: GridColDef[];
   checkboxSelection?: boolean;
@@ -17,7 +17,7 @@ type TableComponentProps = {
 };
 
 const TableComponent: React.FC<TableComponentProps> = ({
-  key,
+  tableKey,
   rows,
   columns,
   checkboxSelection = false,
@@ -30,7 +30,7 @@ const TableComponent: React.FC<TableComponentProps> = ({
   return (
     <div>
       <DataGrid
-        key={key}
+        key={tableKey}
         className="!rounded-xl !min-h-96"
         classes={{
           columnHeader: "bg-gray-200",
