@@ -173,7 +173,7 @@ const AssistantView = () => {
           <div className="w-full h-auto p-10 bg-white rounded-xl">
             <div className="mt-10">
               <TableComponent
-                key="home-table"
+                tableKey="home-table"
                 rows={testRows}
                 columns={columns}
                 checkboxSelection={false}
