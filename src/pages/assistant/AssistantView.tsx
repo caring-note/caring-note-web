@@ -17,10 +17,16 @@ import {
 import moment from "moment";
 import { useState } from "react";
 import arrowForwardIcon from "@icon/24/arrowback.outlined.black.svg";
+import AgreementDetailsDialog from "./AgreementDetailsDialog";
+import AgreementDetails2Dialog from "./AgreementDetails2Dialog";
+import AgreementDetails3Dialog from "./AgreementDetails3Dialog";
 import { useNavigate } from "react-router-dom";
 import clsx from "clsx";
 const AssistantView = () => {
   const [isOpen, setIsOpen] = useState(false);
+  const [isDetailsDialogOpen, setIsDetailsDialogOpen] = useState(false);
+  const [isDetails2DialogOpen, setIsDetails2DialogOpen] = useState(false);
+  const [isDetails3DialogOpen, setIsDetails3DialogOpen] = useState(false);
   const navigate = useNavigate();
   const [allChecked, setAllChecked] = useState(false);
   const [terms, setTerms] = useState({
@@ -228,6 +234,7 @@ const AssistantView = () => {
                 src={arrowForwardIcon}
                 className="rotate-180 cursor-pointer"
                 onClick={() => {
+                  setIsDetailsDialogOpen(true);
                   setIsOpen(false);
                 }}
               />
@@ -250,6 +257,7 @@ const AssistantView = () => {
                 src={arrowForwardIcon}
                 className="rotate-180 cursor-pointer"
                 onClick={() => {
+                  setIsDetails2DialogOpen(true);
                   setIsOpen(false);
                 }}
               />
@@ -272,6 +280,7 @@ const AssistantView = () => {
                 src={arrowForwardIcon}
                 className="rotate-180 cursor-pointer"
                 onClick={() => {
+                  setIsDetails3DialogOpen(true);
                   setIsOpen(false);
                 }}
               />
@@ -294,6 +303,25 @@ const AssistantView = () => {
           </DialogFooter>
         </DialogContent>
       </Dialog>
+
+      <AgreementDetailsDialog
+        isDetailOpen={isDetailsDialogOpen}
+        mainOpen={() => setIsOpen(true)}
+        onClose={() => setIsDetailsDialogOpen(false)}
+        onAgree={handleIndividualCheck}
+      />
+      <AgreementDetails2Dialog
+        isDetailOpen={isDetails2DialogOpen}
+        mainOpen={() => setIsOpen(true)}
+        onClose={() => setIsDetails2DialogOpen(false)}
+        onAgree={handleIndividualCheck}
+      />
+      <AgreementDetails3Dialog
+        isDetailOpen={isDetails3DialogOpen}
+        mainOpen={() => setIsOpen(true)}
+        onClose={() => setIsDetails3DialogOpen(false)}
+        onAgree={handleIndividualCheck}
+      />
     </div>
   );
 };
