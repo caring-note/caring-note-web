@@ -152,9 +152,8 @@ const DiscardMedicine: React.FC = () => {
               수정하기
             </Button>
           </div>
-          <div className="h-96 bg-green-100">
-            의약물 기록탭 - 처방 의약품 테이블과 아주 동일하므로, 처방 의약품
-            테이블이 완전히 제대로 작동하는지 확인 후 개발
+          <div className="h-96">
+            테이블 내용 확정 후 추가 예정
           </div>
         </div>
       </TabContentContainer>
