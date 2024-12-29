@@ -1,16 +1,20 @@
 import classNames from "classnames";
 import { get } from "http";
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import ClockBlackIcon from "@icon/24/clock.outlined.black.svg?react";
 import ReactModal from "react-modal";
 import Badge from "./Badge";
 import HistoryList from "./HistoryList";
+import { CounselCardControllerApi } from "@api/api";
+import { useQuery, useQueryClient } from "@tanstack/react-query";
 
 interface CardContainerProps {
   className?: string;
   variant?: "primary" | "secondary" | "grayscale" | "error";
   title?: string;
   titleIcon?: "clock";
+  informationName?: string;
+  itemName?: string;
   children: React.ReactNode;
 }
 
@@ -18,11 +22,39 @@ const CardContainer = ({
   className,
   variant,
   title,
-  titleIcon,
+  titleIcon = "clock", // 모든 cardContainer에 clock 아이콘이 추가되도록 기획이 수정됨
+  informationName = "",
+  itemName = "",
   children,
 }: CardContainerProps) => {
+  const counselSessionId = "TEST-COUNSEL-SESSION-01"; // TODO : 다른 곳에서 전달받아야됨
+  const counselCardControllerApi = new CounselCardControllerApi();
+
+  const selectPreviousHistoryItemList = async () => {
+    const response =
+      await counselCardControllerApi.selectPreviousItemListByInformationNameAndItemName(
+        counselSessionId,
+        informationName,
+        itemName,
+      );
+    console.log("상담카드 history", response.data);
+    return response.data;
+  };
+
+  const queryClient = useQueryClient();
+  const previousHistoryItemQuery: any = useQuery({
+    queryKey: ["previousHistoryItemList"],
+    queryFn: selectPreviousHistoryItemList,
+  });
+
   const [modalStyle, setModalStyle] = useState<ReactModal.Styles>({});
   const [isHistoryModalOpen, setIsHistoryModalOpen] = useState(false);
+
+  useEffect(() => {
+    if (isHistoryModalOpen && informationName && itemName) {
+      previousHistoryItemQuery.refetch();
+    }
+  }, [isHistoryModalOpen]);
 
   const getTitleIcon = () => {
     if (titleIcon === "clock") {
@@ -82,35 +114,33 @@ const CardContainer = ({
       </div>
 
       <ReactModal
+        appElement={document.getElementById("root") as HTMLElement}
         isOpen={isHistoryModalOpen}
         style={modalStyle}
         onRequestClose={() => setIsHistoryModalOpen(false)}>
         <div>
           <p className="text-subtitle2 font-bold mb-4">히스토리</p>
-          <HistoryList
-            date="2021-08-01"
-            items={[
-              "고혈압 · 고지혈증 · 뇌혈관질환 · 척추 관절염/신경통 · 호흡기질환 · 당뇨병 · 수면장애",
-              "고혈압",
-              "고지혈증",
-            ]}
-          />
-          <HistoryList
-            date="2021-08-01"
-            items={[
-              "고혈압 · 고지혈증 · 뇌혈관질환 · 척추 관절염/신경통 · 호흡기질환 · 당뇨병 · 수면장애",
-              "고혈압",
-              "고지혈증",
-            ]}
-          />
-          <HistoryList
-            date="2021-08-01"
-            items={[
-              "고혈압 · 고지혈증 · 뇌혈관질환 · 척추 관절염/신경통 · 호흡기질환 · 당뇨병 · 수면장애",
-              "고혈압",
-              "고지혈증",
-            ]}
-          />
+          {previousHistoryItemQuery.isLoading && <p>Loading...</p>}
+          {previousHistoryItemQuery.isError && <p>Error!</p>}
+          {previousHistoryItemQuery.isSuccess && (
+            <div>
+              {previousHistoryItemQuery.data.data?.map(
+                (item: any, index: number) => {
+                  return (
+                    <HistoryList
+                      key={index}
+                      date={item?.counselDate}
+                      items={[
+                        JSON.stringify(item?.counselCardItem),
+                        "두번째",
+                        "세번째(API 수정예정)",
+                      ]}
+                    />
+                  );
+                },
+              )}
+            </div>
+          )}
         </div>
       </ReactModal>
     </>

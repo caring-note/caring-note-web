@@ -1,9 +1,7 @@
 import { MedicationControllerApi } from "@api/api";
 import SearchComponent from "@components/common/SearchComponent";
 import TableComponent from "@components/common/TableComponent";
-import {
-  GridColDef
-} from "@mui/x-data-grid";
+import { GridColDef } from "@mui/x-data-grid";
 import { changeActiveTab } from "@reducers/tabReducer";
 import useNomalMedicineTableStore from "@store/nomalMedicineTableStore";
 import usePrescribedMedicineTableStore from "@store/prescribedMedicineTableStore";
@@ -164,7 +162,11 @@ const MedicineMemo: React.FC = () => {
             <div className="inline-block">
               <Button
                 variant="secondary"
-                onClick={() => deletePrescribedMedicineRowById(selectedPrescribedMedicineRowIds)}
+                onClick={() =>
+                  deletePrescribedMedicineRowById(
+                    selectedPrescribedMedicineRowIds,
+                  )
+                }
                 _class=""
                 disabled={selectedPrescribedMedicineRowIds.length == 0}>
                 삭제하기
@@ -196,7 +198,7 @@ const MedicineMemo: React.FC = () => {
                   col3: "",
                   col4: "",
                   col5: null,
-                })
+                });
               }}>
               + 새 의약품 추가하기
             </Button>

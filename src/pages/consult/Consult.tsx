@@ -36,7 +36,6 @@ function Consult() {
   const SHOW_DISEASE_COUNT = 5;
 
   const counselSessionId = "TEST-COUNSEL-SESSION-01"; // TODO : 다른 곳에서 전달받아야됨
-  const counseleeId = "TEST-COUNSEL-SESSION-01"; // TODO : 다른 곳에서 전달받아야됨
   const counselSessionControllerApi = new CounselSessionControllerApi();
   const counseleeControllerApi = new CounseleeControllerApi();
 
@@ -51,9 +50,8 @@ function Consult() {
 
   const selectCounseleeBaseInformation = async () => {
     const response =
-      await counseleeControllerApi.selectCounseleeBaseInformationByCounseleeId(
+      await counseleeControllerApi.selectCounseleeBaseInformation(
         counselSessionId,
-        counseleeId,
       );
     console.log(response.data);
     return response.data.data;
