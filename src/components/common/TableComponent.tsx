@@ -6,6 +6,8 @@ import {
   GridRowsProp,
 } from "@mui/x-data-grid";
 import React from "react";
+import PlusBlueIcon from "@icon/24/add.outlined.black.svg?react";
+import classNames from "classnames";
 
 type TableComponentProps = {
   tableKey: string;
@@ -14,6 +16,8 @@ type TableComponentProps = {
   checkboxSelection?: boolean;
   onUpdateCell?: (update: GridRowModel) => void;
   onRowSelectionModelChange?: (selection: string[]) => void;
+  withAddButton?: boolean;
+  onClickAddButton?: () => void;
 };
 
 const TableComponent: React.FC<TableComponentProps> = ({
@@ -23,6 +27,8 @@ const TableComponent: React.FC<TableComponentProps> = ({
   checkboxSelection = false,
   onUpdateCell,
   onRowSelectionModelChange,
+  withAddButton,
+  onClickAddButton,
 }) => {
   const memoizedRows = React.useMemo(() => rows, [rows]);
   const memoizedColumns = React.useMemo(() => columns, [columns]);
@@ -31,7 +37,10 @@ const TableComponent: React.FC<TableComponentProps> = ({
     <div>
       <DataGrid
         key={tableKey}
-        className="!rounded-xl !min-h-96"
+        className={classNames(
+          withAddButton ? "!rounded-t-xl" : "!rounded-xl",
+          "!min-h-96",
+        )}
         classes={{
           columnHeader: "bg-gray-200",
           cell: "bg-white",
@@ -60,6 +69,19 @@ const TableComponent: React.FC<TableComponentProps> = ({
           ),
         }}
       />
+      {withAddButton ? (
+        <div
+          className="flex items-center rounded-b-xl bg-white border-x border-b border-grayscale-10 p-3 hover:cursor-pointer"
+          onClick={onClickAddButton}>
+          <PlusBlueIcon
+            className="inline-block"
+            width={24}
+            height={24}></PlusBlueIcon>
+          <span className="text-body1 text-primary-50 ml-2">
+            새 의약품 추가하기
+          </span>
+        </div>
+      ) : null}
     </div>
   );
 };
