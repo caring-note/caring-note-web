@@ -17,8 +17,8 @@ const ConsultCard: React.FC = () => {
     const response = await counselCardControllerApi.selectCounselCard(
       counselSessionId,
     );
-    console.log(response.data);
-    return response.data;
+    console.log(response);
+    return response.data.data;
   };
 
   // tanstack/react-query 를 사용하여 데이터 fetch
@@ -56,8 +56,9 @@ const ConsultCard: React.FC = () => {
           <div id="consult-card-left" className="w-1/2">
             <CardContainer
               title="기본 정보"
-              titleIcon="clock"
-              variant="grayscale">
+              variant="grayscale"
+              informationName="baseInformation"
+              itemName="baseInfo">
               <CardContent
                 item="성명"
                 value={
@@ -80,7 +81,11 @@ const ConsultCard: React.FC = () => {
                 }
               />
             </CardContainer>
-            <CardContainer title="상담 목적 및 특이사항" titleIcon="clock">
+
+            <CardContainer
+              title="상담 목적 및 특이사항"
+              informationName="baseInformation"
+              itemName="counselPurposeAndMomo">
               <CardContent
                 item="상담 목적"
                 value={
@@ -103,7 +108,12 @@ const ConsultCard: React.FC = () => {
                 }
               />
             </CardContainer>
-            <CardContainer title="흡연" variant="secondary">
+
+            <CardContainer
+              title="흡연"
+              variant="secondary"
+              informationName="livingInformation"
+              itemName="smoking">
               <CardContent
                 item="흡연 여부"
                 value={
@@ -128,7 +138,11 @@ const ConsultCard: React.FC = () => {
                 }
               />
             </CardContainer>
-            <CardContainer title="음주">
+
+            <CardContainer
+              title="음주"
+              informationName="livingInformation"
+              itemName="drinking">
               <CardContent
                 item="음주 여부"
                 value={
@@ -146,7 +160,11 @@ const ConsultCard: React.FC = () => {
                 }
               />
             </CardContainer>
-            <CardContainer title="영양상태">
+
+            <CardContainer
+              title="영양상태"
+              informationName="livingInformation"
+              itemName="nutrition">
               <CardContent
                 item="하루 식사 패턴"
                 value={
@@ -162,7 +180,11 @@ const ConsultCard: React.FC = () => {
                 }
               />
             </CardContainer>
-            <CardContainer title="운동">
+
+            <CardContainer
+              title="운동"
+              informationName="livingInformation"
+              itemName="exercise">
               <CardContent
                 item="주간 운동 패턴"
                 value={
@@ -178,7 +200,11 @@ const ConsultCard: React.FC = () => {
                 }
               />
             </CardContainer>
-            <CardContainer title="약 복용 관리">
+
+            <CardContainer
+              title="약 복용 관리"
+              informationName="livingInformation"
+              itemName="medicationManagement">
               <CardContent
                 item="독거 여부"
                 value={
@@ -208,8 +234,9 @@ const ConsultCard: React.FC = () => {
           <div id="consult-card-right" className="w-1/2">
             <CardContainer
               title="앓고 있는 질병"
-              titleIcon="clock"
-              variant="primary">
+              variant="primary"
+              informationName="healthInformation"
+              itemName="diseaseInfo">
               <CardContent
                 item="질병"
                 value={
@@ -233,7 +260,11 @@ const ConsultCard: React.FC = () => {
                 }
               />
             </CardContainer>
-            <CardContainer title="알레르기" titleIcon="clock">
+
+            <CardContainer
+              title="알레르기"
+              informationName="healthInformation"
+              itemName="allergy">
               <CardContent
                 item="알레르기 여부"
                 value={
@@ -251,7 +282,11 @@ const ConsultCard: React.FC = () => {
                 }
               />
             </CardContainer>
-            <CardContainer title="약물 부작용" titleIcon="clock">
+
+            <CardContainer
+              title="약물 부작용"
+              informationName="healthInformation"
+              itemName="medicationSideEffect">
               <CardContent
                 item="약물 부작용 여부"
                 value={
@@ -276,9 +311,14 @@ const ConsultCard: React.FC = () => {
                 }
               />
             </CardContainer>
+
             {consultCardQuery.data?.data?.independentLifeInformation && (
               <>
-                <CardContainer title="보행" titleIcon="clock" variant="error">
+                <CardContainer
+                  title="보행"
+                  variant="error"
+                  informationName="independentLifeInformation"
+                  itemName="walking">
                   <CardContent
                     item="보행 여부"
                     value={
@@ -304,7 +344,10 @@ const ConsultCard: React.FC = () => {
                   />
                 </CardContainer>
 
-                <CardContainer title="배변 처리" titleIcon="clock">
+                <CardContainer
+                  title="배변 처리"
+                  informationName="independentLifeInformation"
+                  itemName="evacuation">
                   <CardContent
                     item="배변 처리 방식"
                     value={
@@ -322,7 +365,10 @@ const ConsultCard: React.FC = () => {
                   />
                 </CardContainer>
 
-                <CardContainer title="의사소통 정도" titleIcon="clock">
+                <CardContainer
+                  title="의사소통 정도"
+                  informationName="independentLifeInformation"
+                  itemName="Communication">
                   <CardContent
                     item="시력"
                     value={
