@@ -139,6 +139,7 @@ export interface AddCounselSessionReq {
 
 export const AddCounselSessionReqStatusEnum = {
   Scheduled: "SCHEDULED",
+  Progress: "PROGRESS",
   Completed: "COMPLETED",
   Canceled: "CANCELED",
 } as const;
@@ -639,6 +640,19 @@ export interface CommonResUpdateCounseleeConsentRes {
 /**
  *
  * @export
+ * @interface CommonResUpdateCounselorInCounselSessionRes
+ */
+export interface CommonResUpdateCounselorInCounselSessionRes {
+  /**
+   *
+   * @type {UpdateCounselorInCounselSessionRes}
+   * @memberof CommonResUpdateCounselorInCounselSessionRes
+   */
+  data?: UpdateCounselorInCounselSessionRes;
+}
+/**
+ *
+ * @export
  * @interface CommonResUpdateMedicationCounselRes
  */
 export interface CommonResUpdateMedicationCounselRes {
@@ -648,6 +662,19 @@ export interface CommonResUpdateMedicationCounselRes {
    * @memberof CommonResUpdateMedicationCounselRes
    */
   data?: UpdateMedicationCounselRes;
+}
+/**
+ *
+ * @export
+ * @interface CommonResUpdateStatusInCounselSessionRes
+ */
+export interface CommonResUpdateStatusInCounselSessionRes {
+  /**
+   *
+   * @type {UpdateStatusInCounselSessionRes}
+   * @memberof CommonResUpdateStatusInCounselSessionRes
+   */
+  data?: UpdateStatusInCounselSessionRes;
 }
 /**
  *
@@ -923,14 +950,51 @@ export interface SelectCounselSessionListItem {
    * @type {string}
    * @memberof SelectCounselSessionListItem
    */
+  counselorId?: string;
+  /**
+   *
+   * @type {string}
+   * @memberof SelectCounselSessionListItem
+   */
   counselorName?: string;
+  /**
+   * 상담 상태(SCHEDULED, PROGRESS, COMPLETED, CANCELED
+   * @type {string}
+   * @memberof SelectCounselSessionListItem
+   */
+  status?: SelectCounselSessionListItemStatusEnum;
+  /**
+   * 상담 카드 기록 상태(UNRECORDED, RECORDING, RECORDED
+   * @type {string}
+   * @memberof SelectCounselSessionListItem
+   */
+  cardRecordStatus?: SelectCounselSessionListItemCardRecordStatusEnum;
   /**
    *
    * @type {boolean}
    * @memberof SelectCounselSessionListItem
    */
-  shardCaringMessage?: boolean;
+  counselorAssign?: boolean;
 }
+
+export const SelectCounselSessionListItemStatusEnum = {
+  Scheduled: "SCHEDULED",
+  Progress: "PROGRESS",
+  Completed: "COMPLETED",
+  Canceled: "CANCELED",
+} as const;
+
+export type SelectCounselSessionListItemStatusEnum =
+  (typeof SelectCounselSessionListItemStatusEnum)[keyof typeof SelectCounselSessionListItemStatusEnum];
+export const SelectCounselSessionListItemCardRecordStatusEnum = {
+  Unrecorded: "UNRECORDED",
+  Recording: "RECORDING",
+  Recorded: "RECORDED",
+} as const;
+
+export type SelectCounselSessionListItemCardRecordStatusEnum =
+  (typeof SelectCounselSessionListItemCardRecordStatusEnum)[keyof typeof SelectCounselSessionListItemCardRecordStatusEnum];
+
 /**
  *
  * @export
@@ -1383,6 +1447,7 @@ export interface UpdateCounselSessionReq {
 
 export const UpdateCounselSessionReqStatusEnum = {
   Scheduled: "SCHEDULED",
+  Progress: "PROGRESS",
   Completed: "COMPLETED",
   Canceled: "CANCELED",
 } as const;
@@ -1438,6 +1503,38 @@ export interface UpdateCounseleeConsentRes {
 /**
  *
  * @export
+ * @interface UpdateCounselorInCounselSessionReq
+ */
+export interface UpdateCounselorInCounselSessionReq {
+  /**
+   *
+   * @type {string}
+   * @memberof UpdateCounselorInCounselSessionReq
+   */
+  counselSessionId: string;
+  /**
+   *
+   * @type {string}
+   * @memberof UpdateCounselorInCounselSessionReq
+   */
+  counselorId?: string;
+}
+/**
+ *
+ * @export
+ * @interface UpdateCounselorInCounselSessionRes
+ */
+export interface UpdateCounselorInCounselSessionRes {
+  /**
+   *
+   * @type {string}
+   * @memberof UpdateCounselorInCounselSessionRes
+   */
+  updatedCounselSessionId?: string;
+}
+/**
+ *
+ * @export
  * @interface UpdateMedicationCounselReq
  */
 export interface UpdateMedicationCounselReq {
@@ -1487,6 +1584,49 @@ export interface UpdateMedicationCounselRes {
    * @memberof UpdateMedicationCounselRes
    */
   updatedMedicationCounselId?: string;
+}
+/**
+ *
+ * @export
+ * @interface UpdateStatusInCounselSessionReq
+ */
+export interface UpdateStatusInCounselSessionReq {
+  /**
+   *
+   * @type {string}
+   * @memberof UpdateStatusInCounselSessionReq
+   */
+  counselSessionId: string;
+  /**
+   *
+   * @type {string}
+   * @memberof UpdateStatusInCounselSessionReq
+   */
+  status: UpdateStatusInCounselSessionReqStatusEnum;
+}
+
+export const UpdateStatusInCounselSessionReqStatusEnum = {
+  Scheduled: "SCHEDULED",
+  Progress: "PROGRESS",
+  Completed: "COMPLETED",
+  Canceled: "CANCELED",
+} as const;
+
+export type UpdateStatusInCounselSessionReqStatusEnum =
+  (typeof UpdateStatusInCounselSessionReqStatusEnum)[keyof typeof UpdateStatusInCounselSessionReqStatusEnum];
+
+/**
+ *
+ * @export
+ * @interface UpdateStatusInCounselSessionRes
+ */
+export interface UpdateStatusInCounselSessionRes {
+  /**
+   *
+   * @type {string}
+   * @memberof UpdateStatusInCounselSessionRes
+   */
+  updatedCounselSessionId?: string;
 }
 
 /**
@@ -2180,26 +2320,18 @@ export const DefaultApiAxiosParamCreator = function (
      *
      * @summary 내담자 기본 정보 조회
      * @param {string} counselSessionId
-     * @param {string} counseleeId
      * @param {*} [options] Override http request option.
      * @throws {RequiredError}
      */
-    selectCounseleeBaseInformationByCounseleeId: async (
+    selectCounseleeBaseInformation: async (
       counselSessionId: string,
-      counseleeId: string,
       options: RawAxiosRequestConfig = {},
     ): Promise<RequestArgs> => {
       // verify required parameter 'counselSessionId' is not null or undefined
       assertParamExists(
-        "selectCounseleeBaseInformationByCounseleeId",
+        "selectCounseleeBaseInformation",
         "counselSessionId",
         counselSessionId,
-      );
-      // verify required parameter 'counseleeId' is not null or undefined
-      assertParamExists(
-        "selectCounseleeBaseInformationByCounseleeId",
-        "counseleeId",
-        counseleeId,
       );
       const localVarPath =
         `/v1/counsel/counselee/{counselSessionId}/base/information`.replace(
@@ -2224,10 +2356,6 @@ export const DefaultApiAxiosParamCreator = function (
       // authentication bearerAuth required
       // http bearer authentication required
       await setBearerAuthToObject(localVarHeaderParameter, configuration);
-
-      if (counseleeId !== undefined) {
-        localVarQueryParameter["counseleeId"] = counseleeId;
-      }
 
       setSearchParams(localVarUrlObj, localVarQueryParameter);
       let headersFromBaseOptions =
@@ -2247,26 +2375,18 @@ export const DefaultApiAxiosParamCreator = function (
      *
      * @summary 내담자 기본 정보 조회
      * @param {string} counselSessionId
-     * @param {string} counseleeId
      * @param {*} [options] Override http request option.
      * @throws {RequiredError}
      */
-    selectCounseleeBaseInformationByCounseleeId_2: async (
+    selectCounseleeBaseInformation_2: async (
       counselSessionId: string,
-      counseleeId: string,
       options: RawAxiosRequestConfig = {},
     ): Promise<RequestArgs> => {
       // verify required parameter 'counselSessionId' is not null or undefined
       assertParamExists(
-        "selectCounseleeBaseInformationByCounseleeId_2",
+        "selectCounseleeBaseInformation_2",
         "counselSessionId",
         counselSessionId,
-      );
-      // verify required parameter 'counseleeId' is not null or undefined
-      assertParamExists(
-        "selectCounseleeBaseInformationByCounseleeId_2",
-        "counseleeId",
-        counseleeId,
       );
       const localVarPath =
         `/v1/counsel/counselee/{counselSessionId}/base/information`.replace(
@@ -2291,10 +2411,6 @@ export const DefaultApiAxiosParamCreator = function (
       // authentication bearerAuth required
       // http bearer authentication required
       await setBearerAuthToObject(localVarHeaderParameter, configuration);
-
-      if (counseleeId !== undefined) {
-        localVarQueryParameter["counseleeId"] = counseleeId;
-      }
 
       setSearchParams(localVarUrlObj, localVarQueryParameter);
       let headersFromBaseOptions =
@@ -2850,6 +2966,64 @@ export const DefaultApiAxiosParamCreator = function (
       };
     },
     /**
+     * req body에 counselorId 넣지 않은 경우 로그인 계정 정보로 할당됨.
+     * @summary 상담일정 담당 약사 수정
+     * @param {UpdateCounselorInCounselSessionReq} updateCounselorInCounselSessionReq
+     * @param {*} [options] Override http request option.
+     * @throws {RequiredError}
+     */
+    updateCounselorInCounselSession: async (
+      updateCounselorInCounselSessionReq: UpdateCounselorInCounselSessionReq,
+      options: RawAxiosRequestConfig = {},
+    ): Promise<RequestArgs> => {
+      // verify required parameter 'updateCounselorInCounselSessionReq' is not null or undefined
+      assertParamExists(
+        "updateCounselorInCounselSession",
+        "updateCounselorInCounselSessionReq",
+        updateCounselorInCounselSessionReq,
+      );
+      const localVarPath = `/v1/counsel/session/counselor`;
+      // use dummy base URL string because the URL constructor only accepts absolute URLs.
+      const localVarUrlObj = new URL(localVarPath, DUMMY_BASE_URL);
+      let baseOptions;
+      if (configuration) {
+        baseOptions = configuration.baseOptions;
+      }
+
+      const localVarRequestOptions = {
+        method: "PUT",
+        ...baseOptions,
+        ...options,
+      };
+      const localVarHeaderParameter = {} as any;
+      const localVarQueryParameter = {} as any;
+
+      // authentication bearerAuth required
+      // http bearer authentication required
+      await setBearerAuthToObject(localVarHeaderParameter, configuration);
+
+      localVarHeaderParameter["Content-Type"] = "application/json";
+
+      setSearchParams(localVarUrlObj, localVarQueryParameter);
+      let headersFromBaseOptions =
+        baseOptions && baseOptions.headers ? baseOptions.headers : {};
+      localVarRequestOptions.headers = {
+        ...localVarHeaderParameter,
+        ...headersFromBaseOptions,
+        ...options.headers,
+      };
+      localVarRequestOptions.data = serializeDataIfNeeded(
+        updateCounselorInCounselSessionReq,
+        localVarRequestOptions,
+        configuration,
+      );
+
+      return {
+        url: toPathString(localVarUrlObj),
+        options: localVarRequestOptions,
+      };
+    },
+    /**
      *
      * @summary 복약 상담 수정
      * @param {UpdateMedicationCounselReq} updateMedicationCounselReq
@@ -2898,6 +3072,64 @@ export const DefaultApiAxiosParamCreator = function (
       };
       localVarRequestOptions.data = serializeDataIfNeeded(
         updateMedicationCounselReq,
+        localVarRequestOptions,
+        configuration,
+      );
+
+      return {
+        url: toPathString(localVarUrlObj),
+        options: localVarRequestOptions,
+      };
+    },
+    /**
+     *
+     * @summary 상담 상태 수정
+     * @param {UpdateStatusInCounselSessionReq} updateStatusInCounselSessionReq
+     * @param {*} [options] Override http request option.
+     * @throws {RequiredError}
+     */
+    updateStatusInCounselSession: async (
+      updateStatusInCounselSessionReq: UpdateStatusInCounselSessionReq,
+      options: RawAxiosRequestConfig = {},
+    ): Promise<RequestArgs> => {
+      // verify required parameter 'updateStatusInCounselSessionReq' is not null or undefined
+      assertParamExists(
+        "updateStatusInCounselSession",
+        "updateStatusInCounselSessionReq",
+        updateStatusInCounselSessionReq,
+      );
+      const localVarPath = `/v1/counsel/session/status`;
+      // use dummy base URL string because the URL constructor only accepts absolute URLs.
+      const localVarUrlObj = new URL(localVarPath, DUMMY_BASE_URL);
+      let baseOptions;
+      if (configuration) {
+        baseOptions = configuration.baseOptions;
+      }
+
+      const localVarRequestOptions = {
+        method: "PUT",
+        ...baseOptions,
+        ...options,
+      };
+      const localVarHeaderParameter = {} as any;
+      const localVarQueryParameter = {} as any;
+
+      // authentication bearerAuth required
+      // http bearer authentication required
+      await setBearerAuthToObject(localVarHeaderParameter, configuration);
+
+      localVarHeaderParameter["Content-Type"] = "application/json";
+
+      setSearchParams(localVarUrlObj, localVarQueryParameter);
+      let headersFromBaseOptions =
+        baseOptions && baseOptions.headers ? baseOptions.headers : {};
+      localVarRequestOptions.headers = {
+        ...localVarHeaderParameter,
+        ...headersFromBaseOptions,
+        ...options.headers,
+      };
+      localVarRequestOptions.data = serializeDataIfNeeded(
+        updateStatusInCounselSessionReq,
         localVarRequestOptions,
         configuration,
       );
@@ -3329,13 +3561,11 @@ export const DefaultApiFp = function (configuration?: Configuration) {
      *
      * @summary 내담자 기본 정보 조회
      * @param {string} counselSessionId
-     * @param {string} counseleeId
      * @param {*} [options] Override http request option.
      * @throws {RequiredError}
      */
-    async selectCounseleeBaseInformationByCounseleeId(
+    async selectCounseleeBaseInformation(
       counselSessionId: string,
-      counseleeId: string,
       options?: RawAxiosRequestConfig,
     ): Promise<
       (
@@ -3344,16 +3574,15 @@ export const DefaultApiFp = function (configuration?: Configuration) {
       ) => AxiosPromise<CommonResSelectCounseleeBaseInformationByCounseleeIdRes>
     > {
       const localVarAxiosArgs =
-        await localVarAxiosParamCreator.selectCounseleeBaseInformationByCounseleeId(
+        await localVarAxiosParamCreator.selectCounseleeBaseInformation(
           counselSessionId,
-          counseleeId,
           options,
         );
       const localVarOperationServerIndex = configuration?.serverIndex ?? 0;
       const localVarOperationServerBasePath =
-        operationServerMap[
-          "DefaultApi.selectCounseleeBaseInformationByCounseleeId"
-        ]?.[localVarOperationServerIndex]?.url;
+        operationServerMap["DefaultApi.selectCounseleeBaseInformation"]?.[
+          localVarOperationServerIndex
+        ]?.url;
       return (axios, basePath) =>
         createRequestFunction(
           localVarAxiosArgs,
@@ -3366,13 +3595,11 @@ export const DefaultApiFp = function (configuration?: Configuration) {
      *
      * @summary 내담자 기본 정보 조회
      * @param {string} counselSessionId
-     * @param {string} counseleeId
      * @param {*} [options] Override http request option.
      * @throws {RequiredError}
      */
-    async selectCounseleeBaseInformationByCounseleeId_2(
+    async selectCounseleeBaseInformation_2(
       counselSessionId: string,
-      counseleeId: string,
       options?: RawAxiosRequestConfig,
     ): Promise<
       (
@@ -3381,16 +3608,15 @@ export const DefaultApiFp = function (configuration?: Configuration) {
       ) => AxiosPromise<CommonResSelectCounseleeBaseInformationByCounseleeIdRes>
     > {
       const localVarAxiosArgs =
-        await localVarAxiosParamCreator.selectCounseleeBaseInformationByCounseleeId_2(
+        await localVarAxiosParamCreator.selectCounseleeBaseInformation_2(
           counselSessionId,
-          counseleeId,
           options,
         );
       const localVarOperationServerIndex = configuration?.serverIndex ?? 0;
       const localVarOperationServerBasePath =
-        operationServerMap[
-          "DefaultApi.selectCounseleeBaseInformationByCounseleeId_2"
-        ]?.[localVarOperationServerIndex]?.url;
+        operationServerMap["DefaultApi.selectCounseleeBaseInformation_2"]?.[
+          localVarOperationServerIndex
+        ]?.url;
       return (axios, basePath) =>
         createRequestFunction(
           localVarAxiosArgs,
@@ -3715,6 +3941,40 @@ export const DefaultApiFp = function (configuration?: Configuration) {
         )(axios, localVarOperationServerBasePath || basePath);
     },
     /**
+     * req body에 counselorId 넣지 않은 경우 로그인 계정 정보로 할당됨.
+     * @summary 상담일정 담당 약사 수정
+     * @param {UpdateCounselorInCounselSessionReq} updateCounselorInCounselSessionReq
+     * @param {*} [options] Override http request option.
+     * @throws {RequiredError}
+     */
+    async updateCounselorInCounselSession(
+      updateCounselorInCounselSessionReq: UpdateCounselorInCounselSessionReq,
+      options?: RawAxiosRequestConfig,
+    ): Promise<
+      (
+        axios?: AxiosInstance,
+        basePath?: string,
+      ) => AxiosPromise<CommonResUpdateCounselorInCounselSessionRes>
+    > {
+      const localVarAxiosArgs =
+        await localVarAxiosParamCreator.updateCounselorInCounselSession(
+          updateCounselorInCounselSessionReq,
+          options,
+        );
+      const localVarOperationServerIndex = configuration?.serverIndex ?? 0;
+      const localVarOperationServerBasePath =
+        operationServerMap["DefaultApi.updateCounselorInCounselSession"]?.[
+          localVarOperationServerIndex
+        ]?.url;
+      return (axios, basePath) =>
+        createRequestFunction(
+          localVarAxiosArgs,
+          globalAxios,
+          BASE_PATH,
+          configuration,
+        )(axios, localVarOperationServerBasePath || basePath);
+    },
+    /**
      *
      * @summary 복약 상담 수정
      * @param {UpdateMedicationCounselReq} updateMedicationCounselReq
@@ -3738,6 +3998,40 @@ export const DefaultApiFp = function (configuration?: Configuration) {
       const localVarOperationServerIndex = configuration?.serverIndex ?? 0;
       const localVarOperationServerBasePath =
         operationServerMap["DefaultApi.updateMedicationCounsel"]?.[
+          localVarOperationServerIndex
+        ]?.url;
+      return (axios, basePath) =>
+        createRequestFunction(
+          localVarAxiosArgs,
+          globalAxios,
+          BASE_PATH,
+          configuration,
+        )(axios, localVarOperationServerBasePath || basePath);
+    },
+    /**
+     *
+     * @summary 상담 상태 수정
+     * @param {UpdateStatusInCounselSessionReq} updateStatusInCounselSessionReq
+     * @param {*} [options] Override http request option.
+     * @throws {RequiredError}
+     */
+    async updateStatusInCounselSession(
+      updateStatusInCounselSessionReq: UpdateStatusInCounselSessionReq,
+      options?: RawAxiosRequestConfig,
+    ): Promise<
+      (
+        axios?: AxiosInstance,
+        basePath?: string,
+      ) => AxiosPromise<CommonResUpdateStatusInCounselSessionRes>
+    > {
+      const localVarAxiosArgs =
+        await localVarAxiosParamCreator.updateStatusInCounselSession(
+          updateStatusInCounselSessionReq,
+          options,
+        );
+      const localVarOperationServerIndex = configuration?.serverIndex ?? 0;
+      const localVarOperationServerBasePath =
+        operationServerMap["DefaultApi.updateStatusInCounselSession"]?.[
           localVarOperationServerIndex
         ]?.url;
       return (axios, basePath) =>
@@ -3955,42 +4249,30 @@ export const DefaultApiFactory = function (
      *
      * @summary 내담자 기본 정보 조회
      * @param {string} counselSessionId
-     * @param {string} counseleeId
      * @param {*} [options] Override http request option.
      * @throws {RequiredError}
      */
-    selectCounseleeBaseInformationByCounseleeId(
+    selectCounseleeBaseInformation(
       counselSessionId: string,
-      counseleeId: string,
       options?: RawAxiosRequestConfig,
     ): AxiosPromise<CommonResSelectCounseleeBaseInformationByCounseleeIdRes> {
       return localVarFp
-        .selectCounseleeBaseInformationByCounseleeId(
-          counselSessionId,
-          counseleeId,
-          options,
-        )
+        .selectCounseleeBaseInformation(counselSessionId, options)
         .then((request) => request(axios, basePath));
     },
     /**
      *
      * @summary 내담자 기본 정보 조회
      * @param {string} counselSessionId
-     * @param {string} counseleeId
      * @param {*} [options] Override http request option.
      * @throws {RequiredError}
      */
-    selectCounseleeBaseInformationByCounseleeId_2(
+    selectCounseleeBaseInformation_2(
       counselSessionId: string,
-      counseleeId: string,
       options?: RawAxiosRequestConfig,
     ): AxiosPromise<CommonResSelectCounseleeBaseInformationByCounseleeIdRes> {
       return localVarFp
-        .selectCounseleeBaseInformationByCounseleeId_2(
-          counselSessionId,
-          counseleeId,
-          options,
-        )
+        .selectCounseleeBaseInformation_2(counselSessionId, options)
         .then((request) => request(axios, basePath));
     },
     /**
@@ -4144,6 +4426,24 @@ export const DefaultApiFactory = function (
         .then((request) => request(axios, basePath));
     },
     /**
+     * req body에 counselorId 넣지 않은 경우 로그인 계정 정보로 할당됨.
+     * @summary 상담일정 담당 약사 수정
+     * @param {UpdateCounselorInCounselSessionReq} updateCounselorInCounselSessionReq
+     * @param {*} [options] Override http request option.
+     * @throws {RequiredError}
+     */
+    updateCounselorInCounselSession(
+      updateCounselorInCounselSessionReq: UpdateCounselorInCounselSessionReq,
+      options?: RawAxiosRequestConfig,
+    ): AxiosPromise<CommonResUpdateCounselorInCounselSessionRes> {
+      return localVarFp
+        .updateCounselorInCounselSession(
+          updateCounselorInCounselSessionReq,
+          options,
+        )
+        .then((request) => request(axios, basePath));
+    },
+    /**
      *
      * @summary 복약 상담 수정
      * @param {UpdateMedicationCounselReq} updateMedicationCounselReq
@@ -4156,6 +4456,21 @@ export const DefaultApiFactory = function (
     ): AxiosPromise<CommonResUpdateMedicationCounselRes> {
       return localVarFp
         .updateMedicationCounsel(updateMedicationCounselReq, options)
+        .then((request) => request(axios, basePath));
+    },
+    /**
+     *
+     * @summary 상담 상태 수정
+     * @param {UpdateStatusInCounselSessionReq} updateStatusInCounselSessionReq
+     * @param {*} [options] Override http request option.
+     * @throws {RequiredError}
+     */
+    updateStatusInCounselSession(
+      updateStatusInCounselSessionReq: UpdateStatusInCounselSessionReq,
+      options?: RawAxiosRequestConfig,
+    ): AxiosPromise<CommonResUpdateStatusInCounselSessionRes> {
+      return localVarFp
+        .updateStatusInCounselSession(updateStatusInCounselSessionReq, options)
         .then((request) => request(axios, basePath));
     },
   };
@@ -4385,22 +4700,16 @@ export class DefaultApi extends BaseAPI {
    *
    * @summary 내담자 기본 정보 조회
    * @param {string} counselSessionId
-   * @param {string} counseleeId
    * @param {*} [options] Override http request option.
    * @throws {RequiredError}
    * @memberof DefaultApi
    */
-  public selectCounseleeBaseInformationByCounseleeId(
+  public selectCounseleeBaseInformation(
     counselSessionId: string,
-    counseleeId: string,
     options?: RawAxiosRequestConfig,
   ) {
     return DefaultApiFp(this.configuration)
-      .selectCounseleeBaseInformationByCounseleeId(
-        counselSessionId,
-        counseleeId,
-        options,
-      )
+      .selectCounseleeBaseInformation(counselSessionId, options)
       .then((request) => request(this.axios, this.basePath));
   }
 
@@ -4408,22 +4717,16 @@ export class DefaultApi extends BaseAPI {
    *
    * @summary 내담자 기본 정보 조회
    * @param {string} counselSessionId
-   * @param {string} counseleeId
    * @param {*} [options] Override http request option.
    * @throws {RequiredError}
    * @memberof DefaultApi
    */
-  public selectCounseleeBaseInformationByCounseleeId_2(
+  public selectCounseleeBaseInformation_2(
     counselSessionId: string,
-    counseleeId: string,
     options?: RawAxiosRequestConfig,
   ) {
     return DefaultApiFp(this.configuration)
-      .selectCounseleeBaseInformationByCounseleeId_2(
-        counselSessionId,
-        counseleeId,
-        options,
-      )
+      .selectCounseleeBaseInformation_2(counselSessionId, options)
       .then((request) => request(this.axios, this.basePath));
   }
 
@@ -4596,6 +4899,26 @@ export class DefaultApi extends BaseAPI {
   }
 
   /**
+   * req body에 counselorId 넣지 않은 경우 로그인 계정 정보로 할당됨.
+   * @summary 상담일정 담당 약사 수정
+   * @param {UpdateCounselorInCounselSessionReq} updateCounselorInCounselSessionReq
+   * @param {*} [options] Override http request option.
+   * @throws {RequiredError}
+   * @memberof DefaultApi
+   */
+  public updateCounselorInCounselSession(
+    updateCounselorInCounselSessionReq: UpdateCounselorInCounselSessionReq,
+    options?: RawAxiosRequestConfig,
+  ) {
+    return DefaultApiFp(this.configuration)
+      .updateCounselorInCounselSession(
+        updateCounselorInCounselSessionReq,
+        options,
+      )
+      .then((request) => request(this.axios, this.basePath));
+  }
+
+  /**
    *
    * @summary 복약 상담 수정
    * @param {UpdateMedicationCounselReq} updateMedicationCounselReq
@@ -4609,6 +4932,23 @@ export class DefaultApi extends BaseAPI {
   ) {
     return DefaultApiFp(this.configuration)
       .updateMedicationCounsel(updateMedicationCounselReq, options)
+      .then((request) => request(this.axios, this.basePath));
+  }
+
+  /**
+   *
+   * @summary 상담 상태 수정
+   * @param {UpdateStatusInCounselSessionReq} updateStatusInCounselSessionReq
+   * @param {*} [options] Override http request option.
+   * @throws {RequiredError}
+   * @memberof DefaultApi
+   */
+  public updateStatusInCounselSession(
+    updateStatusInCounselSessionReq: UpdateStatusInCounselSessionReq,
+    options?: RawAxiosRequestConfig,
+  ) {
+    return DefaultApiFp(this.configuration)
+      .updateStatusInCounselSession(updateStatusInCounselSessionReq, options)
       .then((request) => request(this.axios, this.basePath));
   }
 }
@@ -5795,6 +6135,122 @@ export const CounselSessionControllerApiAxiosParamCreator = function (
         options: localVarRequestOptions,
       };
     },
+    /**
+     * req body에 counselorId 넣지 않은 경우 로그인 계정 정보로 할당됨.
+     * @summary 상담일정 담당 약사 수정
+     * @param {UpdateCounselorInCounselSessionReq} updateCounselorInCounselSessionReq
+     * @param {*} [options] Override http request option.
+     * @throws {RequiredError}
+     */
+    updateCounselorInCounselSession: async (
+      updateCounselorInCounselSessionReq: UpdateCounselorInCounselSessionReq,
+      options: RawAxiosRequestConfig = {},
+    ): Promise<RequestArgs> => {
+      // verify required parameter 'updateCounselorInCounselSessionReq' is not null or undefined
+      assertParamExists(
+        "updateCounselorInCounselSession",
+        "updateCounselorInCounselSessionReq",
+        updateCounselorInCounselSessionReq,
+      );
+      const localVarPath = `/v1/counsel/session/counselor`;
+      // use dummy base URL string because the URL constructor only accepts absolute URLs.
+      const localVarUrlObj = new URL(localVarPath, DUMMY_BASE_URL);
+      let baseOptions;
+      if (configuration) {
+        baseOptions = configuration.baseOptions;
+      }
+
+      const localVarRequestOptions = {
+        method: "PUT",
+        ...baseOptions,
+        ...options,
+      };
+      const localVarHeaderParameter = {} as any;
+      const localVarQueryParameter = {} as any;
+
+      // authentication bearerAuth required
+      // http bearer authentication required
+      await setBearerAuthToObject(localVarHeaderParameter, configuration);
+
+      localVarHeaderParameter["Content-Type"] = "application/json";
+
+      setSearchParams(localVarUrlObj, localVarQueryParameter);
+      let headersFromBaseOptions =
+        baseOptions && baseOptions.headers ? baseOptions.headers : {};
+      localVarRequestOptions.headers = {
+        ...localVarHeaderParameter,
+        ...headersFromBaseOptions,
+        ...options.headers,
+      };
+      localVarRequestOptions.data = serializeDataIfNeeded(
+        updateCounselorInCounselSessionReq,
+        localVarRequestOptions,
+        configuration,
+      );
+
+      return {
+        url: toPathString(localVarUrlObj),
+        options: localVarRequestOptions,
+      };
+    },
+    /**
+     *
+     * @summary 상담 상태 수정
+     * @param {UpdateStatusInCounselSessionReq} updateStatusInCounselSessionReq
+     * @param {*} [options] Override http request option.
+     * @throws {RequiredError}
+     */
+    updateStatusInCounselSession: async (
+      updateStatusInCounselSessionReq: UpdateStatusInCounselSessionReq,
+      options: RawAxiosRequestConfig = {},
+    ): Promise<RequestArgs> => {
+      // verify required parameter 'updateStatusInCounselSessionReq' is not null or undefined
+      assertParamExists(
+        "updateStatusInCounselSession",
+        "updateStatusInCounselSessionReq",
+        updateStatusInCounselSessionReq,
+      );
+      const localVarPath = `/v1/counsel/session/status`;
+      // use dummy base URL string because the URL constructor only accepts absolute URLs.
+      const localVarUrlObj = new URL(localVarPath, DUMMY_BASE_URL);
+      let baseOptions;
+      if (configuration) {
+        baseOptions = configuration.baseOptions;
+      }
+
+      const localVarRequestOptions = {
+        method: "PUT",
+        ...baseOptions,
+        ...options,
+      };
+      const localVarHeaderParameter = {} as any;
+      const localVarQueryParameter = {} as any;
+
+      // authentication bearerAuth required
+      // http bearer authentication required
+      await setBearerAuthToObject(localVarHeaderParameter, configuration);
+
+      localVarHeaderParameter["Content-Type"] = "application/json";
+
+      setSearchParams(localVarUrlObj, localVarQueryParameter);
+      let headersFromBaseOptions =
+        baseOptions && baseOptions.headers ? baseOptions.headers : {};
+      localVarRequestOptions.headers = {
+        ...localVarHeaderParameter,
+        ...headersFromBaseOptions,
+        ...options.headers,
+      };
+      localVarRequestOptions.data = serializeDataIfNeeded(
+        updateStatusInCounselSessionReq,
+        localVarRequestOptions,
+        configuration,
+      );
+
+      return {
+        url: toPathString(localVarUrlObj),
+        options: localVarRequestOptions,
+      };
+    },
   };
 };
 
@@ -6018,6 +6474,74 @@ export const CounselSessionControllerApiFp = function (
           configuration,
         )(axios, localVarOperationServerBasePath || basePath);
     },
+    /**
+     * req body에 counselorId 넣지 않은 경우 로그인 계정 정보로 할당됨.
+     * @summary 상담일정 담당 약사 수정
+     * @param {UpdateCounselorInCounselSessionReq} updateCounselorInCounselSessionReq
+     * @param {*} [options] Override http request option.
+     * @throws {RequiredError}
+     */
+    async updateCounselorInCounselSession(
+      updateCounselorInCounselSessionReq: UpdateCounselorInCounselSessionReq,
+      options?: RawAxiosRequestConfig,
+    ): Promise<
+      (
+        axios?: AxiosInstance,
+        basePath?: string,
+      ) => AxiosPromise<CommonResUpdateCounselorInCounselSessionRes>
+    > {
+      const localVarAxiosArgs =
+        await localVarAxiosParamCreator.updateCounselorInCounselSession(
+          updateCounselorInCounselSessionReq,
+          options,
+        );
+      const localVarOperationServerIndex = configuration?.serverIndex ?? 0;
+      const localVarOperationServerBasePath =
+        operationServerMap[
+          "CounselSessionControllerApi.updateCounselorInCounselSession"
+        ]?.[localVarOperationServerIndex]?.url;
+      return (axios, basePath) =>
+        createRequestFunction(
+          localVarAxiosArgs,
+          globalAxios,
+          BASE_PATH,
+          configuration,
+        )(axios, localVarOperationServerBasePath || basePath);
+    },
+    /**
+     *
+     * @summary 상담 상태 수정
+     * @param {UpdateStatusInCounselSessionReq} updateStatusInCounselSessionReq
+     * @param {*} [options] Override http request option.
+     * @throws {RequiredError}
+     */
+    async updateStatusInCounselSession(
+      updateStatusInCounselSessionReq: UpdateStatusInCounselSessionReq,
+      options?: RawAxiosRequestConfig,
+    ): Promise<
+      (
+        axios?: AxiosInstance,
+        basePath?: string,
+      ) => AxiosPromise<CommonResUpdateStatusInCounselSessionRes>
+    > {
+      const localVarAxiosArgs =
+        await localVarAxiosParamCreator.updateStatusInCounselSession(
+          updateStatusInCounselSessionReq,
+          options,
+        );
+      const localVarOperationServerIndex = configuration?.serverIndex ?? 0;
+      const localVarOperationServerBasePath =
+        operationServerMap[
+          "CounselSessionControllerApi.updateStatusInCounselSession"
+        ]?.[localVarOperationServerIndex]?.url;
+      return (axios, basePath) =>
+        createRequestFunction(
+          localVarAxiosArgs,
+          globalAxios,
+          BASE_PATH,
+          configuration,
+        )(axios, localVarOperationServerBasePath || basePath);
+    },
   };
 };
 
@@ -6129,6 +6653,39 @@ export const CounselSessionControllerApiFactory = function (
     ): AxiosPromise<CommonResUpdateCounselSessionRes> {
       return localVarFp
         .updateCounselSession(updateCounselSessionReq, options)
+        .then((request) => request(axios, basePath));
+    },
+    /**
+     * req body에 counselorId 넣지 않은 경우 로그인 계정 정보로 할당됨.
+     * @summary 상담일정 담당 약사 수정
+     * @param {UpdateCounselorInCounselSessionReq} updateCounselorInCounselSessionReq
+     * @param {*} [options] Override http request option.
+     * @throws {RequiredError}
+     */
+    updateCounselorInCounselSession(
+      updateCounselorInCounselSessionReq: UpdateCounselorInCounselSessionReq,
+      options?: RawAxiosRequestConfig,
+    ): AxiosPromise<CommonResUpdateCounselorInCounselSessionRes> {
+      return localVarFp
+        .updateCounselorInCounselSession(
+          updateCounselorInCounselSessionReq,
+          options,
+        )
+        .then((request) => request(axios, basePath));
+    },
+    /**
+     *
+     * @summary 상담 상태 수정
+     * @param {UpdateStatusInCounselSessionReq} updateStatusInCounselSessionReq
+     * @param {*} [options] Override http request option.
+     * @throws {RequiredError}
+     */
+    updateStatusInCounselSession(
+      updateStatusInCounselSessionReq: UpdateStatusInCounselSessionReq,
+      options?: RawAxiosRequestConfig,
+    ): AxiosPromise<CommonResUpdateStatusInCounselSessionRes> {
+      return localVarFp
+        .updateStatusInCounselSession(updateStatusInCounselSessionReq, options)
         .then((request) => request(axios, basePath));
     },
   };
@@ -6249,6 +6806,43 @@ export class CounselSessionControllerApi extends BaseAPI {
   ) {
     return CounselSessionControllerApiFp(this.configuration)
       .updateCounselSession(updateCounselSessionReq, options)
+      .then((request) => request(this.axios, this.basePath));
+  }
+
+  /**
+   * req body에 counselorId 넣지 않은 경우 로그인 계정 정보로 할당됨.
+   * @summary 상담일정 담당 약사 수정
+   * @param {UpdateCounselorInCounselSessionReq} updateCounselorInCounselSessionReq
+   * @param {*} [options] Override http request option.
+   * @throws {RequiredError}
+   * @memberof CounselSessionControllerApi
+   */
+  public updateCounselorInCounselSession(
+    updateCounselorInCounselSessionReq: UpdateCounselorInCounselSessionReq,
+    options?: RawAxiosRequestConfig,
+  ) {
+    return CounselSessionControllerApiFp(this.configuration)
+      .updateCounselorInCounselSession(
+        updateCounselorInCounselSessionReq,
+        options,
+      )
+      .then((request) => request(this.axios, this.basePath));
+  }
+
+  /**
+   *
+   * @summary 상담 상태 수정
+   * @param {UpdateStatusInCounselSessionReq} updateStatusInCounselSessionReq
+   * @param {*} [options] Override http request option.
+   * @throws {RequiredError}
+   * @memberof CounselSessionControllerApi
+   */
+  public updateStatusInCounselSession(
+    updateStatusInCounselSessionReq: UpdateStatusInCounselSessionReq,
+    options?: RawAxiosRequestConfig,
+  ) {
+    return CounselSessionControllerApiFp(this.configuration)
+      .updateStatusInCounselSession(updateStatusInCounselSessionReq, options)
       .then((request) => request(this.axios, this.basePath));
   }
 }
@@ -6830,26 +7424,18 @@ export const CounseleeControllerApiAxiosParamCreator = function (
      *
      * @summary 내담자 기본 정보 조회
      * @param {string} counselSessionId
-     * @param {string} counseleeId
      * @param {*} [options] Override http request option.
      * @throws {RequiredError}
      */
-    selectCounseleeBaseInformationByCounseleeId: async (
+    selectCounseleeBaseInformation: async (
       counselSessionId: string,
-      counseleeId: string,
       options: RawAxiosRequestConfig = {},
     ): Promise<RequestArgs> => {
       // verify required parameter 'counselSessionId' is not null or undefined
       assertParamExists(
-        "selectCounseleeBaseInformationByCounseleeId",
+        "selectCounseleeBaseInformation",
         "counselSessionId",
         counselSessionId,
-      );
-      // verify required parameter 'counseleeId' is not null or undefined
-      assertParamExists(
-        "selectCounseleeBaseInformationByCounseleeId",
-        "counseleeId",
-        counseleeId,
       );
       const localVarPath =
         `/v1/counsel/counselee/{counselSessionId}/base/information`.replace(
@@ -6874,10 +7460,6 @@ export const CounseleeControllerApiAxiosParamCreator = function (
       // authentication bearerAuth required
       // http bearer authentication required
       await setBearerAuthToObject(localVarHeaderParameter, configuration);
-
-      if (counseleeId !== undefined) {
-        localVarQueryParameter["counseleeId"] = counseleeId;
-      }
 
       setSearchParams(localVarUrlObj, localVarQueryParameter);
       let headersFromBaseOptions =
@@ -6910,13 +7492,11 @@ export const CounseleeControllerApiFp = function (
      *
      * @summary 내담자 기본 정보 조회
      * @param {string} counselSessionId
-     * @param {string} counseleeId
      * @param {*} [options] Override http request option.
      * @throws {RequiredError}
      */
-    async selectCounseleeBaseInformationByCounseleeId(
+    async selectCounseleeBaseInformation(
       counselSessionId: string,
-      counseleeId: string,
       options?: RawAxiosRequestConfig,
     ): Promise<
       (
@@ -6925,15 +7505,14 @@ export const CounseleeControllerApiFp = function (
       ) => AxiosPromise<CommonResSelectCounseleeBaseInformationByCounseleeIdRes>
     > {
       const localVarAxiosArgs =
-        await localVarAxiosParamCreator.selectCounseleeBaseInformationByCounseleeId(
+        await localVarAxiosParamCreator.selectCounseleeBaseInformation(
           counselSessionId,
-          counseleeId,
           options,
         );
       const localVarOperationServerIndex = configuration?.serverIndex ?? 0;
       const localVarOperationServerBasePath =
         operationServerMap[
-          "CounseleeControllerApi.selectCounseleeBaseInformationByCounseleeId"
+          "CounseleeControllerApi.selectCounseleeBaseInformation"
         ]?.[localVarOperationServerIndex]?.url;
       return (axios, basePath) =>
         createRequestFunction(
@@ -6961,21 +7540,15 @@ export const CounseleeControllerApiFactory = function (
      *
      * @summary 내담자 기본 정보 조회
      * @param {string} counselSessionId
-     * @param {string} counseleeId
      * @param {*} [options] Override http request option.
      * @throws {RequiredError}
      */
-    selectCounseleeBaseInformationByCounseleeId(
+    selectCounseleeBaseInformation(
       counselSessionId: string,
-      counseleeId: string,
       options?: RawAxiosRequestConfig,
     ): AxiosPromise<CommonResSelectCounseleeBaseInformationByCounseleeIdRes> {
       return localVarFp
-        .selectCounseleeBaseInformationByCounseleeId(
-          counselSessionId,
-          counseleeId,
-          options,
-        )
+        .selectCounseleeBaseInformation(counselSessionId, options)
         .then((request) => request(axios, basePath));
     },
   };
@@ -6992,22 +7565,16 @@ export class CounseleeControllerApi extends BaseAPI {
    *
    * @summary 내담자 기본 정보 조회
    * @param {string} counselSessionId
-   * @param {string} counseleeId
    * @param {*} [options] Override http request option.
    * @throws {RequiredError}
    * @memberof CounseleeControllerApi
    */
-  public selectCounseleeBaseInformationByCounseleeId(
+  public selectCounseleeBaseInformation(
     counselSessionId: string,
-    counseleeId: string,
     options?: RawAxiosRequestConfig,
   ) {
     return CounseleeControllerApiFp(this.configuration)
-      .selectCounseleeBaseInformationByCounseleeId(
-        counselSessionId,
-        counseleeId,
-        options,
-      )
+      .selectCounseleeBaseInformation(counselSessionId, options)
       .then((request) => request(this.axios, this.basePath));
   }
 }

@@ -12,7 +12,8 @@ const PastConsultContainer: React.FC<PastConsultContainerProps> = ({
   children,
 }) => {
   return (
-    <div className={`w-1/2 h-80 rounded-lg border border-${variant}-30`}>
+    <div
+      className={`w-1/2 min-h-80 rounded-lg border border-${variant}-30 mb-10`}>
       <div className={`bg-${variant}-10 p-4 rounded-t-lg`}>
         <h2
           className={`text-subtitle2 font-bold text-${variant}-70 flex items-center`}>

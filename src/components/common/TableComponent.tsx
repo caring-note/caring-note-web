@@ -59,7 +59,7 @@ const TableComponent: React.FC<TableComponentProps> = ({
         onRowSelectionModelChange={(selection: GridRowSelectionModel) => {
           onRowSelectionModelChange?.(selection.map((s) => s.toString()));
         }}
-        disableColumnMenu
+        // disableColumnMenu  // 24.12.29 : 기디쪽 기능 확인을 위해 컬럼 기능 사용
         hideFooter
         slots={{
           noRowsOverlay: () => (
