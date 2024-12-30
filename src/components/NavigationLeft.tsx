@@ -1,22 +1,21 @@
+import { CounselorControllerApi } from "@api/api";
+import { setToken } from "@api/apiConfiguration";
 import AdminBlackIcon from "@icon/24/accountcircle.fiiled.black.svg?react";
 import AdminBlueIcon from "@icon/24/accountcircle.fiiled.blue.svg?react";
 import QuestionBlackIcon from "@icon/24/help.fiiled.black.svg?react";
 import HomeBlackIcon from "@icon/24/home.filled.black.svg?react";
 import HomeBlueIcon from "@icon/24/home.filled.blue.svg?react";
+import LogoutBlackIcon from "@icon/24/logout.outline.black.svg?react";
 import NoteBlackIcon from "@icon/24/note.fiiled.black.svg?react";
 import NoteBlueIcon from "@icon/24/note.fiiled.blue.svg?react";
 import PaperPlainBlackIcon from "@icon/24/paperplane.black.svg?react";
 import PaperPlainBlueIcon from "@icon/24/paperplane.blue.svg?react";
-import SettingBlackIcon from "@icon/24/settings.fiiled.black.svg?react";
-import SettingBlueIcon from "@icon/24/settings.fiiled.blue.svg?react";
+import PatientBlackIcon from "@icon/24/patient.fiiled.black.svg?react";
+import PatientBlueIcon from "@icon/24/patient.fiiled.blue.svg?react";
 import React from "react";
 import { useNavigate } from "react-router-dom";
 import logoBlack from "../assets/logoBlack.png";
 import NavigationLeftMenu from "../components/NavigationLeftMenu";
-import PatientBlackIcon from "@icon/24/patient.fiiled.black.svg?react";
-import PatientBlueIcon from "@icon/24/patient.fiiled.blue.svg?react";
-import { CounselorControllerApi } from "@api/api";
-import { setToken } from "@api/apiConfiguration";
 
 interface NavigationLeftProps {}
 
@@ -73,14 +72,13 @@ const NavigationLeft: React.FC<NavigationLeftProps> = ({}) => {
       />
       <hr className="border-t border-grayscale-10" />
       <NavigationLeftMenu
-        menuIcon={<SettingBlackIcon width={24} height={24} />}
-        activteMenuIcon={<SettingBlueIcon width={24} height={24} />}
-        menuName="설정"
-      />
-      <NavigationLeftMenu
         menuIcon={<QuestionBlackIcon width={24} height={24} />}
         activteMenuIcon={<QuestionBlackIcon width={24} height={24} />}
         menuName="도움말"
+      />
+      <NavigationLeftMenu
+        menuIcon={<LogoutBlackIcon width={24} height={24} />}
+        menuName="로그아웃"
       />
       <div className="flex justify-center items-center absolute bottom-5 w-full">
         <img

@@ -187,11 +187,8 @@ const MedicineMemo: React.FC = () => {
               checkboxSelection={true}
               onUpdateCell={updatePrescribedMedicineRowById}
               onRowSelectionModelChange={setSelectedPrescribedMedicineRowIds}
-            />
-            <Button
-              _class="mt-2"
-              variant="secondary"
-              onClick={() => {
+              withAddButton
+              onClickAddButton={() => {
                 addPrescribedMedicineRow({
                   col1: "",
                   col2: "",
@@ -199,9 +196,8 @@ const MedicineMemo: React.FC = () => {
                   col4: "",
                   col5: null,
                 });
-              }}>
-              + 새 의약품 추가하기
-            </Button>
+              }}
+            />
           </div>
         </GrayContainer>
 
