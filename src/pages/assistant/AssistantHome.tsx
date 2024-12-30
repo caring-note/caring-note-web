@@ -45,9 +45,9 @@ const AssistantHome = () => {
         </div>
       </div>
       <div className="flex flex-row items-center justify-start w-full my-0 border-t-2 border-b-2 border-gray-200 h-14 pl-14 border-b-gray-300">
-        {tabTitle("기본 정보", "/assistant/basicInfo")}
-        {tabTitle("건강 정보", "/assistant/healthInfo")}
-        {tabTitle("생활 정보", "/assistant/lifeInfo")}
+        {tabTitle("기본 정보", "/assistant/view/basicInfo")}
+        {tabTitle("건강 정보", "/assistant/view/healthInfo")}
+        {tabTitle("생활 정보", "/assistant/view/lifeInfo")}
       </div>
       <Outlet />
     </div>
