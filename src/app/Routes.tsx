@@ -64,11 +64,11 @@ const Routes = () => {
     element: <AssistantRoot />,
     children: [
       {
-        path: "view",
+        path: "",
         element: <AssistantView />,
       },
       {
-        path: "*",
+        path: "view",
         element: <AssistantHome />,
         children: [
           { index: true, element: <AssistantBasicInfo /> },

@@ -45,7 +45,7 @@ const AssistantLifeInfo = () => {
   // 새로고침이 되었을 때도 active tab 을 잃지 않도록 컴포넌트 load 시 dispatch
   const dispatch = useAppDispatch();
   useEffect(() => {
-    dispatch(changeActiveTab("/assistant/lifeInfo")); // 해당 tab의 url
+    dispatch(changeActiveTab("/assistant/view/lifeInfo")); // 해당 tab의 url
   }, []);
   const [formData, setFormData] = useState({
     isSmoking: "흡연",

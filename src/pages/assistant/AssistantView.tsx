@@ -299,7 +299,7 @@ const AssistantView = () => {
                   : "bg-grayscale-30 text-grayscale-40",
               )}
               onClick={() =>
-                allChecked ? navigate("/assistant") : "disabled"
+                allChecked ? navigate("/assistant/view/basicInfo") : "disabled"
               }>
               확인
             </Button>
