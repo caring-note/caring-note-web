@@ -1,6 +1,5 @@
 import TableComponent from "@components/common/TableComponent";
 import { Button } from "@components/components/ui/button";
-import { Checkbox } from "@components/components/ui/checkbox";
 import {
   Dialog,
   DialogContent,
@@ -21,34 +20,13 @@ import AgreementDetailsDialog from "./AgreementDetailsDialog";
 import AgreementDetails2Dialog from "./AgreementDetails2Dialog";
 import AgreementDetails3Dialog from "./AgreementDetails3Dialog";
 import { useNavigate } from "react-router-dom";
-import clsx from "clsx";
+
 const AssistantView = () => {
   const [isOpen, setIsOpen] = useState(false);
   const [isDetailsDialogOpen, setIsDetailsDialogOpen] = useState(false);
   const [isDetails2DialogOpen, setIsDetails2DialogOpen] = useState(false);
   const [isDetails3DialogOpen, setIsDetails3DialogOpen] = useState(false);
   const navigate = useNavigate();
-  const [allChecked, setAllChecked] = useState(false);
-  const [terms, setTerms] = useState({
-    term1: false,
-    term2: false,
-    term3: false,
-  });
-
-  const handleAllChecked = (checked: boolean) => {
-    setAllChecked(checked);
-    setTerms({
-      term1: checked,
-      term2: checked,
-      term3: checked,
-    });
-  };
-
-  const handleIndividualCheck = (key: string, checked: boolean) => {
-    const updatedTerms = { ...terms, [key]: checked };
-    setTerms(updatedTerms);
-    setAllChecked(Object.values(updatedTerms).every((value) => value));
-  };
 
   const columns: GridColDef[] = [
     {
@@ -203,105 +181,63 @@ const AssistantView = () => {
       <Dialog open={isOpen} onOpenChange={handleOpen}>
         <DialogOverlay />
         <DialogContent className="w-[480px] h-[350px] flex flex-col justify-between">
-          <DialogHeader>
-            <DialogTitle>개인정보 수집 동의서를 작성해주세요.</DialogTitle>
+          <DialogHeader className="pt-2 border-none">
+            <DialogTitle className="text-2xl font-bold text-grayscale-100">
+              개인정보 수집 동의서를 작성해주세요.
+            </DialogTitle>
           </DialogHeader>
-          <div className="flex items-center p-5">
-            <Checkbox
-              type="button"
-              id="all-agree"
-              checked={allChecked}
-              onCheckedChange={(checked) => handleAllChecked(!!checked)}
-            />
-            <label htmlFor="all-agree" className="ml-2 text-gray-700">
-              전체 동의하기
-            </label>
-          </div>
 
-          <div className="p-5 mt-4 space-y-3 bg-grayscale-3">
-            <div className="flex items-center justify-between">
-              <div className="flex items-center">
-                <Checkbox
-                  id="term1"
-                  checked={terms.term1}
-                  onCheckedChange={(checked) =>
-                    handleIndividualCheck("term1", !!checked)
-                  }
-                  className="w-5 h-5 text-blue-600 border-gray-300 rounded focus:ring-blue-500"
-                />
-                <label htmlFor="term1" className="ml-2 text-gray-700">
-                  개인정보 수집 · 이용 내역 동의
-                </label>
-              </div>
+          <div className="p-5 space-y-3 bg-grayscale-3">
+            <div
+              className="flex items-center justify-between cursor-pointer"
+              onClick={() => {
+                setIsDetailsDialogOpen(true);
+                setIsOpen(false);
+              }}>
+              <h2 className="ml-2 text-grayscale-90">
+                개인정보 수집 · 이용 내역 동의
+              </h2>
               <img
                 src={arrowForwardIcon}
                 className="rotate-180 cursor-pointer"
-                onClick={() => {
-                  setIsDetailsDialogOpen(true);
-                  setIsOpen(false);
-                }}
               />
             </div>
-            <div className="flex items-center justify-between">
-              <div className="flex items-center">
-                <Checkbox
-                  id="term2"
-                  checked={terms.term2}
-                  onCheckedChange={(checked) =>
-                    handleIndividualCheck("term2", !!checked)
-                  }
-                  className="w-5 h-5 text-blue-600 border-gray-300 rounded focus:ring-blue-500"
-                />
-                <label htmlFor="term2" className="ml-2 text-gray-700">
-                  개인정보의 제 3자 제공 동의
-                </label>
-              </div>
+            <div
+              className="flex items-center justify-between cursor-pointer"
+              onClick={() => {
+                setIsDetails2DialogOpen(true);
+                setIsOpen(false);
+              }}>
+              <h2 className="ml-2 text-grayscale-90">
+                개인정보의 제 3자 제공 동의
+              </h2>
+
               <img
                 src={arrowForwardIcon}
                 className="rotate-180 cursor-pointer"
-                onClick={() => {
-                  setIsDetails2DialogOpen(true);
-                  setIsOpen(false);
-                }}
               />
             </div>
-            <div className="flex items-center justify-between">
-              <div className="flex items-center">
-                <Checkbox
-                  id="term3"
-                  checked={terms.term3}
-                  onCheckedChange={(checked) =>
-                    handleIndividualCheck("term3", !!checked)
-                  }
-                  className="w-5 h-5 text-blue-600 border-gray-300 rounded focus:ring-blue-500"
-                />
-                <label htmlFor="term3" className="ml-2 text-gray-700">
-                  폐의약품 수거에 관한 동의
-                </label>
-              </div>
+            <div
+              className="flex items-center justify-between cursor-pointer"
+              onClick={() => {
+                setIsDetails3DialogOpen(true);
+                setIsOpen(false);
+              }}>
+              <h2 className="ml-2 text-grayscale-90">
+                폐의약품 수거에 관한 동의
+              </h2>
               <img
                 src={arrowForwardIcon}
                 className="rotate-180 cursor-pointer"
-                onClick={() => {
-                  setIsDetails3DialogOpen(true);
-                  setIsOpen(false);
-                }}
               />
             </div>
           </div>
 
           <DialogFooter className="justify-center">
             <Button
-              className={clsx(
-                "w-full",
-                allChecked
-                  ? "bg-primary-50 text-white"
-                  : "bg-grayscale-30 text-grayscale-40",
-              )}
-              onClick={() =>
-                allChecked ? navigate("/assistant/view/basicInfo") : "disabled"
-              }>
-              확인
+              className={"w-full bg-primary-50 text-white h-12"}
+              onClick={() => navigate("/assistant/view/basicInfo")}>
+              전부 동의하고 시작하기
             </Button>
           </DialogFooter>
         </DialogContent>
@@ -311,19 +247,16 @@ const AssistantView = () => {
         isDetailOpen={isDetailsDialogOpen}
         mainOpen={() => setIsOpen(true)}
         onClose={() => setIsDetailsDialogOpen(false)}
-        onAgree={handleIndividualCheck}
       />
       <AgreementDetails2Dialog
         isDetailOpen={isDetails2DialogOpen}
         mainOpen={() => setIsOpen(true)}
         onClose={() => setIsDetails2DialogOpen(false)}
-        onAgree={handleIndividualCheck}
       />
       <AgreementDetails3Dialog
         isDetailOpen={isDetails3DialogOpen}
         mainOpen={() => setIsOpen(true)}
         onClose={() => setIsDetails3DialogOpen(false)}
-        onAgree={handleIndividualCheck}
       />
     </div>
   );

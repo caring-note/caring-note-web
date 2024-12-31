@@ -6,6 +6,9 @@ import clsx from "clsx";
 
 const Dialog = DialogPrimitive.Root;
 
+const DialogPortal = DialogPrimitive.Portal;
+
+// DialogTrigger 컴포넌트
 const DialogTrigger = React.forwardRef<
   React.ElementRef<typeof DialogPrimitive.Trigger>,
   React.ComponentPropsWithoutRef<typeof DialogPrimitive.Trigger>
@@ -21,8 +24,7 @@ const DialogTrigger = React.forwardRef<
 ));
 DialogTrigger.displayName = DialogPrimitive.Trigger.displayName;
 
-const DialogPortal = DialogPrimitive.Portal;
-
+// DialogOverlay 컴포넌트
 const DialogOverlay = React.forwardRef<
   React.ElementRef<typeof DialogPrimitive.Overlay>,
   React.ComponentPropsWithoutRef<typeof DialogPrimitive.Overlay>
@@ -35,6 +37,7 @@ const DialogOverlay = React.forwardRef<
 ));
 DialogOverlay.displayName = DialogPrimitive.Overlay.displayName;
 
+// DialogClose 컴포넌트
 const DialogClose = React.forwardRef<
   React.ElementRef<typeof DialogPrimitive.Close>,
   React.ComponentPropsWithoutRef<typeof DialogPrimitive.Close>
@@ -50,6 +53,7 @@ const DialogClose = React.forwardRef<
 ));
 DialogClose.displayName = DialogPrimitive.Close.displayName;
 
+// DialogContent 컴포넌트
 const DialogContent = React.forwardRef<
   React.ElementRef<typeof DialogPrimitive.Content>,
   React.ComponentPropsWithoutRef<typeof DialogPrimitive.Content>
@@ -70,6 +74,7 @@ const DialogContent = React.forwardRef<
 ));
 DialogContent.displayName = DialogPrimitive.Content.displayName;
 
+// DialogHeader 컴포넌트
 const DialogHeader = ({
   className,
   children,
@@ -82,33 +87,34 @@ const DialogHeader = ({
     )}
     {...props}>
     {children}
-    <DialogPrimitive.Close className="absolute w-5 h-5 right-5 top-3">
-      <CloseBlackIcon width={24} height={24} />
-    </DialogPrimitive.Close>
   </div>
 );
 DialogHeader.displayName = "DialogHeader";
 
-const DialogFooter = ({
-  className,
-  ...props
-}: React.HTMLAttributes<HTMLDivElement>) => (
-  <div className={cn("flex justify-end space-x-2", className)} {...props} />
-);
-DialogFooter.displayName = "DialogFooter";
+// DialogCloseButton 컴포넌트
+const DialogCloseButton: React.FC = () => {
+  return (
+    <DialogPrimitive.Close className="absolute w-5 h-5 pb-2 right-5">
+      <CloseBlackIcon width={24} height={24} />
+    </DialogPrimitive.Close>
+  );
+};
+DialogCloseButton.displayName = "DialogCloseButton";
 
+// DialogTitle 컴포넌트
 const DialogTitle = React.forwardRef<
   React.ElementRef<typeof DialogPrimitive.Title>,
   React.ComponentPropsWithoutRef<typeof DialogPrimitive.Title>
 >(({ className, ...props }, ref) => (
   <DialogPrimitive.Title
     ref={ref}
-    className={cn("text-lg pb-3 font-bold text-grayscale-90 font", className)}
+    className={cn("text-lg pb-2 font-bold text-grayscale-90", className)}
     {...props}
   />
 ));
 DialogTitle.displayName = DialogPrimitive.Title.displayName;
 
+// DialogDescription 컴포넌트
 const DialogDescription = React.forwardRef<
   React.ElementRef<typeof DialogPrimitive.Description>,
   React.ComponentPropsWithoutRef<typeof DialogPrimitive.Description>
@@ -120,6 +126,15 @@ const DialogDescription = React.forwardRef<
   />
 ));
 DialogDescription.displayName = DialogPrimitive.Description.displayName;
+
+// DialogFooter 컴포넌트
+const DialogFooter = ({
+  className,
+  ...props
+}: React.HTMLAttributes<HTMLDivElement>) => (
+  <div className={cn("flex justify-end space-x-2", className)} {...props} />
+);
+DialogFooter.displayName = "DialogFooter";
 
 export {
   Dialog,

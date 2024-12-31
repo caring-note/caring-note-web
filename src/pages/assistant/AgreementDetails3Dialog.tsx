@@ -1,27 +1,22 @@
 import {
   Dialog,
   DialogContent,
-  DialogDescription,
-  DialogFooter,
   DialogHeader,
   DialogOverlay,
   DialogTitle,
 } from "@components/components/ui/dialog";
-import { Button } from "@components/components/ui/button";
 import arrowForwardIcon from "@icon/24/arrowback.outlined.black.svg";
 
 type AgreementDetailDialogTypes = {
   isDetailOpen: boolean;
   mainOpen: () => void;
   onClose: () => void;
-  onAgree: (key: string, checked: boolean) => void;
 };
 
 const AgreementDetails3Dialog = ({
   isDetailOpen,
   mainOpen,
   onClose,
-  onAgree,
 }: AgreementDetailDialogTypes) => {
   return (
     <Dialog open={isDetailOpen} onOpenChange={onClose}>
@@ -45,26 +40,6 @@ const AgreementDetails3Dialog = ({
             동의하십니까?
           </p>
         </div>
-
-        <DialogFooter className="justify-around w-full">
-          <Button
-            variant="secondary"
-            onClick={() => {
-              mainOpen();
-              onClose();
-              onAgree("term3", false);
-            }}>
-            동의하지 않습니다
-          </Button>
-          <Button
-            onClick={() => {
-              mainOpen();
-              onClose();
-              onAgree("term3", true);
-            }}>
-            동의합니다
-          </Button>
-        </DialogFooter>
       </DialogContent>
     </Dialog>
   );
