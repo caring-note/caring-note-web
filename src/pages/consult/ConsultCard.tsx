@@ -18,13 +18,13 @@ const ConsultCard: React.FC = () => {
       counselSessionId,
     );
     console.log(response);
-    return response.data.data;
+    return response.data;
   };
 
   // tanstack/react-query 를 사용하여 데이터 fetch
   const queryClient = useQueryClient();
   // 상담카드 API는 JSON Object 덩어리로 내려오므로 any 로 강제 type 해야 에러가 나지 않는다
-  const consultCardQuery: any = useQuery({
+  const consultCardQuery = useQuery({
     queryKey: ["consultCard"],
     queryFn: selectCounselCard,
   });
@@ -85,26 +85,26 @@ const ConsultCard: React.FC = () => {
             <CardContainer
               title="상담 목적 및 특이사항"
               informationName="baseInformation"
-              itemName="counselPurposeAndMomo">
+              itemName="counselPurposeAndNote">
               <CardContent
                 item="상담 목적"
                 value={
                   consultCardQuery.data?.data?.baseInformation
-                    ?.counselPurposeAndMomo?.counselPurpose || ""
+                    ?.counselPurposeAndNote?.counselPurpose || ""
                 }
               />
               <CardContent
                 item="특이사항"
                 value={
                   consultCardQuery.data?.data?.baseInformation
-                    ?.counselPurposeAndMomo?.SignificantNote || ""
+                    ?.counselPurposeAndNote?.SignificantNote || ""
                 }
               />
               <CardContent
                 item="의약품"
                 value={
                   consultCardQuery.data?.data?.baseInformation
-                    ?.counselPurposeAndMomo?.MedicationNote || ""
+                    ?.counselPurposeAndNote?.MedicationNote || ""
                 }
               />
             </CardContainer>
@@ -372,7 +372,7 @@ const ConsultCard: React.FC = () => {
                   <CardContent
                     item="시력"
                     value={
-                      consultCardQuery.data?.data?.independentLifeInformation?.Communication?.visibles?.join(
+                      consultCardQuery.data?.data?.independentLifeInformation?.communication?.sights?.join(
                         ", ",
                       ) || "정보 없음"
                     }
@@ -380,7 +380,7 @@ const ConsultCard: React.FC = () => {
                   <CardContent
                     item="청력"
                     value={
-                      consultCardQuery.data?.data?.independentLifeInformation?.Communication?.auditables?.join(
+                      consultCardQuery.data?.data?.independentLifeInformation?.communication?.hearings?.join(
                         ", ",
                       ) || "정보 없음"
                     }
@@ -388,7 +388,7 @@ const ConsultCard: React.FC = () => {
                   <CardContent
                     item="언어 소통"
                     value={
-                      consultCardQuery.data?.data?.independentLifeInformation?.Communication?.Communications?.join(
+                      consultCardQuery.data?.data?.independentLifeInformation?.communication?.communications?.join(
                         ", ",
                       ) || "정보 없음"
                     }
@@ -396,7 +396,7 @@ const ConsultCard: React.FC = () => {
                   <CardContent
                     item="한글 사용"
                     value={
-                      consultCardQuery.data?.data?.independentLifeInformation?.Communication?.Usingkoreans?.join(
+                      consultCardQuery.data?.data?.independentLifeInformation?.communication?.usingKoreans?.join(
                         ", ",
                       ) || "정보 없음"
                     }
