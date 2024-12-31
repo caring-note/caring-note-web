@@ -169,13 +169,7 @@ const MedicineMemo: React.FC = () => {
                 }
                 _class=""
                 disabled={selectedPrescribedMedicineRowIds.length == 0}>
-                삭제하기
-              </Button>
-              <Button
-                variant="primary"
-                onClick={handleClickSavePrescribedMedicine}
-                _class="">
-                저장하기
+                선택항목 삭제
               </Button>
             </div>
           }>
