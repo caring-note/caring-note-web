@@ -59,28 +59,28 @@ export interface AddCounselCardReq {
   cardRecordStatus?: AddCounselCardReqCardRecordStatusEnum;
   /**
    *
-   * @type {object}
+   * @type {BaseInformationDTO}
    * @memberof AddCounselCardReq
    */
-  baseInformation?: object;
+  baseInformation?: BaseInformationDTO;
   /**
    *
-   * @type {object}
+   * @type {HealthInformationDTO}
    * @memberof AddCounselCardReq
    */
-  healthInformation?: object;
+  healthInformation?: HealthInformationDTO;
   /**
    *
-   * @type {object}
+   * @type {LivingInformationDTO}
    * @memberof AddCounselCardReq
    */
-  livingInformation?: object;
+  livingInformation?: LivingInformationDTO;
   /**
    *
-   * @type {object}
+   * @type {IndependentLifeInformationDTO}
    * @memberof AddCounselCardReq
    */
-  independentLifeInformation?: object;
+  independentLifeInformation?: IndependentLifeInformationDTO;
 }
 
 export const AddCounselCardReqCardRecordStatusEnum = {
@@ -339,6 +339,87 @@ export const AddUserReqRoleEnum = {
 export type AddUserReqRoleEnum =
   (typeof AddUserReqRoleEnum)[keyof typeof AddUserReqRoleEnum];
 
+/**
+ *
+ * @export
+ * @interface AllergyDTO
+ */
+export interface AllergyDTO {
+  /**
+   *
+   * @type {boolean}
+   * @memberof AllergyDTO
+   */
+  isAllergy?: boolean;
+  /**
+   *
+   * @type {string}
+   * @memberof AllergyDTO
+   */
+  allergyNote?: string;
+}
+/**
+ *
+ * @export
+ * @interface BaseInfoDTO
+ */
+export interface BaseInfoDTO {
+  /**
+   *
+   * @type {string}
+   * @memberof BaseInfoDTO
+   */
+  counseleeId?: string;
+  /**
+   *
+   * @type {string}
+   * @memberof BaseInfoDTO
+   */
+  name?: string;
+  /**
+   *
+   * @type {string}
+   * @memberof BaseInfoDTO
+   */
+  birthDate?: string;
+  /**
+   *
+   * @type {string}
+   * @memberof BaseInfoDTO
+   */
+  counselSessionOrder?: string;
+  /**
+   *
+   * @type {string}
+   * @memberof BaseInfoDTO
+   */
+  lastCounselDate?: string;
+}
+/**
+ *
+ * @export
+ * @interface BaseInformationDTO
+ */
+export interface BaseInformationDTO {
+  /**
+   *
+   * @type {string}
+   * @memberof BaseInformationDTO
+   */
+  version?: string;
+  /**
+   *
+   * @type {BaseInfoDTO}
+   * @memberof BaseInformationDTO
+   */
+  baseInfo?: BaseInfoDTO;
+  /**
+   *
+   * @type {CounselPurposeAndNoteDTO}
+   * @memberof BaseInformationDTO
+   */
+  counselPurposeAndNote?: CounselPurposeAndNoteDTO;
+}
 /**
  *
  * @export
@@ -679,6 +760,62 @@ export interface CommonResUpdateStatusInCounselSessionRes {
 /**
  *
  * @export
+ * @interface CommunicationDTO
+ */
+export interface CommunicationDTO {
+  /**
+   *
+   * @type {Array<string>}
+   * @memberof CommunicationDTO
+   */
+  sights?: Array<string>;
+  /**
+   *
+   * @type {Array<string>}
+   * @memberof CommunicationDTO
+   */
+  hearings?: Array<string>;
+  /**
+   *
+   * @type {Array<string>}
+   * @memberof CommunicationDTO
+   */
+  communications?: Array<string>;
+  /**
+   *
+   * @type {Array<string>}
+   * @memberof CommunicationDTO
+   */
+  usingKoreans?: Array<string>;
+}
+/**
+ *
+ * @export
+ * @interface CounselPurposeAndNoteDTO
+ */
+export interface CounselPurposeAndNoteDTO {
+  /**
+   *
+   * @type {string}
+   * @memberof CounselPurposeAndNoteDTO
+   */
+  counselPurpose?: string;
+  /**
+   *
+   * @type {string}
+   * @memberof CounselPurposeAndNoteDTO
+   */
+  SignificantNote?: string;
+  /**
+   *
+   * @type {string}
+   * @memberof CounselPurposeAndNoteDTO
+   */
+  MedicationNote?: string;
+}
+/**
+ *
+ * @export
  * @interface DeleteCounselCardReq
  */
 export interface DeleteCounselCardReq {
@@ -783,6 +920,50 @@ export interface DeleteMedicationCounselRes {
 /**
  *
  * @export
+ * @interface DiseaseInfoDTO
+ */
+export interface DiseaseInfoDTO {
+  /**
+   *
+   * @type {Array<string>}
+   * @memberof DiseaseInfoDTO
+   */
+  diseases?: Array<string>;
+  /**
+   *
+   * @type {string}
+   * @memberof DiseaseInfoDTO
+   */
+  historyNote?: string;
+  /**
+   *
+   * @type {string}
+   * @memberof DiseaseInfoDTO
+   */
+  mainInconvenienceNote?: string;
+}
+/**
+ *
+ * @export
+ * @interface DrinkingDTO
+ */
+export interface DrinkingDTO {
+  /**
+   *
+   * @type {boolean}
+   * @memberof DrinkingDTO
+   */
+  isDrinking?: boolean;
+  /**
+   *
+   * @type {string}
+   * @memberof DrinkingDTO
+   */
+  drinkingAmount?: string;
+}
+/**
+ *
+ * @export
  * @interface ErrorRes
  */
 export interface ErrorRes {
@@ -792,6 +973,149 @@ export interface ErrorRes {
    * @memberof ErrorRes
    */
   message?: string;
+}
+/**
+ *
+ * @export
+ * @interface EvacuationDTO
+ */
+export interface EvacuationDTO {
+  /**
+   *
+   * @type {Array<string>}
+   * @memberof EvacuationDTO
+   */
+  evacuationMethods?: Array<string>;
+  /**
+   *
+   * @type {string}
+   * @memberof EvacuationDTO
+   */
+  etcNote?: string;
+}
+/**
+ *
+ * @export
+ * @interface ExerciseDTO
+ */
+export interface ExerciseDTO {
+  /**
+   *
+   * @type {string}
+   * @memberof ExerciseDTO
+   */
+  exercisePattern?: string;
+  /**
+   *
+   * @type {string}
+   * @memberof ExerciseDTO
+   */
+  exerciseNote?: string;
+}
+/**
+ *
+ * @export
+ * @interface HealthInformationDTO
+ */
+export interface HealthInformationDTO {
+  /**
+   *
+   * @type {string}
+   * @memberof HealthInformationDTO
+   */
+  version?: string;
+  /**
+   *
+   * @type {DiseaseInfoDTO}
+   * @memberof HealthInformationDTO
+   */
+  diseaseInfo?: DiseaseInfoDTO;
+  /**
+   *
+   * @type {AllergyDTO}
+   * @memberof HealthInformationDTO
+   */
+  allergy?: AllergyDTO;
+  /**
+   *
+   * @type {MedicationSideEffectDTO}
+   * @memberof HealthInformationDTO
+   */
+  medicationSideEffect?: MedicationSideEffectDTO;
+}
+/**
+ *
+ * @export
+ * @interface IndependentLifeInformationDTO
+ */
+export interface IndependentLifeInformationDTO {
+  /**
+   *
+   * @type {string}
+   * @memberof IndependentLifeInformationDTO
+   */
+  version?: string;
+  /**
+   *
+   * @type {WalkingDTO}
+   * @memberof IndependentLifeInformationDTO
+   */
+  walking?: WalkingDTO;
+  /**
+   *
+   * @type {EvacuationDTO}
+   * @memberof IndependentLifeInformationDTO
+   */
+  evacuation?: EvacuationDTO;
+  /**
+   *
+   * @type {CommunicationDTO}
+   * @memberof IndependentLifeInformationDTO
+   */
+  communication?: CommunicationDTO;
+}
+/**
+ *
+ * @export
+ * @interface LivingInformationDTO
+ */
+export interface LivingInformationDTO {
+  /**
+   *
+   * @type {string}
+   * @memberof LivingInformationDTO
+   */
+  version?: string;
+  /**
+   *
+   * @type {SmokingDTO}
+   * @memberof LivingInformationDTO
+   */
+  smoking?: SmokingDTO;
+  /**
+   *
+   * @type {DrinkingDTO}
+   * @memberof LivingInformationDTO
+   */
+  drinking?: DrinkingDTO;
+  /**
+   *
+   * @type {NutritionDTO}
+   * @memberof LivingInformationDTO
+   */
+  nutrition?: NutritionDTO;
+  /**
+   *
+   * @type {ExerciseDTO}
+   * @memberof LivingInformationDTO
+   */
+  exercise?: ExerciseDTO;
+  /**
+   *
+   * @type {MedicationManagementDTO}
+   * @memberof LivingInformationDTO
+   */
+  medicationManagement?: MedicationManagementDTO;
 }
 /**
  *
@@ -834,6 +1158,75 @@ export interface LoginReq {
 /**
  *
  * @export
+ * @interface MedicationManagementDTO
+ */
+export interface MedicationManagementDTO {
+  /**
+   *
+   * @type {boolean}
+   * @memberof MedicationManagementDTO
+   */
+  isAlone?: boolean;
+  /**
+   *
+   * @type {string}
+   * @memberof MedicationManagementDTO
+   */
+  houseMateNote?: string;
+  /**
+   *
+   * @type {Array<string>}
+   * @memberof MedicationManagementDTO
+   */
+  medicationAssistants?: Array<string>;
+}
+/**
+ *
+ * @export
+ * @interface MedicationSideEffectDTO
+ */
+export interface MedicationSideEffectDTO {
+  /**
+   *
+   * @type {boolean}
+   * @memberof MedicationSideEffectDTO
+   */
+  isSideEffect?: boolean;
+  /**
+   *
+   * @type {string}
+   * @memberof MedicationSideEffectDTO
+   */
+  suspectedMedicationNote?: string;
+  /**
+   *
+   * @type {string}
+   * @memberof MedicationSideEffectDTO
+   */
+  symptomsNote?: string;
+}
+/**
+ *
+ * @export
+ * @interface NutritionDTO
+ */
+export interface NutritionDTO {
+  /**
+   *
+   * @type {string}
+   * @memberof NutritionDTO
+   */
+  mealPattern?: string;
+  /**
+   *
+   * @type {string}
+   * @memberof NutritionDTO
+   */
+  nutritionNote?: string;
+}
+/**
+ *
+ * @export
  * @interface SearchMedicationByKeywordRes
  */
 export interface SearchMedicationByKeywordRes {
@@ -870,28 +1263,28 @@ export interface SelectCounselCardRes {
   counselCardId?: string;
   /**
    *
-   * @type {object}
+   * @type {BaseInformationDTO}
    * @memberof SelectCounselCardRes
    */
-  baseInformation?: object;
+  baseInformation?: BaseInformationDTO;
   /**
    *
-   * @type {object}
+   * @type {HealthInformationDTO}
    * @memberof SelectCounselCardRes
    */
-  healthInformation?: object;
+  healthInformation?: HealthInformationDTO;
   /**
    *
-   * @type {object}
+   * @type {LivingInformationDTO}
    * @memberof SelectCounselCardRes
    */
-  livingInformation?: object;
+  livingInformation?: LivingInformationDTO;
   /**
    *
-   * @type {object}
+   * @type {IndependentLifeInformationDTO}
    * @memberof SelectCounselCardRes
    */
-  independentLifeInformation?: object;
+  independentLifeInformation?: IndependentLifeInformationDTO;
   /**
    *
    * @type {string}
@@ -1237,28 +1630,28 @@ export type SelectMedicationCounselResCounselNeedStatusEnum =
 export interface SelectPreviousCounselCardRes {
   /**
    *
-   * @type {object}
+   * @type {BaseInformationDTO}
    * @memberof SelectPreviousCounselCardRes
    */
-  baseInformation?: object;
+  baseInformation?: BaseInformationDTO;
   /**
    *
-   * @type {object}
+   * @type {HealthInformationDTO}
    * @memberof SelectPreviousCounselCardRes
    */
-  healthInformation?: object;
+  healthInformation?: HealthInformationDTO;
   /**
    *
-   * @type {object}
+   * @type {LivingInformationDTO}
    * @memberof SelectPreviousCounselCardRes
    */
-  livingInformation?: object;
+  livingInformation?: LivingInformationDTO;
   /**
    *
-   * @type {object}
+   * @type {IndependentLifeInformationDTO}
    * @memberof SelectPreviousCounselCardRes
    */
-  independentLifeInformation?: object;
+  independentLifeInformation?: IndependentLifeInformationDTO;
 }
 /**
  *
@@ -1344,6 +1737,31 @@ export interface SelectPreviousMedicationCounselRes {
 /**
  *
  * @export
+ * @interface SmokingDTO
+ */
+export interface SmokingDTO {
+  /**
+   *
+   * @type {boolean}
+   * @memberof SmokingDTO
+   */
+  isSmoking?: boolean;
+  /**
+   *
+   * @type {string}
+   * @memberof SmokingDTO
+   */
+  smokingPeriodNote?: string;
+  /**
+   *
+   * @type {string}
+   * @memberof SmokingDTO
+   */
+  smokingAmount?: string;
+}
+/**
+ *
+ * @export
  * @interface UpdateCounselCardReq
  */
 export interface UpdateCounselCardReq {
@@ -1355,28 +1773,28 @@ export interface UpdateCounselCardReq {
   counselCardId: string;
   /**
    *
-   * @type {object}
+   * @type {BaseInformationDTO}
    * @memberof UpdateCounselCardReq
    */
-  baseInformation?: object;
+  baseInformation?: BaseInformationDTO;
   /**
    *
-   * @type {object}
+   * @type {HealthInformationDTO}
    * @memberof UpdateCounselCardReq
    */
-  healthInformation?: object;
+  healthInformation?: HealthInformationDTO;
   /**
    *
-   * @type {object}
+   * @type {LivingInformationDTO}
    * @memberof UpdateCounselCardReq
    */
-  livingInformation?: object;
+  livingInformation?: LivingInformationDTO;
   /**
    *
-   * @type {object}
+   * @type {IndependentLifeInformationDTO}
    * @memberof UpdateCounselCardReq
    */
-  independentLifeInformation?: object;
+  independentLifeInformation?: IndependentLifeInformationDTO;
   /**
    * 상담카드기록상태(RECORDING, RECORDED
    * @type {string}
@@ -1627,6 +2045,31 @@ export interface UpdateStatusInCounselSessionRes {
    * @memberof UpdateStatusInCounselSessionRes
    */
   updatedCounselSessionId?: string;
+}
+/**
+ *
+ * @export
+ * @interface WalkingDTO
+ */
+export interface WalkingDTO {
+  /**
+   *
+   * @type {Array<string>}
+   * @memberof WalkingDTO
+   */
+  walkingMethods?: Array<string>;
+  /**
+   *
+   * @type {Array<string>}
+   * @memberof WalkingDTO
+   */
+  walkingEquipments?: Array<string>;
+  /**
+   *
+   * @type {string}
+   * @memberof WalkingDTO
+   */
+  etcNote?: string;
 }
 
 /**
