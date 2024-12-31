@@ -195,6 +195,7 @@ const MedicineMemo: React.FC = () => {
           </div>
         </GrayContainer>
 
+        {/* TODO : 처방 의약품 테이블 확정 후 수정사항 반영 */}
         <GrayContainer
           title="일반 의약품"
           subTitle="가정 내 보관중인 모든 식품"
