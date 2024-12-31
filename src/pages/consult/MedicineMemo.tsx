@@ -73,8 +73,8 @@ const MedicineMemo: React.FC = () => {
           params.value || <span className="text-gray-400 italic">선택</span>
         );
       },
-      headerClassName: "!pl-6",
-      cellClassName: "!pl-6",
+      // headerClassName: "!pl-6",
+      // cellClassName: "!pl-6",
     },
     {
       field: "col2",

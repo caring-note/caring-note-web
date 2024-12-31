@@ -1,3 +1,4 @@
+import PlusBlueIcon from "@icon/24/add.outlined.black.svg?react"; // TODO : Figma에 Blue 아이콘 추가되면 해당 파일로 교체 필요
 import {
   DataGrid,
   GridColDef,
@@ -5,9 +6,8 @@ import {
   GridRowSelectionModel,
   GridRowsProp,
 } from "@mui/x-data-grid";
-import React from "react";
-import PlusBlueIcon from "@icon/24/add.outlined.black.svg?react"; // TODO : Figma에 Blue 아이콘 추가되면 해당 파일로 교체 필요
 import classNames from "classnames";
+import React from "react";
 
 type TableComponentProps = {
   tableKey: string;
