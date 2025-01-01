@@ -48,6 +48,7 @@ const AssistantHome = () => {
         {tabTitle("기본 정보", "/assistant/view/basicInfo")}
         {tabTitle("건강 정보", "/assistant/view/healthInfo")}
         {tabTitle("생활 정보", "/assistant/view/lifeInfo")}
+        {tabTitle("자립생활 역량", "/assistant/view/IndependentInfo")}
       </div>
       <Outlet />
     </div>
