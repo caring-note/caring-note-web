@@ -14,6 +14,7 @@ import AssistantBasicInfo from "../pages/assistant/AssistantBasicInfo";
 import AssistantHealthInfo from "../pages/assistant/AssistantHealthInfo";
 import AssistantLifeInfo from "../pages/assistant/AssistantLifeInfo";
 import AssistantView from "@pages/assistant/AssistantView";
+import AssistantIndependentInfo from "@pages/assistant/AssistantIndependentInfo";
 
 const Routes = () => {
   const rootRoutes: RouteObject = {
@@ -75,6 +76,7 @@ const Routes = () => {
           { path: "basicInfo", element: <AssistantBasicInfo /> },
           { path: "healthInfo", element: <AssistantHealthInfo /> },
           { path: "lifeInfo", element: <AssistantLifeInfo /> },
+          { path: "IndependentInfo", element: <AssistantIndependentInfo /> },
         ],
       },
     ],
