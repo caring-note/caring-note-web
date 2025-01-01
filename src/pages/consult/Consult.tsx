@@ -62,11 +62,18 @@ function Consult() {
   const previousCounselQuery = useQuery({
     queryKey: ["previousCounsel"],
     queryFn: selectPreviousCounselSessionList,
+    enabled: false,
   });
   const counseleeBaseInfoQuery = useQuery({
     queryKey: ["counseleeBaseInfo"],
     queryFn: selectCounseleeBaseInformation,
+    enabled: false,
   });
+
+  useEffect(() => {
+    previousCounselQuery.refetch();
+    counseleeBaseInfoQuery.refetch();
+  }, []);
 
   useEffect(() => {
     if (previousCounselQuery.data?.status !== 204) {

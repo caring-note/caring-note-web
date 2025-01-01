@@ -51,12 +51,12 @@ const ConsultCard: React.FC = () => {
     // originalData 가 비어있을 때만 setOriginalData 호출
     if (consultCardQuery.isSuccess && JSON.stringify(originalData) === "{}") {
       // Zustand 상태 update
-      setHttpStatus && setHttpStatus(consultCardQuery.data?.status || 999);
+      setHttpStatus && setHttpStatus(consultCardQuery.data?.status || 0);
       setOriginalData &&
         setOriginalData(consultCardQuery.data?.data?.data || {});
       setEditedData && setEditedData(consultCardQuery.data?.data?.data || {});
 
-      console.log("jw, originalData updated!!");
+      console.log("jw, consultCard:: originalData updated!!");
     }
   }, [originalData]);
 
