@@ -8,39 +8,57 @@ import CardContainer from "../../components/common/CardContainer";
 import TabContentContainer from "../../components/consult/TabContentContainer";
 import TabContentTitle from "../../components/consult/TabContentTitle";
 import { changeActiveTab } from "../../reducers/tabReducer";
+import useConsultCardStore from "@store/consultCardStore";
 
 const ConsultCard: React.FC = () => {
   const counselSessionId = "TEST-COUNSEL-SESSION-01"; // TODO : 다른 곳에서 전달받아야됨
+
   const counselCardControllerApi = new CounselCardControllerApi();
 
   const selectCounselCard = async () => {
     const response = await counselCardControllerApi.selectCounselCard(
       counselSessionId,
     );
-    console.log(response);
-    return response.data.data;
+    console.log("selectCounselCard", response);
+    return response;
   };
 
   // tanstack/react-query 를 사용하여 데이터 fetch
-  const queryClient = useQueryClient();
-  // 상담카드 API는 JSON Object 덩어리로 내려오므로 any 로 강제 type 해야 에러가 나지 않는다
-  const consultCardQuery: any = useQuery({
+  const consultCardQuery = useQuery({
     queryKey: ["consultCard"],
     queryFn: selectCounselCard,
+    enabled: false, // 자동 새로고침 block
   });
-  // 상담카드 수정 시 사용
-  const mutation = useMutation({
-    mutationFn: async () => {},
-    onSuccess: () => {
-      queryClient.invalidateQueries({ queryKey: ["consultCard"] });
-    },
-  });
+  // zustand 로 상태관리
+  const {
+    originalData,
+    editedData,
+    setOriginalData,
+    setEditedData,
+    setHttpStatus,
+  } = useConsultCardStore();
 
   // 새로고침이 되었을 때도 active tab 을 잃지 않도록 컴포넌트 load 시 dispatch
   const dispatch = useAppDispatch();
   useEffect(() => {
     dispatch(changeActiveTab("/consult/consultCard")); // 해당 tab의 url
   }, []);
+
+  useEffect(() => {
+    // API 호출
+    consultCardQuery.refetch().then(() => {
+      // originalData 가 비어있을 때만 setOriginalData 호출
+      if (consultCardQuery.isSuccess && JSON.stringify(originalData) === "{}") {
+        // Zustand 상태 update
+        setHttpStatus && setHttpStatus(consultCardQuery.data?.status || 0);
+        setOriginalData &&
+          setOriginalData(consultCardQuery.data?.data?.data || {});
+        setEditedData && setEditedData(consultCardQuery.data?.data?.data || {});
+
+        console.log("jw, consultCard:: originalData updated!!");
+      }
+    });
+  }, [originalData]);
 
   return (
     <>
@@ -61,22 +79,16 @@ const ConsultCard: React.FC = () => {
               itemName="baseInfo">
               <CardContent
                 item="성명"
-                value={
-                  consultCardQuery.data?.data?.baseInformation?.baseInfo
-                    ?.name || ""
-                }
+                value={originalData?.baseInformation?.baseInfo?.name || ""}
               />
               <CardContent
                 item="생년월일"
-                value={
-                  consultCardQuery.data?.data?.baseInformation?.baseInfo
-                    ?.birthDate || ""
-                }
+                value={originalData?.baseInformation?.baseInfo?.birthDate || ""}
               />
               <CardContent
                 item="의료보장형태"
                 value={
-                  consultCardQuery.data?.data?.baseInformation?.baseInfo
+                  originalData?.baseInformation?.baseInfo
                     ?.counselSessionOrder || ""
                 }
               />
@@ -85,26 +97,26 @@ const ConsultCard: React.FC = () => {
             <CardContainer
               title="상담 목적 및 특이사항"
               informationName="baseInformation"
-              itemName="counselPurposeAndMomo">
+              itemName="counselPurposeAndNote">
               <CardContent
                 item="상담 목적"
                 value={
-                  consultCardQuery.data?.data?.baseInformation
-                    ?.counselPurposeAndMomo?.counselPurpose || ""
+                  originalData?.baseInformation?.counselPurposeAndNote
+                    ?.counselPurpose || ""
                 }
               />
               <CardContent
                 item="특이사항"
                 value={
-                  consultCardQuery.data?.data?.baseInformation
-                    ?.counselPurposeAndMomo?.SignificantNote || ""
+                  originalData?.baseInformation?.counselPurposeAndNote
+                    ?.SignificantNote || ""
                 }
               />
               <CardContent
                 item="의약품"
                 value={
-                  consultCardQuery.data?.data?.baseInformation
-                    ?.counselPurposeAndMomo?.MedicationNote || ""
+                  originalData?.baseInformation?.counselPurposeAndNote
+                    ?.MedicationNote || ""
                 }
               />
             </CardContainer>
@@ -117,8 +129,7 @@ const ConsultCard: React.FC = () => {
               <CardContent
                 item="흡연 여부"
                 value={
-                  consultCardQuery.data?.data?.livingInformation?.smoking
-                    ?.isSmoking
+                  originalData?.livingInformation?.smoking?.isSmoking
                     ? "흡연"
                     : "비흡연"
                 }
@@ -126,15 +137,14 @@ const ConsultCard: React.FC = () => {
               <CardContent
                 item="총 흡연기간"
                 value={
-                  consultCardQuery.data?.data?.livingInformation?.smoking
-                    ?.smokingPeriodNote || ""
+                  originalData?.livingInformation?.smoking?.smokingPeriodNote ||
+                  ""
                 }
               />
               <CardContent
                 item="하루 평균 흡연량"
                 value={
-                  consultCardQuery.data?.data?.livingInformation?.smoking
-                    ?.smokingAmount || ""
+                  originalData?.livingInformation?.smoking?.smokingAmount || ""
                 }
               />
             </CardContainer>
@@ -146,8 +156,7 @@ const ConsultCard: React.FC = () => {
               <CardContent
                 item="음주 여부"
                 value={
-                  consultCardQuery.data?.data?.livingInformation?.drinking
-                    ?.isDrinking
+                  originalData?.livingInformation?.drinking?.isDrinking
                     ? "음주"
                     : "비음주"
                 }
@@ -155,8 +164,8 @@ const ConsultCard: React.FC = () => {
               <CardContent
                 item="음주 횟수"
                 value={
-                  consultCardQuery.data?.data?.livingInformation?.drinking
-                    ?.drinkingAmount || ""
+                  originalData?.livingInformation?.drinking?.drinkingAmount ||
+                  ""
                 }
               />
             </CardContainer>
@@ -168,15 +177,14 @@ const ConsultCard: React.FC = () => {
               <CardContent
                 item="하루 식사 패턴"
                 value={
-                  consultCardQuery.data?.data?.livingInformation?.nutrition
-                    ?.mealPattern || ""
+                  originalData?.livingInformation?.nutrition?.mealPattern || ""
                 }
               />
               <CardContent
                 item="식생활 특이사항"
                 value={
-                  consultCardQuery.data?.data?.livingInformation?.nutrition
-                    ?.nutritionNote || ""
+                  originalData?.livingInformation?.nutrition?.nutritionNote ||
+                  ""
                 }
               />
             </CardContainer>
@@ -188,15 +196,14 @@ const ConsultCard: React.FC = () => {
               <CardContent
                 item="주간 운동 패턴"
                 value={
-                  consultCardQuery.data?.data?.livingInformation?.exercise
-                    ?.exercisePattern || ""
+                  originalData?.livingInformation?.exercise?.exercisePattern ||
+                  ""
                 }
               />
               <CardContent
                 item="운동 종류"
                 value={
-                  consultCardQuery.data?.data?.livingInformation?.exercise
-                    ?.exerciseNote || ""
+                  originalData?.livingInformation?.exercise?.exerciseNote || ""
                 }
               />
             </CardContainer>
@@ -208,8 +215,7 @@ const ConsultCard: React.FC = () => {
               <CardContent
                 item="독거 여부"
                 value={
-                  consultCardQuery.data?.data?.livingInformation
-                    ?.medicationManagement?.isAlone
+                  originalData?.livingInformation?.medicationManagement?.isAlone
                     ? "혼자"
                     : "동거"
                 }
@@ -217,14 +223,14 @@ const ConsultCard: React.FC = () => {
               <CardContent
                 item="동거인 구성원"
                 value={
-                  consultCardQuery.data?.data?.livingInformation
-                    ?.medicationManagement?.houseMateNote || ""
+                  originalData?.livingInformation?.medicationManagement
+                    ?.houseMateNote || ""
                 }
               />
               <CardContent
                 item="복용자 및 투약 보조자"
                 value={
-                  consultCardQuery.data?.data?.livingInformation?.medicationManagement?.medicationAssistants?.join(
+                  originalData?.livingInformation?.medicationManagement?.medicationAssistants?.join(
                     ", ",
                   ) || ""
                 }
@@ -240,7 +246,7 @@ const ConsultCard: React.FC = () => {
               <CardContent
                 item="질병"
                 value={
-                  consultCardQuery.data?.data?.healthInformation?.diseaseInfo?.diseases?.join(
+                  originalData?.healthInformation?.diseaseInfo?.diseases?.join(
                     " · ",
                   ) || ""
                 }
@@ -248,14 +254,14 @@ const ConsultCard: React.FC = () => {
               <CardContent
                 item="질병 및 수술 이력"
                 value={
-                  consultCardQuery.data?.data?.healthInformation?.diseaseInfo
-                    ?.historyNote || ""
+                  originalData?.healthInformation?.diseaseInfo?.historyNote ||
+                  ""
                 }
               />
               <CardContent
                 item="주요 불편 증상"
                 value={
-                  consultCardQuery.data?.data?.healthInformation?.diseaseInfo
+                  originalData?.healthInformation?.diseaseInfo
                     ?.mainInconvenienceNote || ""
                 }
               />
@@ -268,8 +274,7 @@ const ConsultCard: React.FC = () => {
               <CardContent
                 item="알레르기 여부"
                 value={
-                  consultCardQuery.data?.data?.healthInformation?.allergy
-                    ?.isAllergy
+                  originalData?.healthInformation?.allergy?.isAllergy
                     ? "알레르기 있음"
                     : "없음"
                 }
@@ -277,8 +282,7 @@ const ConsultCard: React.FC = () => {
               <CardContent
                 item="의심 식품/약물"
                 value={
-                  consultCardQuery.data?.data?.healthInformation?.allergy
-                    ?.allergyNote || ""
+                  originalData?.healthInformation?.allergy?.allergyNote || ""
                 }
               />
             </CardContainer>
@@ -290,8 +294,8 @@ const ConsultCard: React.FC = () => {
               <CardContent
                 item="약물 부작용 여부"
                 value={
-                  consultCardQuery.data?.data?.healthInformation
-                    ?.medicationSideEffect?.isSideEffect
+                  originalData?.healthInformation?.medicationSideEffect
+                    ?.isSideEffect
                     ? "약물 부작용 있음"
                     : "없음"
                 }
@@ -299,20 +303,20 @@ const ConsultCard: React.FC = () => {
               <CardContent
                 item="부작용 의심 약물"
                 value={
-                  consultCardQuery.data?.data?.healthInformation
-                    ?.medicationSideEffect?.suspectedMedicationNote || ""
+                  originalData?.healthInformation?.medicationSideEffect
+                    ?.suspectedMedicationNote || ""
                 }
               />
               <CardContent
                 item="부작용 증상"
                 value={
-                  consultCardQuery.data?.data?.healthInformation
-                    ?.medicationSideEffect?.symptomsNote || ""
+                  originalData?.healthInformation?.medicationSideEffect
+                    ?.symptomsNote || ""
                 }
               />
             </CardContainer>
 
-            {consultCardQuery.data?.data?.independentLifeInformation && (
+            {originalData?.independentLifeInformation && (
               <>
                 <CardContainer
                   title="보행"
@@ -322,7 +326,7 @@ const ConsultCard: React.FC = () => {
                   <CardContent
                     item="보행 여부"
                     value={
-                      consultCardQuery.data?.data?.independentLifeInformation?.walking?.walkingMethods?.join(
+                      originalData?.independentLifeInformation?.walking?.walkingMethods?.join(
                         ", ",
                       ) || "정보 없음"
                     }
@@ -330,7 +334,7 @@ const ConsultCard: React.FC = () => {
                   <CardContent
                     item="이동 장비"
                     value={
-                      consultCardQuery.data?.data?.independentLifeInformation?.walking?.walkingEquipments?.join(
+                      originalData?.independentLifeInformation?.walking?.walkingEquipments?.join(
                         ", ",
                       ) || "정보 없음"
                     }
@@ -338,8 +342,8 @@ const ConsultCard: React.FC = () => {
                   <CardContent
                     item="기타"
                     value={
-                      consultCardQuery.data?.data?.independentLifeInformation
-                        ?.walking?.etcNote || "정보 없음"
+                      originalData?.independentLifeInformation?.walking
+                        ?.etcNote || "정보 없음"
                     }
                   />
                 </CardContainer>
@@ -351,7 +355,7 @@ const ConsultCard: React.FC = () => {
                   <CardContent
                     item="배변 처리 방식"
                     value={
-                      consultCardQuery.data?.data?.independentLifeInformation?.evacuation?.evacuationMethods?.join(
+                      originalData?.independentLifeInformation?.evacuation?.evacuationMethods?.join(
                         ", ",
                       ) || "정보 없음"
                     }
@@ -359,8 +363,8 @@ const ConsultCard: React.FC = () => {
                   <CardContent
                     item="기타"
                     value={
-                      consultCardQuery.data?.data?.independentLifeInformation
-                        ?.evacuation?.etcNote || "정보 없음"
+                      originalData?.independentLifeInformation?.evacuation
+                        ?.etcNote || "정보 없음"
                     }
                   />
                 </CardContainer>
@@ -372,7 +376,7 @@ const ConsultCard: React.FC = () => {
                   <CardContent
                     item="시력"
                     value={
-                      consultCardQuery.data?.data?.independentLifeInformation?.Communication?.visibles?.join(
+                      originalData?.independentLifeInformation?.communication?.sights?.join(
                         ", ",
                       ) || "정보 없음"
                     }
@@ -380,7 +384,7 @@ const ConsultCard: React.FC = () => {
                   <CardContent
                     item="청력"
                     value={
-                      consultCardQuery.data?.data?.independentLifeInformation?.Communication?.auditables?.join(
+                      originalData?.independentLifeInformation?.communication?.hearings?.join(
                         ", ",
                       ) || "정보 없음"
                     }
@@ -388,7 +392,7 @@ const ConsultCard: React.FC = () => {
                   <CardContent
                     item="언어 소통"
                     value={
-                      consultCardQuery.data?.data?.independentLifeInformation?.Communication?.Communications?.join(
+                      originalData?.independentLifeInformation?.communication?.communications?.join(
                         ", ",
                       ) || "정보 없음"
                     }
@@ -396,7 +400,7 @@ const ConsultCard: React.FC = () => {
                   <CardContent
                     item="한글 사용"
                     value={
-                      consultCardQuery.data?.data?.independentLifeInformation?.Communication?.Usingkoreans?.join(
+                      originalData?.independentLifeInformation?.communication?.usingKoreans?.join(
                         ", ",
                       ) || "정보 없음"
                     }

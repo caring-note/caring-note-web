@@ -20,6 +20,8 @@ const buttonVariants = cva(
         ghost:
           "hover:bg-neutral-100 hover:text-neutral-900 dark:hover:bg-neutral-800 dark:hover:text-neutral-50",
         link: "text-neutral-900 underline-offset-4 hover:underline dark:text-neutral-50",
+        secondaryError:
+          "bg-white border-error-50 border-[1.5px] text-error-50 hover:bg-error-10 active:bg-error-20 active:border-error-60 disabled:bg-grayscale-10 disabled:border-grayscale-40 disabled:text-grayscale-30 dark:bg-neutral-800 dark:text-neutral-50 dark:hover:bg-neutral-800/80",
       },
       size: {
         sm: "h-4 rouned-md px-2",

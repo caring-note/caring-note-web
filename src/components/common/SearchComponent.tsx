@@ -43,6 +43,7 @@ const SearchComponent: React.FC<SearchComponentProps> = ({
   );
 
   const handleSelect = (item: string) => {
+    setInputValue(item);
     if (onSelect) onSelect(item);
   };
 

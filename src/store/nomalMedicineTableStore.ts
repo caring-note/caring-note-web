@@ -19,7 +19,12 @@ const useNomalMedicineTableStore = create<MedicineTableState>((set) => ({
         ...state.normalMedicineRows,
         {
           ...row,
-          id: Math.max(0, ...state.normalMedicineRows.map((row) => Number(row.id))) + 1,
+          id:
+            row?.id ||
+            Math.max(
+              0,
+              ...state.normalMedicineRows.map((row) => Number(row.id)),
+            ) + 1,
         },
       ],
     })),

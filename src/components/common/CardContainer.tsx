@@ -1,12 +1,10 @@
-import classNames from "classnames";
-import { get } from "http";
-import React, { useEffect, useState } from "react";
-import ClockBlackIcon from "@icon/24/clock.outlined.black.svg?react";
-import ReactModal from "react-modal";
-import Badge from "./Badge";
-import HistoryList from "./HistoryList";
 import { CounselCardControllerApi } from "@api/api";
+import ClockBlackIcon from "@icon/24/clock.outlined.black.svg?react";
 import { useQuery, useQueryClient } from "@tanstack/react-query";
+import classNames from "classnames";
+import React, { useEffect, useState } from "react";
+import ReactModal from "react-modal";
+import HistoryList from "./HistoryList";
 
 interface CardContainerProps {
   className?: string;
@@ -22,9 +20,9 @@ const CardContainer = ({
   className,
   variant,
   title,
-  titleIcon = "clock", // 모든 cardContainer에 clock 아이콘이 추가되도록 기획이 수정됨
   informationName = "",
-  itemName = "",
+  itemName,
+  titleIcon = itemName !== "baseInfo" ? "clock" : undefined, // 모든 cardContainer에 clock 아이콘이 추가되도록 기획이 수정됨 -> 기본정보에선 없음..
   children,
 }: CardContainerProps) => {
   const counselSessionId = "TEST-COUNSEL-SESSION-01"; // TODO : 다른 곳에서 전달받아야됨
@@ -35,14 +33,14 @@ const CardContainer = ({
       await counselCardControllerApi.selectPreviousItemListByInformationNameAndItemName(
         counselSessionId,
         informationName,
-        itemName,
+        itemName || "",
       );
     console.log("상담카드 history", response.data);
     return response.data;
   };
 
   const queryClient = useQueryClient();
-  const previousHistoryItemQuery: any = useQuery({
+  const previousHistoryItemQuery = useQuery({
     queryKey: ["previousHistoryItemList"],
     queryFn: selectPreviousHistoryItemList,
   });
@@ -94,6 +92,108 @@ const CardContainer = ({
     setIsHistoryModalOpen(true);
   };
 
+  /**
+   * 으아....정녕 이 방법뿐이 없을까...
+   * 근데 방법이 없어...boolean 때문에...
+   */
+  const extractItemToString = (item: any): string[] => {
+    let itemDto: any;
+
+    switch (itemName) {
+      case "counselPurposeAndNote":
+        itemDto = JSON.parse(JSON.stringify(item));
+        return [
+          ...Object.values(itemDto).filter(
+            (value): value is string => typeof value === "string",
+          ),
+        ];
+      case "smoking":
+        itemDto = JSON.parse(JSON.stringify(item));
+        return [
+          itemDto?.isSmoking ? "흡연" : "비흡연",
+          ...Object.values(itemDto).filter(
+            (value): value is string => typeof value === "string",
+          ),
+        ];
+      case "drinking":
+        itemDto = JSON.parse(JSON.stringify(item));
+        return [
+          itemDto?.isDrinking ? "음주" : "음주안함",
+          ...Object.values(itemDto).filter(
+            (value): value is string => typeof value === "string",
+          ),
+        ];
+      case "nutrition":
+        itemDto = JSON.parse(JSON.stringify(item));
+        return [
+          ...Object.values(itemDto).filter(
+            (value): value is string => typeof value === "string",
+          ),
+        ];
+      case "exercise":
+        itemDto = JSON.parse(JSON.stringify(item));
+        return [
+          ...Object.values(itemDto).filter(
+            (value): value is string => typeof value === "string",
+          ),
+        ];
+      case "medicationManagement":
+        itemDto = JSON.parse(JSON.stringify(item));
+        return [
+          itemDto?.isAlone ? "독거" : "동거",
+          ...Object.values(itemDto).filter(
+            (value): value is string => typeof value === "string",
+          ),
+        ];
+      case "diseaseInfo":
+        itemDto = JSON.parse(JSON.stringify(item));
+        return [
+          ...Object.values(itemDto).filter(
+            (value): value is string => typeof value === "string",
+          ),
+        ];
+      case "allergy":
+        itemDto = JSON.parse(JSON.stringify(item));
+        return [
+          itemDto?.isAllergy ? "있음" : "없음",
+          ...Object.values(itemDto).filter(
+            (value): value is string => typeof value === "string",
+          ),
+        ];
+      case "medicationSideEffect":
+        itemDto = JSON.parse(JSON.stringify(item));
+        return [
+          itemDto?.isSideEffect ? "있음" : "없음",
+          ...Object.values(itemDto).filter(
+            (value): value is string => typeof value === "string",
+          ),
+        ];
+      case "walking":
+        itemDto = JSON.parse(JSON.stringify(item));
+        return [
+          ...Object.values(itemDto).filter(
+            (value): value is string => typeof value === "string",
+          ),
+        ];
+      case "evacuation":
+        itemDto = JSON.parse(JSON.stringify(item));
+        return [
+          ...Object.values(itemDto).filter(
+            (value): value is string => typeof value === "string",
+          ),
+        ];
+      case "Communication":
+        itemDto = JSON.parse(JSON.stringify(item));
+        return [
+          ...Object.values(itemDto).filter(
+            (value): value is string => typeof value === "string",
+          ),
+        ];
+      default:
+        return ["히스토리 불러오기 실패"];
+    }
+  };
+
   return (
     <>
       <div
@@ -125,16 +225,12 @@ const CardContainer = ({
           {previousHistoryItemQuery.isSuccess && (
             <div>
               {previousHistoryItemQuery.data.data?.map(
-                (item: any, index: number) => {
+                (item, index: number) => {
                   return (
                     <HistoryList
                       key={index}
-                      date={item?.counselDate}
-                      items={[
-                        JSON.stringify(item?.counselCardItem),
-                        "두번째",
-                        "세번째(API 수정예정)",
-                      ]}
+                      date={item?.counselDate || ""}
+                      items={extractItemToString(item.counselCardItem)}
                     />
                   );
                 },
