@@ -9,17 +9,15 @@ import {
   DialogTitle,
 } from "@components/components/ui/dialog";
 import { GridColDef } from "@mui/x-data-grid";
-import {
-  createDefaultDateColumn,
-  createDefaultTextColumn,
-} from "@utils/TableUtils";
-import moment from "moment";
+import { createDefaultTextColumn } from "@utils/TableUtils";
 import { useEffect, useState } from "react";
 import arrowForwardIcon from "@icon/24/arrowback.outlined.black.svg";
 import AgreementDetailsDialog from "./AgreementDetailsDialog";
 import AgreementDetails2Dialog from "./AgreementDetails2Dialog";
 import AgreementDetails3Dialog from "./AgreementDetails3Dialog";
 import { useNavigate } from "react-router-dom";
+import { useCounselSessionStore } from "@store/counselSessionStore";
+import { useSelectCounselSessionList } from "@hooks/useCounselSessionQuery";
 
 const AssistantView = () => {
   const [isOpen, setIsOpen] = useState(false);
@@ -28,31 +26,44 @@ const AssistantView = () => {
   const [isDetails3DialogOpen, setIsDetails3DialogOpen] = useState(false);
   const navigate = useNavigate();
 
+  const { params, setParams } = useCounselSessionStore();
+  const fetchParams = {
+    ...params,
+    baseDate: params?.baseDate || "2024-12-31",
+    size: params?.size || 10,
+  };
+
+  const {
+    data: items,
+    isLoading,
+    error,
+  } = useSelectCounselSessionList(fetchParams);
+
   const columns: GridColDef[] = [
     {
-      field: "col1",
-      headerName: "예약 시각",
-      flex: 1,
-      renderCell: (params) => {
-        const formattedDate = params.value
-          ? moment(params.value).format("HH:mm")
-          : null;
-        return (
-          formattedDate || <span className="italic text-gray-400">HH:mm</span>
-        );
-      },
+      ...createDefaultTextColumn({
+        field: "col1",
+        headerName: "예약 시각",
+      }),
     },
     {
-      ...createDefaultDateColumn({
+      ...createDefaultTextColumn({
         field: "col2",
         headerName: "상담 일자",
       }),
     },
     {
-      ...createDefaultTextColumn({
-        field: "col3",
-        headerName: "상담 진행",
-      }),
+      field: "col3",
+      headerName: "상담 진행",
+      flex: 1,
+      renderCell: (params) => {
+        // TODO : 할당 여부에 따라 버튼 diable 처리 (아래는 임시 코드)
+        return params.value === "SCHEDULED" ? (
+          <h2 className="text-black">예약</h2>
+        ) : (
+          <h2 className="text-primary-50">미예약</h2>
+        );
+      },
     },
     {
       ...createDefaultTextColumn({
@@ -66,7 +77,7 @@ const AssistantView = () => {
       flex: 1,
       renderCell: (params) => {
         // TODO : 할당 여부에 따라 버튼 diable 처리 (아래는 임시 코드)
-        return parseInt(params.id.toString()) % 2 === 1 ? (
+        return params.value !== "RECORDED" ? (
           <Button variant={"primary"} onClick={handleOpen}>
             카드 작성
           </Button>
@@ -79,29 +90,15 @@ const AssistantView = () => {
     },
   ];
 
-  const testRows = [
-    {
-      id: "1",
-      col1: new Date(),
-      col2: new Date(),
-      col3: "예정",
-      col4: "박진완",
-    },
-    {
-      id: "2",
-      col1: new Date(),
-      col2: new Date(),
-      col3: "예정",
-      col4: "김진영",
-    },
-    {
-      id: "3",
-      col1: new Date(),
-      col2: new Date(),
-      col3: "예정",
-      col4: "조영호",
-    },
-  ];
+  const testRows =
+    items?.map((item) => ({
+      id: item.counselSessionId,
+      col1: item.scheduledTime,
+      col2: item.scheduledDate,
+      col3: item.status,
+      col4: item.counselorName,
+      col5: item.cardRecordStatus,
+    })) || [];
 
   const handleOpen = () => {
     setIsOpen(!isOpen);
