@@ -1,6 +1,6 @@
-import check from "@icon/16/check.outline.blue.svg";
-import arrowDropDown from "@icon/arrowdropdown.svg";
-import arrowDropUp from "@icon/arrowdropup.svg";
+import check from "@/assets/icon/16/check.outline.blue.svg";
+import arrowDropDown from "@/assets/icon/arrowdropdown.svg";
+import arrowDropUp from "@/assets/icon/arrowdropup.svg";
 import React, { useState } from "react";
 interface DropdownProps {
   options: string[]; // 드롭다운 항목 배열

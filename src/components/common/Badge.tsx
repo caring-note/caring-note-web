@@ -1,8 +1,8 @@
-import React from "react";
+import BookmarkBlueIcon from "@/assets/icon/20/bookmark.blue.svg?react";
+import BookmarkRedIcon from "@/assets/icon/20/bookmark.red.svg?react";
+import BookmarkWhiteIcon from "@/assets/icon/20/bookmark.white.svg?react";
 import classNames from "classnames";
-import BookmarkBlueIcon from "@icon/20/bookmark.blue.svg?react";
-import BookmarkRedIcon from "@icon/20/bookmark.red.svg?react";
-import BookmarkWhiteIcon from "@icon/20/bookmark.white.svg?react";
+import React from "react";
 
 type BadgeVariant = "filled" | "tint" | "outline" | "ghost";
 type BadgeSize = "extra-large" | "large" | "medium" | "small";

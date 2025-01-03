@@ -1,9 +1,8 @@
 import {
-  AddAndUpdateMedicationRecordHistReq,
-  MedicationControllerApi,
-  MedicationRecordHistControllerApi,
-  SelectMedicationRecordHistResDivisionCodeEnum,
-  SelectMedicationRecordHistResUsageStatusCodeEnum,
+    AddAndUpdateMedicationRecordHistReq,
+    MedicationControllerApi,
+    MedicationRecordHistControllerApi,
+    SelectMedicationRecordHistResDivisionCodeEnum
 } from "@api/api";
 import SearchComponent from "@components/common/SearchComponent";
 import TableComponent from "@components/common/TableComponent";
@@ -15,16 +14,15 @@ import useNomalMedicineTableStore from "@store/nomalMedicineTableStore";
 import usePrescribedMedicineTableStore from "@store/prescribedMedicineTableStore";
 import { useQuery } from "@tanstack/react-query";
 import {
-  createDefaultDateColumn,
-  createDefaultNumberColumn,
-  createDefaultTextColumn,
+    createDefaultDateColumn,
+    createDefaultNumberColumn,
+    createDefaultTextColumn,
 } from "@utils/TableUtils";
 import { useEffect } from "react";
-import { useAppDispatch } from "../../../hooks";
+import { useAppDispatch } from "../../app/reduxHooks";
 import NulpeumImg from "../../assets/temp-nulpeum.png";
 import TabContentContainer from "../../components/consult/TabContentContainer";
 import GrayContainer from "./GrayContainer";
-import { add } from "date-fns";
 
 const MedicineMemo: React.FC = () => {
   const counselSessionId = "TEST-COUNSEL-SESSION-01"; // TODO : 다른 곳에서 전달받아야됨

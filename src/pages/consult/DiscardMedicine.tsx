@@ -1,17 +1,17 @@
+import InputContainer from "@components/common/InputContainer";
+import { Checkbox } from "@components/components/ui/checkbox";
+import { Label } from "@components/components/ui/label";
+import {
+    RadioGroup,
+    RadioGroupItem,
+} from "@components/components/ui/radio-group";
+import { Input } from "@mui/material";
 import { useEffect } from "react";
-import { useAppDispatch } from "../../../hooks";
+import { useAppDispatch } from "../../app/reduxHooks";
 import Button from "../../components/Button";
 import TabContentContainer from "../../components/consult/TabContentContainer";
 import TabContentTitle from "../../components/consult/TabContentTitle";
 import { changeActiveTab } from "../../reducers/tabReducer";
-import {
-  RadioGroup,
-  RadioGroupItem,
-} from "@components/components/ui/radio-group";
-import { Label } from "@components/components/ui/label";
-import { Checkbox } from "@components/components/ui/checkbox";
-import { Input } from "@mui/material";
-import InputContainer from "@components/common/InputContainer";
 
 const DiscardMedicine: React.FC = () => {
   // 새로고침이 되었을 때도 active tab 을 잃지 않도록 컴포넌트 load 시 dispatch

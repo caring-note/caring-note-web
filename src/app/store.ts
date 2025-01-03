@@ -1,7 +1,7 @@
 import { configureStore } from "@reduxjs/toolkit";
-import editorStateReducer from "./src/reducers/editorStateReducer";
-import navigationReducer from "./src/reducers/navigationReducer";
-import tabReducer from "./src/reducers/tabReducer";
+import editorStateReducer from "../reducers/editorStateReducer";
+import navigationReducer from "../reducers/navigationReducer";
+import tabReducer from "../reducers/tabReducer";
 
 const store = configureStore({
   reducer: {

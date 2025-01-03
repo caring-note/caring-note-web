@@ -1,15 +1,11 @@
-import React, { ReactEventHandler, useRef, useState } from "react";
-import cancelBlack from "../assets/icon/cancelBlack.png";
-import micBlack from "../assets/icon/micBlack.png";
-import pencilBlack from "../assets/icon/pencilBlack.png";
-import Badge from "@components/common/Badge";
-import HighlightInput from "./consult/HighlightInput";
-import { on } from "events";
-import { useAppDispatch, useAppSelector } from "../../hooks";
-import { toggleRightNavigation } from "../reducers/navigationReducer";
-import MicBlackIcon from "@icon/24/mic.filled.black.svg?react";
-import PencilBlackIcon from "@icon/24/create.filled.black.svg?react";
+import Badge from "@/components/common/Badge";
 import CloseBlackIcon from "@icon/24/close.outlined.black.svg?react";
+import PencilBlackIcon from "@icon/24/create.filled.black.svg?react";
+import MicBlackIcon from "@icon/24/mic.filled.black.svg?react";
+import React from "react";
+import { useAppDispatch, useAppSelector } from "../app/reduxHooks";
+import { toggleRightNavigation } from "../reducers/navigationReducer";
+import HighlightInput from "./consult/HighlightInput";
 
 interface NavigationRightProps {}
 

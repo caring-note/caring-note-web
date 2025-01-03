@@ -1,5 +1,5 @@
-import { CounselorControllerApi } from "@api/api";
-import { setToken } from "@api/apiConfiguration";
+import { CounselorControllerApi } from "@/api/api";
+import { setToken } from "@/api/apiConfiguration";
 import AdminBlackIcon from "@icon/24/accountcircle.fiiled.black.svg?react";
 import AdminBlueIcon from "@icon/24/accountcircle.fiiled.blue.svg?react";
 import QuestionBlackIcon from "@icon/24/help.fiiled.black.svg?react";

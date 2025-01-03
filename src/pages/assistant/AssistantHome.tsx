@@ -1,8 +1,8 @@
 import arrowHeadLeftGray from "@icon/arrowHeadLeftGray.png";
-import { changeActiveTab } from "../../reducers/tabReducer";
 import { Outlet, useNavigate } from "react-router-dom";
-import { useAppDispatch, useAppSelector } from "../../../hooks";
+import { useAppDispatch, useAppSelector } from "../../app/reduxHooks";
 import Button from "../../components/Button";
+import { changeActiveTab } from "../../reducers/tabReducer";
 
 const tabTitle = (text: string, goPage: string) => {
   const navigate = useNavigate();
