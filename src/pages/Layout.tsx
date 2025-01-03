@@ -1,8 +1,8 @@
-import { Outlet } from "react-router-dom";
 import NavigationLeft from "@components/NavigationLeft";
 import NavigationRight from "@components/NavigationRight";
+import { Outlet } from "react-router-dom";
 
-function Root() {
+function Layout() {
   return (
     <div className="flex justify-start w-full h-auto">
       <NavigationLeft />
@@ -17,4 +17,4 @@ function Root() {
   );
 }
 
-export default Root;
+export default Layout;
