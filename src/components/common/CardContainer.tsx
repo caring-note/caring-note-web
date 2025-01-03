@@ -1,5 +1,5 @@
 import { CounselCardControllerApi } from "@/api/api";
-import ClockBlackIcon from "@/assets/icon/24/clock.outlined.black.svg";
+import ClockBlackIcon from "@/assets/icon/24/clock.outlined.black.svg?react";
 import HistoryList from "@/components/common/HistoryList";
 import { useQuery } from "@tanstack/react-query";
 import classNames from "classnames";
