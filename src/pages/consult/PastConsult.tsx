@@ -1,16 +1,18 @@
 import {
-    CounselSessionControllerApi,
-    MedicationCounselControllerApi
-} from "@api/api";
-import TableComponent from "@components/common/TableComponent";
-import PastConsultContainer from "@components/consult/PastConsultContainer";
+  CounselSessionControllerApi,
+  MedicationCounselControllerApi,
+  SelectPreviousCounselSessionListRes,
+  SelectPreviousMedicationCounselRes,
+} from "@/api";
+import TableComponent from "@/components/common/TableComponent";
+import PastConsultContainer from "@/components/consult/PastConsultContainer";
 import { GridColDef } from "@mui/x-data-grid";
 import { useQuery } from "@tanstack/react-query";
 import {
-    createDefaultDateColumn,
-    createDefaultNumberColumn,
-    createDefaultTextColumn,
-} from "@utils/TableUtils";
+  createDefaultDateColumn,
+  createDefaultNumberColumn,
+  createDefaultTextColumn,
+} from "@/utils/TableUtils";
 import moment from "moment";
 import React, { useEffect } from "react";
 import { useAppDispatch } from "../../app/reduxHooks";

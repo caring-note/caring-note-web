@@ -28,7 +28,7 @@ const Routes = () => {
   };
 
   const noMatchRoutes: AppRouteObject = {
-    path: "*", 
+    path: "*",
     element: <Navigate to="/" />,
     errorElement: <ErrorPage />,
   };

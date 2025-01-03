@@ -1,4 +1,4 @@
-import { SelectCounselCardRes, SelectMedicationRecordHistRes } from "@api/api";
+import { SelectCounselCardRes, SelectMedicationRecordHistRes } from "@/api";
 import { create } from "zustand";
 
 interface MedicineMemoState {

@@ -1,9 +1,9 @@
-import Badge from "@components/common/Badge";
-import { Button } from "@components/components/ui/button";
-import { Input } from "@components/components/ui/input";
-import { Label } from "@components/components/ui/label";
-import TabContentContainer from "@components/consult/TabContentContainer";
-import InfoBlueIcon from "@icon/24/info.filled.blue.svg";
+import Badge from "@/components/common/Badge";
+import { Button } from "@/components/ui/button";
+import { Input } from "@/components/ui/input";
+import { Label } from "@/components/ui/label";
+import TabContentContainer from "@/components/consult/TabContentContainer";
+import InfoBlueIcon from "@/assets/icon/24/info.filled.blue.svg";
 import { useEffect, useState } from "react";
 import { useAppDispatch } from "../../app/reduxHooks";
 import CardContainer from "../../components/common/CardContainer";

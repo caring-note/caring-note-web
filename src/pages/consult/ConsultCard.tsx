@@ -1,6 +1,6 @@
-import { CounselCardControllerApi } from "@api/api";
-import CardContent from "@components/common/CardContent";
-import useConsultCardStore from "@store/consultCardStore";
+import { CounselCardControllerApi } from "@/api";
+import CardContent from "@/components/common/CardContent";
+import useConsultCardStore from "@/store/consultCardStore";
 import { useQuery } from "@tanstack/react-query";
 import { useEffect } from "react";
 import { useAppDispatch } from "../../app/reduxHooks";

@@ -1,7 +1,7 @@
 import Badge from "@/components/common/Badge";
-import CloseBlackIcon from "@icon/24/close.outlined.black.svg?react";
-import PencilBlackIcon from "@icon/24/create.filled.black.svg?react";
-import MicBlackIcon from "@icon/24/mic.filled.black.svg?react";
+import CloseBlackIcon from "@/assets/icon/24/close.outlined.black.svg?react";
+import PencilBlackIcon from "@/assets/icon/24/create.filled.black.svg?react";
+import MicBlackIcon from "@/assets/icon/24/mic.filled.black.svg?react";
 import React from "react";
 import { useAppDispatch, useAppSelector } from "../app/reduxHooks";
 import { toggleRightNavigation } from "../reducers/navigationReducer";

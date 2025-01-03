@@ -1,27 +1,28 @@
 import {
-    AddAndUpdateMedicationRecordHistReq,
-    MedicationControllerApi,
-    MedicationRecordHistControllerApi,
-    SelectMedicationRecordHistResDivisionCodeEnum
-} from "@api/api";
-import SearchComponent from "@components/common/SearchComponent";
-import TableComponent from "@components/common/TableComponent";
-import { Button } from "@components/components/ui/button";
+  AddAndUpdateMedicationRecordHistReq,
+  MedicationControllerApi,
+  MedicationRecordHistControllerApi,
+  SelectMedicationRecordHistResDivisionCodeEnum,
+  SelectMedicationRecordHistResUsageStatusCodeEnum,
+} from "@/api/api";
+import SearchComponent from "@/components/common/SearchComponent";
+import TableComponent from "@/components/common/TableComponent";
+import { Button } from "@/components/ui/button";
 import { GridColDef } from "@mui/x-data-grid";
-import { changeActiveTab } from "@reducers/tabReducer";
-import useMedicineMemoStore from "@store/medicineMemoStore";
-import useNomalMedicineTableStore from "@store/nomalMedicineTableStore";
-import usePrescribedMedicineTableStore from "@store/prescribedMedicineTableStore";
+import { changeActiveTab } from "@/reducers/tabReducer";
+import useMedicineMemoStore from "@/store/medicineMemoStore";
+import useNomalMedicineTableStore from "@/store/nomalMedicineTableStore";
+import usePrescribedMedicineTableStore from "@/store/prescribedMedicineTableStore";
 import { useQuery } from "@tanstack/react-query";
 import {
-    createDefaultDateColumn,
-    createDefaultNumberColumn,
-    createDefaultTextColumn,
-} from "@utils/TableUtils";
+  createDefaultDateColumn,
+  createDefaultNumberColumn,
+  createDefaultTextColumn,
+} from "@/utils/TableUtils";
 import { useEffect } from "react";
-import { useAppDispatch } from "../../app/reduxHooks";
-import NulpeumImg from "../../assets/temp-nulpeum.png";
-import TabContentContainer from "../../components/consult/TabContentContainer";
+import { useAppDispatch } from "@/app/reduxHooks";
+import NulpeumImg from "@/assets/temp-nulpeum.png";
+import TabContentContainer from "@/components/consult/TabContentContainer";
 import GrayContainer from "./GrayContainer";
 
 const MedicineMemo: React.FC = () => {
@@ -129,7 +130,7 @@ const MedicineMemo: React.FC = () => {
         selectMedicationRecordListBySessionIdQuery.data?.data?.data?.map(
           (item) => {
             if (
-              item.DivisionCode ===
+              item.divisionCode ===
               SelectMedicationRecordHistResDivisionCodeEnum.Prescription
             ) {
               addPrescribedMedicineRow({
@@ -141,7 +142,7 @@ const MedicineMemo: React.FC = () => {
                 col5: item.prescriptionDays,
               });
             } else if (
-              item.DivisionCode ===
+              item.divisionCode ===
               SelectMedicationRecordHistResDivisionCodeEnum.Otc
             ) {
               addNormalMedicineRow({

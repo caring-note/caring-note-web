@@ -1,5 +1,6 @@
-import TableComponent from "@components/common/TableComponent";
-import { Button } from "@components/components/ui/button";
+import arrowForwardIcon from "@/assets/icon/24/arrowback.outlined.black.svg";
+import TableComponent from "@/components/common/TableComponent";
+import { Button } from "@/components/ui/button";
 import {
   Dialog,
   DialogContent,
@@ -7,17 +8,18 @@ import {
   DialogHeader,
   DialogOverlay,
   DialogTitle,
-} from "@components/components/ui/dialog";
+} from "@/components/ui/dialog";
+import {
+  createDefaultTextColumn
+} from "@/utils/TableUtils";
+import { useSelectCounselSessionList } from "@hooks/useCounselSessionQuery";
 import { GridColDef } from "@mui/x-data-grid";
-import { createDefaultTextColumn } from "@utils/TableUtils";
+import { useCounselSessionStore } from "@store/counselSessionStore";
 import { useEffect, useState } from "react";
-import arrowForwardIcon from "@icon/24/arrowback.outlined.black.svg";
-import AgreementDetailsDialog from "./AgreementDetailsDialog";
+import { useNavigate } from "react-router-dom";
 import AgreementDetails2Dialog from "./AgreementDetails2Dialog";
 import AgreementDetails3Dialog from "./AgreementDetails3Dialog";
-import { useNavigate } from "react-router-dom";
-import { useCounselSessionStore } from "@store/counselSessionStore";
-import { useSelectCounselSessionList } from "@hooks/useCounselSessionQuery";
+import AgreementDetailsDialog from "./AgreementDetailsDialog";
 
 const AssistantView = () => {
   const [isOpen, setIsOpen] = useState(false);

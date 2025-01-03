@@ -1,10 +1,10 @@
 import { CounselCardControllerApi } from "@/api/api";
-import ClockBlackIcon from "@icon/24/clock.outlined.black.svg?react";
+import ClockBlackIcon from "@/assets/icon/24/clock.outlined.black.svg";
 import { useQuery, useQueryClient } from "@tanstack/react-query";
 import classNames from "classnames";
 import React, { useEffect, useState } from "react";
 import ReactModal from "react-modal";
-import HistoryList from "./HistoryList";
+import HistoryList from "@/components/common/HistoryList";
 
 interface CardContainerProps {
   className?: string;
@@ -57,16 +57,17 @@ const CardContainer = ({
   const getTitleIcon = () => {
     if (titleIcon === "clock") {
       return (
-        <ClockBlackIcon
+        <span
           className="w-6 h-6 text-grayscale-50 ml-3 cursor-pointer"
-          onClick={(e) => openModalAtPosition(e)}
-        />
+          onClick={(e) => openModalAtPosition(e)}>
+          <ClockBlackIcon />
+        </span>
       );
     }
     return titleIcon;
   };
 
-  const openModalAtPosition = (e: React.MouseEvent<SVGSVGElement>) => {
+  const openModalAtPosition = (e: React.MouseEvent<HTMLSpanElement>) => {
     // 클릭한 위치에서 마우스 좌표를 가져옴
     const { clientX, clientY } = e;
 

@@ -4,8 +4,8 @@ import {
   DialogHeader,
   DialogOverlay,
   DialogTitle,
-} from "@components/components/ui/dialog";
-import arrowForwardIcon from "@icon/24/arrowback.outlined.black.svg";
+} from "@/components/ui/dialog";
+import arrowForwardIcon from "@/assets/icon/24/arrowback.outlined.black.svg";
 
 type AgreementDetailDialogTypes = {
   isDetailOpen: boolean;

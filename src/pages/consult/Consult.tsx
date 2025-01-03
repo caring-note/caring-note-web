@@ -1,10 +1,10 @@
-import { CounseleeControllerApi, CounselSessionControllerApi } from "@api/api";
+import { CounseleeControllerApi, CounselSessionControllerApi } from "@/api/api";
 import { useQuery } from "@tanstack/react-query";
 import { useEffect, useState } from "react";
 import { Outlet, useNavigate } from "react-router-dom";
-import { useAppDispatch, useAppSelector } from "../../app/reduxHooks";
-import Button from "../../components/Button";
-import { changeActiveTab } from "../../reducers/tabReducer";
+import { useAppDispatch, useAppSelector } from "@/app/reduxHooks";
+import Button from "@/components/Button";
+import { changeActiveTab } from "@/reducers/tabReducer";
 
 const tabTitle = (text: string, goPage: string, isHidden?: boolean) => {
   const navigate = useNavigate();

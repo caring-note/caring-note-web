@@ -1,11 +1,11 @@
-import TableComponent from "@components/common/TableComponent";
-import { Button } from "@components/components/ui/button";
+import TableComponent from "@/components/common/TableComponent";
+import { Button } from "@/components/ui/button";
 import { GridColDef } from "@mui/x-data-grid";
 import {
   createDefaultDateColumn,
   createDefaultNumberColumn,
   createDefaultTextColumn,
-} from "@utils/TableUtils";
+} from "@/utils/TableUtils";
 import moment from "moment";
 import { useNavigate } from "react-router-dom";
 

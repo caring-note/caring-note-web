@@ -13,15 +13,15 @@
  */
 
 
-import type { AxiosInstance, AxiosPromise, RawAxiosRequestConfig } from 'axios';
-import globalAxios from 'axios';
 import type { Configuration } from './configuration';
+import type { AxiosPromise, AxiosInstance, RawAxiosRequestConfig } from 'axios';
+import globalAxios from 'axios';
 // Some imports not used depending on template conditions
 // @ts-ignore
+import { DUMMY_BASE_URL, assertParamExists, setApiKeyToObject, setBasicAuthToObject, setBearerAuthToObject, setOAuthToObject, setSearchParams, serializeDataIfNeeded, toPathString, createRequestFunction } from './common';
 import type { RequestArgs } from './base';
-import { DUMMY_BASE_URL, assertParamExists, createRequestFunction, serializeDataIfNeeded, setBearerAuthToObject, setSearchParams, toPathString } from './common';
 // @ts-ignore
-import { BASE_PATH, BaseAPI, RequiredError, operationServerMap } from './base';
+import { BASE_PATH, COLLECTION_FORMATS, BaseAPI, RequiredError, operationServerMap } from './base';
 
 /**
  * 
@@ -46,7 +46,7 @@ export interface AddAndUpdateMedicationRecordHistReq {
      * @type {string}
      * @memberof AddAndUpdateMedicationRecordHistReq
      */
-    'divisionCode': string;
+    'divisionCode': AddAndUpdateMedicationRecordHistReqDivisionCodeEnum;
     /**
      * 
      * @type {string}
@@ -82,8 +82,23 @@ export interface AddAndUpdateMedicationRecordHistReq {
      * @type {string}
      * @memberof AddAndUpdateMedicationRecordHistReq
      */
-    'usageStatusCode'?: string;
+    'usageStatusCode'?: AddAndUpdateMedicationRecordHistReqUsageStatusCodeEnum;
 }
+
+export const AddAndUpdateMedicationRecordHistReqDivisionCodeEnum = {
+    Prescription: 'PRESCRIPTION',
+    Otc: 'OTC'
+} as const;
+
+export type AddAndUpdateMedicationRecordHistReqDivisionCodeEnum = typeof AddAndUpdateMedicationRecordHistReqDivisionCodeEnum[keyof typeof AddAndUpdateMedicationRecordHistReqDivisionCodeEnum];
+export const AddAndUpdateMedicationRecordHistReqUsageStatusCodeEnum = {
+    Regular: 'REGULAR',
+    AsNeeded: 'AS_NEEDED',
+    Stopped: 'STOPPED'
+} as const;
+
+export type AddAndUpdateMedicationRecordHistReqUsageStatusCodeEnum = typeof AddAndUpdateMedicationRecordHistReqUsageStatusCodeEnum[keyof typeof AddAndUpdateMedicationRecordHistReqUsageStatusCodeEnum];
+
 /**
  * 
  * @export
@@ -1816,7 +1831,7 @@ export interface SelectMedicationRecordHistRes {
      * @type {string}
      * @memberof SelectMedicationRecordHistRes
      */
-    'DivisionCode'?: string;
+    'divisionCode'?: SelectMedicationRecordHistResDivisionCodeEnum;
     /**
      * 
      * @type {string}
@@ -1846,7 +1861,7 @@ export interface SelectMedicationRecordHistRes {
      * @type {string}
      * @memberof SelectMedicationRecordHistRes
      */
-    'usageStatusCode'?: string;
+    'usageStatusCode'?: SelectMedicationRecordHistResUsageStatusCodeEnum;
     /**
      * 
      * @type {string}
@@ -1872,6 +1887,21 @@ export interface SelectMedicationRecordHistRes {
      */
     'updatedBy'?: string;
 }
+
+export const SelectMedicationRecordHistResDivisionCodeEnum = {
+    Prescription: 'PRESCRIPTION',
+    Otc: 'OTC'
+} as const;
+
+export type SelectMedicationRecordHistResDivisionCodeEnum = typeof SelectMedicationRecordHistResDivisionCodeEnum[keyof typeof SelectMedicationRecordHistResDivisionCodeEnum];
+export const SelectMedicationRecordHistResUsageStatusCodeEnum = {
+    Regular: 'REGULAR',
+    AsNeeded: 'AS_NEEDED',
+    Stopped: 'STOPPED'
+} as const;
+
+export type SelectMedicationRecordHistResUsageStatusCodeEnum = typeof SelectMedicationRecordHistResUsageStatusCodeEnum[keyof typeof SelectMedicationRecordHistResUsageStatusCodeEnum];
+
 /**
  * 
  * @export

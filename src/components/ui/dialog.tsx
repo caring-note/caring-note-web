@@ -1,4 +1,4 @@
-import CloseBlackIcon from "@icon/24/close.outlined.black.svg?react";
+import CloseBlackIcon from "@/assets/icon/24/close.outlined.black.svg?react";
 import * as DialogPrimitive from "@radix-ui/react-dialog";
 import * as React from "react";
 
@@ -138,6 +138,14 @@ const DialogFooter = ({
 DialogFooter.displayName = "DialogFooter";
 
 export {
-  Dialog, DialogClose, DialogContent, DialogDescription, DialogFooter, DialogHeader, DialogOverlay, DialogPortal, DialogTitle, DialogTrigger
+  Dialog,
+  DialogClose,
+  DialogContent,
+  DialogDescription,
+  DialogFooter,
+  DialogHeader,
+  DialogOverlay,
+  DialogPortal,
+  DialogTitle,
+  DialogTrigger,
 };
-
