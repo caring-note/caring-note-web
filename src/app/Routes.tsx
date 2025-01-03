@@ -21,16 +21,9 @@ type AppRouteObject = RouteObject & {
 };
 
 const Routes = () => {
-  const rootRoutes: AppRouteObject = {
-    path: "/",
-    element: <Navigate to="/main" />,
-    errorElement: <ErrorPage />,
-  };
-
   const noMatchRoutes: AppRouteObject = {
-    path: "*",
-    element: <Navigate to="/" />,
-    errorElement: <ErrorPage />,
+    path: "/*",
+    element: <ErrorPage />,
   };
 
   const mainRoutes: AppRouteObject = {
@@ -39,7 +32,7 @@ const Routes = () => {
     errorElement: <ErrorPage />,
     children: [
       {
-        path: "main",
+        path: "/",
         element: <Home />,
       },
     ],
@@ -86,7 +79,6 @@ const Routes = () => {
     ],
   };
   const routes: AppRouteObject[] = [
-    rootRoutes,
     noMatchRoutes,
     mainRoutes,
     consultRoutes,
