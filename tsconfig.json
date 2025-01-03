@@ -9,7 +9,8 @@
       "@reducers/*": ["reducers/*"],
       "@utils/*": ["utils/*"],
       "@api/*": ["api/*"],
-      "@store/*": ["store/*"]
+      "@store/*": ["store/*"],
+      "@hooks/*": ["hooks/*"]
     }
   },
   "files": [],
