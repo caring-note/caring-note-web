@@ -1,15 +1,13 @@
-import Badge from "@/components/common/Badge";
 import CloseBlackIcon from "@/assets/icon/24/close.outlined.black.svg?react";
 import PencilBlackIcon from "@/assets/icon/24/create.filled.black.svg?react";
 import MicBlackIcon from "@/assets/icon/24/mic.filled.black.svg?react";
-import React from "react";
+import Badge from "@/components/common/Badge";
 import { useAppDispatch, useAppSelector } from "../app/reduxHooks";
 import { toggleRightNavigation } from "../reducers/navigationReducer";
 import HighlightInput from "./consult/HighlightInput";
 
-interface NavigationRightProps {}
 
-const NavigationRight: React.FC<NavigationRightProps> = ({}) => {
+const NavigationRight = () => {
   const isOpen = useAppSelector(
     (state) => state.navigation.isOpenRightNavigation,
   );

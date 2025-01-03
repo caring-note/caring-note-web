@@ -1,10 +1,10 @@
 import { CounselCardControllerApi } from "@/api/api";
 import ClockBlackIcon from "@/assets/icon/24/clock.outlined.black.svg";
-import { useQuery, useQueryClient } from "@tanstack/react-query";
+import HistoryList from "@/components/common/HistoryList";
+import { useQuery } from "@tanstack/react-query";
 import classNames from "classnames";
 import React, { useEffect, useState } from "react";
 import ReactModal from "react-modal";
-import HistoryList from "@/components/common/HistoryList";
 
 interface CardContainerProps {
   className?: string;
@@ -39,7 +39,6 @@ const CardContainer = ({
     return response.data;
   };
 
-  const queryClient = useQueryClient();
   const previousHistoryItemQuery = useQuery({
     queryKey: ["previousHistoryItemList"],
     queryFn: selectPreviousHistoryItemList,

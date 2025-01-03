@@ -9,12 +9,12 @@ import {
   DialogOverlay,
   DialogTitle,
 } from "@/components/ui/dialog";
+import { useSelectCounselSessionList } from "@/hooks/useCounselSessionQuery";
+import { useCounselSessionStore } from "@/store/counselSessionStore";
 import {
   createDefaultTextColumn
 } from "@/utils/TableUtils";
-import { useSelectCounselSessionList } from "@hooks/useCounselSessionQuery";
 import { GridColDef } from "@mui/x-data-grid";
-import { useCounselSessionStore } from "@store/counselSessionStore";
 import { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import AgreementDetails2Dialog from "./AgreementDetails2Dialog";

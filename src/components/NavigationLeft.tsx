@@ -12,14 +12,12 @@ import PaperPlainBlackIcon from "@/assets/icon/24/paperplane.black.svg?react";
 import PaperPlainBlueIcon from "@/assets/icon/24/paperplane.blue.svg?react";
 import PatientBlackIcon from "@/assets/icon/24/patient.fiiled.black.svg?react";
 import PatientBlueIcon from "@/assets/icon/24/patient.fiiled.blue.svg?react";
-import React from "react";
-import { useNavigate } from "react-router-dom";
 import logoBlack from "@/assets/logoBlack.png";
 import NavigationLeftMenu from "@/components/NavigationLeftMenu";
+import { useNavigate } from "react-router-dom";
 
-interface NavigationLeftProps {}
 
-const NavigationLeft: React.FC<NavigationLeftProps> = ({}) => {
+const NavigationLeft = () => {
   const navigate = useNavigate();
 
   return (

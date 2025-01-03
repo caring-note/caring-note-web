@@ -40,13 +40,6 @@ const Badge: React.FC<BadgeProps> = ({
     ghost: `text-${color}-50`,
   };
 
-  const hoverClasses = {
-    filled: `hover:bg-${color}-60`,
-    tint: `hover:bg-${color}-20`,
-    outline: `hover:bg-${color}-10`,
-    ghost: `hover:bg-${color}-10`,
-  };
-
   const iconSize = {
     "extra-large": 20,
     large: 16,
@@ -73,7 +66,6 @@ const Badge: React.FC<BadgeProps> = ({
         baseClasses,
         sizeClasses[size],
         variantClasses[variant],
-        // hoverClasses[variant],   // 배지는 인터렉션 없음
         className,
       )}>
       {icon()}
