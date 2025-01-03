@@ -1,5 +1,5 @@
 import { useEffect } from "react";
-import { useAppDispatch, useAppSelector } from "../../../hooks";
+import { useAppDispatch, useAppSelector } from "../../app/reduxHooks";
 import logoBlack from "../../assets/logoBlack.png";
 import HighlightInput from "../../components/consult/HighlightInput";
 import TabContentContainer from "../../components/consult/TabContentContainer";

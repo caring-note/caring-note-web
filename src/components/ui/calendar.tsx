@@ -1,13 +1,13 @@
-import { buttonVariants } from "@components/components/ui/button";
-import { ScrollArea } from "@components/components/ui/scroll-area";
+import { buttonVariants } from "@/components/ui/button";
+import { ScrollArea } from "@/components/ui/scroll-area";
 import {
   Select,
   SelectContent,
   SelectItem,
   SelectTrigger,
   SelectValue,
-} from "@components/components/ui/select";
-import { cn } from "@components/lib/utils";
+} from "@/components/ui/select";
+import { cn } from "@/lib/utils";
 import { format } from "date-fns";
 import { ko } from "date-fns/locale";
 import { ChevronLeft, ChevronRight } from "lucide-react";

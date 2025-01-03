@@ -1,17 +1,14 @@
-import { useEffect } from "react";
-import { useAppDispatch } from "../../../hooks";
-import Button from "../../components/Button";
-import TabContentContainer from "../../components/consult/TabContentContainer";
-import TabContentTitle from "../../components/consult/TabContentTitle";
-import { changeActiveTab } from "../../reducers/tabReducer";
-import {
-  RadioGroup,
-  RadioGroupItem,
-} from "@components/components/ui/radio-group";
-import { Label } from "@components/components/ui/label";
-import { Checkbox } from "@components/components/ui/checkbox";
+import InputContainer from "@/components/common/InputContainer";
+import { Checkbox } from "@/components/ui/checkbox";
+import { Label } from "@/components/ui/label";
+import { RadioGroup, RadioGroupItem } from "@/components/ui/radio-group";
 import { Input } from "@mui/material";
-import InputContainer from "@components/common/InputContainer";
+import { useEffect } from "react";
+import { useAppDispatch } from "@/app/reduxHooks";
+import Button from "@/components/Button";
+import TabContentContainer from "@/components/consult/TabContentContainer";
+import TabContentTitle from "@/components/consult/TabContentTitle";
+import { changeActiveTab } from "@/reducers/tabReducer";
 
 const DiscardMedicine: React.FC = () => {
   // 새로고침이 되었을 때도 active tab 을 잃지 않도록 컴포넌트 load 시 dispatch
@@ -152,9 +149,7 @@ const DiscardMedicine: React.FC = () => {
               수정하기
             </Button>
           </div>
-          <div className="h-96">
-            테이블 내용 확정 후 추가 예정
-          </div>
+          <div className="h-96">테이블 내용 확정 후 추가 예정</div>
         </div>
       </TabContentContainer>
     </>

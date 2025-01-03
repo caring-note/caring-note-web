@@ -1,13 +1,13 @@
+import Badge from "@/components/common/Badge";
+import { Button } from "@/components/ui/button";
+import { Input } from "@/components/ui/input";
+import { Label } from "@/components/ui/label";
+import TabContentContainer from "@/components/consult/TabContentContainer";
+import InfoBlueIcon from "@/assets/icon/24/info.filled.blue.svg";
 import { useEffect, useState } from "react";
-import { useAppDispatch } from "../../../hooks";
-import { changeActiveTab } from "../../reducers/tabReducer";
-import Badge from "@components/common/Badge";
+import { useAppDispatch } from "../../app/reduxHooks";
 import CardContainer from "../../components/common/CardContainer";
-import InfoBlueIcon from "@icon/24/info.filled.blue.svg";
-import TabContentContainer from "@components/consult/TabContentContainer";
-import { Label } from "@components/components/ui/label";
-import { Input } from "@components/components/ui/input";
-import { Button } from "@components/components/ui/button";
+import { changeActiveTab } from "../../reducers/tabReducer";
 
 const insuranceTypes = ["건강보험", "의료급여", "보훈", "비급여"];
 const consultationCounts = ["1회차", "2회차", "3회차", "4회차", "5회차 이상"];

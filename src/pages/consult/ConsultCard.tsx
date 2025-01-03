@@ -1,14 +1,14 @@
-import { CounselCardControllerApi } from "@api/api";
-import CardContent from "@components/common/CardContent";
-import { useMutation, useQuery, useQueryClient } from "@tanstack/react-query";
+import { CounselCardControllerApi } from "@/api";
+import CardContent from "@/components/common/CardContent";
+import useConsultCardStore from "@/store/consultCardStore";
+import { useQuery } from "@tanstack/react-query";
 import { useEffect } from "react";
-import { useAppDispatch } from "../../../hooks";
+import { useAppDispatch } from "../../app/reduxHooks";
 import Button from "../../components/Button";
 import CardContainer from "../../components/common/CardContainer";
 import TabContentContainer from "../../components/consult/TabContentContainer";
 import TabContentTitle from "../../components/consult/TabContentTitle";
 import { changeActiveTab } from "../../reducers/tabReducer";
-import useConsultCardStore from "@store/consultCardStore";
 
 const ConsultCard: React.FC = () => {
   const counselSessionId = "TEST-COUNSEL-SESSION-01"; // TODO : 다른 곳에서 전달받아야됨

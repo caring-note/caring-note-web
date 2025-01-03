@@ -1,4 +1,3 @@
-import React from "react";
 
 interface CardContentProps {
   className?: string;
@@ -6,11 +5,7 @@ interface CardContentProps {
   value: string;
 }
 
-const CardContent: React.FC<CardContentProps> = ({
-  className,
-  item,
-  value,
-}) => {
+const CardContent = ({ item, value }: CardContentProps) => {
   return (
     <div className="px-6 mt-8 mb-2 w-full">
       <p className="text-body1 font-bold text-grayscale-90 mb-1">{item}</p>

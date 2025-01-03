@@ -4,27 +4,26 @@ import {
   MedicationRecordHistControllerApi,
   SelectMedicationRecordHistResDivisionCodeEnum,
   SelectMedicationRecordHistResUsageStatusCodeEnum,
-} from "@api/api";
-import SearchComponent from "@components/common/SearchComponent";
-import TableComponent from "@components/common/TableComponent";
-import { Button } from "@components/components/ui/button";
+} from "@/api/api";
+import SearchComponent from "@/components/common/SearchComponent";
+import TableComponent from "@/components/common/TableComponent";
+import { Button } from "@/components/ui/button";
 import { GridColDef } from "@mui/x-data-grid";
-import { changeActiveTab } from "@reducers/tabReducer";
-import useMedicineMemoStore from "@store/medicineMemoStore";
-import useNomalMedicineTableStore from "@store/nomalMedicineTableStore";
-import usePrescribedMedicineTableStore from "@store/prescribedMedicineTableStore";
+import { changeActiveTab } from "@/reducers/tabReducer";
+import useMedicineMemoStore from "@/store/medicineMemoStore";
+import useNomalMedicineTableStore from "@/store/nomalMedicineTableStore";
+import usePrescribedMedicineTableStore from "@/store/prescribedMedicineTableStore";
 import { useQuery } from "@tanstack/react-query";
 import {
   createDefaultDateColumn,
   createDefaultNumberColumn,
   createDefaultTextColumn,
-} from "@utils/TableUtils";
+} from "@/utils/TableUtils";
 import { useEffect } from "react";
-import { useAppDispatch } from "../../../hooks";
-import NulpeumImg from "../../assets/temp-nulpeum.png";
-import TabContentContainer from "../../components/consult/TabContentContainer";
+import { useAppDispatch } from "@/app/reduxHooks";
+import NulpeumImg from "@/assets/temp-nulpeum.png";
+import TabContentContainer from "@/components/consult/TabContentContainer";
 import GrayContainer from "./GrayContainer";
-import { add } from "date-fns";
 
 const MedicineMemo: React.FC = () => {
   const counselSessionId = "TEST-COUNSEL-SESSION-01"; // TODO : 다른 곳에서 전달받아야됨
@@ -131,7 +130,7 @@ const MedicineMemo: React.FC = () => {
         selectMedicationRecordListBySessionIdQuery.data?.data?.data?.map(
           (item) => {
             if (
-              item.DivisionCode ===
+              item.divisionCode ===
               SelectMedicationRecordHistResDivisionCodeEnum.Prescription
             ) {
               addPrescribedMedicineRow({
@@ -143,7 +142,7 @@ const MedicineMemo: React.FC = () => {
                 col5: item.prescriptionDays,
               });
             } else if (
-              item.DivisionCode ===
+              item.divisionCode ===
               SelectMedicationRecordHistResDivisionCodeEnum.Otc
             ) {
               addNormalMedicineRow({

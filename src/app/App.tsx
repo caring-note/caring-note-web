@@ -1,7 +1,7 @@
-import { Provider } from "react-redux";
 import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
-import store from "../../store";
+import { Provider } from "react-redux";
 import Router from "./Router";
+import store from "./store";
 
 // Tanstack : QueryClient 인스턴스 생성
 const queryClient = new QueryClient();

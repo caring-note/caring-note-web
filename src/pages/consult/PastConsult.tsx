@@ -3,22 +3,22 @@ import {
   MedicationCounselControllerApi,
   SelectPreviousCounselSessionListRes,
   SelectPreviousMedicationCounselRes,
-} from "@api/api";
-import TableComponent from "@components/common/TableComponent";
-import PastConsultContainer from "@components/consult/PastConsultContainer";
+} from "@/api";
+import TableComponent from "@/components/common/TableComponent";
+import PastConsultContainer from "@/components/consult/PastConsultContainer";
 import { GridColDef } from "@mui/x-data-grid";
+import { useQuery } from "@tanstack/react-query";
 import {
   createDefaultDateColumn,
   createDefaultNumberColumn,
   createDefaultTextColumn,
-} from "@utils/TableUtils";
+} from "@/utils/TableUtils";
 import moment from "moment";
-import React, { useEffect, useState } from "react";
-import { useAppDispatch } from "../../../hooks";
+import React, { useEffect } from "react";
+import { useAppDispatch } from "../../app/reduxHooks";
 import TabContentContainer from "../../components/consult/TabContentContainer";
 import TabContentTitle from "../../components/consult/TabContentTitle";
 import { changeActiveTab } from "../../reducers/tabReducer";
-import { useQuery } from "@tanstack/react-query";
 
 const PastConsult: React.FC = () => {
   const counselSessionId = "TEST-COUNSEL-SESSION-01"; // TODO : 다른 곳에서 전달받아야됨

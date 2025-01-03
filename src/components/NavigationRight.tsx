@@ -1,19 +1,13 @@
-import React, { ReactEventHandler, useRef, useState } from "react";
-import cancelBlack from "../assets/icon/cancelBlack.png";
-import micBlack from "../assets/icon/micBlack.png";
-import pencilBlack from "../assets/icon/pencilBlack.png";
-import Badge from "@components/common/Badge";
-import HighlightInput from "./consult/HighlightInput";
-import { on } from "events";
-import { useAppDispatch, useAppSelector } from "../../hooks";
+import CloseBlackIcon from "@/assets/icon/24/close.outlined.black.svg?react";
+import PencilBlackIcon from "@/assets/icon/24/create.filled.black.svg?react";
+import MicBlackIcon from "@/assets/icon/24/mic.filled.black.svg?react";
+import Badge from "@/components/common/Badge";
+import { useAppDispatch, useAppSelector } from "../app/reduxHooks";
 import { toggleRightNavigation } from "../reducers/navigationReducer";
-import MicBlackIcon from "@icon/24/mic.filled.black.svg?react";
-import PencilBlackIcon from "@icon/24/create.filled.black.svg?react";
-import CloseBlackIcon from "@icon/24/close.outlined.black.svg?react";
+import HighlightInput from "./consult/HighlightInput";
 
-interface NavigationRightProps {}
 
-const NavigationRight: React.FC<NavigationRightProps> = ({}) => {
+const NavigationRight = () => {
   const isOpen = useAppSelector(
     (state) => state.navigation.isOpenRightNavigation,
   );

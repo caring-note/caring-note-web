@@ -1,4 +1,4 @@
-import TooltipBlackIcon from "@icon/20/info.filled.black.svg?react";
+import TooltipBlackIcon from "@/assets/icon/20/info.filled.black.svg?react";
 import React from "react";
 import { PlacesType, Tooltip as ReactTooltip } from "react-tooltip";
 

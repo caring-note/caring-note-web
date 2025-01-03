@@ -1,16 +1,12 @@
-import React, { ReactNode, useCallback, useState } from "react";
 import {
   Command,
-  CommandDialog,
-  CommandEmpty,
   CommandGroup,
   CommandInput,
   CommandItem,
-  CommandList,
-  CommandSeparator,
-  CommandShortcut,
-} from "@components/components/ui/command";
+  CommandList
+} from "@/components/ui/command";
 import { debounce } from "@mui/material";
+import React, { useCallback, useState } from "react";
 
 interface SearchComponentProps {
   commandProps?: React.ComponentProps<typeof Command>;
@@ -35,7 +31,7 @@ const SearchComponent: React.FC<SearchComponentProps> = ({
   };
 
   const debouncedOnChangeInputValue = useCallback(
-    debounce((value) => {
+    debounce((value: string) => {
       console.log("debouncedOnChangeInputValue::" + value);
       if (onChangeInputValue) onChangeInputValue(value);
     }, 1000),

@@ -1,37 +1,41 @@
+import AssistantBasicInfo from "@/pages/assistant/AssistantBasicInfo";
+import AssistantHealthInfo from "@/pages/assistant/AssistantHealthInfo";
+import AssistantHome from "@/pages/assistant/AssistantHome";
+import AssistantIndependentInfo from "@/pages/assistant/AssistantIndependentInfo";
+import AssistantLifeInfo from "@/pages/assistant/AssistantLifeInfo";
+import AssistantRoot from "@/pages/assistant/AssistantRoot";
+import AssistantView from "@/pages/assistant/AssistantView";
+import Consult from "@/pages/consult/Consult";
+import ConsultCard from "@/pages/consult/ConsultCard";
+import DiscardMedicine from "@/pages/consult/DiscardMedicine";
+import MedicineConsult from "@/pages/consult/MedicineConsult";
+import MedicineMemo from "@/pages/consult/MedicineMemo";
+import PastConsult from "@/pages/consult/PastConsult";
+import ErrorPage from "@/pages/ErrorPage";
+import Home from "@/pages/Home";
+import Layout from "@/pages/Layout";
 import { Navigate, RouteObject, useRoutes } from "react-router-dom";
-import ErrorPage from "../pages/ErrorPage";
-import Root from "../pages/Root";
-import Home from "../pages/Home";
-import Consult from "../pages/consult/Consult";
-import PastConsult from "../pages/consult/PastConsult";
-import ConsultCard from "../pages/consult/ConsultCard";
-import MedicineMemo from "../pages/consult/MedicineMemo";
-import MedicineConsult from "../pages/consult/MedicineConsult";
-import DiscardMedicine from "../pages/consult/DiscardMedicine";
-import AssistantRoot from "../pages/assistant/AssistantRoot";
-import AssistantHome from "../pages/assistant/AssistantHome";
-import AssistantBasicInfo from "../pages/assistant/AssistantBasicInfo";
-import AssistantHealthInfo from "../pages/assistant/AssistantHealthInfo";
-import AssistantLifeInfo from "../pages/assistant/AssistantLifeInfo";
-import AssistantView from "@pages/assistant/AssistantView";
-import AssistantIndependentInfo from "@pages/assistant/AssistantIndependentInfo";
+
+type AppRouteObject = RouteObject & {
+  children?: AppRouteObject[];
+};
 
 const Routes = () => {
-  const rootRoutes: RouteObject = {
+  const rootRoutes: AppRouteObject = {
     path: "/",
     element: <Navigate to="/main" />,
     errorElement: <ErrorPage />,
   };
 
-  const noMatchRoutes: RouteObject = {
+  const noMatchRoutes: AppRouteObject = {
     path: "*",
-    element: <Navigate to="/main" />,
+    element: <Navigate to="/" />,
     errorElement: <ErrorPage />,
   };
 
-  const mainRoutes: RouteObject = {
+  const mainRoutes: AppRouteObject = {
     path: "/",
-    element: <Root />,
+    element: <Layout />,
     errorElement: <ErrorPage />,
     children: [
       {
@@ -41,9 +45,9 @@ const Routes = () => {
     ],
   };
 
-  const consultRoutes: RouteObject = {
+  const consultRoutes: AppRouteObject = {
     path: "/",
-    element: <Root />,
+    element: <Layout />,
     children: [
       {
         path: "consult",
@@ -81,8 +85,7 @@ const Routes = () => {
       },
     ],
   };
-
-  const routes = [
+  const routes: AppRouteObject[] = [
     rootRoutes,
     noMatchRoutes,
     mainRoutes,

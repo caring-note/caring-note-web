@@ -1,4 +1,4 @@
-import { SelectCounselCardRes } from "@api/api";
+import { SelectCounselCardRes } from "@/api";
 import { create } from "zustand";
 
 interface ConsultCardState {

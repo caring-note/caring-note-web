@@ -1,5 +1,4 @@
 import React from "react";
-import Badge from "./Badge";
 
 interface HistoryListProps {
   date: string;

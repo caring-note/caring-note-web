@@ -1,10 +1,10 @@
-import arrowHeadLeftGray from "@icon/arrowHeadLeftGray.png";
-import { changeActiveTab } from "../../reducers/tabReducer";
+import { useAppDispatch, useAppSelector } from "@/app/reduxHooks";
+import arrowHeadLeftGray from "@/assets/icon/arrowHeadLeftGray.png";
+import Button from "@/components/Button";
+import { changeActiveTab } from "@/reducers/tabReducer";
 import { Outlet, useNavigate } from "react-router-dom";
-import { useAppDispatch, useAppSelector } from "../../../hooks";
-import Button from "../../components/Button";
 
-const tabTitle = (text: string, goPage: string) => {
+const TabTitle = (text: string, goPage: string) => {
   const navigate = useNavigate();
   const activeTab = useAppSelector((state) => state.tab.activeTab);
   const dispatch = useAppDispatch();
@@ -45,10 +45,10 @@ const AssistantHome = () => {
         </div>
       </div>
       <div className="flex flex-row items-center justify-start w-full my-0 border-t-2 border-b-2 border-gray-200 h-14 pl-14 border-b-gray-300">
-        {tabTitle("기본 정보", "/assistant/view/basicInfo")}
-        {tabTitle("건강 정보", "/assistant/view/healthInfo")}
-        {tabTitle("생활 정보", "/assistant/view/lifeInfo")}
-        {tabTitle("자립생활 역량", "/assistant/view/IndependentInfo")}
+        {TabTitle("기본 정보", "/assistant/view/basicInfo")}
+        {TabTitle("건강 정보", "/assistant/view/healthInfo")}
+        {TabTitle("생활 정보", "/assistant/view/lifeInfo")}
+        {TabTitle("자립생활 역량", "/assistant/view/IndependentInfo")}
       </div>
       <Outlet />
     </div>

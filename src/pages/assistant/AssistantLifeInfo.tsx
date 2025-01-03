@@ -1,11 +1,11 @@
+import CardContainer from "@/components/common/CardContainer";
+import { Button } from "@/components/ui/button";
+import { Input } from "@/components/ui/input";
+import { Label } from "@/components/ui/label";
+import TabContentContainer from "@/components/consult/TabContentContainer";
 import { useEffect, useState } from "react";
-import { useAppDispatch } from "../../../hooks";
-import { changeActiveTab } from "../../reducers/tabReducer";
-import TabContentContainer from "@components/consult/TabContentContainer";
-import CardContainer from "@components/common/CardContainer";
-import { Label } from "@components/components/ui/label";
-import { Button } from "@components/components/ui/button";
-import { Input } from "@components/components/ui/input";
+import { useAppDispatch } from "@/app/reduxHooks";
+import { changeActiveTab } from "@/reducers/tabReducer";
 
 const isSmokingTypes = ["흡연", "비흡연"];
 const smokingDailyCounts = ["1갑", "2갑", "3갑 이상"];

@@ -1,25 +1,23 @@
-import { CounselorControllerApi } from "@api/api";
-import { setToken } from "@api/apiConfiguration";
-import AdminBlackIcon from "@icon/24/accountcircle.fiiled.black.svg?react";
-import AdminBlueIcon from "@icon/24/accountcircle.fiiled.blue.svg?react";
-import QuestionBlackIcon from "@icon/24/help.fiiled.black.svg?react";
-import HomeBlackIcon from "@icon/24/home.filled.black.svg?react";
-import HomeBlueIcon from "@icon/24/home.filled.blue.svg?react";
-import LogoutBlackIcon from "@icon/24/logout.outline.black.svg?react";
-import NoteBlackIcon from "@icon/24/note.fiiled.black.svg?react";
-import NoteBlueIcon from "@icon/24/note.fiiled.blue.svg?react";
-import PaperPlainBlackIcon from "@icon/24/paperplane.black.svg?react";
-import PaperPlainBlueIcon from "@icon/24/paperplane.blue.svg?react";
-import PatientBlackIcon from "@icon/24/patient.fiiled.black.svg?react";
-import PatientBlueIcon from "@icon/24/patient.fiiled.blue.svg?react";
-import React from "react";
+import { CounselorControllerApi } from "@/api/api";
+import { setToken } from "@/api/apiConfiguration";
+import AdminBlackIcon from "@/assets/icon/24/accountcircle.fiiled.black.svg?react";
+import AdminBlueIcon from "@/assets/icon/24/accountcircle.fiiled.blue.svg?react";
+import QuestionBlackIcon from "@/assets/icon/24/help.fiiled.black.svg?react";
+import HomeBlackIcon from "@/assets/icon/24/home.filled.black.svg?react";
+import HomeBlueIcon from "@/assets/icon/24/home.filled.blue.svg?react";
+import LogoutBlackIcon from "@/assets/icon/24/logout.outline.black.svg?react";
+import NoteBlackIcon from "@/assets/icon/24/note.fiiled.black.svg?react";
+import NoteBlueIcon from "@/assets/icon/24/note.fiiled.blue.svg?react";
+import PaperPlainBlackIcon from "@/assets/icon/24/paperplane.black.svg?react";
+import PaperPlainBlueIcon from "@/assets/icon/24/paperplane.blue.svg?react";
+import PatientBlackIcon from "@/assets/icon/24/patient.fiiled.black.svg?react";
+import PatientBlueIcon from "@/assets/icon/24/patient.fiiled.blue.svg?react";
+import logoBlack from "@/assets/logoBlack.png";
+import NavigationLeftMenu from "@/components/NavigationLeftMenu";
 import { useNavigate } from "react-router-dom";
-import logoBlack from "../assets/logoBlack.png";
-import NavigationLeftMenu from "../components/NavigationLeftMenu";
 
-interface NavigationLeftProps {}
 
-const NavigationLeft: React.FC<NavigationLeftProps> = ({}) => {
+const NavigationLeft = () => {
   const navigate = useNavigate();
 
   return (

@@ -1,7 +1,7 @@
-import React from "react";
-import arrowRightBlack from "../assets/icon/arrowRightBlack.png";
-import searchGray from "../assets/icon/searchGray.png";
+import arrowRightBlack from "@/assets/icon/arrowRightBlack.png";
+import searchGray from "@/assets/icon/searchGray.png";
 import classNames from "classnames";
+import React from "react";
 
 interface ButtonProps {
   _class?: string;
