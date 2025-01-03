@@ -1,10 +1,10 @@
 import { useEffect } from "react";
-import { useAppDispatch, useAppSelector } from "../../app/reduxHooks";
-import logoBlack from "../../assets/logoBlack.png";
-import HighlightInput from "../../components/consult/HighlightInput";
-import TabContentContainer from "../../components/consult/TabContentContainer";
-import { changeActiveTab } from "../../reducers/tabReducer";
-import GrayContainer from "./GrayContainer";
+import { useAppDispatch, useAppSelector } from "@/app/reduxHooks";
+import logoBlack from "@/assets/logoBlack.png";
+import HighlightInput from "@/components/consult/HighlightInput";
+import TabContentContainer from "@/components/consult/TabContentContainer";
+import { changeActiveTab } from "@/reducers/tabReducer";
+import GrayContainer from "@/pages/Consult/components/GrayContainer";
 
 const MedicineConsult: React.FC = () => {
   const dispatch = useAppDispatch();

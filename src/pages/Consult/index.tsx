@@ -1,15 +1,35 @@
+import { useEffect, useState, lazy, Suspense } from "react";
+import Button from "@/components/Button";
 import { CounseleeControllerApi, CounselSessionControllerApi } from "@/api/api";
 import { useQuery } from "@tanstack/react-query";
-import { useEffect, useState } from "react";
-import { Outlet, useNavigate } from "react-router-dom";
-import { useAppDispatch, useAppSelector } from "@/app/reduxHooks";
-import Button from "@/components/Button";
-import { changeActiveTab } from "@/reducers/tabReducer";
+import useConsultTabStore, { ConsultTab } from "@/store/consultTabStore";
 
-const tabTitle = (text: string, goPage: string, isHidden?: boolean) => {
-  const navigate = useNavigate();
-  const activeTab = useAppSelector((state) => state.tab.activeTab);
-  const dispatch = useAppDispatch();
+const PastConsult = lazy(
+  () => import("@/pages/Consult/components/tabs/PastConsult"),
+);
+const ConsultCard = lazy(
+  () => import("@/pages/Consult/components/tabs/ConsultCard"),
+);
+const MedicineMemo = lazy(
+  () => import("@/pages/Consult/components/tabs/MedicineMemo"),
+);
+const MedicineConsult = lazy(
+  () => import("@/pages/Consult/components/tabs/MedicineConsult"),
+);
+const DiscardMedicine = lazy(
+  () => import("@/pages/Consult/components/tabs/DiscardMedicine"),
+);
+
+const TabTitle = ({
+  text,
+  goPage,
+  isHidden,
+}: {
+  text: string;
+  goPage: ConsultTab;
+  isHidden?: boolean;
+}) => {
+  const { activeTab, setActiveTab } = useConsultTabStore();
 
   return (
     <p
@@ -21,15 +41,16 @@ const tabTitle = (text: string, goPage: string, isHidden?: boolean) => {
         isHidden ? "hidden" : ""
       } mr-10 py-3 h-full flex items-center hover:text-primary-50 hover:border-b-2 border-primary-50 cursor-pointer`}
       onClick={() => {
-        dispatch(changeActiveTab(goPage));
-        navigate(goPage);
+        setActiveTab(goPage);
       }}>
       {text}
     </p>
   );
 };
 
-function Consult() {
+function index() {
+  const { activeTab } = useConsultTabStore();
+
   const [hidePastConsultTab, setHidePastConsultTab] = useState(true);
   let diseasesLength = 0;
   const SHOW_DISEASE_COUNT = 5;
@@ -57,7 +78,6 @@ function Consult() {
     return response.data.data;
   };
 
-  const navigate = useNavigate();
   const previousCounselQuery = useQuery({
     queryKey: ["previousCounsel"],
     queryFn: selectPreviousCounselSessionList,
@@ -77,10 +97,8 @@ function Consult() {
   useEffect(() => {
     if (previousCounselQuery.data?.status !== 204) {
       setHidePastConsultTab(false);
-      navigate("/consult/pastConsult");
     } else {
       setHidePastConsultTab(true);
-      navigate("/consult/consultCard");
     }
   }, [previousCounselQuery.data]);
 
@@ -128,15 +146,60 @@ function Consult() {
         </div>
       </div>
       <div className="flex flex-row items-center justify-start w-full h-auto pl-14 my-0 border-t-2 border-b-2 border-grayscale-5 ">
-        {tabTitle("이전 상담 내역", "/consult/pastConsult", hidePastConsultTab)}
-        {tabTitle("상담카드", "/consult/consultCard")}
-        {tabTitle("의약물 기록", "/consult/medicineMemo")}
-        {tabTitle("복약 상담", "/consult/medicineConsult")}
-        {tabTitle("폐의약품 처리", "/consult/discardMedicine")}
+        <TabTitle text="이전 상담 내역" goPage={ConsultTab.pastConsult} />
+        <TabTitle text="상담카드" goPage={ConsultTab.consultCard} />
+        <TabTitle text="의약물 기록" goPage={ConsultTab.medicineMemo} />
+        <TabTitle text="복약 상담" goPage={ConsultTab.medicineConsult} />
+        <TabTitle text="폐의약품 처리" goPage={ConsultTab.discardMedicine} />
       </div>
-      <Outlet />
+      {/* @TODO: skeleton 추가 or loading 인디케이터 추가  */}
+      <Suspense
+        fallback={
+          <div className="flex items-center justify-center w-full min-h-[800px]">
+            <div
+              className="animate-spin rounded-full border-2 border-solid border-primary-50"
+              style={{
+                borderTopColor: "transparent",
+                borderRightColor: "transparent",
+                width: "40px",
+                height: "40px",
+                animation: "spin 1s linear infinite",
+              }}
+            />
+          </div>
+        }>
+        <TabContent
+          activeTab={activeTab}
+          hidePastConsultTab={hidePastConsultTab}
+        />
+      </Suspense>
     </div>
   );
 }
 
-export default Consult;
+export default index;
+
+function TabContent({
+  activeTab,
+  hidePastConsultTab,
+}: {
+  activeTab: ConsultTab;
+  hidePastConsultTab: boolean;
+}) {
+  const defaultTab = hidePastConsultTab ? <ConsultCard /> : <PastConsult />;
+
+  switch (activeTab) {
+    case ConsultTab.pastConsult:
+      return <PastConsult />;
+    case ConsultTab.consultCard:
+      return <ConsultCard />;
+    case ConsultTab.medicineMemo:
+      return <MedicineMemo />;
+    case ConsultTab.medicineConsult:
+      return <MedicineConsult />;
+    case ConsultTab.discardMedicine:
+      return <DiscardMedicine />;
+    default:
+      return defaultTab;
+  }
+}
