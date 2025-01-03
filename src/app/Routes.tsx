@@ -5,32 +5,20 @@ import AssistantIndependentInfo from "@/pages/assistant/AssistantIndependentInfo
 import AssistantLifeInfo from "@/pages/assistant/AssistantLifeInfo";
 import AssistantRoot from "@/pages/assistant/AssistantRoot";
 import AssistantView from "@/pages/assistant/AssistantView";
-import Consult from "@/pages/consult/Consult";
-import ConsultCard from "@/pages/consult/ConsultCard";
-import DiscardMedicine from "@/pages/consult/DiscardMedicine";
-import MedicineConsult from "@/pages/consult/MedicineConsult";
-import MedicineMemo from "@/pages/consult/MedicineMemo";
-import PastConsult from "@/pages/consult/PastConsult";
+import Consult from "@/pages/Consult";
 import ErrorPage from "@/pages/ErrorPage";
 import Home from "@/pages/Home";
 import Layout from "@/pages/Layout";
-import { Navigate, RouteObject, useRoutes } from "react-router-dom";
+import { RouteObject, useRoutes } from "react-router-dom";
 
 type AppRouteObject = RouteObject & {
   children?: AppRouteObject[];
 };
 
 const Routes = () => {
-  const rootRoutes: AppRouteObject = {
-    path: "/",
-    element: <Navigate to="/main" />,
-    errorElement: <ErrorPage />,
-  };
-
   const noMatchRoutes: AppRouteObject = {
-    path: "*",
-    element: <Navigate to="/" />,
-    errorElement: <ErrorPage />,
+    path: "/*",
+    element: <ErrorPage />,
   };
 
   const mainRoutes: AppRouteObject = {
@@ -39,27 +27,19 @@ const Routes = () => {
     errorElement: <ErrorPage />,
     children: [
       {
-        path: "main",
+        path: "/",
         element: <Home />,
       },
     ],
   };
 
   const consultRoutes: AppRouteObject = {
-    path: "/",
+    path: "/consult",
     element: <Layout />,
     children: [
       {
-        path: "consult",
+        path: "",
         element: <Consult />,
-        children: [
-          { index: true, element: <PastConsult /> },
-          { path: "pastConsult", element: <PastConsult /> },
-          { path: "consultCard", element: <ConsultCard /> },
-          { path: "medicineMemo", element: <MedicineMemo /> },
-          { path: "medicineConsult", element: <MedicineConsult /> },
-          { path: "discardMedicine", element: <DiscardMedicine /> },
-        ],
       },
     ],
   };
@@ -86,7 +66,6 @@ const Routes = () => {
     ],
   };
   const routes: AppRouteObject[] = [
-    rootRoutes,
     noMatchRoutes,
     mainRoutes,
     consultRoutes,

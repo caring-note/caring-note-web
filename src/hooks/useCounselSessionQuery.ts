@@ -1,4 +1,4 @@
-import { CounselSessionControllerApi } from "@api/api";
+import { CounselSessionControllerApi } from "@/api/api";
 import { useQuery } from "@tanstack/react-query";
 
 interface FetchParams {

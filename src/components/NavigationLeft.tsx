@@ -16,7 +16,6 @@ import logoBlack from "@/assets/logoBlack.png";
 import NavigationLeftMenu from "@/components/NavigationLeftMenu";
 import { useNavigate } from "react-router-dom";
 
-
 const NavigationLeft = () => {
   const navigate = useNavigate();
 
@@ -83,7 +82,7 @@ const NavigationLeft = () => {
           className="hover:cursor-pointer"
           src={logoBlack}
           alt="logo"
-          onClick={() => navigate("/consult/home")}
+          onClick={() => navigate("/")}
         />
       </div>
     </div>

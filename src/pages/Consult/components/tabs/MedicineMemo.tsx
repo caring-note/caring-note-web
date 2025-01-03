@@ -23,7 +23,7 @@ import { useEffect } from "react";
 import { useAppDispatch } from "@/app/reduxHooks";
 import NulpeumImg from "@/assets/temp-nulpeum.png";
 import TabContentContainer from "@/components/consult/TabContentContainer";
-import GrayContainer from "./GrayContainer";
+import GrayContainer from "../GrayContainer";
 
 const MedicineMemo: React.FC = () => {
   const counselSessionId = "TEST-COUNSEL-SESSION-01"; // TODO : 다른 곳에서 전달받아야됨

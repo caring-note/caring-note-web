@@ -15,10 +15,10 @@ import {
 } from "@/utils/TableUtils";
 import moment from "moment";
 import React, { useEffect } from "react";
-import { useAppDispatch } from "../../app/reduxHooks";
-import TabContentContainer from "../../components/consult/TabContentContainer";
-import TabContentTitle from "../../components/consult/TabContentTitle";
-import { changeActiveTab } from "../../reducers/tabReducer";
+import { useAppDispatch } from "../../../../app/reduxHooks";
+import TabContentContainer from "../../../../components/consult/TabContentContainer";
+import TabContentTitle from "../../../../components/consult/TabContentTitle";
+import { changeActiveTab } from "../../../../reducers/tabReducer";
 
 const PastConsult: React.FC = () => {
   const counselSessionId = "TEST-COUNSEL-SESSION-01"; // TODO : 다른 곳에서 전달받아야됨
