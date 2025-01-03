@@ -1,16 +1,8 @@
 {
   "compilerOptions": {
-    "baseUrl": "src", // 기준 경로 설정
+    "baseUrl": ".", // 기준 경로 설정
     "paths": {
-      "@components/*": ["components/*"], // 별칭 설정
-      "@pages/*": ["pages/*"],
-      "@assets/*": ["assets/*"],
-      "@icon/*": ["assets/icon/*"],
-      "@reducers/*": ["reducers/*"],
-      "@utils/*": ["utils/*"],
-      "@api/*": ["api/*"],
-      "@store/*": ["store/*"],
-      "@hooks/*": ["hooks/*"]
+      "@/*": ["./src/*"]
     }
   },
   "files": [],
