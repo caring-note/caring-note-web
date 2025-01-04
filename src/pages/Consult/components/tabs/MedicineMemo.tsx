@@ -3,26 +3,23 @@ import {
   MedicationControllerApi,
   MedicationRecordHistControllerApi,
   SelectMedicationRecordHistResDivisionCodeEnum,
-  SelectMedicationRecordHistResUsageStatusCodeEnum,
 } from "@/api/api";
+import NulpeumImg from "@/assets/temp-nulpeum.png";
 import SearchComponent from "@/components/common/SearchComponent";
 import TableComponent from "@/components/common/TableComponent";
+import TabContentContainer from "@/components/consult/TabContentContainer";
 import { Button } from "@/components/ui/button";
-import { GridColDef } from "@mui/x-data-grid";
-import { changeActiveTab } from "@/reducers/tabReducer";
 import useMedicineMemoStore from "@/store/medicineMemoStore";
 import useNomalMedicineTableStore from "@/store/nomalMedicineTableStore";
 import usePrescribedMedicineTableStore from "@/store/prescribedMedicineTableStore";
-import { useQuery } from "@tanstack/react-query";
 import {
   createDefaultDateColumn,
   createDefaultNumberColumn,
   createDefaultTextColumn,
 } from "@/utils/TableUtils";
+import { GridColDef } from "@mui/x-data-grid";
+import { useQuery } from "@tanstack/react-query";
 import { useEffect } from "react";
-import { useAppDispatch } from "@/app/reduxHooks";
-import NulpeumImg from "@/assets/temp-nulpeum.png";
-import TabContentContainer from "@/components/consult/TabContentContainer";
 import GrayContainer from "../GrayContainer";
 
 const MedicineMemo: React.FC = () => {
@@ -98,12 +95,6 @@ const MedicineMemo: React.FC = () => {
     deletePrescribedMedicineRowById,
     setSelectedPrescribedMedicineRowIds,
   } = usePrescribedMedicineTableStore();
-
-  const dispatch = useAppDispatch();
-  useEffect(() => {
-    // 새로고침이 되었을 때도 active tab 을 잃지 않도록 컴포넌트 load 시 dispatch
-    dispatch(changeActiveTab("/consult/medicineMemo")); // 해당 tab의 url
-  }, []);
 
   useEffect(() => {
     // API 호출
