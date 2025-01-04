@@ -67,7 +67,7 @@ const MedicineMemo: React.FC = () => {
   });
   const addAndUpdateMedicationRecordHistQuery = useQuery({
     queryKey: ["addAndUpdateMedicationRecordHist"],
-    queryFn: () => addAndUpdateMedicationRecordHist,
+    queryFn: () => addAndUpdateMedicationRecordHist(editedData || []),
     enabled: false,
   });
 
@@ -307,7 +307,7 @@ const MedicineMemo: React.FC = () => {
     console.log("수정된 editedData", editedData);
 
     // edited Data 에 있는 값으로 API 호출
-    addAndUpdateMedicationRecordHistQuery.refetch(editedData);
+    addAndUpdateMedicationRecordHistQuery.refetch();
   };
 
   return (
