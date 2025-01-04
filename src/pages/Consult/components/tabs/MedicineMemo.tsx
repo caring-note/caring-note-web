@@ -2,6 +2,7 @@ import {
   AddAndUpdateMedicationRecordHistReq,
   MedicationControllerApi,
   MedicationRecordHistControllerApi,
+  SelectMedicationRecordHistRes,
   SelectMedicationRecordHistResDivisionCodeEnum,
 } from "@/api/api";
 import NulpeumImg from "@/assets/temp-nulpeum.png";
@@ -105,11 +106,11 @@ const MedicineMemo: React.FC = () => {
         selectMedicationRecordListBySessionIdQuery.isSuccess &&
         JSON.stringify(originalData) === "[]"
       ) {
-        setHttpStatus &&
+        if (setHttpStatus)
           setHttpStatus(
             selectMedicationRecordListBySessionIdQuery.data?.status || 0,
           );
-        setOriginalData &&
+        if (setOriginalData)
           setOriginalData([
             ...(selectMedicationRecordListBySessionIdQuery.data?.data?.data ||
               []),
@@ -118,35 +119,36 @@ const MedicineMemo: React.FC = () => {
         console.log("jw, medicineMemo:: originalData updated!!");
 
         // 의약품 테이블 zustand 데이터 세팅
-        selectMedicationRecordListBySessionIdQuery.data?.data?.data?.map(
-          (item) => {
-            if (
-              item.divisionCode ===
-              SelectMedicationRecordHistResDivisionCodeEnum.Prescription
-            ) {
-              addPrescribedMedicineRow({
-                id: item.rowId,
-                col1: item.usageStatusCode,
-                col2: item.medicationName,
-                col3: item.usageObject,
-                col4: item.prescriptionDate,
-                col5: item.prescriptionDays,
-              });
-            } else if (
-              item.divisionCode ===
-              SelectMedicationRecordHistResDivisionCodeEnum.Otc
-            ) {
-              addNormalMedicineRow({
-                id: item.rowId,
-                col1: item.usageStatusCode,
-                col2: item.medicationName,
-                col3: item.usageObject,
-                col4: item.prescriptionDate,
-                col5: item.prescriptionDays,
-              });
-            }
-          },
-        );
+        (
+          selectMedicationRecordListBySessionIdQuery.data?.data
+            ?.data as SelectMedicationRecordHistRes[]
+        )?.map((item) => {
+          if (
+            item.divisionCode ===
+            SelectMedicationRecordHistResDivisionCodeEnum.Prescription
+          ) {
+            addPrescribedMedicineRow({
+              id: item.rowId,
+              col1: item.usageStatusCode,
+              col2: item.medicationName,
+              col3: item.usageObject,
+              col4: item.prescriptionDate,
+              col5: item.prescriptionDays,
+            });
+          } else if (
+            item.divisionCode ===
+            SelectMedicationRecordHistResDivisionCodeEnum.Otc
+          ) {
+            addNormalMedicineRow({
+              id: item.rowId,
+              col1: item.usageStatusCode,
+              col2: item.medicationName,
+              col3: item.usageObject,
+              col4: item.prescriptionDate,
+              col5: item.prescriptionDays,
+            });
+          }
+        });
       }
     });
   }, [originalData]);
@@ -230,31 +232,82 @@ const MedicineMemo: React.FC = () => {
     console.log("originalData", originalData);
     console.log("prescribedMedicineRows", prescribedMedicineRows);
 
-    // prescribedMedicineRows 에 수정되어 저장돼있는걸 editedData 에 이쁘게 넣어주기
+    // prescribedMedicineRows와 normalMedicineRows 에 수정되어 저장돼있는걸 editedData 에 이쁘게 넣어주기
     editedData?.map((item) => {
-      const idx = prescribedMedicineRows.findIndex(
+      // 처방의약품
+      const prescribedIdx = prescribedMedicineRows.findIndex(
         (row) => row.id === item.rowId,
       );
-
-      // 조회해온 데이터를 수정한 경우
-      if (idx !== -1) {
-        item.usageStatusCode = prescribedMedicineRows[idx].col1;
-        item.medicationName = prescribedMedicineRows[idx].col2;
-        item.usageObject = prescribedMedicineRows[idx].col3;
-        item.prescriptionDate = prescribedMedicineRows[idx].col4;
-        item.prescriptionDays = prescribedMedicineRows[idx].col5;
+      // 조회해온 처방의약품을 수정한 경우
+      if (prescribedIdx !== -1) {
+        item.usageStatusCode = prescribedMedicineRows[prescribedIdx].col1;
+        item.name = prescribedMedicineRows[prescribedIdx].col2;
+        item.usageObject = prescribedMedicineRows[prescribedIdx].col3;
+        item.prescriptionDate = prescribedMedicineRows[prescribedIdx].col4;
+        item.prescriptionDays = prescribedMedicineRows[prescribedIdx].col5;
       }
+
+      // 일반의약품
+      const normalIdx = normalMedicineRows.findIndex(
+        (row) => row.id === item.rowId,
+      );
+      // 조회해온 일반의약품을 수정한 경우
+      if (normalIdx !== -1) {
+        item.usageStatusCode = normalMedicineRows[normalIdx].col1;
+        item.name = normalMedicineRows[normalIdx].col2;
+        item.usageObject = normalMedicineRows[normalIdx].col3;
+        item.prescriptionDate = normalMedicineRows[normalIdx].col4;
+        item.prescriptionDays = normalMedicineRows[normalIdx].col5;
+      }
+
       // 모든 row에 대해 medicationId 를 넣어주기 (있는 경우에만)
       item.medicationId =
         searchMedicationByKeywordQuery.data?.data?.data?.find(
-          (medication) => medication.itemName === item.medicationName,
+          (medication) => medication.itemName === item.name,
         )?.id || "";
+    });
+
+    // 추가된 처방의약품과 일반의약품을 editedData 에 넣어주기
+    prescribedMedicineRows.forEach((row) => {
+      if (editedData?.findIndex((item) => item.rowId === row.id) === -1) {
+        editedData?.push({
+          rowId: row.id,
+          divisionCode:
+            SelectMedicationRecordHistResDivisionCodeEnum.Prescription,
+          usageStatusCode: row.col1,
+          name: row.col2,
+          usageObject: row.col3,
+          prescriptionDate: row.col4,
+          prescriptionDays: row.col5,
+          medicationId:
+            searchMedicationByKeywordQuery.data?.data?.data?.find(
+              (medication) => medication.itemName === row.col2,
+            )?.id || "",
+        });
+      }
+    });
+    normalMedicineRows.forEach((row) => {
+      if (editedData?.findIndex((item) => item.rowId === row.id) === -1) {
+        editedData?.push({
+          rowId: row.id,
+          divisionCode: SelectMedicationRecordHistResDivisionCodeEnum.Otc,
+          usageStatusCode: row.col1,
+          name: row.col2,
+          usageObject: row.col3,
+          prescriptionDate: row.col4,
+          prescriptionDays: row.col5,
+          medicationId:
+            searchMedicationByKeywordQuery.data?.data?.data?.find(
+              (medication) => medication.itemName === row.col2,
+            )?.id || "",
+        });
+      }
     });
 
     console.log("수정된 editedData", editedData);
 
-    // editted Data 에 있는 값으로 API 호출
-    // 현재 단계에서 데이터 잘 받고 editedData 에 잘 들어가는지 확인 후 등록 API 호출
+    // edited Data 에 있는 값으로 API 호출
+    addAndUpdateMedicationRecordHistQuery.refetch(editedData);
   };
 
   return (
@@ -342,7 +395,7 @@ const MedicineMemo: React.FC = () => {
           <p
             className="text-subtitle2 font-bold text-grayscale-90 mt-8"
             onClick={test}>
-            유용한 사이트
+            유용한 사이트 (TEST : 여기를 클릭하여 의약물 등록 API 호출)
           </p>
           <div className="mt-6">
             <img
