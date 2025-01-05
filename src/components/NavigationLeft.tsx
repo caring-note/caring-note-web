@@ -26,15 +26,17 @@ const NavigationLeft = () => {
         onClick={() => {
           // TEST CODE : 박진완 로그인 API 호출 및 토큰 세팅
           const counselorCountroller = new CounselorControllerApi();
-          counselorCountroller
-            .login({
-              email: "jw@jw.com",
-              password: "rksk12!@",
-            })
-            .then((response) => {
-              console.log(response);
-              setToken(response.headers.authorization.split(" ")[1]); // 토큰 저장
-            });
+          counselorCountroller.login();
+          // then((response) => {
+          //   // response 의 http status code 가 302인 경우 리다이렉트 처리
+          //   if (response.status === 302) {
+          //     const location = response.headers.location;
+          //     if (location) {
+          //       console.log("Redirect to", location);
+          //       navigate(location);
+          //     }
+          //   }
+          // });
         }}>
         <span className="text-subtitle2 font-bold mr-3">{"박진완"}</span>
         <span className="text-body1 font-medium">{`${"약사"}님`}</span>

@@ -7,17 +7,25 @@ import Button from "../../../../components/Button";
 import CardContainer from "../../../../components/common/CardContainer";
 import TabContentContainer from "../../../../components/consult/TabContentContainer";
 import TabContentTitle from "../../../../components/consult/TabContentTitle";
+import { useNavigate } from "react-router-dom";
 
 const ConsultCard: React.FC = () => {
   const counselSessionId = "TEST-COUNSEL-SESSION-01"; // TODO : 다른 곳에서 전달받아야됨
 
   const counselCardControllerApi = new CounselCardControllerApi();
 
+  const navigate = useNavigate();
   const selectCounselCard = async () => {
     const response = await counselCardControllerApi.selectCounselCard(
       counselSessionId,
     );
     console.log("selectCounselCard", response);
+
+    // 302 리다이렉트 테스트 (25-01-05)
+    if (response.status === 302) {
+      console.log("Redirect to", response.headers.location);
+      navigate(response.headers.location);
+    }
     return response;
   };
 
