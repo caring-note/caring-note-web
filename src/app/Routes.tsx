@@ -9,6 +9,7 @@ import Consult from "@/pages/Consult";
 import ErrorPage from "@/pages/ErrorPage";
 import Home from "@/pages/Home";
 import Layout from "@/pages/Layout";
+import { useKeycloak } from "@react-keycloak/web";
 import { RouteObject, useRoutes } from "react-router-dom";
 
 type AppRouteObject = RouteObject & {
@@ -16,22 +17,30 @@ type AppRouteObject = RouteObject & {
 };
 
 const Routes = () => {
-  const noMatchRoutes: AppRouteObject = {
-    path: "/*",
-    element: <ErrorPage />,
-  };
+    const { keycloak , initialized} = useKeycloak();
+    if (keycloak && !keycloak?.authenticated && initialized) {
+        keycloak?.login({
+            scope: "openid profile email",
+            prompt: "login",
+            redirectUri: window.location.origin,
+        });
+    }
+    const noMatchRoutes: AppRouteObject = {
+      path: "/*",
+      element: <ErrorPage />,
+    };
 
-  const mainRoutes: AppRouteObject = {
-    path: "/",
-    element: <Layout />,
-    errorElement: <ErrorPage />,
-    children: [
-      {
-        path: "/",
-        element: <Home />,
-      },
-    ],
-  };
+    const mainRoutes: AppRouteObject = {
+      path: "/",
+      element: <Layout />,
+      errorElement: <ErrorPage />,
+      children: [
+        {
+          path: "/",
+          element: <Home />,
+        },
+      ],
+    }; 
 
   const consultRoutes: AppRouteObject = {
     path: "/consult",
