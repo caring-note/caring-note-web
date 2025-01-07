@@ -1,11 +1,42 @@
 // src/keycloak.js
+import { AuthClientError, AuthClientEvent } from '@react-keycloak/core';
 import Keycloak from 'keycloak-js';
 
 // Keycloak 설정. 여기서 url, realm, clientId는 위에서 만든 값으로 교체
 const keycloak = new Keycloak({
-  url: 'http://caringnote.co.kr/keycloak',
+  url: 'https://caringnote.co.kr/keycloak',
   realm: 'caringnote',
   clientId: 'caringnote',
 });
+
+export const initOptions = {
+  onLoad: 'login-required',
+  checkLoginIframe: false,
+  pkceMethod: 'S256',
+};
+
+// keycloak Event 를 보기 위한 함수 정의
+// keycloak provider 의 onEvent 에 넣어준다.
+export const onKeycloakEvent = (event: AuthClientEvent, error?: AuthClientError) => {
+  console.log('keycloak event ', event, error);
+  switch (event) {
+    case 'onAuthError':
+      keycloak.login();
+      break;
+    case 'onAuthLogout':
+      keycloak.login();
+      break;
+    case 'onAuthSuccess':
+      console.log('onAuthSuccess');
+      // useAuth.getState().login(keycloak.token);
+      break;
+    case 'onAuthRefreshError':
+      keycloak.login();
+      break;
+    case 'onTokenExpired':
+      keycloak.updateToken(30);
+      break;
+  }
+};
 
 export default keycloak;
