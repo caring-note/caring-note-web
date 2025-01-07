@@ -1,4 +1,3 @@
-import keycloak from '@/app/keycloak';
 import AdminBlackIcon from '@/assets/icon/24/accountcircle.fiiled.black.svg?react';
 import AdminBlueIcon from '@/assets/icon/24/accountcircle.fiiled.blue.svg?react';
 import QuestionBlackIcon from '@/assets/icon/24/help.fiiled.black.svg?react';
@@ -13,18 +12,21 @@ import PatientBlackIcon from '@/assets/icon/24/patient.fiiled.black.svg?react';
 import PatientBlueIcon from '@/assets/icon/24/patient.fiiled.blue.svg?react';
 import logoBlack from '@/assets/logoBlack.png';
 import NavigationLeftMenu from '@/components/NavigationLeftMenu';
+import { useKeycloak } from '@react-keycloak/web';
 import { useNavigate } from 'react-router-dom';
 
 const NavigationLeft = () => {
   const navigate = useNavigate();
+  const { keycloak } = useKeycloak();
 
   return (
     <div className="w-52 h-auto bg-grayscale-3 relative py-0 z-1000">
       <div className="flex justify-start items-end p-5">
         <span className="text-subtitle2 font-bold mr-3">
-          {keycloak.tokenParsed?.preferred_username}
+          {keycloak.tokenParsed?.family_name ?? ''}
+          {keycloak.tokenParsed?.given_name ?? ''}
         </span>
-        <span className="text-body1 font-medium">{`${'TODO'}님`}</span>
+        <span className="text-body1 font-medium">{`${'약사'}님`}</span>
       </div>
       <hr className="border-t border-grayscale-10" />
       <NavigationLeftMenu
