@@ -12,9 +12,9 @@
  * Do not edit the class manually.
  */
 
-import type { Configuration } from "./configuration";
-import type { AxiosPromise, AxiosInstance, RawAxiosRequestConfig } from "axios";
-import globalAxios from "axios";
+import type { Configuration } from './configuration';
+import type { AxiosPromise, AxiosInstance, RawAxiosRequestConfig } from 'axios';
+import globalAxios from 'axios';
 // Some imports not used depending on template conditions
 // @ts-ignore
 import {
@@ -28,8 +28,8 @@ import {
   serializeDataIfNeeded,
   toPathString,
   createRequestFunction,
-} from "./common";
-import type { RequestArgs } from "./base";
+} from './common';
+import type { RequestArgs } from './base';
 // @ts-ignore
 import {
   BASE_PATH,
@@ -37,7 +37,7 @@ import {
   BaseAPI,
   RequiredError,
   operationServerMap,
-} from "./base";
+} from './base';
 
 /**
  *
@@ -102,16 +102,16 @@ export interface AddAndUpdateMedicationRecordHistReq {
 }
 
 export const AddAndUpdateMedicationRecordHistReqDivisionCodeEnum = {
-  Prescription: "PRESCRIPTION",
-  Otc: "OTC",
+  Prescription: 'PRESCRIPTION',
+  Otc: 'OTC',
 } as const;
 
 export type AddAndUpdateMedicationRecordHistReqDivisionCodeEnum =
   (typeof AddAndUpdateMedicationRecordHistReqDivisionCodeEnum)[keyof typeof AddAndUpdateMedicationRecordHistReqDivisionCodeEnum];
 export const AddAndUpdateMedicationRecordHistReqUsageStatusCodeEnum = {
-  Regular: "REGULAR",
-  AsNeeded: "AS_NEEDED",
-  Stopped: "STOPPED",
+  Regular: 'REGULAR',
+  AsNeeded: 'AS_NEEDED',
+  Stopped: 'STOPPED',
 } as const;
 
 export type AddAndUpdateMedicationRecordHistReqUsageStatusCodeEnum =
@@ -225,9 +225,9 @@ export interface AddCounselCardReq {
 }
 
 export const AddCounselCardReqCardRecordStatusEnum = {
-  Unrecorded: "UNRECORDED",
-  Recording: "RECORDING",
-  Recorded: "RECORDED",
+  Unrecorded: 'UNRECORDED',
+  Recording: 'RECORDING',
+  Recorded: 'RECORDED',
 } as const;
 
 export type AddCounselCardReqCardRecordStatusEnum =
@@ -279,10 +279,10 @@ export interface AddCounselSessionReq {
 }
 
 export const AddCounselSessionReqStatusEnum = {
-  Scheduled: "SCHEDULED",
-  Progress: "PROGRESS",
-  Completed: "COMPLETED",
-  Canceled: "CANCELED",
+  Scheduled: 'SCHEDULED',
+  Progress: 'PROGRESS',
+  Completed: 'COMPLETED',
+  Canceled: 'CANCELED',
 } as const;
 
 export type AddCounselSessionReqStatusEnum =
@@ -372,8 +372,8 @@ export interface AddMedicationCounselReq {
 }
 
 export const AddMedicationCounselReqCounselNeedStatusEnum = {
-  One: "ONE",
-  Continuous: "CONTINUOUS",
+  One: 'ONE',
+  Continuous: 'CONTINUOUS',
 } as const;
 
 export type AddMedicationCounselReqCounselNeedStatusEnum =
@@ -1400,9 +1400,9 @@ export interface SelectCounselCardRes {
 }
 
 export const SelectCounselCardResCardRecordStatusEnum = {
-  Unrecorded: "UNRECORDED",
-  Recording: "RECORDING",
-  Recorded: "RECORDED",
+  Unrecorded: 'UNRECORDED',
+  Recording: 'RECORDING',
+  Recorded: 'RECORDED',
 } as const;
 
 export type SelectCounselCardResCardRecordStatusEnum =
@@ -1477,18 +1477,18 @@ export interface SelectCounselSessionListItem {
 }
 
 export const SelectCounselSessionListItemStatusEnum = {
-  Scheduled: "SCHEDULED",
-  Progress: "PROGRESS",
-  Completed: "COMPLETED",
-  Canceled: "CANCELED",
+  Scheduled: 'SCHEDULED',
+  Progress: 'PROGRESS',
+  Completed: 'COMPLETED',
+  Canceled: 'CANCELED',
 } as const;
 
 export type SelectCounselSessionListItemStatusEnum =
   (typeof SelectCounselSessionListItemStatusEnum)[keyof typeof SelectCounselSessionListItemStatusEnum];
 export const SelectCounselSessionListItemCardRecordStatusEnum = {
-  Unrecorded: "UNRECORDED",
-  Recording: "RECORDING",
-  Recorded: "RECORDED",
+  Unrecorded: 'UNRECORDED',
+  Recording: 'RECORDING',
+  Recorded: 'RECORDED',
 } as const;
 
 export type SelectCounselSessionListItemCardRecordStatusEnum =
@@ -1624,28 +1624,28 @@ export interface SelectCounseleeBaseInformationByCounseleeIdRes {
 }
 
 export const SelectCounseleeBaseInformationByCounseleeIdResGenderEnum = {
-  Male: "MALE",
-  Female: "FEMALE",
-  Else: "ELSE",
+  Male: 'MALE',
+  Female: 'FEMALE',
+  Else: 'ELSE',
 } as const;
 
 export type SelectCounseleeBaseInformationByCounseleeIdResGenderEnum =
   (typeof SelectCounseleeBaseInformationByCounseleeIdResGenderEnum)[keyof typeof SelectCounseleeBaseInformationByCounseleeIdResGenderEnum];
 export const SelectCounseleeBaseInformationByCounseleeIdResHealthInsuranceTypeEnum =
   {
-    HealthInsurance: "HEALTH_INSURANCE",
-    MedicalAid: "MEDICAL_AID",
-    VeteransBenefits: "VETERANS_BENEFITS",
-    NonCovered: "NON_COVERED",
+    HealthInsurance: 'HEALTH_INSURANCE',
+    MedicalAid: 'MEDICAL_AID',
+    VeteransBenefits: 'VETERANS_BENEFITS',
+    NonCovered: 'NON_COVERED',
   } as const;
 
 export type SelectCounseleeBaseInformationByCounseleeIdResHealthInsuranceTypeEnum =
   (typeof SelectCounseleeBaseInformationByCounseleeIdResHealthInsuranceTypeEnum)[keyof typeof SelectCounseleeBaseInformationByCounseleeIdResHealthInsuranceTypeEnum];
 export const SelectCounseleeBaseInformationByCounseleeIdResCardRecordStatusEnum =
   {
-    Unrecorded: "UNRECORDED",
-    Recording: "RECORDING",
-    Recorded: "RECORDED",
+    Unrecorded: 'UNRECORDED',
+    Recording: 'RECORDING',
+    Recorded: 'RECORDED',
   } as const;
 
 export type SelectCounseleeBaseInformationByCounseleeIdResCardRecordStatusEnum =
@@ -1727,8 +1727,8 @@ export interface SelectMedicationCounselRes {
 }
 
 export const SelectMedicationCounselResCounselNeedStatusEnum = {
-  One: "ONE",
-  Continuous: "CONTINUOUS",
+  One: 'ONE',
+  Continuous: 'CONTINUOUS',
 } as const;
 
 export type SelectMedicationCounselResCounselNeedStatusEnum =
@@ -1821,16 +1821,16 @@ export interface SelectMedicationRecordHistRes {
 }
 
 export const SelectMedicationRecordHistResDivisionCodeEnum = {
-  Prescription: "PRESCRIPTION",
-  Otc: "OTC",
+  Prescription: 'PRESCRIPTION',
+  Otc: 'OTC',
 } as const;
 
 export type SelectMedicationRecordHistResDivisionCodeEnum =
   (typeof SelectMedicationRecordHistResDivisionCodeEnum)[keyof typeof SelectMedicationRecordHistResDivisionCodeEnum];
 export const SelectMedicationRecordHistResUsageStatusCodeEnum = {
-  Regular: "REGULAR",
-  AsNeeded: "AS_NEEDED",
-  Stopped: "STOPPED",
+  Regular: 'REGULAR',
+  AsNeeded: 'AS_NEEDED',
+  Stopped: 'STOPPED',
 } as const;
 
 export type SelectMedicationRecordHistResUsageStatusCodeEnum =
@@ -2079,9 +2079,9 @@ export interface UpdateCounselCardReq {
 }
 
 export const UpdateCounselCardReqCardRecordStatusEnum = {
-  Unrecorded: "UNRECORDED",
-  Recording: "RECORDING",
-  Recorded: "RECORDED",
+  Unrecorded: 'UNRECORDED',
+  Recording: 'RECORDING',
+  Recorded: 'RECORDED',
 } as const;
 
 export type UpdateCounselCardReqCardRecordStatusEnum =
@@ -2139,10 +2139,10 @@ export interface UpdateCounselSessionReq {
 }
 
 export const UpdateCounselSessionReqStatusEnum = {
-  Scheduled: "SCHEDULED",
-  Progress: "PROGRESS",
-  Completed: "COMPLETED",
-  Canceled: "CANCELED",
+  Scheduled: 'SCHEDULED',
+  Progress: 'PROGRESS',
+  Completed: 'COMPLETED',
+  Canceled: 'CANCELED',
 } as const;
 
 export type UpdateCounselSessionReqStatusEnum =
@@ -2258,8 +2258,8 @@ export interface UpdateMedicationCounselReq {
 }
 
 export const UpdateMedicationCounselReqCounselNeedStatusEnum = {
-  One: "ONE",
-  Continuous: "CONTINUOUS",
+  One: 'ONE',
+  Continuous: 'CONTINUOUS',
 } as const;
 
 export type UpdateMedicationCounselReqCounselNeedStatusEnum =
@@ -2299,10 +2299,10 @@ export interface UpdateStatusInCounselSessionReq {
 }
 
 export const UpdateStatusInCounselSessionReqStatusEnum = {
-  Scheduled: "SCHEDULED",
-  Progress: "PROGRESS",
-  Completed: "COMPLETED",
-  Canceled: "CANCELED",
+  Scheduled: 'SCHEDULED',
+  Progress: 'PROGRESS',
+  Completed: 'COMPLETED',
+  Canceled: 'CANCELED',
 } as const;
 
 export type UpdateStatusInCounselSessionReqStatusEnum =
@@ -2421,16 +2421,16 @@ export interface WasteMedicationDisposal {
 }
 
 export const WasteMedicationDisposalDrugRemainActionTypeEnum = {
-  DoctorOrPharmacist: "DOCTOR_OR_PHARMACIST",
-  SelfDecision: "SELF_DECISION",
-  None: "NONE",
+  DoctorOrPharmacist: 'DOCTOR_OR_PHARMACIST',
+  SelfDecision: 'SELF_DECISION',
+  None: 'NONE',
 } as const;
 
 export type WasteMedicationDisposalDrugRemainActionTypeEnum =
   (typeof WasteMedicationDisposalDrugRemainActionTypeEnum)[keyof typeof WasteMedicationDisposalDrugRemainActionTypeEnum];
 export const WasteMedicationDisposalRecoveryAgreementTypeEnum = {
-  Agree: "AGREE",
-  Disagree: "DISAGREE",
+  Agree: 'AGREE',
+  Disagree: 'DISAGREE',
 } as const;
 
 export type WasteMedicationDisposalRecoveryAgreementTypeEnum =
@@ -2481,28 +2481,28 @@ export interface WasteMedicationDisposalReq {
 }
 
 export const WasteMedicationDisposalReqUnusedReasonTypesEnum = {
-  Recovered: "RECOVERED",
-  SideEffect: "SIDE_EFFECT",
-  Retreated: "RETREATED",
-  Replaced: "REPLACED",
-  Forgotten: "FORGOTTEN",
-  Reserved: "RESERVED",
-  Etc: "ETC",
+  Recovered: 'RECOVERED',
+  SideEffect: 'SIDE_EFFECT',
+  Retreated: 'RETREATED',
+  Replaced: 'REPLACED',
+  Forgotten: 'FORGOTTEN',
+  Reserved: 'RESERVED',
+  Etc: 'ETC',
 } as const;
 
 export type WasteMedicationDisposalReqUnusedReasonTypesEnum =
   (typeof WasteMedicationDisposalReqUnusedReasonTypesEnum)[keyof typeof WasteMedicationDisposalReqUnusedReasonTypesEnum];
 export const WasteMedicationDisposalReqDrugRemainActionTypeEnum = {
-  DoctorOrPharmacist: "DOCTOR_OR_PHARMACIST",
-  SelfDecision: "SELF_DECISION",
-  None: "NONE",
+  DoctorOrPharmacist: 'DOCTOR_OR_PHARMACIST',
+  SelfDecision: 'SELF_DECISION',
+  None: 'NONE',
 } as const;
 
 export type WasteMedicationDisposalReqDrugRemainActionTypeEnum =
   (typeof WasteMedicationDisposalReqDrugRemainActionTypeEnum)[keyof typeof WasteMedicationDisposalReqDrugRemainActionTypeEnum];
 export const WasteMedicationDisposalReqRecoveryAgreementTypeEnum = {
-  Agree: "AGREE",
-  Disagree: "DISAGREE",
+  Agree: 'AGREE',
+  Disagree: 'DISAGREE',
 } as const;
 
 export type WasteMedicationDisposalReqRecoveryAgreementTypeEnum =
@@ -2545,19 +2545,19 @@ export const DefaultApiAxiosParamCreator = function (
     ): Promise<RequestArgs> => {
       // verify required parameter 'counselSessionId' is not null or undefined
       assertParamExists(
-        "addAndUpdateMedicationRecordHist",
-        "counselSessionId",
+        'addAndUpdateMedicationRecordHist',
+        'counselSessionId',
         counselSessionId,
       );
       // verify required parameter 'addAndUpdateMedicationRecordHistReq' is not null or undefined
       assertParamExists(
-        "addAndUpdateMedicationRecordHist",
-        "addAndUpdateMedicationRecordHistReq",
+        'addAndUpdateMedicationRecordHist',
+        'addAndUpdateMedicationRecordHistReq',
         addAndUpdateMedicationRecordHistReq,
       );
       const localVarPath =
         `/v1/counsel/medication/record/{counselSessionId}`.replace(
-          `{${"counselSessionId"}}`,
+          `{${'counselSessionId'}}`,
           encodeURIComponent(String(counselSessionId)),
         );
       // use dummy base URL string because the URL constructor only accepts absolute URLs.
@@ -2568,23 +2568,18 @@ export const DefaultApiAxiosParamCreator = function (
       }
 
       const localVarRequestOptions = {
-        method: "POST",
+        method: 'POST',
         ...baseOptions,
         ...options,
       };
       const localVarHeaderParameter = {} as any;
       const localVarQueryParameter = {} as any;
 
-      // authentication oauth2 required
-      // oauth required
-      await setOAuthToObject(
-        localVarHeaderParameter,
-        "oauth2",
-        [],
-        configuration,
-      );
+      // authentication bearer-jwt required
+      // http bearer authentication required
+      await setBearerAuthToObject(localVarHeaderParameter, configuration);
 
-      localVarHeaderParameter["Content-Type"] = "application/json";
+      localVarHeaderParameter['Content-Type'] = 'application/json';
 
       setSearchParams(localVarUrlObj, localVarQueryParameter);
       let headersFromBaseOptions =
@@ -2618,8 +2613,8 @@ export const DefaultApiAxiosParamCreator = function (
     ): Promise<RequestArgs> => {
       // verify required parameter 'addCounselCardReq' is not null or undefined
       assertParamExists(
-        "addCounselCard",
-        "addCounselCardReq",
+        'addCounselCard',
+        'addCounselCardReq',
         addCounselCardReq,
       );
       const localVarPath = `/v1/counsel/card`;
@@ -2631,23 +2626,18 @@ export const DefaultApiAxiosParamCreator = function (
       }
 
       const localVarRequestOptions = {
-        method: "POST",
+        method: 'POST',
         ...baseOptions,
         ...options,
       };
       const localVarHeaderParameter = {} as any;
       const localVarQueryParameter = {} as any;
 
-      // authentication oauth2 required
-      // oauth required
-      await setOAuthToObject(
-        localVarHeaderParameter,
-        "oauth2",
-        [],
-        configuration,
-      );
+      // authentication bearer-jwt required
+      // http bearer authentication required
+      await setBearerAuthToObject(localVarHeaderParameter, configuration);
 
-      localVarHeaderParameter["Content-Type"] = "application/json";
+      localVarHeaderParameter['Content-Type'] = 'application/json';
 
       setSearchParams(localVarUrlObj, localVarQueryParameter);
       let headersFromBaseOptions =
@@ -2681,8 +2671,8 @@ export const DefaultApiAxiosParamCreator = function (
     ): Promise<RequestArgs> => {
       // verify required parameter 'addCounselSessionReq' is not null or undefined
       assertParamExists(
-        "addCounselSession",
-        "addCounselSessionReq",
+        'addCounselSession',
+        'addCounselSessionReq',
         addCounselSessionReq,
       );
       const localVarPath = `/v1/counsel/session`;
@@ -2694,23 +2684,18 @@ export const DefaultApiAxiosParamCreator = function (
       }
 
       const localVarRequestOptions = {
-        method: "POST",
+        method: 'POST',
         ...baseOptions,
         ...options,
       };
       const localVarHeaderParameter = {} as any;
       const localVarQueryParameter = {} as any;
 
-      // authentication oauth2 required
-      // oauth required
-      await setOAuthToObject(
-        localVarHeaderParameter,
-        "oauth2",
-        [],
-        configuration,
-      );
+      // authentication bearer-jwt required
+      // http bearer authentication required
+      await setBearerAuthToObject(localVarHeaderParameter, configuration);
 
-      localVarHeaderParameter["Content-Type"] = "application/json";
+      localVarHeaderParameter['Content-Type'] = 'application/json';
 
       setSearchParams(localVarUrlObj, localVarQueryParameter);
       let headersFromBaseOptions =
@@ -2744,8 +2729,8 @@ export const DefaultApiAxiosParamCreator = function (
     ): Promise<RequestArgs> => {
       // verify required parameter 'addCounseleeConsentReq' is not null or undefined
       assertParamExists(
-        "addCounseleeConsent",
-        "addCounseleeConsentReq",
+        'addCounseleeConsent',
+        'addCounseleeConsentReq',
         addCounseleeConsentReq,
       );
       const localVarPath = `/v1/counselee/consent`;
@@ -2757,23 +2742,18 @@ export const DefaultApiAxiosParamCreator = function (
       }
 
       const localVarRequestOptions = {
-        method: "POST",
+        method: 'POST',
         ...baseOptions,
         ...options,
       };
       const localVarHeaderParameter = {} as any;
       const localVarQueryParameter = {} as any;
 
-      // authentication oauth2 required
-      // oauth required
-      await setOAuthToObject(
-        localVarHeaderParameter,
-        "oauth2",
-        [],
-        configuration,
-      );
+      // authentication bearer-jwt required
+      // http bearer authentication required
+      await setBearerAuthToObject(localVarHeaderParameter, configuration);
 
-      localVarHeaderParameter["Content-Type"] = "application/json";
+      localVarHeaderParameter['Content-Type'] = 'application/json';
 
       setSearchParams(localVarUrlObj, localVarQueryParameter);
       let headersFromBaseOptions =
@@ -2807,8 +2787,8 @@ export const DefaultApiAxiosParamCreator = function (
     ): Promise<RequestArgs> => {
       // verify required parameter 'addMedicationCounselReq' is not null or undefined
       assertParamExists(
-        "addMedicationCounsel",
-        "addMedicationCounselReq",
+        'addMedicationCounsel',
+        'addMedicationCounselReq',
         addMedicationCounselReq,
       );
       const localVarPath = `/v1/counsel/record`;
@@ -2820,23 +2800,18 @@ export const DefaultApiAxiosParamCreator = function (
       }
 
       const localVarRequestOptions = {
-        method: "POST",
+        method: 'POST',
         ...baseOptions,
         ...options,
       };
       const localVarHeaderParameter = {} as any;
       const localVarQueryParameter = {} as any;
 
-      // authentication oauth2 required
-      // oauth required
-      await setOAuthToObject(
-        localVarHeaderParameter,
-        "oauth2",
-        [],
-        configuration,
-      );
+      // authentication bearer-jwt required
+      // http bearer authentication required
+      await setBearerAuthToObject(localVarHeaderParameter, configuration);
 
-      localVarHeaderParameter["Content-Type"] = "application/json";
+      localVarHeaderParameter['Content-Type'] = 'application/json';
 
       setSearchParams(localVarUrlObj, localVarQueryParameter);
       let headersFromBaseOptions =
@@ -2872,19 +2847,19 @@ export const DefaultApiAxiosParamCreator = function (
     ): Promise<RequestArgs> => {
       // verify required parameter 'counselSessionId' is not null or undefined
       assertParamExists(
-        "addWasteMedicationDisposal",
-        "counselSessionId",
+        'addWasteMedicationDisposal',
+        'counselSessionId',
         counselSessionId,
       );
       // verify required parameter 'wasteMedicationDisposalReq' is not null or undefined
       assertParamExists(
-        "addWasteMedicationDisposal",
-        "wasteMedicationDisposalReq",
+        'addWasteMedicationDisposal',
+        'wasteMedicationDisposalReq',
         wasteMedicationDisposalReq,
       );
       const localVarPath =
         `/v1/counsel/medication/waste/disposal/{counselSessionId}`.replace(
-          `{${"counselSessionId"}}`,
+          `{${'counselSessionId'}}`,
           encodeURIComponent(String(counselSessionId)),
         );
       // use dummy base URL string because the URL constructor only accepts absolute URLs.
@@ -2895,23 +2870,18 @@ export const DefaultApiAxiosParamCreator = function (
       }
 
       const localVarRequestOptions = {
-        method: "POST",
+        method: 'POST',
         ...baseOptions,
         ...options,
       };
       const localVarHeaderParameter = {} as any;
       const localVarQueryParameter = {} as any;
 
-      // authentication oauth2 required
-      // oauth required
-      await setOAuthToObject(
-        localVarHeaderParameter,
-        "oauth2",
-        [],
-        configuration,
-      );
+      // authentication bearer-jwt required
+      // http bearer authentication required
+      await setBearerAuthToObject(localVarHeaderParameter, configuration);
 
-      localVarHeaderParameter["Content-Type"] = "application/json";
+      localVarHeaderParameter['Content-Type'] = 'application/json';
 
       setSearchParams(localVarUrlObj, localVarQueryParameter);
       let headersFromBaseOptions =
@@ -2947,19 +2917,19 @@ export const DefaultApiAxiosParamCreator = function (
     ): Promise<RequestArgs> => {
       // verify required parameter 'counselSessionId' is not null or undefined
       assertParamExists(
-        "addWasteMedicationRecord",
-        "counselSessionId",
+        'addWasteMedicationRecord',
+        'counselSessionId',
         counselSessionId,
       );
       // verify required parameter 'addAndUpdateWasteMedicationRecordReq' is not null or undefined
       assertParamExists(
-        "addWasteMedicationRecord",
-        "addAndUpdateWasteMedicationRecordReq",
+        'addWasteMedicationRecord',
+        'addAndUpdateWasteMedicationRecordReq',
         addAndUpdateWasteMedicationRecordReq,
       );
       const localVarPath =
         `/v1/counsel/medication/waste/{counselSessionId}`.replace(
-          `{${"counselSessionId"}}`,
+          `{${'counselSessionId'}}`,
           encodeURIComponent(String(counselSessionId)),
         );
       // use dummy base URL string because the URL constructor only accepts absolute URLs.
@@ -2970,23 +2940,18 @@ export const DefaultApiAxiosParamCreator = function (
       }
 
       const localVarRequestOptions = {
-        method: "POST",
+        method: 'POST',
         ...baseOptions,
         ...options,
       };
       const localVarHeaderParameter = {} as any;
       const localVarQueryParameter = {} as any;
 
-      // authentication oauth2 required
-      // oauth required
-      await setOAuthToObject(
-        localVarHeaderParameter,
-        "oauth2",
-        [],
-        configuration,
-      );
+      // authentication bearer-jwt required
+      // http bearer authentication required
+      await setBearerAuthToObject(localVarHeaderParameter, configuration);
 
-      localVarHeaderParameter["Content-Type"] = "application/json";
+      localVarHeaderParameter['Content-Type'] = 'application/json';
 
       setSearchParams(localVarUrlObj, localVarQueryParameter);
       let headersFromBaseOptions =
@@ -3020,8 +2985,8 @@ export const DefaultApiAxiosParamCreator = function (
     ): Promise<RequestArgs> => {
       // verify required parameter 'deleteCounselSessionReq' is not null or undefined
       assertParamExists(
-        "deleteCounselSession",
-        "deleteCounselSessionReq",
+        'deleteCounselSession',
+        'deleteCounselSessionReq',
         deleteCounselSessionReq,
       );
       const localVarPath = `/v1/counsel/session`;
@@ -3033,23 +2998,18 @@ export const DefaultApiAxiosParamCreator = function (
       }
 
       const localVarRequestOptions = {
-        method: "DELETE",
+        method: 'DELETE',
         ...baseOptions,
         ...options,
       };
       const localVarHeaderParameter = {} as any;
       const localVarQueryParameter = {} as any;
 
-      // authentication oauth2 required
-      // oauth required
-      await setOAuthToObject(
-        localVarHeaderParameter,
-        "oauth2",
-        [],
-        configuration,
-      );
+      // authentication bearer-jwt required
+      // http bearer authentication required
+      await setBearerAuthToObject(localVarHeaderParameter, configuration);
 
-      localVarHeaderParameter["Content-Type"] = "application/json";
+      localVarHeaderParameter['Content-Type'] = 'application/json';
 
       setSearchParams(localVarUrlObj, localVarQueryParameter);
       let headersFromBaseOptions =
@@ -3083,8 +3043,8 @@ export const DefaultApiAxiosParamCreator = function (
     ): Promise<RequestArgs> => {
       // verify required parameter 'deleteMedicationCounselReq' is not null or undefined
       assertParamExists(
-        "deleteMedicationCounsel",
-        "deleteMedicationCounselReq",
+        'deleteMedicationCounsel',
+        'deleteMedicationCounselReq',
         deleteMedicationCounselReq,
       );
       const localVarPath = `/v1/counsel/record`;
@@ -3096,23 +3056,18 @@ export const DefaultApiAxiosParamCreator = function (
       }
 
       const localVarRequestOptions = {
-        method: "DELETE",
+        method: 'DELETE',
         ...baseOptions,
         ...options,
       };
       const localVarHeaderParameter = {} as any;
       const localVarQueryParameter = {} as any;
 
-      // authentication oauth2 required
-      // oauth required
-      await setOAuthToObject(
-        localVarHeaderParameter,
-        "oauth2",
-        [],
-        configuration,
-      );
+      // authentication bearer-jwt required
+      // http bearer authentication required
+      await setBearerAuthToObject(localVarHeaderParameter, configuration);
 
-      localVarHeaderParameter["Content-Type"] = "application/json";
+      localVarHeaderParameter['Content-Type'] = 'application/json';
 
       setSearchParams(localVarUrlObj, localVarQueryParameter);
       let headersFromBaseOptions =
@@ -3148,19 +3103,19 @@ export const DefaultApiAxiosParamCreator = function (
     ): Promise<RequestArgs> => {
       // verify required parameter 'counselSessionId' is not null or undefined
       assertParamExists(
-        "deleteMedicationRecordHist",
-        "counselSessionId",
+        'deleteMedicationRecordHist',
+        'counselSessionId',
         counselSessionId,
       );
       // verify required parameter 'id' is not null or undefined
-      assertParamExists("deleteMedicationRecordHist", "id", id);
+      assertParamExists('deleteMedicationRecordHist', 'id', id);
       const localVarPath =
         `/v1/counsel/medication/record/{counselSessionId}/{id}`
           .replace(
-            `{${"counselSessionId"}}`,
+            `{${'counselSessionId'}}`,
             encodeURIComponent(String(counselSessionId)),
           )
-          .replace(`{${"id"}}`, encodeURIComponent(String(id)));
+          .replace(`{${'id'}}`, encodeURIComponent(String(id)));
       // use dummy base URL string because the URL constructor only accepts absolute URLs.
       const localVarUrlObj = new URL(localVarPath, DUMMY_BASE_URL);
       let baseOptions;
@@ -3169,21 +3124,16 @@ export const DefaultApiAxiosParamCreator = function (
       }
 
       const localVarRequestOptions = {
-        method: "DELETE",
+        method: 'DELETE',
         ...baseOptions,
         ...options,
       };
       const localVarHeaderParameter = {} as any;
       const localVarQueryParameter = {} as any;
 
-      // authentication oauth2 required
-      // oauth required
-      await setOAuthToObject(
-        localVarHeaderParameter,
-        "oauth2",
-        [],
-        configuration,
-      );
+      // authentication bearer-jwt required
+      // http bearer authentication required
+      await setBearerAuthToObject(localVarHeaderParameter, configuration);
 
       setSearchParams(localVarUrlObj, localVarQueryParameter);
       let headersFromBaseOptions =
@@ -3212,13 +3162,13 @@ export const DefaultApiAxiosParamCreator = function (
     ): Promise<RequestArgs> => {
       // verify required parameter 'counselSessionId' is not null or undefined
       assertParamExists(
-        "deleteMedicationRecordHistsByCounselSessionId",
-        "counselSessionId",
+        'deleteMedicationRecordHistsByCounselSessionId',
+        'counselSessionId',
         counselSessionId,
       );
       const localVarPath =
         `/v1/counsel/medication/record/{counselSessionId}`.replace(
-          `{${"counselSessionId"}}`,
+          `{${'counselSessionId'}}`,
           encodeURIComponent(String(counselSessionId)),
         );
       // use dummy base URL string because the URL constructor only accepts absolute URLs.
@@ -3229,21 +3179,16 @@ export const DefaultApiAxiosParamCreator = function (
       }
 
       const localVarRequestOptions = {
-        method: "DELETE",
+        method: 'DELETE',
         ...baseOptions,
         ...options,
       };
       const localVarHeaderParameter = {} as any;
       const localVarQueryParameter = {} as any;
 
-      // authentication oauth2 required
-      // oauth required
-      await setOAuthToObject(
-        localVarHeaderParameter,
-        "oauth2",
-        [],
-        configuration,
-      );
+      // authentication bearer-jwt required
+      // http bearer authentication required
+      await setBearerAuthToObject(localVarHeaderParameter, configuration);
 
       setSearchParams(localVarUrlObj, localVarQueryParameter);
       let headersFromBaseOptions =
@@ -3272,13 +3217,13 @@ export const DefaultApiAxiosParamCreator = function (
     ): Promise<RequestArgs> => {
       // verify required parameter 'counselSessionId' is not null or undefined
       assertParamExists(
-        "deleteWasteMedicationDisposal",
-        "counselSessionId",
+        'deleteWasteMedicationDisposal',
+        'counselSessionId',
         counselSessionId,
       );
       const localVarPath =
         `/v1/counsel/medication/waste/disposal/{counselSessionId}`.replace(
-          `{${"counselSessionId"}}`,
+          `{${'counselSessionId'}}`,
           encodeURIComponent(String(counselSessionId)),
         );
       // use dummy base URL string because the URL constructor only accepts absolute URLs.
@@ -3289,21 +3234,16 @@ export const DefaultApiAxiosParamCreator = function (
       }
 
       const localVarRequestOptions = {
-        method: "DELETE",
+        method: 'DELETE',
         ...baseOptions,
         ...options,
       };
       const localVarHeaderParameter = {} as any;
       const localVarQueryParameter = {} as any;
 
-      // authentication oauth2 required
-      // oauth required
-      await setOAuthToObject(
-        localVarHeaderParameter,
-        "oauth2",
-        [],
-        configuration,
-      );
+      // authentication bearer-jwt required
+      // http bearer authentication required
+      await setBearerAuthToObject(localVarHeaderParameter, configuration);
 
       setSearchParams(localVarUrlObj, localVarQueryParameter);
       let headersFromBaseOptions =
@@ -3334,24 +3274,24 @@ export const DefaultApiAxiosParamCreator = function (
     ): Promise<RequestArgs> => {
       // verify required parameter 'counselSessionId' is not null or undefined
       assertParamExists(
-        "deleteWasteMedicationRecord",
-        "counselSessionId",
+        'deleteWasteMedicationRecord',
+        'counselSessionId',
         counselSessionId,
       );
       // verify required parameter 'wasteMedicationRecordId' is not null or undefined
       assertParamExists(
-        "deleteWasteMedicationRecord",
-        "wasteMedicationRecordId",
+        'deleteWasteMedicationRecord',
+        'wasteMedicationRecordId',
         wasteMedicationRecordId,
       );
       const localVarPath =
         `/v1/counsel/medication/waste/{counselSessionId}/{wasteMedicationRecordId}`
           .replace(
-            `{${"counselSessionId"}}`,
+            `{${'counselSessionId'}}`,
             encodeURIComponent(String(counselSessionId)),
           )
           .replace(
-            `{${"wasteMedicationRecordId"}}`,
+            `{${'wasteMedicationRecordId'}}`,
             encodeURIComponent(String(wasteMedicationRecordId)),
           );
       // use dummy base URL string because the URL constructor only accepts absolute URLs.
@@ -3362,21 +3302,16 @@ export const DefaultApiAxiosParamCreator = function (
       }
 
       const localVarRequestOptions = {
-        method: "DELETE",
+        method: 'DELETE',
         ...baseOptions,
         ...options,
       };
       const localVarHeaderParameter = {} as any;
       const localVarQueryParameter = {} as any;
 
-      // authentication oauth2 required
-      // oauth required
-      await setOAuthToObject(
-        localVarHeaderParameter,
-        "oauth2",
-        [],
-        configuration,
-      );
+      // authentication bearer-jwt required
+      // http bearer authentication required
+      await setBearerAuthToObject(localVarHeaderParameter, configuration);
 
       setSearchParams(localVarUrlObj, localVarQueryParameter);
       let headersFromBaseOptions =
@@ -3405,13 +3340,13 @@ export const DefaultApiAxiosParamCreator = function (
     ): Promise<RequestArgs> => {
       // verify required parameter 'counselSessionId' is not null or undefined
       assertParamExists(
-        "getWasteMedicationDisposal",
-        "counselSessionId",
+        'getWasteMedicationDisposal',
+        'counselSessionId',
         counselSessionId,
       );
       const localVarPath =
         `/v1/counsel/medication/waste/disposal/{counselSessionId}`.replace(
-          `{${"counselSessionId"}}`,
+          `{${'counselSessionId'}}`,
           encodeURIComponent(String(counselSessionId)),
         );
       // use dummy base URL string because the URL constructor only accepts absolute URLs.
@@ -3422,21 +3357,16 @@ export const DefaultApiAxiosParamCreator = function (
       }
 
       const localVarRequestOptions = {
-        method: "GET",
+        method: 'GET',
         ...baseOptions,
         ...options,
       };
       const localVarHeaderParameter = {} as any;
       const localVarQueryParameter = {} as any;
 
-      // authentication oauth2 required
-      // oauth required
-      await setOAuthToObject(
-        localVarHeaderParameter,
-        "oauth2",
-        [],
-        configuration,
-      );
+      // authentication bearer-jwt required
+      // http bearer authentication required
+      await setBearerAuthToObject(localVarHeaderParameter, configuration);
 
       setSearchParams(localVarUrlObj, localVarQueryParameter);
       let headersFromBaseOptions =
@@ -3470,21 +3400,16 @@ export const DefaultApiAxiosParamCreator = function (
       }
 
       const localVarRequestOptions = {
-        method: "GET",
+        method: 'GET',
         ...baseOptions,
         ...options,
       };
       const localVarHeaderParameter = {} as any;
       const localVarQueryParameter = {} as any;
 
-      // authentication oauth2 required
-      // oauth required
-      await setOAuthToObject(
-        localVarHeaderParameter,
-        "oauth2",
-        [],
-        configuration,
-      );
+      // authentication bearer-jwt required
+      // http bearer authentication required
+      await setBearerAuthToObject(localVarHeaderParameter, configuration);
 
       setSearchParams(localVarUrlObj, localVarQueryParameter);
       let headersFromBaseOptions =
@@ -3512,7 +3437,7 @@ export const DefaultApiAxiosParamCreator = function (
       options: RawAxiosRequestConfig = {},
     ): Promise<RequestArgs> => {
       // verify required parameter 'keyword' is not null or undefined
-      assertParamExists("searchMedicationByKeyword", "keyword", keyword);
+      assertParamExists('searchMedicationByKeyword', 'keyword', keyword);
       const localVarPath = `/v1/medication`;
       // use dummy base URL string because the URL constructor only accepts absolute URLs.
       const localVarUrlObj = new URL(localVarPath, DUMMY_BASE_URL);
@@ -3522,24 +3447,19 @@ export const DefaultApiAxiosParamCreator = function (
       }
 
       const localVarRequestOptions = {
-        method: "GET",
+        method: 'GET',
         ...baseOptions,
         ...options,
       };
       const localVarHeaderParameter = {} as any;
       const localVarQueryParameter = {} as any;
 
-      // authentication oauth2 required
-      // oauth required
-      await setOAuthToObject(
-        localVarHeaderParameter,
-        "oauth2",
-        [],
-        configuration,
-      );
+      // authentication bearer-jwt required
+      // http bearer authentication required
+      await setBearerAuthToObject(localVarHeaderParameter, configuration);
 
       if (keyword !== undefined) {
-        localVarQueryParameter["keyword"] = keyword;
+        localVarQueryParameter['keyword'] = keyword;
       }
 
       setSearchParams(localVarUrlObj, localVarQueryParameter);
@@ -3569,12 +3489,12 @@ export const DefaultApiAxiosParamCreator = function (
     ): Promise<RequestArgs> => {
       // verify required parameter 'counselSessionId' is not null or undefined
       assertParamExists(
-        "selectCounselCard",
-        "counselSessionId",
+        'selectCounselCard',
+        'counselSessionId',
         counselSessionId,
       );
       const localVarPath = `/v1/counsel/card/{counselSessionId}`.replace(
-        `{${"counselSessionId"}}`,
+        `{${'counselSessionId'}}`,
         encodeURIComponent(String(counselSessionId)),
       );
       // use dummy base URL string because the URL constructor only accepts absolute URLs.
@@ -3585,21 +3505,16 @@ export const DefaultApiAxiosParamCreator = function (
       }
 
       const localVarRequestOptions = {
-        method: "GET",
+        method: 'GET',
         ...baseOptions,
         ...options,
       };
       const localVarHeaderParameter = {} as any;
       const localVarQueryParameter = {} as any;
 
-      // authentication oauth2 required
-      // oauth required
-      await setOAuthToObject(
-        localVarHeaderParameter,
-        "oauth2",
-        [],
-        configuration,
-      );
+      // authentication bearer-jwt required
+      // http bearer authentication required
+      await setBearerAuthToObject(localVarHeaderParameter, configuration);
 
       setSearchParams(localVarUrlObj, localVarQueryParameter);
       let headersFromBaseOptions =
@@ -3628,12 +3543,12 @@ export const DefaultApiAxiosParamCreator = function (
     ): Promise<RequestArgs> => {
       // verify required parameter 'counselSessionId' is not null or undefined
       assertParamExists(
-        "selectCounselCard_1",
-        "counselSessionId",
+        'selectCounselCard_1',
+        'counselSessionId',
         counselSessionId,
       );
       const localVarPath = `/v1/counsel/card/{counselSessionId}`.replace(
-        `{${"counselSessionId"}}`,
+        `{${'counselSessionId'}}`,
         encodeURIComponent(String(counselSessionId)),
       );
       // use dummy base URL string because the URL constructor only accepts absolute URLs.
@@ -3644,21 +3559,16 @@ export const DefaultApiAxiosParamCreator = function (
       }
 
       const localVarRequestOptions = {
-        method: "GET",
+        method: 'GET',
         ...baseOptions,
         ...options,
       };
       const localVarHeaderParameter = {} as any;
       const localVarQueryParameter = {} as any;
 
-      // authentication oauth2 required
-      // oauth required
-      await setOAuthToObject(
-        localVarHeaderParameter,
-        "oauth2",
-        [],
-        configuration,
-      );
+      // authentication bearer-jwt required
+      // http bearer authentication required
+      await setBearerAuthToObject(localVarHeaderParameter, configuration);
 
       setSearchParams(localVarUrlObj, localVarQueryParameter);
       let headersFromBaseOptions =
@@ -3687,12 +3597,12 @@ export const DefaultApiAxiosParamCreator = function (
     ): Promise<RequestArgs> => {
       // verify required parameter 'counselSessionId' is not null or undefined
       assertParamExists(
-        "selectCounselSession",
-        "counselSessionId",
+        'selectCounselSession',
+        'counselSessionId',
         counselSessionId,
       );
       const localVarPath = `/v1/counsel/session/{counselSessionId}`.replace(
-        `{${"counselSessionId"}}`,
+        `{${'counselSessionId'}}`,
         encodeURIComponent(String(counselSessionId)),
       );
       // use dummy base URL string because the URL constructor only accepts absolute URLs.
@@ -3703,21 +3613,16 @@ export const DefaultApiAxiosParamCreator = function (
       }
 
       const localVarRequestOptions = {
-        method: "GET",
+        method: 'GET',
         ...baseOptions,
         ...options,
       };
       const localVarHeaderParameter = {} as any;
       const localVarQueryParameter = {} as any;
 
-      // authentication oauth2 required
-      // oauth required
-      await setOAuthToObject(
-        localVarHeaderParameter,
-        "oauth2",
-        [],
-        configuration,
-      );
+      // authentication bearer-jwt required
+      // http bearer authentication required
+      await setBearerAuthToObject(localVarHeaderParameter, configuration);
 
       setSearchParams(localVarUrlObj, localVarQueryParameter);
       let headersFromBaseOptions =
@@ -3757,35 +3662,30 @@ export const DefaultApiAxiosParamCreator = function (
       }
 
       const localVarRequestOptions = {
-        method: "GET",
+        method: 'GET',
         ...baseOptions,
         ...options,
       };
       const localVarHeaderParameter = {} as any;
       const localVarQueryParameter = {} as any;
 
-      // authentication oauth2 required
-      // oauth required
-      await setOAuthToObject(
-        localVarHeaderParameter,
-        "oauth2",
-        [],
-        configuration,
-      );
+      // authentication bearer-jwt required
+      // http bearer authentication required
+      await setBearerAuthToObject(localVarHeaderParameter, configuration);
 
       if (baseDate !== undefined) {
-        localVarQueryParameter["baseDate"] =
+        localVarQueryParameter['baseDate'] =
           (baseDate as any) instanceof Date
             ? (baseDate as any).toISOString().substring(0, 10)
             : baseDate;
       }
 
       if (cursor !== undefined) {
-        localVarQueryParameter["cursor"] = cursor;
+        localVarQueryParameter['cursor'] = cursor;
       }
 
       if (size !== undefined) {
-        localVarQueryParameter["size"] = size;
+        localVarQueryParameter['size'] = size;
       }
 
       setSearchParams(localVarUrlObj, localVarQueryParameter);
@@ -3815,13 +3715,13 @@ export const DefaultApiAxiosParamCreator = function (
     ): Promise<RequestArgs> => {
       // verify required parameter 'counselSessionId' is not null or undefined
       assertParamExists(
-        "selectCounseleeBaseInformation",
-        "counselSessionId",
+        'selectCounseleeBaseInformation',
+        'counselSessionId',
         counselSessionId,
       );
       const localVarPath =
         `/v1/counsel/counselee/{counselSessionId}/base/information`.replace(
-          `{${"counselSessionId"}}`,
+          `{${'counselSessionId'}}`,
           encodeURIComponent(String(counselSessionId)),
         );
       // use dummy base URL string because the URL constructor only accepts absolute URLs.
@@ -3832,21 +3732,16 @@ export const DefaultApiAxiosParamCreator = function (
       }
 
       const localVarRequestOptions = {
-        method: "GET",
+        method: 'GET',
         ...baseOptions,
         ...options,
       };
       const localVarHeaderParameter = {} as any;
       const localVarQueryParameter = {} as any;
 
-      // authentication oauth2 required
-      // oauth required
-      await setOAuthToObject(
-        localVarHeaderParameter,
-        "oauth2",
-        [],
-        configuration,
-      );
+      // authentication bearer-jwt required
+      // http bearer authentication required
+      await setBearerAuthToObject(localVarHeaderParameter, configuration);
 
       setSearchParams(localVarUrlObj, localVarQueryParameter);
       let headersFromBaseOptions =
@@ -3875,13 +3770,13 @@ export const DefaultApiAxiosParamCreator = function (
     ): Promise<RequestArgs> => {
       // verify required parameter 'counselSessionId' is not null or undefined
       assertParamExists(
-        "selectCounseleeBaseInformation_2",
-        "counselSessionId",
+        'selectCounseleeBaseInformation_2',
+        'counselSessionId',
         counselSessionId,
       );
       const localVarPath =
         `/v1/counsel/counselee/{counselSessionId}/base/information`.replace(
-          `{${"counselSessionId"}}`,
+          `{${'counselSessionId'}}`,
           encodeURIComponent(String(counselSessionId)),
         );
       // use dummy base URL string because the URL constructor only accepts absolute URLs.
@@ -3892,21 +3787,16 @@ export const DefaultApiAxiosParamCreator = function (
       }
 
       const localVarRequestOptions = {
-        method: "GET",
+        method: 'GET',
         ...baseOptions,
         ...options,
       };
       const localVarHeaderParameter = {} as any;
       const localVarQueryParameter = {} as any;
 
-      // authentication oauth2 required
-      // oauth required
-      await setOAuthToObject(
-        localVarHeaderParameter,
-        "oauth2",
-        [],
-        configuration,
-      );
+      // authentication bearer-jwt required
+      // http bearer authentication required
+      await setBearerAuthToObject(localVarHeaderParameter, configuration);
 
       setSearchParams(localVarUrlObj, localVarQueryParameter);
       let headersFromBaseOptions =
@@ -3937,18 +3827,18 @@ export const DefaultApiAxiosParamCreator = function (
     ): Promise<RequestArgs> => {
       // verify required parameter 'counselSessionId' is not null or undefined
       assertParamExists(
-        "selectCounseleeConsentByCounseleeId",
-        "counselSessionId",
+        'selectCounseleeConsentByCounseleeId',
+        'counselSessionId',
         counselSessionId,
       );
       // verify required parameter 'counseleeId' is not null or undefined
       assertParamExists(
-        "selectCounseleeConsentByCounseleeId",
-        "counseleeId",
+        'selectCounseleeConsentByCounseleeId',
+        'counseleeId',
         counseleeId,
       );
       const localVarPath = `/v1/counselee/consent/{counselSessionId}`.replace(
-        `{${"counselSessionId"}}`,
+        `{${'counselSessionId'}}`,
         encodeURIComponent(String(counselSessionId)),
       );
       // use dummy base URL string because the URL constructor only accepts absolute URLs.
@@ -3959,24 +3849,19 @@ export const DefaultApiAxiosParamCreator = function (
       }
 
       const localVarRequestOptions = {
-        method: "GET",
+        method: 'GET',
         ...baseOptions,
         ...options,
       };
       const localVarHeaderParameter = {} as any;
       const localVarQueryParameter = {} as any;
 
-      // authentication oauth2 required
-      // oauth required
-      await setOAuthToObject(
-        localVarHeaderParameter,
-        "oauth2",
-        [],
-        configuration,
-      );
+      // authentication bearer-jwt required
+      // http bearer authentication required
+      await setBearerAuthToObject(localVarHeaderParameter, configuration);
 
       if (counseleeId !== undefined) {
-        localVarQueryParameter["counseleeId"] = counseleeId;
+        localVarQueryParameter['counseleeId'] = counseleeId;
       }
 
       setSearchParams(localVarUrlObj, localVarQueryParameter);
@@ -4006,8 +3891,8 @@ export const DefaultApiAxiosParamCreator = function (
     ): Promise<RequestArgs> => {
       // verify required parameter 'counselSessionId' is not null or undefined
       assertParamExists(
-        "selectMedicationCounsel",
-        "counselSessionId",
+        'selectMedicationCounsel',
+        'counselSessionId',
         counselSessionId,
       );
       const localVarPath = `/v1/counsel/record`;
@@ -4019,24 +3904,19 @@ export const DefaultApiAxiosParamCreator = function (
       }
 
       const localVarRequestOptions = {
-        method: "GET",
+        method: 'GET',
         ...baseOptions,
         ...options,
       };
       const localVarHeaderParameter = {} as any;
       const localVarQueryParameter = {} as any;
 
-      // authentication oauth2 required
-      // oauth required
-      await setOAuthToObject(
-        localVarHeaderParameter,
-        "oauth2",
-        [],
-        configuration,
-      );
+      // authentication bearer-jwt required
+      // http bearer authentication required
+      await setBearerAuthToObject(localVarHeaderParameter, configuration);
 
       if (counselSessionId !== undefined) {
-        localVarQueryParameter["counselSessionId"] = counselSessionId;
+        localVarQueryParameter['counselSessionId'] = counselSessionId;
       }
 
       setSearchParams(localVarUrlObj, localVarQueryParameter);
@@ -4066,13 +3946,13 @@ export const DefaultApiAxiosParamCreator = function (
     ): Promise<RequestArgs> => {
       // verify required parameter 'counselSessionId' is not null or undefined
       assertParamExists(
-        "selectMedicationRecordListBySessionId",
-        "counselSessionId",
+        'selectMedicationRecordListBySessionId',
+        'counselSessionId',
         counselSessionId,
       );
       const localVarPath =
         `/v1/counsel/medication/waste/{counselSessionId}`.replace(
-          `{${"counselSessionId"}}`,
+          `{${'counselSessionId'}}`,
           encodeURIComponent(String(counselSessionId)),
         );
       // use dummy base URL string because the URL constructor only accepts absolute URLs.
@@ -4083,21 +3963,16 @@ export const DefaultApiAxiosParamCreator = function (
       }
 
       const localVarRequestOptions = {
-        method: "GET",
+        method: 'GET',
         ...baseOptions,
         ...options,
       };
       const localVarHeaderParameter = {} as any;
       const localVarQueryParameter = {} as any;
 
-      // authentication oauth2 required
-      // oauth required
-      await setOAuthToObject(
-        localVarHeaderParameter,
-        "oauth2",
-        [],
-        configuration,
-      );
+      // authentication bearer-jwt required
+      // http bearer authentication required
+      await setBearerAuthToObject(localVarHeaderParameter, configuration);
 
       setSearchParams(localVarUrlObj, localVarQueryParameter);
       let headersFromBaseOptions =
@@ -4126,13 +4001,13 @@ export const DefaultApiAxiosParamCreator = function (
     ): Promise<RequestArgs> => {
       // verify required parameter 'counselSessionId' is not null or undefined
       assertParamExists(
-        "selectMedicationRecordListBySessionId1",
-        "counselSessionId",
+        'selectMedicationRecordListBySessionId1',
+        'counselSessionId',
         counselSessionId,
       );
       const localVarPath =
         `/v1/counsel/medication/record/{counselSessionId}`.replace(
-          `{${"counselSessionId"}}`,
+          `{${'counselSessionId'}}`,
           encodeURIComponent(String(counselSessionId)),
         );
       // use dummy base URL string because the URL constructor only accepts absolute URLs.
@@ -4143,21 +4018,16 @@ export const DefaultApiAxiosParamCreator = function (
       }
 
       const localVarRequestOptions = {
-        method: "GET",
+        method: 'GET',
         ...baseOptions,
         ...options,
       };
       const localVarHeaderParameter = {} as any;
       const localVarQueryParameter = {} as any;
 
-      // authentication oauth2 required
-      // oauth required
-      await setOAuthToObject(
-        localVarHeaderParameter,
-        "oauth2",
-        [],
-        configuration,
-      );
+      // authentication bearer-jwt required
+      // http bearer authentication required
+      await setBearerAuthToObject(localVarHeaderParameter, configuration);
 
       setSearchParams(localVarUrlObj, localVarQueryParameter);
       let headersFromBaseOptions =
@@ -4186,13 +4056,13 @@ export const DefaultApiAxiosParamCreator = function (
     ): Promise<RequestArgs> => {
       // verify required parameter 'counselSessionId' is not null or undefined
       assertParamExists(
-        "selectPreviousCounselCard",
-        "counselSessionId",
+        'selectPreviousCounselCard',
+        'counselSessionId',
         counselSessionId,
       );
       const localVarPath =
         `/v1/counsel/card/{counselSessionId}/previous`.replace(
-          `{${"counselSessionId"}}`,
+          `{${'counselSessionId'}}`,
           encodeURIComponent(String(counselSessionId)),
         );
       // use dummy base URL string because the URL constructor only accepts absolute URLs.
@@ -4203,21 +4073,16 @@ export const DefaultApiAxiosParamCreator = function (
       }
 
       const localVarRequestOptions = {
-        method: "GET",
+        method: 'GET',
         ...baseOptions,
         ...options,
       };
       const localVarHeaderParameter = {} as any;
       const localVarQueryParameter = {} as any;
 
-      // authentication oauth2 required
-      // oauth required
-      await setOAuthToObject(
-        localVarHeaderParameter,
-        "oauth2",
-        [],
-        configuration,
-      );
+      // authentication bearer-jwt required
+      // http bearer authentication required
+      await setBearerAuthToObject(localVarHeaderParameter, configuration);
 
       setSearchParams(localVarUrlObj, localVarQueryParameter);
       let headersFromBaseOptions =
@@ -4246,13 +4111,13 @@ export const DefaultApiAxiosParamCreator = function (
     ): Promise<RequestArgs> => {
       // verify required parameter 'counselSessionId' is not null or undefined
       assertParamExists(
-        "selectPreviousCounselSessionList",
-        "counselSessionId",
+        'selectPreviousCounselSessionList',
+        'counselSessionId',
         counselSessionId,
       );
       const localVarPath =
         `/v1/counsel/session/{counselSessionId}/previous/list`.replace(
-          `{${"counselSessionId"}}`,
+          `{${'counselSessionId'}}`,
           encodeURIComponent(String(counselSessionId)),
         );
       // use dummy base URL string because the URL constructor only accepts absolute URLs.
@@ -4263,21 +4128,16 @@ export const DefaultApiAxiosParamCreator = function (
       }
 
       const localVarRequestOptions = {
-        method: "GET",
+        method: 'GET',
         ...baseOptions,
         ...options,
       };
       const localVarHeaderParameter = {} as any;
       const localVarQueryParameter = {} as any;
 
-      // authentication oauth2 required
-      // oauth required
-      await setOAuthToObject(
-        localVarHeaderParameter,
-        "oauth2",
-        [],
-        configuration,
-      );
+      // authentication bearer-jwt required
+      // http bearer authentication required
+      await setBearerAuthToObject(localVarHeaderParameter, configuration);
 
       setSearchParams(localVarUrlObj, localVarQueryParameter);
       let headersFromBaseOptions =
@@ -4310,25 +4170,25 @@ export const DefaultApiAxiosParamCreator = function (
     ): Promise<RequestArgs> => {
       // verify required parameter 'counselSessionId' is not null or undefined
       assertParamExists(
-        "selectPreviousItemListByInformationNameAndItemName",
-        "counselSessionId",
+        'selectPreviousItemListByInformationNameAndItemName',
+        'counselSessionId',
         counselSessionId,
       );
       // verify required parameter 'informationName' is not null or undefined
       assertParamExists(
-        "selectPreviousItemListByInformationNameAndItemName",
-        "informationName",
+        'selectPreviousItemListByInformationNameAndItemName',
+        'informationName',
         informationName,
       );
       // verify required parameter 'itemName' is not null or undefined
       assertParamExists(
-        "selectPreviousItemListByInformationNameAndItemName",
-        "itemName",
+        'selectPreviousItemListByInformationNameAndItemName',
+        'itemName',
         itemName,
       );
       const localVarPath =
         `/v1/counsel/card/{counselSessionId}/preious/item/list`.replace(
-          `{${"counselSessionId"}}`,
+          `{${'counselSessionId'}}`,
           encodeURIComponent(String(counselSessionId)),
         );
       // use dummy base URL string because the URL constructor only accepts absolute URLs.
@@ -4339,28 +4199,23 @@ export const DefaultApiAxiosParamCreator = function (
       }
 
       const localVarRequestOptions = {
-        method: "GET",
+        method: 'GET',
         ...baseOptions,
         ...options,
       };
       const localVarHeaderParameter = {} as any;
       const localVarQueryParameter = {} as any;
 
-      // authentication oauth2 required
-      // oauth required
-      await setOAuthToObject(
-        localVarHeaderParameter,
-        "oauth2",
-        [],
-        configuration,
-      );
+      // authentication bearer-jwt required
+      // http bearer authentication required
+      await setBearerAuthToObject(localVarHeaderParameter, configuration);
 
       if (informationName !== undefined) {
-        localVarQueryParameter["informationName"] = informationName;
+        localVarQueryParameter['informationName'] = informationName;
       }
 
       if (itemName !== undefined) {
-        localVarQueryParameter["itemName"] = itemName;
+        localVarQueryParameter['itemName'] = itemName;
       }
 
       setSearchParams(localVarUrlObj, localVarQueryParameter);
@@ -4390,13 +4245,13 @@ export const DefaultApiAxiosParamCreator = function (
     ): Promise<RequestArgs> => {
       // verify required parameter 'counselSessionId' is not null or undefined
       assertParamExists(
-        "selectPreviousMedicationCounsel",
-        "counselSessionId",
+        'selectPreviousMedicationCounsel',
+        'counselSessionId',
         counselSessionId,
       );
       const localVarPath =
         `/v1/counsel/record/{counselSessionId}/previous/summary`.replace(
-          `{${"counselSessionId"}}`,
+          `{${'counselSessionId'}}`,
           encodeURIComponent(String(counselSessionId)),
         );
       // use dummy base URL string because the URL constructor only accepts absolute URLs.
@@ -4407,21 +4262,16 @@ export const DefaultApiAxiosParamCreator = function (
       }
 
       const localVarRequestOptions = {
-        method: "GET",
+        method: 'GET',
         ...baseOptions,
         ...options,
       };
       const localVarHeaderParameter = {} as any;
       const localVarQueryParameter = {} as any;
 
-      // authentication oauth2 required
-      // oauth required
-      await setOAuthToObject(
-        localVarHeaderParameter,
-        "oauth2",
-        [],
-        configuration,
-      );
+      // authentication bearer-jwt required
+      // http bearer authentication required
+      await setBearerAuthToObject(localVarHeaderParameter, configuration);
 
       setSearchParams(localVarUrlObj, localVarQueryParameter);
       let headersFromBaseOptions =
@@ -4450,8 +4300,8 @@ export const DefaultApiAxiosParamCreator = function (
     ): Promise<RequestArgs> => {
       // verify required parameter 'updateCounselCardReq' is not null or undefined
       assertParamExists(
-        "updateCounselCard",
-        "updateCounselCardReq",
+        'updateCounselCard',
+        'updateCounselCardReq',
         updateCounselCardReq,
       );
       const localVarPath = `/v1/counsel/card`;
@@ -4463,23 +4313,18 @@ export const DefaultApiAxiosParamCreator = function (
       }
 
       const localVarRequestOptions = {
-        method: "PUT",
+        method: 'PUT',
         ...baseOptions,
         ...options,
       };
       const localVarHeaderParameter = {} as any;
       const localVarQueryParameter = {} as any;
 
-      // authentication oauth2 required
-      // oauth required
-      await setOAuthToObject(
-        localVarHeaderParameter,
-        "oauth2",
-        [],
-        configuration,
-      );
+      // authentication bearer-jwt required
+      // http bearer authentication required
+      await setBearerAuthToObject(localVarHeaderParameter, configuration);
 
-      localVarHeaderParameter["Content-Type"] = "application/json";
+      localVarHeaderParameter['Content-Type'] = 'application/json';
 
       setSearchParams(localVarUrlObj, localVarQueryParameter);
       let headersFromBaseOptions =
@@ -4513,8 +4358,8 @@ export const DefaultApiAxiosParamCreator = function (
     ): Promise<RequestArgs> => {
       // verify required parameter 'updateCounselSessionReq' is not null or undefined
       assertParamExists(
-        "updateCounselSession",
-        "updateCounselSessionReq",
+        'updateCounselSession',
+        'updateCounselSessionReq',
         updateCounselSessionReq,
       );
       const localVarPath = `/v1/counsel/session`;
@@ -4526,23 +4371,18 @@ export const DefaultApiAxiosParamCreator = function (
       }
 
       const localVarRequestOptions = {
-        method: "PUT",
+        method: 'PUT',
         ...baseOptions,
         ...options,
       };
       const localVarHeaderParameter = {} as any;
       const localVarQueryParameter = {} as any;
 
-      // authentication oauth2 required
-      // oauth required
-      await setOAuthToObject(
-        localVarHeaderParameter,
-        "oauth2",
-        [],
-        configuration,
-      );
+      // authentication bearer-jwt required
+      // http bearer authentication required
+      await setBearerAuthToObject(localVarHeaderParameter, configuration);
 
-      localVarHeaderParameter["Content-Type"] = "application/json";
+      localVarHeaderParameter['Content-Type'] = 'application/json';
 
       setSearchParams(localVarUrlObj, localVarQueryParameter);
       let headersFromBaseOptions =
@@ -4576,8 +4416,8 @@ export const DefaultApiAxiosParamCreator = function (
     ): Promise<RequestArgs> => {
       // verify required parameter 'updateCounseleeConsentReq' is not null or undefined
       assertParamExists(
-        "updateCounseleeConsent",
-        "updateCounseleeConsentReq",
+        'updateCounseleeConsent',
+        'updateCounseleeConsentReq',
         updateCounseleeConsentReq,
       );
       const localVarPath = `/v1/counselee/consent`;
@@ -4589,23 +4429,18 @@ export const DefaultApiAxiosParamCreator = function (
       }
 
       const localVarRequestOptions = {
-        method: "PUT",
+        method: 'PUT',
         ...baseOptions,
         ...options,
       };
       const localVarHeaderParameter = {} as any;
       const localVarQueryParameter = {} as any;
 
-      // authentication oauth2 required
-      // oauth required
-      await setOAuthToObject(
-        localVarHeaderParameter,
-        "oauth2",
-        [],
-        configuration,
-      );
+      // authentication bearer-jwt required
+      // http bearer authentication required
+      await setBearerAuthToObject(localVarHeaderParameter, configuration);
 
-      localVarHeaderParameter["Content-Type"] = "application/json";
+      localVarHeaderParameter['Content-Type'] = 'application/json';
 
       setSearchParams(localVarUrlObj, localVarQueryParameter);
       let headersFromBaseOptions =
@@ -4639,8 +4474,8 @@ export const DefaultApiAxiosParamCreator = function (
     ): Promise<RequestArgs> => {
       // verify required parameter 'updateCounselorInCounselSessionReq' is not null or undefined
       assertParamExists(
-        "updateCounselorInCounselSession",
-        "updateCounselorInCounselSessionReq",
+        'updateCounselorInCounselSession',
+        'updateCounselorInCounselSessionReq',
         updateCounselorInCounselSessionReq,
       );
       const localVarPath = `/v1/counsel/session/counselor`;
@@ -4652,23 +4487,18 @@ export const DefaultApiAxiosParamCreator = function (
       }
 
       const localVarRequestOptions = {
-        method: "PUT",
+        method: 'PUT',
         ...baseOptions,
         ...options,
       };
       const localVarHeaderParameter = {} as any;
       const localVarQueryParameter = {} as any;
 
-      // authentication oauth2 required
-      // oauth required
-      await setOAuthToObject(
-        localVarHeaderParameter,
-        "oauth2",
-        [],
-        configuration,
-      );
+      // authentication bearer-jwt required
+      // http bearer authentication required
+      await setBearerAuthToObject(localVarHeaderParameter, configuration);
 
-      localVarHeaderParameter["Content-Type"] = "application/json";
+      localVarHeaderParameter['Content-Type'] = 'application/json';
 
       setSearchParams(localVarUrlObj, localVarQueryParameter);
       let headersFromBaseOptions =
@@ -4702,8 +4532,8 @@ export const DefaultApiAxiosParamCreator = function (
     ): Promise<RequestArgs> => {
       // verify required parameter 'updateMedicationCounselReq' is not null or undefined
       assertParamExists(
-        "updateMedicationCounsel",
-        "updateMedicationCounselReq",
+        'updateMedicationCounsel',
+        'updateMedicationCounselReq',
         updateMedicationCounselReq,
       );
       const localVarPath = `/v1/counsel/record`;
@@ -4715,23 +4545,18 @@ export const DefaultApiAxiosParamCreator = function (
       }
 
       const localVarRequestOptions = {
-        method: "PUT",
+        method: 'PUT',
         ...baseOptions,
         ...options,
       };
       const localVarHeaderParameter = {} as any;
       const localVarQueryParameter = {} as any;
 
-      // authentication oauth2 required
-      // oauth required
-      await setOAuthToObject(
-        localVarHeaderParameter,
-        "oauth2",
-        [],
-        configuration,
-      );
+      // authentication bearer-jwt required
+      // http bearer authentication required
+      await setBearerAuthToObject(localVarHeaderParameter, configuration);
 
-      localVarHeaderParameter["Content-Type"] = "application/json";
+      localVarHeaderParameter['Content-Type'] = 'application/json';
 
       setSearchParams(localVarUrlObj, localVarQueryParameter);
       let headersFromBaseOptions =
@@ -4765,8 +4590,8 @@ export const DefaultApiAxiosParamCreator = function (
     ): Promise<RequestArgs> => {
       // verify required parameter 'updateStatusInCounselSessionReq' is not null or undefined
       assertParamExists(
-        "updateStatusInCounselSession",
-        "updateStatusInCounselSessionReq",
+        'updateStatusInCounselSession',
+        'updateStatusInCounselSessionReq',
         updateStatusInCounselSessionReq,
       );
       const localVarPath = `/v1/counsel/session/status`;
@@ -4778,23 +4603,18 @@ export const DefaultApiAxiosParamCreator = function (
       }
 
       const localVarRequestOptions = {
-        method: "PUT",
+        method: 'PUT',
         ...baseOptions,
         ...options,
       };
       const localVarHeaderParameter = {} as any;
       const localVarQueryParameter = {} as any;
 
-      // authentication oauth2 required
-      // oauth required
-      await setOAuthToObject(
-        localVarHeaderParameter,
-        "oauth2",
-        [],
-        configuration,
-      );
+      // authentication bearer-jwt required
+      // http bearer authentication required
+      await setBearerAuthToObject(localVarHeaderParameter, configuration);
 
-      localVarHeaderParameter["Content-Type"] = "application/json";
+      localVarHeaderParameter['Content-Type'] = 'application/json';
 
       setSearchParams(localVarUrlObj, localVarQueryParameter);
       let headersFromBaseOptions =
@@ -4851,7 +4671,7 @@ export const DefaultApiFp = function (configuration?: Configuration) {
         );
       const localVarOperationServerIndex = configuration?.serverIndex ?? 0;
       const localVarOperationServerBasePath =
-        operationServerMap["DefaultApi.addAndUpdateMedicationRecordHist"]?.[
+        operationServerMap['DefaultApi.addAndUpdateMedicationRecordHist']?.[
           localVarOperationServerIndex
         ]?.url;
       return (axios, basePath) =>
@@ -4884,7 +4704,7 @@ export const DefaultApiFp = function (configuration?: Configuration) {
       );
       const localVarOperationServerIndex = configuration?.serverIndex ?? 0;
       const localVarOperationServerBasePath =
-        operationServerMap["DefaultApi.addCounselCard"]?.[
+        operationServerMap['DefaultApi.addCounselCard']?.[
           localVarOperationServerIndex
         ]?.url;
       return (axios, basePath) =>
@@ -4918,7 +4738,7 @@ export const DefaultApiFp = function (configuration?: Configuration) {
         );
       const localVarOperationServerIndex = configuration?.serverIndex ?? 0;
       const localVarOperationServerBasePath =
-        operationServerMap["DefaultApi.addCounselSession"]?.[
+        operationServerMap['DefaultApi.addCounselSession']?.[
           localVarOperationServerIndex
         ]?.url;
       return (axios, basePath) =>
@@ -4952,7 +4772,7 @@ export const DefaultApiFp = function (configuration?: Configuration) {
         );
       const localVarOperationServerIndex = configuration?.serverIndex ?? 0;
       const localVarOperationServerBasePath =
-        operationServerMap["DefaultApi.addCounseleeConsent"]?.[
+        operationServerMap['DefaultApi.addCounseleeConsent']?.[
           localVarOperationServerIndex
         ]?.url;
       return (axios, basePath) =>
@@ -4986,7 +4806,7 @@ export const DefaultApiFp = function (configuration?: Configuration) {
         );
       const localVarOperationServerIndex = configuration?.serverIndex ?? 0;
       const localVarOperationServerBasePath =
-        operationServerMap["DefaultApi.addMedicationCounsel"]?.[
+        operationServerMap['DefaultApi.addMedicationCounsel']?.[
           localVarOperationServerIndex
         ]?.url;
       return (axios, basePath) =>
@@ -5023,7 +4843,7 @@ export const DefaultApiFp = function (configuration?: Configuration) {
         );
       const localVarOperationServerIndex = configuration?.serverIndex ?? 0;
       const localVarOperationServerBasePath =
-        operationServerMap["DefaultApi.addWasteMedicationDisposal"]?.[
+        operationServerMap['DefaultApi.addWasteMedicationDisposal']?.[
           localVarOperationServerIndex
         ]?.url;
       return (axios, basePath) =>
@@ -5060,7 +4880,7 @@ export const DefaultApiFp = function (configuration?: Configuration) {
         );
       const localVarOperationServerIndex = configuration?.serverIndex ?? 0;
       const localVarOperationServerBasePath =
-        operationServerMap["DefaultApi.addWasteMedicationRecord"]?.[
+        operationServerMap['DefaultApi.addWasteMedicationRecord']?.[
           localVarOperationServerIndex
         ]?.url;
       return (axios, basePath) =>
@@ -5094,7 +4914,7 @@ export const DefaultApiFp = function (configuration?: Configuration) {
         );
       const localVarOperationServerIndex = configuration?.serverIndex ?? 0;
       const localVarOperationServerBasePath =
-        operationServerMap["DefaultApi.deleteCounselSession"]?.[
+        operationServerMap['DefaultApi.deleteCounselSession']?.[
           localVarOperationServerIndex
         ]?.url;
       return (axios, basePath) =>
@@ -5128,7 +4948,7 @@ export const DefaultApiFp = function (configuration?: Configuration) {
         );
       const localVarOperationServerIndex = configuration?.serverIndex ?? 0;
       const localVarOperationServerBasePath =
-        operationServerMap["DefaultApi.deleteMedicationCounsel"]?.[
+        operationServerMap['DefaultApi.deleteMedicationCounsel']?.[
           localVarOperationServerIndex
         ]?.url;
       return (axios, basePath) =>
@@ -5162,7 +4982,7 @@ export const DefaultApiFp = function (configuration?: Configuration) {
         );
       const localVarOperationServerIndex = configuration?.serverIndex ?? 0;
       const localVarOperationServerBasePath =
-        operationServerMap["DefaultApi.deleteMedicationRecordHist"]?.[
+        operationServerMap['DefaultApi.deleteMedicationRecordHist']?.[
           localVarOperationServerIndex
         ]?.url;
       return (axios, basePath) =>
@@ -5194,7 +5014,7 @@ export const DefaultApiFp = function (configuration?: Configuration) {
       const localVarOperationServerIndex = configuration?.serverIndex ?? 0;
       const localVarOperationServerBasePath =
         operationServerMap[
-          "DefaultApi.deleteMedicationRecordHistsByCounselSessionId"
+          'DefaultApi.deleteMedicationRecordHistsByCounselSessionId'
         ]?.[localVarOperationServerIndex]?.url;
       return (axios, basePath) =>
         createRequestFunction(
@@ -5224,7 +5044,7 @@ export const DefaultApiFp = function (configuration?: Configuration) {
         );
       const localVarOperationServerIndex = configuration?.serverIndex ?? 0;
       const localVarOperationServerBasePath =
-        operationServerMap["DefaultApi.deleteWasteMedicationDisposal"]?.[
+        operationServerMap['DefaultApi.deleteWasteMedicationDisposal']?.[
           localVarOperationServerIndex
         ]?.url;
       return (axios, basePath) =>
@@ -5258,7 +5078,7 @@ export const DefaultApiFp = function (configuration?: Configuration) {
         );
       const localVarOperationServerIndex = configuration?.serverIndex ?? 0;
       const localVarOperationServerBasePath =
-        operationServerMap["DefaultApi.deleteWasteMedicationRecord"]?.[
+        operationServerMap['DefaultApi.deleteWasteMedicationRecord']?.[
           localVarOperationServerIndex
         ]?.url;
       return (axios, basePath) =>
@@ -5292,7 +5112,7 @@ export const DefaultApiFp = function (configuration?: Configuration) {
         );
       const localVarOperationServerIndex = configuration?.serverIndex ?? 0;
       const localVarOperationServerBasePath =
-        operationServerMap["DefaultApi.getWasteMedicationDisposal"]?.[
+        operationServerMap['DefaultApi.getWasteMedicationDisposal']?.[
           localVarOperationServerIndex
         ]?.url;
       return (axios, basePath) =>
@@ -5317,7 +5137,7 @@ export const DefaultApiFp = function (configuration?: Configuration) {
       const localVarAxiosArgs = await localVarAxiosParamCreator.login(options);
       const localVarOperationServerIndex = configuration?.serverIndex ?? 0;
       const localVarOperationServerBasePath =
-        operationServerMap["DefaultApi.login"]?.[localVarOperationServerIndex]
+        operationServerMap['DefaultApi.login']?.[localVarOperationServerIndex]
           ?.url;
       return (axios, basePath) =>
         createRequestFunction(
@@ -5350,7 +5170,7 @@ export const DefaultApiFp = function (configuration?: Configuration) {
         );
       const localVarOperationServerIndex = configuration?.serverIndex ?? 0;
       const localVarOperationServerBasePath =
-        operationServerMap["DefaultApi.searchMedicationByKeyword"]?.[
+        operationServerMap['DefaultApi.searchMedicationByKeyword']?.[
           localVarOperationServerIndex
         ]?.url;
       return (axios, basePath) =>
@@ -5384,7 +5204,7 @@ export const DefaultApiFp = function (configuration?: Configuration) {
         );
       const localVarOperationServerIndex = configuration?.serverIndex ?? 0;
       const localVarOperationServerBasePath =
-        operationServerMap["DefaultApi.selectCounselCard"]?.[
+        operationServerMap['DefaultApi.selectCounselCard']?.[
           localVarOperationServerIndex
         ]?.url;
       return (axios, basePath) =>
@@ -5418,7 +5238,7 @@ export const DefaultApiFp = function (configuration?: Configuration) {
         );
       const localVarOperationServerIndex = configuration?.serverIndex ?? 0;
       const localVarOperationServerBasePath =
-        operationServerMap["DefaultApi.selectCounselCard_1"]?.[
+        operationServerMap['DefaultApi.selectCounselCard_1']?.[
           localVarOperationServerIndex
         ]?.url;
       return (axios, basePath) =>
@@ -5452,7 +5272,7 @@ export const DefaultApiFp = function (configuration?: Configuration) {
         );
       const localVarOperationServerIndex = configuration?.serverIndex ?? 0;
       const localVarOperationServerBasePath =
-        operationServerMap["DefaultApi.selectCounselSession"]?.[
+        operationServerMap['DefaultApi.selectCounselSession']?.[
           localVarOperationServerIndex
         ]?.url;
       return (axios, basePath) =>
@@ -5493,7 +5313,7 @@ export const DefaultApiFp = function (configuration?: Configuration) {
       const localVarOperationServerIndex = configuration?.serverIndex ?? 0;
       const localVarOperationServerBasePath =
         operationServerMap[
-          "DefaultApi.selectCounselSessionListByBaseDateAndCursorAndSize"
+          'DefaultApi.selectCounselSessionListByBaseDateAndCursorAndSize'
         ]?.[localVarOperationServerIndex]?.url;
       return (axios, basePath) =>
         createRequestFunction(
@@ -5526,7 +5346,7 @@ export const DefaultApiFp = function (configuration?: Configuration) {
         );
       const localVarOperationServerIndex = configuration?.serverIndex ?? 0;
       const localVarOperationServerBasePath =
-        operationServerMap["DefaultApi.selectCounseleeBaseInformation"]?.[
+        operationServerMap['DefaultApi.selectCounseleeBaseInformation']?.[
           localVarOperationServerIndex
         ]?.url;
       return (axios, basePath) =>
@@ -5560,7 +5380,7 @@ export const DefaultApiFp = function (configuration?: Configuration) {
         );
       const localVarOperationServerIndex = configuration?.serverIndex ?? 0;
       const localVarOperationServerBasePath =
-        operationServerMap["DefaultApi.selectCounseleeBaseInformation_2"]?.[
+        operationServerMap['DefaultApi.selectCounseleeBaseInformation_2']?.[
           localVarOperationServerIndex
         ]?.url;
       return (axios, basePath) =>
@@ -5597,7 +5417,7 @@ export const DefaultApiFp = function (configuration?: Configuration) {
         );
       const localVarOperationServerIndex = configuration?.serverIndex ?? 0;
       const localVarOperationServerBasePath =
-        operationServerMap["DefaultApi.selectCounseleeConsentByCounseleeId"]?.[
+        operationServerMap['DefaultApi.selectCounseleeConsentByCounseleeId']?.[
           localVarOperationServerIndex
         ]?.url;
       return (axios, basePath) =>
@@ -5631,7 +5451,7 @@ export const DefaultApiFp = function (configuration?: Configuration) {
         );
       const localVarOperationServerIndex = configuration?.serverIndex ?? 0;
       const localVarOperationServerBasePath =
-        operationServerMap["DefaultApi.selectMedicationCounsel"]?.[
+        operationServerMap['DefaultApi.selectMedicationCounsel']?.[
           localVarOperationServerIndex
         ]?.url;
       return (axios, basePath) =>
@@ -5666,7 +5486,7 @@ export const DefaultApiFp = function (configuration?: Configuration) {
       const localVarOperationServerIndex = configuration?.serverIndex ?? 0;
       const localVarOperationServerBasePath =
         operationServerMap[
-          "DefaultApi.selectMedicationRecordListBySessionId"
+          'DefaultApi.selectMedicationRecordListBySessionId'
         ]?.[localVarOperationServerIndex]?.url;
       return (axios, basePath) =>
         createRequestFunction(
@@ -5700,7 +5520,7 @@ export const DefaultApiFp = function (configuration?: Configuration) {
       const localVarOperationServerIndex = configuration?.serverIndex ?? 0;
       const localVarOperationServerBasePath =
         operationServerMap[
-          "DefaultApi.selectMedicationRecordListBySessionId1"
+          'DefaultApi.selectMedicationRecordListBySessionId1'
         ]?.[localVarOperationServerIndex]?.url;
       return (axios, basePath) =>
         createRequestFunction(
@@ -5733,7 +5553,7 @@ export const DefaultApiFp = function (configuration?: Configuration) {
         );
       const localVarOperationServerIndex = configuration?.serverIndex ?? 0;
       const localVarOperationServerBasePath =
-        operationServerMap["DefaultApi.selectPreviousCounselCard"]?.[
+        operationServerMap['DefaultApi.selectPreviousCounselCard']?.[
           localVarOperationServerIndex
         ]?.url;
       return (axios, basePath) =>
@@ -5767,7 +5587,7 @@ export const DefaultApiFp = function (configuration?: Configuration) {
         );
       const localVarOperationServerIndex = configuration?.serverIndex ?? 0;
       const localVarOperationServerBasePath =
-        operationServerMap["DefaultApi.selectPreviousCounselSessionList"]?.[
+        operationServerMap['DefaultApi.selectPreviousCounselSessionList']?.[
           localVarOperationServerIndex
         ]?.url;
       return (axios, basePath) =>
@@ -5808,7 +5628,7 @@ export const DefaultApiFp = function (configuration?: Configuration) {
       const localVarOperationServerIndex = configuration?.serverIndex ?? 0;
       const localVarOperationServerBasePath =
         operationServerMap[
-          "DefaultApi.selectPreviousItemListByInformationNameAndItemName"
+          'DefaultApi.selectPreviousItemListByInformationNameAndItemName'
         ]?.[localVarOperationServerIndex]?.url;
       return (axios, basePath) =>
         createRequestFunction(
@@ -5841,7 +5661,7 @@ export const DefaultApiFp = function (configuration?: Configuration) {
         );
       const localVarOperationServerIndex = configuration?.serverIndex ?? 0;
       const localVarOperationServerBasePath =
-        operationServerMap["DefaultApi.selectPreviousMedicationCounsel"]?.[
+        operationServerMap['DefaultApi.selectPreviousMedicationCounsel']?.[
           localVarOperationServerIndex
         ]?.url;
       return (axios, basePath) =>
@@ -5875,7 +5695,7 @@ export const DefaultApiFp = function (configuration?: Configuration) {
         );
       const localVarOperationServerIndex = configuration?.serverIndex ?? 0;
       const localVarOperationServerBasePath =
-        operationServerMap["DefaultApi.updateCounselCard"]?.[
+        operationServerMap['DefaultApi.updateCounselCard']?.[
           localVarOperationServerIndex
         ]?.url;
       return (axios, basePath) =>
@@ -5909,7 +5729,7 @@ export const DefaultApiFp = function (configuration?: Configuration) {
         );
       const localVarOperationServerIndex = configuration?.serverIndex ?? 0;
       const localVarOperationServerBasePath =
-        operationServerMap["DefaultApi.updateCounselSession"]?.[
+        operationServerMap['DefaultApi.updateCounselSession']?.[
           localVarOperationServerIndex
         ]?.url;
       return (axios, basePath) =>
@@ -5943,7 +5763,7 @@ export const DefaultApiFp = function (configuration?: Configuration) {
         );
       const localVarOperationServerIndex = configuration?.serverIndex ?? 0;
       const localVarOperationServerBasePath =
-        operationServerMap["DefaultApi.updateCounseleeConsent"]?.[
+        operationServerMap['DefaultApi.updateCounseleeConsent']?.[
           localVarOperationServerIndex
         ]?.url;
       return (axios, basePath) =>
@@ -5977,7 +5797,7 @@ export const DefaultApiFp = function (configuration?: Configuration) {
         );
       const localVarOperationServerIndex = configuration?.serverIndex ?? 0;
       const localVarOperationServerBasePath =
-        operationServerMap["DefaultApi.updateCounselorInCounselSession"]?.[
+        operationServerMap['DefaultApi.updateCounselorInCounselSession']?.[
           localVarOperationServerIndex
         ]?.url;
       return (axios, basePath) =>
@@ -6011,7 +5831,7 @@ export const DefaultApiFp = function (configuration?: Configuration) {
         );
       const localVarOperationServerIndex = configuration?.serverIndex ?? 0;
       const localVarOperationServerBasePath =
-        operationServerMap["DefaultApi.updateMedicationCounsel"]?.[
+        operationServerMap['DefaultApi.updateMedicationCounsel']?.[
           localVarOperationServerIndex
         ]?.url;
       return (axios, basePath) =>
@@ -6045,7 +5865,7 @@ export const DefaultApiFp = function (configuration?: Configuration) {
         );
       const localVarOperationServerIndex = configuration?.serverIndex ?? 0;
       const localVarOperationServerBasePath =
-        operationServerMap["DefaultApi.updateStatusInCounselSession"]?.[
+        operationServerMap['DefaultApi.updateStatusInCounselSession']?.[
           localVarOperationServerIndex
         ]?.url;
       return (axios, basePath) =>
@@ -7355,8 +7175,8 @@ export const CounselCardControllerApiAxiosParamCreator = function (
     ): Promise<RequestArgs> => {
       // verify required parameter 'addCounselCardReq' is not null or undefined
       assertParamExists(
-        "addCounselCard",
-        "addCounselCardReq",
+        'addCounselCard',
+        'addCounselCardReq',
         addCounselCardReq,
       );
       const localVarPath = `/v1/counsel/card`;
@@ -7368,23 +7188,18 @@ export const CounselCardControllerApiAxiosParamCreator = function (
       }
 
       const localVarRequestOptions = {
-        method: "POST",
+        method: 'POST',
         ...baseOptions,
         ...options,
       };
       const localVarHeaderParameter = {} as any;
       const localVarQueryParameter = {} as any;
 
-      // authentication oauth2 required
-      // oauth required
-      await setOAuthToObject(
-        localVarHeaderParameter,
-        "oauth2",
-        [],
-        configuration,
-      );
+      // authentication bearer-jwt required
+      // http bearer authentication required
+      await setBearerAuthToObject(localVarHeaderParameter, configuration);
 
-      localVarHeaderParameter["Content-Type"] = "application/json";
+      localVarHeaderParameter['Content-Type'] = 'application/json';
 
       setSearchParams(localVarUrlObj, localVarQueryParameter);
       let headersFromBaseOptions =
@@ -7418,8 +7233,8 @@ export const CounselCardControllerApiAxiosParamCreator = function (
     ): Promise<RequestArgs> => {
       // verify required parameter 'deleteCounselCardReq' is not null or undefined
       assertParamExists(
-        "deleteCounselCard",
-        "deleteCounselCardReq",
+        'deleteCounselCard',
+        'deleteCounselCardReq',
         deleteCounselCardReq,
       );
       const localVarPath = `/v1/counsel/card`;
@@ -7431,23 +7246,18 @@ export const CounselCardControllerApiAxiosParamCreator = function (
       }
 
       const localVarRequestOptions = {
-        method: "DELETE",
+        method: 'DELETE',
         ...baseOptions,
         ...options,
       };
       const localVarHeaderParameter = {} as any;
       const localVarQueryParameter = {} as any;
 
-      // authentication oauth2 required
-      // oauth required
-      await setOAuthToObject(
-        localVarHeaderParameter,
-        "oauth2",
-        [],
-        configuration,
-      );
+      // authentication bearer-jwt required
+      // http bearer authentication required
+      await setBearerAuthToObject(localVarHeaderParameter, configuration);
 
-      localVarHeaderParameter["Content-Type"] = "application/json";
+      localVarHeaderParameter['Content-Type'] = 'application/json';
 
       setSearchParams(localVarUrlObj, localVarQueryParameter);
       let headersFromBaseOptions =
@@ -7481,12 +7291,12 @@ export const CounselCardControllerApiAxiosParamCreator = function (
     ): Promise<RequestArgs> => {
       // verify required parameter 'counselSessionId' is not null or undefined
       assertParamExists(
-        "selectCounselCard",
-        "counselSessionId",
+        'selectCounselCard',
+        'counselSessionId',
         counselSessionId,
       );
       const localVarPath = `/v1/counsel/card/{counselSessionId}`.replace(
-        `{${"counselSessionId"}}`,
+        `{${'counselSessionId'}}`,
         encodeURIComponent(String(counselSessionId)),
       );
       // use dummy base URL string because the URL constructor only accepts absolute URLs.
@@ -7497,21 +7307,16 @@ export const CounselCardControllerApiAxiosParamCreator = function (
       }
 
       const localVarRequestOptions = {
-        method: "GET",
+        method: 'GET',
         ...baseOptions,
         ...options,
       };
       const localVarHeaderParameter = {} as any;
       const localVarQueryParameter = {} as any;
 
-      // authentication oauth2 required
-      // oauth required
-      await setOAuthToObject(
-        localVarHeaderParameter,
-        "oauth2",
-        [],
-        configuration,
-      );
+      // authentication bearer-jwt required
+      // http bearer authentication required
+      await setBearerAuthToObject(localVarHeaderParameter, configuration);
 
       setSearchParams(localVarUrlObj, localVarQueryParameter);
       let headersFromBaseOptions =
@@ -7540,13 +7345,13 @@ export const CounselCardControllerApiAxiosParamCreator = function (
     ): Promise<RequestArgs> => {
       // verify required parameter 'counselSessionId' is not null or undefined
       assertParamExists(
-        "selectPreviousCounselCard",
-        "counselSessionId",
+        'selectPreviousCounselCard',
+        'counselSessionId',
         counselSessionId,
       );
       const localVarPath =
         `/v1/counsel/card/{counselSessionId}/previous`.replace(
-          `{${"counselSessionId"}}`,
+          `{${'counselSessionId'}}`,
           encodeURIComponent(String(counselSessionId)),
         );
       // use dummy base URL string because the URL constructor only accepts absolute URLs.
@@ -7557,21 +7362,16 @@ export const CounselCardControllerApiAxiosParamCreator = function (
       }
 
       const localVarRequestOptions = {
-        method: "GET",
+        method: 'GET',
         ...baseOptions,
         ...options,
       };
       const localVarHeaderParameter = {} as any;
       const localVarQueryParameter = {} as any;
 
-      // authentication oauth2 required
-      // oauth required
-      await setOAuthToObject(
-        localVarHeaderParameter,
-        "oauth2",
-        [],
-        configuration,
-      );
+      // authentication bearer-jwt required
+      // http bearer authentication required
+      await setBearerAuthToObject(localVarHeaderParameter, configuration);
 
       setSearchParams(localVarUrlObj, localVarQueryParameter);
       let headersFromBaseOptions =
@@ -7604,25 +7404,25 @@ export const CounselCardControllerApiAxiosParamCreator = function (
     ): Promise<RequestArgs> => {
       // verify required parameter 'counselSessionId' is not null or undefined
       assertParamExists(
-        "selectPreviousItemListByInformationNameAndItemName",
-        "counselSessionId",
+        'selectPreviousItemListByInformationNameAndItemName',
+        'counselSessionId',
         counselSessionId,
       );
       // verify required parameter 'informationName' is not null or undefined
       assertParamExists(
-        "selectPreviousItemListByInformationNameAndItemName",
-        "informationName",
+        'selectPreviousItemListByInformationNameAndItemName',
+        'informationName',
         informationName,
       );
       // verify required parameter 'itemName' is not null or undefined
       assertParamExists(
-        "selectPreviousItemListByInformationNameAndItemName",
-        "itemName",
+        'selectPreviousItemListByInformationNameAndItemName',
+        'itemName',
         itemName,
       );
       const localVarPath =
         `/v1/counsel/card/{counselSessionId}/preious/item/list`.replace(
-          `{${"counselSessionId"}}`,
+          `{${'counselSessionId'}}`,
           encodeURIComponent(String(counselSessionId)),
         );
       // use dummy base URL string because the URL constructor only accepts absolute URLs.
@@ -7633,28 +7433,23 @@ export const CounselCardControllerApiAxiosParamCreator = function (
       }
 
       const localVarRequestOptions = {
-        method: "GET",
+        method: 'GET',
         ...baseOptions,
         ...options,
       };
       const localVarHeaderParameter = {} as any;
       const localVarQueryParameter = {} as any;
 
-      // authentication oauth2 required
-      // oauth required
-      await setOAuthToObject(
-        localVarHeaderParameter,
-        "oauth2",
-        [],
-        configuration,
-      );
+      // authentication bearer-jwt required
+      // http bearer authentication required
+      await setBearerAuthToObject(localVarHeaderParameter, configuration);
 
       if (informationName !== undefined) {
-        localVarQueryParameter["informationName"] = informationName;
+        localVarQueryParameter['informationName'] = informationName;
       }
 
       if (itemName !== undefined) {
-        localVarQueryParameter["itemName"] = itemName;
+        localVarQueryParameter['itemName'] = itemName;
       }
 
       setSearchParams(localVarUrlObj, localVarQueryParameter);
@@ -7684,8 +7479,8 @@ export const CounselCardControllerApiAxiosParamCreator = function (
     ): Promise<RequestArgs> => {
       // verify required parameter 'updateCounselCardReq' is not null or undefined
       assertParamExists(
-        "updateCounselCard",
-        "updateCounselCardReq",
+        'updateCounselCard',
+        'updateCounselCardReq',
         updateCounselCardReq,
       );
       const localVarPath = `/v1/counsel/card`;
@@ -7697,23 +7492,18 @@ export const CounselCardControllerApiAxiosParamCreator = function (
       }
 
       const localVarRequestOptions = {
-        method: "PUT",
+        method: 'PUT',
         ...baseOptions,
         ...options,
       };
       const localVarHeaderParameter = {} as any;
       const localVarQueryParameter = {} as any;
 
-      // authentication oauth2 required
-      // oauth required
-      await setOAuthToObject(
-        localVarHeaderParameter,
-        "oauth2",
-        [],
-        configuration,
-      );
+      // authentication bearer-jwt required
+      // http bearer authentication required
+      await setBearerAuthToObject(localVarHeaderParameter, configuration);
 
-      localVarHeaderParameter["Content-Type"] = "application/json";
+      localVarHeaderParameter['Content-Type'] = 'application/json';
 
       setSearchParams(localVarUrlObj, localVarQueryParameter);
       let headersFromBaseOptions =
@@ -7769,7 +7559,7 @@ export const CounselCardControllerApiFp = function (
       );
       const localVarOperationServerIndex = configuration?.serverIndex ?? 0;
       const localVarOperationServerBasePath =
-        operationServerMap["CounselCardControllerApi.addCounselCard"]?.[
+        operationServerMap['CounselCardControllerApi.addCounselCard']?.[
           localVarOperationServerIndex
         ]?.url;
       return (axios, basePath) =>
@@ -7803,7 +7593,7 @@ export const CounselCardControllerApiFp = function (
         );
       const localVarOperationServerIndex = configuration?.serverIndex ?? 0;
       const localVarOperationServerBasePath =
-        operationServerMap["CounselCardControllerApi.deleteCounselCard"]?.[
+        operationServerMap['CounselCardControllerApi.deleteCounselCard']?.[
           localVarOperationServerIndex
         ]?.url;
       return (axios, basePath) =>
@@ -7837,7 +7627,7 @@ export const CounselCardControllerApiFp = function (
         );
       const localVarOperationServerIndex = configuration?.serverIndex ?? 0;
       const localVarOperationServerBasePath =
-        operationServerMap["CounselCardControllerApi.selectCounselCard"]?.[
+        operationServerMap['CounselCardControllerApi.selectCounselCard']?.[
           localVarOperationServerIndex
         ]?.url;
       return (axios, basePath) =>
@@ -7872,7 +7662,7 @@ export const CounselCardControllerApiFp = function (
       const localVarOperationServerIndex = configuration?.serverIndex ?? 0;
       const localVarOperationServerBasePath =
         operationServerMap[
-          "CounselCardControllerApi.selectPreviousCounselCard"
+          'CounselCardControllerApi.selectPreviousCounselCard'
         ]?.[localVarOperationServerIndex]?.url;
       return (axios, basePath) =>
         createRequestFunction(
@@ -7912,7 +7702,7 @@ export const CounselCardControllerApiFp = function (
       const localVarOperationServerIndex = configuration?.serverIndex ?? 0;
       const localVarOperationServerBasePath =
         operationServerMap[
-          "CounselCardControllerApi.selectPreviousItemListByInformationNameAndItemName"
+          'CounselCardControllerApi.selectPreviousItemListByInformationNameAndItemName'
         ]?.[localVarOperationServerIndex]?.url;
       return (axios, basePath) =>
         createRequestFunction(
@@ -7945,7 +7735,7 @@ export const CounselCardControllerApiFp = function (
         );
       const localVarOperationServerIndex = configuration?.serverIndex ?? 0;
       const localVarOperationServerBasePath =
-        operationServerMap["CounselCardControllerApi.updateCounselCard"]?.[
+        operationServerMap['CounselCardControllerApi.updateCounselCard']?.[
           localVarOperationServerIndex
         ]?.url;
       return (axios, basePath) =>
@@ -8212,8 +8002,8 @@ export const CounselSessionControllerApiAxiosParamCreator = function (
     ): Promise<RequestArgs> => {
       // verify required parameter 'addCounselSessionReq' is not null or undefined
       assertParamExists(
-        "addCounselSession",
-        "addCounselSessionReq",
+        'addCounselSession',
+        'addCounselSessionReq',
         addCounselSessionReq,
       );
       const localVarPath = `/v1/counsel/session`;
@@ -8225,23 +8015,18 @@ export const CounselSessionControllerApiAxiosParamCreator = function (
       }
 
       const localVarRequestOptions = {
-        method: "POST",
+        method: 'POST',
         ...baseOptions,
         ...options,
       };
       const localVarHeaderParameter = {} as any;
       const localVarQueryParameter = {} as any;
 
-      // authentication oauth2 required
-      // oauth required
-      await setOAuthToObject(
-        localVarHeaderParameter,
-        "oauth2",
-        [],
-        configuration,
-      );
+      // authentication bearer-jwt required
+      // http bearer authentication required
+      await setBearerAuthToObject(localVarHeaderParameter, configuration);
 
-      localVarHeaderParameter["Content-Type"] = "application/json";
+      localVarHeaderParameter['Content-Type'] = 'application/json';
 
       setSearchParams(localVarUrlObj, localVarQueryParameter);
       let headersFromBaseOptions =
@@ -8275,8 +8060,8 @@ export const CounselSessionControllerApiAxiosParamCreator = function (
     ): Promise<RequestArgs> => {
       // verify required parameter 'deleteCounselSessionReq' is not null or undefined
       assertParamExists(
-        "deleteCounselSession",
-        "deleteCounselSessionReq",
+        'deleteCounselSession',
+        'deleteCounselSessionReq',
         deleteCounselSessionReq,
       );
       const localVarPath = `/v1/counsel/session`;
@@ -8288,23 +8073,18 @@ export const CounselSessionControllerApiAxiosParamCreator = function (
       }
 
       const localVarRequestOptions = {
-        method: "DELETE",
+        method: 'DELETE',
         ...baseOptions,
         ...options,
       };
       const localVarHeaderParameter = {} as any;
       const localVarQueryParameter = {} as any;
 
-      // authentication oauth2 required
-      // oauth required
-      await setOAuthToObject(
-        localVarHeaderParameter,
-        "oauth2",
-        [],
-        configuration,
-      );
+      // authentication bearer-jwt required
+      // http bearer authentication required
+      await setBearerAuthToObject(localVarHeaderParameter, configuration);
 
-      localVarHeaderParameter["Content-Type"] = "application/json";
+      localVarHeaderParameter['Content-Type'] = 'application/json';
 
       setSearchParams(localVarUrlObj, localVarQueryParameter);
       let headersFromBaseOptions =
@@ -8338,12 +8118,12 @@ export const CounselSessionControllerApiAxiosParamCreator = function (
     ): Promise<RequestArgs> => {
       // verify required parameter 'counselSessionId' is not null or undefined
       assertParamExists(
-        "selectCounselSession",
-        "counselSessionId",
+        'selectCounselSession',
+        'counselSessionId',
         counselSessionId,
       );
       const localVarPath = `/v1/counsel/session/{counselSessionId}`.replace(
-        `{${"counselSessionId"}}`,
+        `{${'counselSessionId'}}`,
         encodeURIComponent(String(counselSessionId)),
       );
       // use dummy base URL string because the URL constructor only accepts absolute URLs.
@@ -8354,21 +8134,16 @@ export const CounselSessionControllerApiAxiosParamCreator = function (
       }
 
       const localVarRequestOptions = {
-        method: "GET",
+        method: 'GET',
         ...baseOptions,
         ...options,
       };
       const localVarHeaderParameter = {} as any;
       const localVarQueryParameter = {} as any;
 
-      // authentication oauth2 required
-      // oauth required
-      await setOAuthToObject(
-        localVarHeaderParameter,
-        "oauth2",
-        [],
-        configuration,
-      );
+      // authentication bearer-jwt required
+      // http bearer authentication required
+      await setBearerAuthToObject(localVarHeaderParameter, configuration);
 
       setSearchParams(localVarUrlObj, localVarQueryParameter);
       let headersFromBaseOptions =
@@ -8408,35 +8183,30 @@ export const CounselSessionControllerApiAxiosParamCreator = function (
       }
 
       const localVarRequestOptions = {
-        method: "GET",
+        method: 'GET',
         ...baseOptions,
         ...options,
       };
       const localVarHeaderParameter = {} as any;
       const localVarQueryParameter = {} as any;
 
-      // authentication oauth2 required
-      // oauth required
-      await setOAuthToObject(
-        localVarHeaderParameter,
-        "oauth2",
-        [],
-        configuration,
-      );
+      // authentication bearer-jwt required
+      // http bearer authentication required
+      await setBearerAuthToObject(localVarHeaderParameter, configuration);
 
       if (baseDate !== undefined) {
-        localVarQueryParameter["baseDate"] =
+        localVarQueryParameter['baseDate'] =
           (baseDate as any) instanceof Date
             ? (baseDate as any).toISOString().substring(0, 10)
             : baseDate;
       }
 
       if (cursor !== undefined) {
-        localVarQueryParameter["cursor"] = cursor;
+        localVarQueryParameter['cursor'] = cursor;
       }
 
       if (size !== undefined) {
-        localVarQueryParameter["size"] = size;
+        localVarQueryParameter['size'] = size;
       }
 
       setSearchParams(localVarUrlObj, localVarQueryParameter);
@@ -8466,13 +8236,13 @@ export const CounselSessionControllerApiAxiosParamCreator = function (
     ): Promise<RequestArgs> => {
       // verify required parameter 'counselSessionId' is not null or undefined
       assertParamExists(
-        "selectPreviousCounselSessionList",
-        "counselSessionId",
+        'selectPreviousCounselSessionList',
+        'counselSessionId',
         counselSessionId,
       );
       const localVarPath =
         `/v1/counsel/session/{counselSessionId}/previous/list`.replace(
-          `{${"counselSessionId"}}`,
+          `{${'counselSessionId'}}`,
           encodeURIComponent(String(counselSessionId)),
         );
       // use dummy base URL string because the URL constructor only accepts absolute URLs.
@@ -8483,21 +8253,16 @@ export const CounselSessionControllerApiAxiosParamCreator = function (
       }
 
       const localVarRequestOptions = {
-        method: "GET",
+        method: 'GET',
         ...baseOptions,
         ...options,
       };
       const localVarHeaderParameter = {} as any;
       const localVarQueryParameter = {} as any;
 
-      // authentication oauth2 required
-      // oauth required
-      await setOAuthToObject(
-        localVarHeaderParameter,
-        "oauth2",
-        [],
-        configuration,
-      );
+      // authentication bearer-jwt required
+      // http bearer authentication required
+      await setBearerAuthToObject(localVarHeaderParameter, configuration);
 
       setSearchParams(localVarUrlObj, localVarQueryParameter);
       let headersFromBaseOptions =
@@ -8526,8 +8291,8 @@ export const CounselSessionControllerApiAxiosParamCreator = function (
     ): Promise<RequestArgs> => {
       // verify required parameter 'updateCounselSessionReq' is not null or undefined
       assertParamExists(
-        "updateCounselSession",
-        "updateCounselSessionReq",
+        'updateCounselSession',
+        'updateCounselSessionReq',
         updateCounselSessionReq,
       );
       const localVarPath = `/v1/counsel/session`;
@@ -8539,23 +8304,18 @@ export const CounselSessionControllerApiAxiosParamCreator = function (
       }
 
       const localVarRequestOptions = {
-        method: "PUT",
+        method: 'PUT',
         ...baseOptions,
         ...options,
       };
       const localVarHeaderParameter = {} as any;
       const localVarQueryParameter = {} as any;
 
-      // authentication oauth2 required
-      // oauth required
-      await setOAuthToObject(
-        localVarHeaderParameter,
-        "oauth2",
-        [],
-        configuration,
-      );
+      // authentication bearer-jwt required
+      // http bearer authentication required
+      await setBearerAuthToObject(localVarHeaderParameter, configuration);
 
-      localVarHeaderParameter["Content-Type"] = "application/json";
+      localVarHeaderParameter['Content-Type'] = 'application/json';
 
       setSearchParams(localVarUrlObj, localVarQueryParameter);
       let headersFromBaseOptions =
@@ -8589,8 +8349,8 @@ export const CounselSessionControllerApiAxiosParamCreator = function (
     ): Promise<RequestArgs> => {
       // verify required parameter 'updateCounselorInCounselSessionReq' is not null or undefined
       assertParamExists(
-        "updateCounselorInCounselSession",
-        "updateCounselorInCounselSessionReq",
+        'updateCounselorInCounselSession',
+        'updateCounselorInCounselSessionReq',
         updateCounselorInCounselSessionReq,
       );
       const localVarPath = `/v1/counsel/session/counselor`;
@@ -8602,23 +8362,18 @@ export const CounselSessionControllerApiAxiosParamCreator = function (
       }
 
       const localVarRequestOptions = {
-        method: "PUT",
+        method: 'PUT',
         ...baseOptions,
         ...options,
       };
       const localVarHeaderParameter = {} as any;
       const localVarQueryParameter = {} as any;
 
-      // authentication oauth2 required
-      // oauth required
-      await setOAuthToObject(
-        localVarHeaderParameter,
-        "oauth2",
-        [],
-        configuration,
-      );
+      // authentication bearer-jwt required
+      // http bearer authentication required
+      await setBearerAuthToObject(localVarHeaderParameter, configuration);
 
-      localVarHeaderParameter["Content-Type"] = "application/json";
+      localVarHeaderParameter['Content-Type'] = 'application/json';
 
       setSearchParams(localVarUrlObj, localVarQueryParameter);
       let headersFromBaseOptions =
@@ -8652,8 +8407,8 @@ export const CounselSessionControllerApiAxiosParamCreator = function (
     ): Promise<RequestArgs> => {
       // verify required parameter 'updateStatusInCounselSessionReq' is not null or undefined
       assertParamExists(
-        "updateStatusInCounselSession",
-        "updateStatusInCounselSessionReq",
+        'updateStatusInCounselSession',
+        'updateStatusInCounselSessionReq',
         updateStatusInCounselSessionReq,
       );
       const localVarPath = `/v1/counsel/session/status`;
@@ -8665,23 +8420,18 @@ export const CounselSessionControllerApiAxiosParamCreator = function (
       }
 
       const localVarRequestOptions = {
-        method: "PUT",
+        method: 'PUT',
         ...baseOptions,
         ...options,
       };
       const localVarHeaderParameter = {} as any;
       const localVarQueryParameter = {} as any;
 
-      // authentication oauth2 required
-      // oauth required
-      await setOAuthToObject(
-        localVarHeaderParameter,
-        "oauth2",
-        [],
-        configuration,
-      );
+      // authentication bearer-jwt required
+      // http bearer authentication required
+      await setBearerAuthToObject(localVarHeaderParameter, configuration);
 
-      localVarHeaderParameter["Content-Type"] = "application/json";
+      localVarHeaderParameter['Content-Type'] = 'application/json';
 
       setSearchParams(localVarUrlObj, localVarQueryParameter);
       let headersFromBaseOptions =
@@ -8738,7 +8488,7 @@ export const CounselSessionControllerApiFp = function (
         );
       const localVarOperationServerIndex = configuration?.serverIndex ?? 0;
       const localVarOperationServerBasePath =
-        operationServerMap["CounselSessionControllerApi.addCounselSession"]?.[
+        operationServerMap['CounselSessionControllerApi.addCounselSession']?.[
           localVarOperationServerIndex
         ]?.url;
       return (axios, basePath) =>
@@ -8773,7 +8523,7 @@ export const CounselSessionControllerApiFp = function (
       const localVarOperationServerIndex = configuration?.serverIndex ?? 0;
       const localVarOperationServerBasePath =
         operationServerMap[
-          "CounselSessionControllerApi.deleteCounselSession"
+          'CounselSessionControllerApi.deleteCounselSession'
         ]?.[localVarOperationServerIndex]?.url;
       return (axios, basePath) =>
         createRequestFunction(
@@ -8807,7 +8557,7 @@ export const CounselSessionControllerApiFp = function (
       const localVarOperationServerIndex = configuration?.serverIndex ?? 0;
       const localVarOperationServerBasePath =
         operationServerMap[
-          "CounselSessionControllerApi.selectCounselSession"
+          'CounselSessionControllerApi.selectCounselSession'
         ]?.[localVarOperationServerIndex]?.url;
       return (axios, basePath) =>
         createRequestFunction(
@@ -8847,7 +8597,7 @@ export const CounselSessionControllerApiFp = function (
       const localVarOperationServerIndex = configuration?.serverIndex ?? 0;
       const localVarOperationServerBasePath =
         operationServerMap[
-          "CounselSessionControllerApi.selectCounselSessionListByBaseDateAndCursorAndSize"
+          'CounselSessionControllerApi.selectCounselSessionListByBaseDateAndCursorAndSize'
         ]?.[localVarOperationServerIndex]?.url;
       return (axios, basePath) =>
         createRequestFunction(
@@ -8881,7 +8631,7 @@ export const CounselSessionControllerApiFp = function (
       const localVarOperationServerIndex = configuration?.serverIndex ?? 0;
       const localVarOperationServerBasePath =
         operationServerMap[
-          "CounselSessionControllerApi.selectPreviousCounselSessionList"
+          'CounselSessionControllerApi.selectPreviousCounselSessionList'
         ]?.[localVarOperationServerIndex]?.url;
       return (axios, basePath) =>
         createRequestFunction(
@@ -8915,7 +8665,7 @@ export const CounselSessionControllerApiFp = function (
       const localVarOperationServerIndex = configuration?.serverIndex ?? 0;
       const localVarOperationServerBasePath =
         operationServerMap[
-          "CounselSessionControllerApi.updateCounselSession"
+          'CounselSessionControllerApi.updateCounselSession'
         ]?.[localVarOperationServerIndex]?.url;
       return (axios, basePath) =>
         createRequestFunction(
@@ -8949,7 +8699,7 @@ export const CounselSessionControllerApiFp = function (
       const localVarOperationServerIndex = configuration?.serverIndex ?? 0;
       const localVarOperationServerBasePath =
         operationServerMap[
-          "CounselSessionControllerApi.updateCounselorInCounselSession"
+          'CounselSessionControllerApi.updateCounselorInCounselSession'
         ]?.[localVarOperationServerIndex]?.url;
       return (axios, basePath) =>
         createRequestFunction(
@@ -8983,7 +8733,7 @@ export const CounselSessionControllerApiFp = function (
       const localVarOperationServerIndex = configuration?.serverIndex ?? 0;
       const localVarOperationServerBasePath =
         operationServerMap[
-          "CounselSessionControllerApi.updateStatusInCounselSession"
+          'CounselSessionControllerApi.updateStatusInCounselSession'
         ]?.[localVarOperationServerIndex]?.url;
       return (axios, basePath) =>
         createRequestFunction(
@@ -9319,8 +9069,8 @@ export const CounseleeConsentControllerApiAxiosParamCreator = function (
     ): Promise<RequestArgs> => {
       // verify required parameter 'addCounseleeConsentReq' is not null or undefined
       assertParamExists(
-        "addCounseleeConsent",
-        "addCounseleeConsentReq",
+        'addCounseleeConsent',
+        'addCounseleeConsentReq',
         addCounseleeConsentReq,
       );
       const localVarPath = `/v1/counselee/consent`;
@@ -9332,23 +9082,18 @@ export const CounseleeConsentControllerApiAxiosParamCreator = function (
       }
 
       const localVarRequestOptions = {
-        method: "POST",
+        method: 'POST',
         ...baseOptions,
         ...options,
       };
       const localVarHeaderParameter = {} as any;
       const localVarQueryParameter = {} as any;
 
-      // authentication oauth2 required
-      // oauth required
-      await setOAuthToObject(
-        localVarHeaderParameter,
-        "oauth2",
-        [],
-        configuration,
-      );
+      // authentication bearer-jwt required
+      // http bearer authentication required
+      await setBearerAuthToObject(localVarHeaderParameter, configuration);
 
-      localVarHeaderParameter["Content-Type"] = "application/json";
+      localVarHeaderParameter['Content-Type'] = 'application/json';
 
       setSearchParams(localVarUrlObj, localVarQueryParameter);
       let headersFromBaseOptions =
@@ -9382,8 +9127,8 @@ export const CounseleeConsentControllerApiAxiosParamCreator = function (
     ): Promise<RequestArgs> => {
       // verify required parameter 'deleteCounseleeConsentReq' is not null or undefined
       assertParamExists(
-        "deleteCounseleeConsent",
-        "deleteCounseleeConsentReq",
+        'deleteCounseleeConsent',
+        'deleteCounseleeConsentReq',
         deleteCounseleeConsentReq,
       );
       const localVarPath = `/v1/counselee/consent`;
@@ -9395,23 +9140,18 @@ export const CounseleeConsentControllerApiAxiosParamCreator = function (
       }
 
       const localVarRequestOptions = {
-        method: "DELETE",
+        method: 'DELETE',
         ...baseOptions,
         ...options,
       };
       const localVarHeaderParameter = {} as any;
       const localVarQueryParameter = {} as any;
 
-      // authentication oauth2 required
-      // oauth required
-      await setOAuthToObject(
-        localVarHeaderParameter,
-        "oauth2",
-        [],
-        configuration,
-      );
+      // authentication bearer-jwt required
+      // http bearer authentication required
+      await setBearerAuthToObject(localVarHeaderParameter, configuration);
 
-      localVarHeaderParameter["Content-Type"] = "application/json";
+      localVarHeaderParameter['Content-Type'] = 'application/json';
 
       setSearchParams(localVarUrlObj, localVarQueryParameter);
       let headersFromBaseOptions =
@@ -9447,18 +9187,18 @@ export const CounseleeConsentControllerApiAxiosParamCreator = function (
     ): Promise<RequestArgs> => {
       // verify required parameter 'counselSessionId' is not null or undefined
       assertParamExists(
-        "selectCounseleeConsentByCounseleeId",
-        "counselSessionId",
+        'selectCounseleeConsentByCounseleeId',
+        'counselSessionId',
         counselSessionId,
       );
       // verify required parameter 'counseleeId' is not null or undefined
       assertParamExists(
-        "selectCounseleeConsentByCounseleeId",
-        "counseleeId",
+        'selectCounseleeConsentByCounseleeId',
+        'counseleeId',
         counseleeId,
       );
       const localVarPath = `/v1/counselee/consent/{counselSessionId}`.replace(
-        `{${"counselSessionId"}}`,
+        `{${'counselSessionId'}}`,
         encodeURIComponent(String(counselSessionId)),
       );
       // use dummy base URL string because the URL constructor only accepts absolute URLs.
@@ -9469,24 +9209,19 @@ export const CounseleeConsentControllerApiAxiosParamCreator = function (
       }
 
       const localVarRequestOptions = {
-        method: "GET",
+        method: 'GET',
         ...baseOptions,
         ...options,
       };
       const localVarHeaderParameter = {} as any;
       const localVarQueryParameter = {} as any;
 
-      // authentication oauth2 required
-      // oauth required
-      await setOAuthToObject(
-        localVarHeaderParameter,
-        "oauth2",
-        [],
-        configuration,
-      );
+      // authentication bearer-jwt required
+      // http bearer authentication required
+      await setBearerAuthToObject(localVarHeaderParameter, configuration);
 
       if (counseleeId !== undefined) {
-        localVarQueryParameter["counseleeId"] = counseleeId;
+        localVarQueryParameter['counseleeId'] = counseleeId;
       }
 
       setSearchParams(localVarUrlObj, localVarQueryParameter);
@@ -9516,8 +9251,8 @@ export const CounseleeConsentControllerApiAxiosParamCreator = function (
     ): Promise<RequestArgs> => {
       // verify required parameter 'updateCounseleeConsentReq' is not null or undefined
       assertParamExists(
-        "updateCounseleeConsent",
-        "updateCounseleeConsentReq",
+        'updateCounseleeConsent',
+        'updateCounseleeConsentReq',
         updateCounseleeConsentReq,
       );
       const localVarPath = `/v1/counselee/consent`;
@@ -9529,23 +9264,18 @@ export const CounseleeConsentControllerApiAxiosParamCreator = function (
       }
 
       const localVarRequestOptions = {
-        method: "PUT",
+        method: 'PUT',
         ...baseOptions,
         ...options,
       };
       const localVarHeaderParameter = {} as any;
       const localVarQueryParameter = {} as any;
 
-      // authentication oauth2 required
-      // oauth required
-      await setOAuthToObject(
-        localVarHeaderParameter,
-        "oauth2",
-        [],
-        configuration,
-      );
+      // authentication bearer-jwt required
+      // http bearer authentication required
+      await setBearerAuthToObject(localVarHeaderParameter, configuration);
 
-      localVarHeaderParameter["Content-Type"] = "application/json";
+      localVarHeaderParameter['Content-Type'] = 'application/json';
 
       setSearchParams(localVarUrlObj, localVarQueryParameter);
       let headersFromBaseOptions =
@@ -9603,7 +9333,7 @@ export const CounseleeConsentControllerApiFp = function (
       const localVarOperationServerIndex = configuration?.serverIndex ?? 0;
       const localVarOperationServerBasePath =
         operationServerMap[
-          "CounseleeConsentControllerApi.addCounseleeConsent"
+          'CounseleeConsentControllerApi.addCounseleeConsent'
         ]?.[localVarOperationServerIndex]?.url;
       return (axios, basePath) =>
         createRequestFunction(
@@ -9637,7 +9367,7 @@ export const CounseleeConsentControllerApiFp = function (
       const localVarOperationServerIndex = configuration?.serverIndex ?? 0;
       const localVarOperationServerBasePath =
         operationServerMap[
-          "CounseleeConsentControllerApi.deleteCounseleeConsent"
+          'CounseleeConsentControllerApi.deleteCounseleeConsent'
         ]?.[localVarOperationServerIndex]?.url;
       return (axios, basePath) =>
         createRequestFunction(
@@ -9674,7 +9404,7 @@ export const CounseleeConsentControllerApiFp = function (
       const localVarOperationServerIndex = configuration?.serverIndex ?? 0;
       const localVarOperationServerBasePath =
         operationServerMap[
-          "CounseleeConsentControllerApi.selectCounseleeConsentByCounseleeId"
+          'CounseleeConsentControllerApi.selectCounseleeConsentByCounseleeId'
         ]?.[localVarOperationServerIndex]?.url;
       return (axios, basePath) =>
         createRequestFunction(
@@ -9708,7 +9438,7 @@ export const CounseleeConsentControllerApiFp = function (
       const localVarOperationServerIndex = configuration?.serverIndex ?? 0;
       const localVarOperationServerBasePath =
         operationServerMap[
-          "CounseleeConsentControllerApi.updateCounseleeConsent"
+          'CounseleeConsentControllerApi.updateCounseleeConsent'
         ]?.[localVarOperationServerIndex]?.url;
       return (axios, basePath) =>
         createRequestFunction(
@@ -9904,13 +9634,13 @@ export const CounseleeControllerApiAxiosParamCreator = function (
     ): Promise<RequestArgs> => {
       // verify required parameter 'counselSessionId' is not null or undefined
       assertParamExists(
-        "selectCounseleeBaseInformation",
-        "counselSessionId",
+        'selectCounseleeBaseInformation',
+        'counselSessionId',
         counselSessionId,
       );
       const localVarPath =
         `/v1/counsel/counselee/{counselSessionId}/base/information`.replace(
-          `{${"counselSessionId"}}`,
+          `{${'counselSessionId'}}`,
           encodeURIComponent(String(counselSessionId)),
         );
       // use dummy base URL string because the URL constructor only accepts absolute URLs.
@@ -9921,21 +9651,16 @@ export const CounseleeControllerApiAxiosParamCreator = function (
       }
 
       const localVarRequestOptions = {
-        method: "GET",
+        method: 'GET',
         ...baseOptions,
         ...options,
       };
       const localVarHeaderParameter = {} as any;
       const localVarQueryParameter = {} as any;
 
-      // authentication oauth2 required
-      // oauth required
-      await setOAuthToObject(
-        localVarHeaderParameter,
-        "oauth2",
-        [],
-        configuration,
-      );
+      // authentication bearer-jwt required
+      // http bearer authentication required
+      await setBearerAuthToObject(localVarHeaderParameter, configuration);
 
       setSearchParams(localVarUrlObj, localVarQueryParameter);
       let headersFromBaseOptions =
@@ -9988,7 +9713,7 @@ export const CounseleeControllerApiFp = function (
       const localVarOperationServerIndex = configuration?.serverIndex ?? 0;
       const localVarOperationServerBasePath =
         operationServerMap[
-          "CounseleeControllerApi.selectCounseleeBaseInformation"
+          'CounseleeControllerApi.selectCounseleeBaseInformation'
         ]?.[localVarOperationServerIndex]?.url;
       return (axios, basePath) =>
         createRequestFunction(
@@ -10081,21 +9806,16 @@ export const CounselorControllerApiAxiosParamCreator = function (
       }
 
       const localVarRequestOptions = {
-        method: "GET",
+        method: 'GET',
         ...baseOptions,
         ...options,
       };
       const localVarHeaderParameter = {} as any;
       const localVarQueryParameter = {} as any;
 
-      // authentication oauth2 required
-      // oauth required
-      await setOAuthToObject(
-        localVarHeaderParameter,
-        "oauth2",
-        [],
-        configuration,
-      );
+      // authentication bearer-jwt required
+      // http bearer authentication required
+      await setBearerAuthToObject(localVarHeaderParameter, configuration);
 
       setSearchParams(localVarUrlObj, localVarQueryParameter);
       let headersFromBaseOptions =
@@ -10138,7 +9858,7 @@ export const CounselorControllerApiFp = function (
       const localVarAxiosArgs = await localVarAxiosParamCreator.login(options);
       const localVarOperationServerIndex = configuration?.serverIndex ?? 0;
       const localVarOperationServerBasePath =
-        operationServerMap["CounselorControllerApi.login"]?.[
+        operationServerMap['CounselorControllerApi.login']?.[
           localVarOperationServerIndex
         ]?.url;
       return (axios, basePath) =>
@@ -10218,7 +9938,7 @@ export const MedicationControllerApiAxiosParamCreator = function (
       options: RawAxiosRequestConfig = {},
     ): Promise<RequestArgs> => {
       // verify required parameter 'keyword' is not null or undefined
-      assertParamExists("searchMedicationByKeyword", "keyword", keyword);
+      assertParamExists('searchMedicationByKeyword', 'keyword', keyword);
       const localVarPath = `/v1/medication`;
       // use dummy base URL string because the URL constructor only accepts absolute URLs.
       const localVarUrlObj = new URL(localVarPath, DUMMY_BASE_URL);
@@ -10228,24 +9948,19 @@ export const MedicationControllerApiAxiosParamCreator = function (
       }
 
       const localVarRequestOptions = {
-        method: "GET",
+        method: 'GET',
         ...baseOptions,
         ...options,
       };
       const localVarHeaderParameter = {} as any;
       const localVarQueryParameter = {} as any;
 
-      // authentication oauth2 required
-      // oauth required
-      await setOAuthToObject(
-        localVarHeaderParameter,
-        "oauth2",
-        [],
-        configuration,
-      );
+      // authentication bearer-jwt required
+      // http bearer authentication required
+      await setBearerAuthToObject(localVarHeaderParameter, configuration);
 
       if (keyword !== undefined) {
-        localVarQueryParameter["keyword"] = keyword;
+        localVarQueryParameter['keyword'] = keyword;
       }
 
       setSearchParams(localVarUrlObj, localVarQueryParameter);
@@ -10299,7 +10014,7 @@ export const MedicationControllerApiFp = function (
       const localVarOperationServerIndex = configuration?.serverIndex ?? 0;
       const localVarOperationServerBasePath =
         operationServerMap[
-          "MedicationControllerApi.searchMedicationByKeyword"
+          'MedicationControllerApi.searchMedicationByKeyword'
         ]?.[localVarOperationServerIndex]?.url;
       return (axios, basePath) =>
         createRequestFunction(
@@ -10387,8 +10102,8 @@ export const MedicationCounselControllerApiAxiosParamCreator = function (
     ): Promise<RequestArgs> => {
       // verify required parameter 'addMedicationCounselReq' is not null or undefined
       assertParamExists(
-        "addMedicationCounsel",
-        "addMedicationCounselReq",
+        'addMedicationCounsel',
+        'addMedicationCounselReq',
         addMedicationCounselReq,
       );
       const localVarPath = `/v1/counsel/record`;
@@ -10400,23 +10115,18 @@ export const MedicationCounselControllerApiAxiosParamCreator = function (
       }
 
       const localVarRequestOptions = {
-        method: "POST",
+        method: 'POST',
         ...baseOptions,
         ...options,
       };
       const localVarHeaderParameter = {} as any;
       const localVarQueryParameter = {} as any;
 
-      // authentication oauth2 required
-      // oauth required
-      await setOAuthToObject(
-        localVarHeaderParameter,
-        "oauth2",
-        [],
-        configuration,
-      );
+      // authentication bearer-jwt required
+      // http bearer authentication required
+      await setBearerAuthToObject(localVarHeaderParameter, configuration);
 
-      localVarHeaderParameter["Content-Type"] = "application/json";
+      localVarHeaderParameter['Content-Type'] = 'application/json';
 
       setSearchParams(localVarUrlObj, localVarQueryParameter);
       let headersFromBaseOptions =
@@ -10450,8 +10160,8 @@ export const MedicationCounselControllerApiAxiosParamCreator = function (
     ): Promise<RequestArgs> => {
       // verify required parameter 'deleteMedicationCounselReq' is not null or undefined
       assertParamExists(
-        "deleteMedicationCounsel",
-        "deleteMedicationCounselReq",
+        'deleteMedicationCounsel',
+        'deleteMedicationCounselReq',
         deleteMedicationCounselReq,
       );
       const localVarPath = `/v1/counsel/record`;
@@ -10463,23 +10173,18 @@ export const MedicationCounselControllerApiAxiosParamCreator = function (
       }
 
       const localVarRequestOptions = {
-        method: "DELETE",
+        method: 'DELETE',
         ...baseOptions,
         ...options,
       };
       const localVarHeaderParameter = {} as any;
       const localVarQueryParameter = {} as any;
 
-      // authentication oauth2 required
-      // oauth required
-      await setOAuthToObject(
-        localVarHeaderParameter,
-        "oauth2",
-        [],
-        configuration,
-      );
+      // authentication bearer-jwt required
+      // http bearer authentication required
+      await setBearerAuthToObject(localVarHeaderParameter, configuration);
 
-      localVarHeaderParameter["Content-Type"] = "application/json";
+      localVarHeaderParameter['Content-Type'] = 'application/json';
 
       setSearchParams(localVarUrlObj, localVarQueryParameter);
       let headersFromBaseOptions =
@@ -10513,8 +10218,8 @@ export const MedicationCounselControllerApiAxiosParamCreator = function (
     ): Promise<RequestArgs> => {
       // verify required parameter 'counselSessionId' is not null or undefined
       assertParamExists(
-        "selectMedicationCounsel",
-        "counselSessionId",
+        'selectMedicationCounsel',
+        'counselSessionId',
         counselSessionId,
       );
       const localVarPath = `/v1/counsel/record`;
@@ -10526,24 +10231,19 @@ export const MedicationCounselControllerApiAxiosParamCreator = function (
       }
 
       const localVarRequestOptions = {
-        method: "GET",
+        method: 'GET',
         ...baseOptions,
         ...options,
       };
       const localVarHeaderParameter = {} as any;
       const localVarQueryParameter = {} as any;
 
-      // authentication oauth2 required
-      // oauth required
-      await setOAuthToObject(
-        localVarHeaderParameter,
-        "oauth2",
-        [],
-        configuration,
-      );
+      // authentication bearer-jwt required
+      // http bearer authentication required
+      await setBearerAuthToObject(localVarHeaderParameter, configuration);
 
       if (counselSessionId !== undefined) {
-        localVarQueryParameter["counselSessionId"] = counselSessionId;
+        localVarQueryParameter['counselSessionId'] = counselSessionId;
       }
 
       setSearchParams(localVarUrlObj, localVarQueryParameter);
@@ -10573,13 +10273,13 @@ export const MedicationCounselControllerApiAxiosParamCreator = function (
     ): Promise<RequestArgs> => {
       // verify required parameter 'counselSessionId' is not null or undefined
       assertParamExists(
-        "selectPreviousMedicationCounsel",
-        "counselSessionId",
+        'selectPreviousMedicationCounsel',
+        'counselSessionId',
         counselSessionId,
       );
       const localVarPath =
         `/v1/counsel/record/{counselSessionId}/previous/summary`.replace(
-          `{${"counselSessionId"}}`,
+          `{${'counselSessionId'}}`,
           encodeURIComponent(String(counselSessionId)),
         );
       // use dummy base URL string because the URL constructor only accepts absolute URLs.
@@ -10590,21 +10290,16 @@ export const MedicationCounselControllerApiAxiosParamCreator = function (
       }
 
       const localVarRequestOptions = {
-        method: "GET",
+        method: 'GET',
         ...baseOptions,
         ...options,
       };
       const localVarHeaderParameter = {} as any;
       const localVarQueryParameter = {} as any;
 
-      // authentication oauth2 required
-      // oauth required
-      await setOAuthToObject(
-        localVarHeaderParameter,
-        "oauth2",
-        [],
-        configuration,
-      );
+      // authentication bearer-jwt required
+      // http bearer authentication required
+      await setBearerAuthToObject(localVarHeaderParameter, configuration);
 
       setSearchParams(localVarUrlObj, localVarQueryParameter);
       let headersFromBaseOptions =
@@ -10633,8 +10328,8 @@ export const MedicationCounselControllerApiAxiosParamCreator = function (
     ): Promise<RequestArgs> => {
       // verify required parameter 'updateMedicationCounselReq' is not null or undefined
       assertParamExists(
-        "updateMedicationCounsel",
-        "updateMedicationCounselReq",
+        'updateMedicationCounsel',
+        'updateMedicationCounselReq',
         updateMedicationCounselReq,
       );
       const localVarPath = `/v1/counsel/record`;
@@ -10646,23 +10341,18 @@ export const MedicationCounselControllerApiAxiosParamCreator = function (
       }
 
       const localVarRequestOptions = {
-        method: "PUT",
+        method: 'PUT',
         ...baseOptions,
         ...options,
       };
       const localVarHeaderParameter = {} as any;
       const localVarQueryParameter = {} as any;
 
-      // authentication oauth2 required
-      // oauth required
-      await setOAuthToObject(
-        localVarHeaderParameter,
-        "oauth2",
-        [],
-        configuration,
-      );
+      // authentication bearer-jwt required
+      // http bearer authentication required
+      await setBearerAuthToObject(localVarHeaderParameter, configuration);
 
-      localVarHeaderParameter["Content-Type"] = "application/json";
+      localVarHeaderParameter['Content-Type'] = 'application/json';
 
       setSearchParams(localVarUrlObj, localVarQueryParameter);
       let headersFromBaseOptions =
@@ -10720,7 +10410,7 @@ export const MedicationCounselControllerApiFp = function (
       const localVarOperationServerIndex = configuration?.serverIndex ?? 0;
       const localVarOperationServerBasePath =
         operationServerMap[
-          "MedicationCounselControllerApi.addMedicationCounsel"
+          'MedicationCounselControllerApi.addMedicationCounsel'
         ]?.[localVarOperationServerIndex]?.url;
       return (axios, basePath) =>
         createRequestFunction(
@@ -10754,7 +10444,7 @@ export const MedicationCounselControllerApiFp = function (
       const localVarOperationServerIndex = configuration?.serverIndex ?? 0;
       const localVarOperationServerBasePath =
         operationServerMap[
-          "MedicationCounselControllerApi.deleteMedicationCounsel"
+          'MedicationCounselControllerApi.deleteMedicationCounsel'
         ]?.[localVarOperationServerIndex]?.url;
       return (axios, basePath) =>
         createRequestFunction(
@@ -10788,7 +10478,7 @@ export const MedicationCounselControllerApiFp = function (
       const localVarOperationServerIndex = configuration?.serverIndex ?? 0;
       const localVarOperationServerBasePath =
         operationServerMap[
-          "MedicationCounselControllerApi.selectMedicationCounsel"
+          'MedicationCounselControllerApi.selectMedicationCounsel'
         ]?.[localVarOperationServerIndex]?.url;
       return (axios, basePath) =>
         createRequestFunction(
@@ -10822,7 +10512,7 @@ export const MedicationCounselControllerApiFp = function (
       const localVarOperationServerIndex = configuration?.serverIndex ?? 0;
       const localVarOperationServerBasePath =
         operationServerMap[
-          "MedicationCounselControllerApi.selectPreviousMedicationCounsel"
+          'MedicationCounselControllerApi.selectPreviousMedicationCounsel'
         ]?.[localVarOperationServerIndex]?.url;
       return (axios, basePath) =>
         createRequestFunction(
@@ -10856,7 +10546,7 @@ export const MedicationCounselControllerApiFp = function (
       const localVarOperationServerIndex = configuration?.serverIndex ?? 0;
       const localVarOperationServerBasePath =
         operationServerMap[
-          "MedicationCounselControllerApi.updateMedicationCounsel"
+          'MedicationCounselControllerApi.updateMedicationCounsel'
         ]?.[localVarOperationServerIndex]?.url;
       return (axios, basePath) =>
         createRequestFunction(
@@ -11074,19 +10764,19 @@ export const MedicationRecordHistControllerApiAxiosParamCreator = function (
     ): Promise<RequestArgs> => {
       // verify required parameter 'counselSessionId' is not null or undefined
       assertParamExists(
-        "addAndUpdateMedicationRecordHist",
-        "counselSessionId",
+        'addAndUpdateMedicationRecordHist',
+        'counselSessionId',
         counselSessionId,
       );
       // verify required parameter 'addAndUpdateMedicationRecordHistReq' is not null or undefined
       assertParamExists(
-        "addAndUpdateMedicationRecordHist",
-        "addAndUpdateMedicationRecordHistReq",
+        'addAndUpdateMedicationRecordHist',
+        'addAndUpdateMedicationRecordHistReq',
         addAndUpdateMedicationRecordHistReq,
       );
       const localVarPath =
         `/v1/counsel/medication/record/{counselSessionId}`.replace(
-          `{${"counselSessionId"}}`,
+          `{${'counselSessionId'}}`,
           encodeURIComponent(String(counselSessionId)),
         );
       // use dummy base URL string because the URL constructor only accepts absolute URLs.
@@ -11097,23 +10787,18 @@ export const MedicationRecordHistControllerApiAxiosParamCreator = function (
       }
 
       const localVarRequestOptions = {
-        method: "POST",
+        method: 'POST',
         ...baseOptions,
         ...options,
       };
       const localVarHeaderParameter = {} as any;
       const localVarQueryParameter = {} as any;
 
-      // authentication oauth2 required
-      // oauth required
-      await setOAuthToObject(
-        localVarHeaderParameter,
-        "oauth2",
-        [],
-        configuration,
-      );
+      // authentication bearer-jwt required
+      // http bearer authentication required
+      await setBearerAuthToObject(localVarHeaderParameter, configuration);
 
-      localVarHeaderParameter["Content-Type"] = "application/json";
+      localVarHeaderParameter['Content-Type'] = 'application/json';
 
       setSearchParams(localVarUrlObj, localVarQueryParameter);
       let headersFromBaseOptions =
@@ -11149,19 +10834,19 @@ export const MedicationRecordHistControllerApiAxiosParamCreator = function (
     ): Promise<RequestArgs> => {
       // verify required parameter 'counselSessionId' is not null or undefined
       assertParamExists(
-        "deleteMedicationRecordHist",
-        "counselSessionId",
+        'deleteMedicationRecordHist',
+        'counselSessionId',
         counselSessionId,
       );
       // verify required parameter 'id' is not null or undefined
-      assertParamExists("deleteMedicationRecordHist", "id", id);
+      assertParamExists('deleteMedicationRecordHist', 'id', id);
       const localVarPath =
         `/v1/counsel/medication/record/{counselSessionId}/{id}`
           .replace(
-            `{${"counselSessionId"}}`,
+            `{${'counselSessionId'}}`,
             encodeURIComponent(String(counselSessionId)),
           )
-          .replace(`{${"id"}}`, encodeURIComponent(String(id)));
+          .replace(`{${'id'}}`, encodeURIComponent(String(id)));
       // use dummy base URL string because the URL constructor only accepts absolute URLs.
       const localVarUrlObj = new URL(localVarPath, DUMMY_BASE_URL);
       let baseOptions;
@@ -11170,21 +10855,16 @@ export const MedicationRecordHistControllerApiAxiosParamCreator = function (
       }
 
       const localVarRequestOptions = {
-        method: "DELETE",
+        method: 'DELETE',
         ...baseOptions,
         ...options,
       };
       const localVarHeaderParameter = {} as any;
       const localVarQueryParameter = {} as any;
 
-      // authentication oauth2 required
-      // oauth required
-      await setOAuthToObject(
-        localVarHeaderParameter,
-        "oauth2",
-        [],
-        configuration,
-      );
+      // authentication bearer-jwt required
+      // http bearer authentication required
+      await setBearerAuthToObject(localVarHeaderParameter, configuration);
 
       setSearchParams(localVarUrlObj, localVarQueryParameter);
       let headersFromBaseOptions =
@@ -11213,13 +10893,13 @@ export const MedicationRecordHistControllerApiAxiosParamCreator = function (
     ): Promise<RequestArgs> => {
       // verify required parameter 'counselSessionId' is not null or undefined
       assertParamExists(
-        "deleteMedicationRecordHistsByCounselSessionId",
-        "counselSessionId",
+        'deleteMedicationRecordHistsByCounselSessionId',
+        'counselSessionId',
         counselSessionId,
       );
       const localVarPath =
         `/v1/counsel/medication/record/{counselSessionId}`.replace(
-          `{${"counselSessionId"}}`,
+          `{${'counselSessionId'}}`,
           encodeURIComponent(String(counselSessionId)),
         );
       // use dummy base URL string because the URL constructor only accepts absolute URLs.
@@ -11230,21 +10910,16 @@ export const MedicationRecordHistControllerApiAxiosParamCreator = function (
       }
 
       const localVarRequestOptions = {
-        method: "DELETE",
+        method: 'DELETE',
         ...baseOptions,
         ...options,
       };
       const localVarHeaderParameter = {} as any;
       const localVarQueryParameter = {} as any;
 
-      // authentication oauth2 required
-      // oauth required
-      await setOAuthToObject(
-        localVarHeaderParameter,
-        "oauth2",
-        [],
-        configuration,
-      );
+      // authentication bearer-jwt required
+      // http bearer authentication required
+      await setBearerAuthToObject(localVarHeaderParameter, configuration);
 
       setSearchParams(localVarUrlObj, localVarQueryParameter);
       let headersFromBaseOptions =
@@ -11273,13 +10948,13 @@ export const MedicationRecordHistControllerApiAxiosParamCreator = function (
     ): Promise<RequestArgs> => {
       // verify required parameter 'counselSessionId' is not null or undefined
       assertParamExists(
-        "selectMedicationRecordListBySessionId1",
-        "counselSessionId",
+        'selectMedicationRecordListBySessionId1',
+        'counselSessionId',
         counselSessionId,
       );
       const localVarPath =
         `/v1/counsel/medication/record/{counselSessionId}`.replace(
-          `{${"counselSessionId"}}`,
+          `{${'counselSessionId'}}`,
           encodeURIComponent(String(counselSessionId)),
         );
       // use dummy base URL string because the URL constructor only accepts absolute URLs.
@@ -11290,21 +10965,16 @@ export const MedicationRecordHistControllerApiAxiosParamCreator = function (
       }
 
       const localVarRequestOptions = {
-        method: "GET",
+        method: 'GET',
         ...baseOptions,
         ...options,
       };
       const localVarHeaderParameter = {} as any;
       const localVarQueryParameter = {} as any;
 
-      // authentication oauth2 required
-      // oauth required
-      await setOAuthToObject(
-        localVarHeaderParameter,
-        "oauth2",
-        [],
-        configuration,
-      );
+      // authentication bearer-jwt required
+      // http bearer authentication required
+      await setBearerAuthToObject(localVarHeaderParameter, configuration);
 
       setSearchParams(localVarUrlObj, localVarQueryParameter);
       let headersFromBaseOptions =
@@ -11360,7 +11030,7 @@ export const MedicationRecordHistControllerApiFp = function (
       const localVarOperationServerIndex = configuration?.serverIndex ?? 0;
       const localVarOperationServerBasePath =
         operationServerMap[
-          "MedicationRecordHistControllerApi.addAndUpdateMedicationRecordHist"
+          'MedicationRecordHistControllerApi.addAndUpdateMedicationRecordHist'
         ]?.[localVarOperationServerIndex]?.url;
       return (axios, basePath) =>
         createRequestFunction(
@@ -11394,7 +11064,7 @@ export const MedicationRecordHistControllerApiFp = function (
       const localVarOperationServerIndex = configuration?.serverIndex ?? 0;
       const localVarOperationServerBasePath =
         operationServerMap[
-          "MedicationRecordHistControllerApi.deleteMedicationRecordHist"
+          'MedicationRecordHistControllerApi.deleteMedicationRecordHist'
         ]?.[localVarOperationServerIndex]?.url;
       return (axios, basePath) =>
         createRequestFunction(
@@ -11425,7 +11095,7 @@ export const MedicationRecordHistControllerApiFp = function (
       const localVarOperationServerIndex = configuration?.serverIndex ?? 0;
       const localVarOperationServerBasePath =
         operationServerMap[
-          "MedicationRecordHistControllerApi.deleteMedicationRecordHistsByCounselSessionId"
+          'MedicationRecordHistControllerApi.deleteMedicationRecordHistsByCounselSessionId'
         ]?.[localVarOperationServerIndex]?.url;
       return (axios, basePath) =>
         createRequestFunction(
@@ -11459,7 +11129,7 @@ export const MedicationRecordHistControllerApiFp = function (
       const localVarOperationServerIndex = configuration?.serverIndex ?? 0;
       const localVarOperationServerBasePath =
         operationServerMap[
-          "MedicationRecordHistControllerApi.selectMedicationRecordListBySessionId1"
+          'MedicationRecordHistControllerApi.selectMedicationRecordListBySessionId1'
         ]?.[localVarOperationServerIndex]?.url;
       return (axios, basePath) =>
         createRequestFunction(
@@ -11665,21 +11335,16 @@ export const SampleControllerApiAxiosParamCreator = function (
       }
 
       const localVarRequestOptions = {
-        method: "GET",
+        method: 'GET',
         ...baseOptions,
         ...options,
       };
       const localVarHeaderParameter = {} as any;
       const localVarQueryParameter = {} as any;
 
-      // authentication oauth2 required
-      // oauth required
-      await setOAuthToObject(
-        localVarHeaderParameter,
-        "oauth2",
-        [],
-        configuration,
-      );
+      // authentication bearer-jwt required
+      // http bearer authentication required
+      await setBearerAuthToObject(localVarHeaderParameter, configuration);
 
       setSearchParams(localVarUrlObj, localVarQueryParameter);
       let headersFromBaseOptions =
@@ -11720,7 +11385,7 @@ export const SampleControllerApiFp = function (configuration?: Configuration) {
       const localVarAxiosArgs = await localVarAxiosParamCreator.auth(options);
       const localVarOperationServerIndex = configuration?.serverIndex ?? 0;
       const localVarOperationServerBasePath =
-        operationServerMap["SampleControllerApi.auth"]?.[
+        operationServerMap['SampleControllerApi.auth']?.[
           localVarOperationServerIndex
         ]?.url;
       return (axios, basePath) =>
@@ -11803,19 +11468,19 @@ export const WasteMedicationControllerApiAxiosParamCreator = function (
     ): Promise<RequestArgs> => {
       // verify required parameter 'counselSessionId' is not null or undefined
       assertParamExists(
-        "addWasteMedicationDisposal",
-        "counselSessionId",
+        'addWasteMedicationDisposal',
+        'counselSessionId',
         counselSessionId,
       );
       // verify required parameter 'wasteMedicationDisposalReq' is not null or undefined
       assertParamExists(
-        "addWasteMedicationDisposal",
-        "wasteMedicationDisposalReq",
+        'addWasteMedicationDisposal',
+        'wasteMedicationDisposalReq',
         wasteMedicationDisposalReq,
       );
       const localVarPath =
         `/v1/counsel/medication/waste/disposal/{counselSessionId}`.replace(
-          `{${"counselSessionId"}}`,
+          `{${'counselSessionId'}}`,
           encodeURIComponent(String(counselSessionId)),
         );
       // use dummy base URL string because the URL constructor only accepts absolute URLs.
@@ -11826,23 +11491,18 @@ export const WasteMedicationControllerApiAxiosParamCreator = function (
       }
 
       const localVarRequestOptions = {
-        method: "POST",
+        method: 'POST',
         ...baseOptions,
         ...options,
       };
       const localVarHeaderParameter = {} as any;
       const localVarQueryParameter = {} as any;
 
-      // authentication oauth2 required
-      // oauth required
-      await setOAuthToObject(
-        localVarHeaderParameter,
-        "oauth2",
-        [],
-        configuration,
-      );
+      // authentication bearer-jwt required
+      // http bearer authentication required
+      await setBearerAuthToObject(localVarHeaderParameter, configuration);
 
-      localVarHeaderParameter["Content-Type"] = "application/json";
+      localVarHeaderParameter['Content-Type'] = 'application/json';
 
       setSearchParams(localVarUrlObj, localVarQueryParameter);
       let headersFromBaseOptions =
@@ -11878,19 +11538,19 @@ export const WasteMedicationControllerApiAxiosParamCreator = function (
     ): Promise<RequestArgs> => {
       // verify required parameter 'counselSessionId' is not null or undefined
       assertParamExists(
-        "addWasteMedicationRecord",
-        "counselSessionId",
+        'addWasteMedicationRecord',
+        'counselSessionId',
         counselSessionId,
       );
       // verify required parameter 'addAndUpdateWasteMedicationRecordReq' is not null or undefined
       assertParamExists(
-        "addWasteMedicationRecord",
-        "addAndUpdateWasteMedicationRecordReq",
+        'addWasteMedicationRecord',
+        'addAndUpdateWasteMedicationRecordReq',
         addAndUpdateWasteMedicationRecordReq,
       );
       const localVarPath =
         `/v1/counsel/medication/waste/{counselSessionId}`.replace(
-          `{${"counselSessionId"}}`,
+          `{${'counselSessionId'}}`,
           encodeURIComponent(String(counselSessionId)),
         );
       // use dummy base URL string because the URL constructor only accepts absolute URLs.
@@ -11901,23 +11561,18 @@ export const WasteMedicationControllerApiAxiosParamCreator = function (
       }
 
       const localVarRequestOptions = {
-        method: "POST",
+        method: 'POST',
         ...baseOptions,
         ...options,
       };
       const localVarHeaderParameter = {} as any;
       const localVarQueryParameter = {} as any;
 
-      // authentication oauth2 required
-      // oauth required
-      await setOAuthToObject(
-        localVarHeaderParameter,
-        "oauth2",
-        [],
-        configuration,
-      );
+      // authentication bearer-jwt required
+      // http bearer authentication required
+      await setBearerAuthToObject(localVarHeaderParameter, configuration);
 
-      localVarHeaderParameter["Content-Type"] = "application/json";
+      localVarHeaderParameter['Content-Type'] = 'application/json';
 
       setSearchParams(localVarUrlObj, localVarQueryParameter);
       let headersFromBaseOptions =
@@ -11951,13 +11606,13 @@ export const WasteMedicationControllerApiAxiosParamCreator = function (
     ): Promise<RequestArgs> => {
       // verify required parameter 'counselSessionId' is not null or undefined
       assertParamExists(
-        "deleteWasteMedicationDisposal",
-        "counselSessionId",
+        'deleteWasteMedicationDisposal',
+        'counselSessionId',
         counselSessionId,
       );
       const localVarPath =
         `/v1/counsel/medication/waste/disposal/{counselSessionId}`.replace(
-          `{${"counselSessionId"}}`,
+          `{${'counselSessionId'}}`,
           encodeURIComponent(String(counselSessionId)),
         );
       // use dummy base URL string because the URL constructor only accepts absolute URLs.
@@ -11968,21 +11623,16 @@ export const WasteMedicationControllerApiAxiosParamCreator = function (
       }
 
       const localVarRequestOptions = {
-        method: "DELETE",
+        method: 'DELETE',
         ...baseOptions,
         ...options,
       };
       const localVarHeaderParameter = {} as any;
       const localVarQueryParameter = {} as any;
 
-      // authentication oauth2 required
-      // oauth required
-      await setOAuthToObject(
-        localVarHeaderParameter,
-        "oauth2",
-        [],
-        configuration,
-      );
+      // authentication bearer-jwt required
+      // http bearer authentication required
+      await setBearerAuthToObject(localVarHeaderParameter, configuration);
 
       setSearchParams(localVarUrlObj, localVarQueryParameter);
       let headersFromBaseOptions =
@@ -12013,24 +11663,24 @@ export const WasteMedicationControllerApiAxiosParamCreator = function (
     ): Promise<RequestArgs> => {
       // verify required parameter 'counselSessionId' is not null or undefined
       assertParamExists(
-        "deleteWasteMedicationRecord",
-        "counselSessionId",
+        'deleteWasteMedicationRecord',
+        'counselSessionId',
         counselSessionId,
       );
       // verify required parameter 'wasteMedicationRecordId' is not null or undefined
       assertParamExists(
-        "deleteWasteMedicationRecord",
-        "wasteMedicationRecordId",
+        'deleteWasteMedicationRecord',
+        'wasteMedicationRecordId',
         wasteMedicationRecordId,
       );
       const localVarPath =
         `/v1/counsel/medication/waste/{counselSessionId}/{wasteMedicationRecordId}`
           .replace(
-            `{${"counselSessionId"}}`,
+            `{${'counselSessionId'}}`,
             encodeURIComponent(String(counselSessionId)),
           )
           .replace(
-            `{${"wasteMedicationRecordId"}}`,
+            `{${'wasteMedicationRecordId'}}`,
             encodeURIComponent(String(wasteMedicationRecordId)),
           );
       // use dummy base URL string because the URL constructor only accepts absolute URLs.
@@ -12041,21 +11691,16 @@ export const WasteMedicationControllerApiAxiosParamCreator = function (
       }
 
       const localVarRequestOptions = {
-        method: "DELETE",
+        method: 'DELETE',
         ...baseOptions,
         ...options,
       };
       const localVarHeaderParameter = {} as any;
       const localVarQueryParameter = {} as any;
 
-      // authentication oauth2 required
-      // oauth required
-      await setOAuthToObject(
-        localVarHeaderParameter,
-        "oauth2",
-        [],
-        configuration,
-      );
+      // authentication bearer-jwt required
+      // http bearer authentication required
+      await setBearerAuthToObject(localVarHeaderParameter, configuration);
 
       setSearchParams(localVarUrlObj, localVarQueryParameter);
       let headersFromBaseOptions =
@@ -12084,13 +11729,13 @@ export const WasteMedicationControllerApiAxiosParamCreator = function (
     ): Promise<RequestArgs> => {
       // verify required parameter 'counselSessionId' is not null or undefined
       assertParamExists(
-        "getWasteMedicationDisposal",
-        "counselSessionId",
+        'getWasteMedicationDisposal',
+        'counselSessionId',
         counselSessionId,
       );
       const localVarPath =
         `/v1/counsel/medication/waste/disposal/{counselSessionId}`.replace(
-          `{${"counselSessionId"}}`,
+          `{${'counselSessionId'}}`,
           encodeURIComponent(String(counselSessionId)),
         );
       // use dummy base URL string because the URL constructor only accepts absolute URLs.
@@ -12101,21 +11746,16 @@ export const WasteMedicationControllerApiAxiosParamCreator = function (
       }
 
       const localVarRequestOptions = {
-        method: "GET",
+        method: 'GET',
         ...baseOptions,
         ...options,
       };
       const localVarHeaderParameter = {} as any;
       const localVarQueryParameter = {} as any;
 
-      // authentication oauth2 required
-      // oauth required
-      await setOAuthToObject(
-        localVarHeaderParameter,
-        "oauth2",
-        [],
-        configuration,
-      );
+      // authentication bearer-jwt required
+      // http bearer authentication required
+      await setBearerAuthToObject(localVarHeaderParameter, configuration);
 
       setSearchParams(localVarUrlObj, localVarQueryParameter);
       let headersFromBaseOptions =
@@ -12144,13 +11784,13 @@ export const WasteMedicationControllerApiAxiosParamCreator = function (
     ): Promise<RequestArgs> => {
       // verify required parameter 'counselSessionId' is not null or undefined
       assertParamExists(
-        "selectMedicationRecordListBySessionId",
-        "counselSessionId",
+        'selectMedicationRecordListBySessionId',
+        'counselSessionId',
         counselSessionId,
       );
       const localVarPath =
         `/v1/counsel/medication/waste/{counselSessionId}`.replace(
-          `{${"counselSessionId"}}`,
+          `{${'counselSessionId'}}`,
           encodeURIComponent(String(counselSessionId)),
         );
       // use dummy base URL string because the URL constructor only accepts absolute URLs.
@@ -12161,21 +11801,16 @@ export const WasteMedicationControllerApiAxiosParamCreator = function (
       }
 
       const localVarRequestOptions = {
-        method: "GET",
+        method: 'GET',
         ...baseOptions,
         ...options,
       };
       const localVarHeaderParameter = {} as any;
       const localVarQueryParameter = {} as any;
 
-      // authentication oauth2 required
-      // oauth required
-      await setOAuthToObject(
-        localVarHeaderParameter,
-        "oauth2",
-        [],
-        configuration,
-      );
+      // authentication bearer-jwt required
+      // http bearer authentication required
+      await setBearerAuthToObject(localVarHeaderParameter, configuration);
 
       setSearchParams(localVarUrlObj, localVarQueryParameter);
       let headersFromBaseOptions =
@@ -12231,7 +11866,7 @@ export const WasteMedicationControllerApiFp = function (
       const localVarOperationServerIndex = configuration?.serverIndex ?? 0;
       const localVarOperationServerBasePath =
         operationServerMap[
-          "WasteMedicationControllerApi.addWasteMedicationDisposal"
+          'WasteMedicationControllerApi.addWasteMedicationDisposal'
         ]?.[localVarOperationServerIndex]?.url;
       return (axios, basePath) =>
         createRequestFunction(
@@ -12268,7 +11903,7 @@ export const WasteMedicationControllerApiFp = function (
       const localVarOperationServerIndex = configuration?.serverIndex ?? 0;
       const localVarOperationServerBasePath =
         operationServerMap[
-          "WasteMedicationControllerApi.addWasteMedicationRecord"
+          'WasteMedicationControllerApi.addWasteMedicationRecord'
         ]?.[localVarOperationServerIndex]?.url;
       return (axios, basePath) =>
         createRequestFunction(
@@ -12299,7 +11934,7 @@ export const WasteMedicationControllerApiFp = function (
       const localVarOperationServerIndex = configuration?.serverIndex ?? 0;
       const localVarOperationServerBasePath =
         operationServerMap[
-          "WasteMedicationControllerApi.deleteWasteMedicationDisposal"
+          'WasteMedicationControllerApi.deleteWasteMedicationDisposal'
         ]?.[localVarOperationServerIndex]?.url;
       return (axios, basePath) =>
         createRequestFunction(
@@ -12333,7 +11968,7 @@ export const WasteMedicationControllerApiFp = function (
       const localVarOperationServerIndex = configuration?.serverIndex ?? 0;
       const localVarOperationServerBasePath =
         operationServerMap[
-          "WasteMedicationControllerApi.deleteWasteMedicationRecord"
+          'WasteMedicationControllerApi.deleteWasteMedicationRecord'
         ]?.[localVarOperationServerIndex]?.url;
       return (axios, basePath) =>
         createRequestFunction(
@@ -12367,7 +12002,7 @@ export const WasteMedicationControllerApiFp = function (
       const localVarOperationServerIndex = configuration?.serverIndex ?? 0;
       const localVarOperationServerBasePath =
         operationServerMap[
-          "WasteMedicationControllerApi.getWasteMedicationDisposal"
+          'WasteMedicationControllerApi.getWasteMedicationDisposal'
         ]?.[localVarOperationServerIndex]?.url;
       return (axios, basePath) =>
         createRequestFunction(
@@ -12401,7 +12036,7 @@ export const WasteMedicationControllerApiFp = function (
       const localVarOperationServerIndex = configuration?.serverIndex ?? 0;
       const localVarOperationServerBasePath =
         operationServerMap[
-          "WasteMedicationControllerApi.selectMedicationRecordListBySessionId"
+          'WasteMedicationControllerApi.selectMedicationRecordListBySessionId'
         ]?.[localVarOperationServerIndex]?.url;
       return (axios, basePath) =>
         createRequestFunction(
