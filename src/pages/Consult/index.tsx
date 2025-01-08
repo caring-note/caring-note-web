@@ -3,6 +3,7 @@ import Button from "@/components/Button";
 import { CounseleeControllerApi, CounselSessionControllerApi } from "@/api/api";
 import { useQuery } from "@tanstack/react-query";
 import useConsultTabStore, { ConsultTab } from "@/store/consultTabStore";
+import { set } from "date-fns";
 
 const PastConsult = lazy(
   () => import("@/pages/Consult/components/tabs/PastConsult"),
@@ -49,7 +50,7 @@ const TabTitle = ({
 };
 
 function index() {
-  const { activeTab } = useConsultTabStore();
+  const { activeTab, setActiveTab } = useConsultTabStore();
 
   const [hidePastConsultTab, setHidePastConsultTab] = useState(true);
   let diseasesLength = 0;
@@ -99,6 +100,7 @@ function index() {
       setHidePastConsultTab(false);
     } else {
       setHidePastConsultTab(true);
+      setActiveTab(ConsultTab.consultCard);
     }
   }, [previousCounselQuery.data]);
 
@@ -108,15 +110,7 @@ function index() {
 
   return (
     <div>
-      <div className="flex flex-col items-center justify-start w-full h-fit px-8 py-4">
-        <div className="flex flex-row justify-start w-full mt-6">
-          {/* 스펙 아웃 */}
-          {/* <img
-            src={arrowHeadLeftGray}
-            alt="arrowHeadLeftGray"
-            className="w-6 h-6"
-          /> */}
-        </div>
+      <div className="flex flex-col items-center justify-start w-full h-fit px-8 py-10">
         <div className="flex flex-row items-center justify-start w-full h-8 mt-4 pl-6">
           <p className="text-h2 font-bold text-grayscale-100">
             {counseleeBaseInfoQuery.data?.name}
@@ -146,7 +140,7 @@ function index() {
         </div>
       </div>
       <div className="flex flex-row items-center justify-start w-full h-auto pl-14 my-0 border-t-2 border-b-2 border-grayscale-5 ">
-        <TabTitle text="이전 상담 내역" goPage={ConsultTab.pastConsult} />
+        {hidePastConsultTab ? null : <TabTitle text="이전 상담 내역" goPage={ConsultTab.pastConsult} />}
         <TabTitle text="상담카드" goPage={ConsultTab.consultCard} />
         <TabTitle text="의약물 기록" goPage={ConsultTab.medicineMemo} />
         <TabTitle text="복약 상담" goPage={ConsultTab.medicineConsult} />

@@ -2,33 +2,30 @@ import {
   AddAndUpdateMedicationRecordHistReq,
   MedicationControllerApi,
   MedicationRecordHistControllerApi,
+  SelectMedicationRecordHistRes,
   SelectMedicationRecordHistResDivisionCodeEnum,
-  SelectMedicationRecordHistResUsageStatusCodeEnum,
-} from "@/api/api";
-import SearchComponent from "@/components/common/SearchComponent";
-import TableComponent from "@/components/common/TableComponent";
-import { Button } from "@/components/ui/button";
-import { GridColDef } from "@mui/x-data-grid";
-import { changeActiveTab } from "@/reducers/tabReducer";
-import useMedicineMemoStore from "@/store/medicineMemoStore";
-import useNomalMedicineTableStore from "@/store/nomalMedicineTableStore";
-import usePrescribedMedicineTableStore from "@/store/prescribedMedicineTableStore";
-import { useQuery } from "@tanstack/react-query";
+} from '@/api/api';
+import NulpeumImg from '@/assets/temp-nulpeum.png';
+import SearchComponent from '@/components/common/SearchComponent';
+import TableComponent from '@/components/common/TableComponent';
+import TabContentContainer from '@/components/consult/TabContentContainer';
+import { Button } from '@/components/ui/button';
+import DatePickerComponent from '@/components/ui/datepicker';
+import useMedicineMemoStore from '@/store/medicineMemoStore';
+import useNomalMedicineTableStore from '@/store/nomalMedicineTableStore';
+import usePrescribedMedicineTableStore from '@/store/prescribedMedicineTableStore';
 import {
-  createDefaultDateColumn,
   createDefaultNumberColumn,
   createDefaultTextColumn,
-} from "@/utils/TableUtils";
-import { useEffect } from "react";
-import { useAppDispatch } from "@/app/reduxHooks";
-import NulpeumImg from "@/assets/temp-nulpeum.png";
-import TabContentContainer from "@/components/consult/TabContentContainer";
-import GrayContainer from "../GrayContainer";
-import DatePickerComponent from "@/components/ui/datepicker";
-import moment from "moment";
+} from '@/utils/TableUtils';
+import { GridColDef } from '@mui/x-data-grid';
+import { useQuery } from '@tanstack/react-query';
+import moment from 'moment';
+import { useEffect, useState } from 'react';
+import GrayContainer from '../GrayContainer';
 
 const MedicineMemo: React.FC = () => {
-  const counselSessionId = "TEST-COUNSEL-SESSION-01"; // TODO : 다른 곳에서 전달받아야됨
+  const counselSessionId = 'TEST-COUNSEL-SESSION-01'; // TODO : 다른 곳에서 전달받아야됨
 
   const medicationApi = new MedicationControllerApi();
   const medicationRecordHistControllerApi =
@@ -36,7 +33,7 @@ const MedicineMemo: React.FC = () => {
 
   const searchMedicationByKeyword = async (keyword: string) => {
     const response = await medicationApi.searchMedicationByKeyword(keyword);
-    console.log("searchMedicationByKeyword", response);
+    console.log('searchMedicationByKeyword', response);
     return response;
   };
   const selectMedicationRecordListBySessionId1 = async () => {
@@ -44,7 +41,7 @@ const MedicineMemo: React.FC = () => {
       await medicationRecordHistControllerApi.selectMedicationRecordListBySessionId1(
         counselSessionId,
       );
-    console.log("selectMedicationRecordListBySessionId1", response);
+    console.log('selectMedicationRecordListBySessionId1', response);
     return response;
   };
   const addAndUpdateMedicationRecordHist = async (
@@ -55,23 +52,24 @@ const MedicineMemo: React.FC = () => {
         counselSessionId,
         editedData,
       );
-    console.log("addAndUpdateMedicationRecordHist", response);
+    console.log('addAndUpdateMedicationRecordHist', response);
     return response;
   };
 
+  const [keyword, setKeyword] = useState<string>('');
   const searchMedicationByKeywordQuery = useQuery({
-    queryKey: ["searchMedicationByKeyword"],
-    queryFn: () => searchMedicationByKeyword(""),
+    queryKey: ['searchMedicationByKeyword'],
+    queryFn: () => searchMedicationByKeyword(keyword),
     enabled: false,
   });
   const selectMedicationRecordListBySessionIdQuery = useQuery({
-    queryKey: ["selectMedicationRecordListBySessionId"],
+    queryKey: ['selectMedicationRecordListBySessionId'],
     queryFn: selectMedicationRecordListBySessionId1,
     enabled: false,
   });
   const addAndUpdateMedicationRecordHistQuery = useQuery({
-    queryKey: ["addAndUpdateMedicationRecordHist"],
-    queryFn: () => addAndUpdateMedicationRecordHist,
+    queryKey: ['addAndUpdateMedicationRecordHist'],
+    queryFn: () => addAndUpdateMedicationRecordHist(editedData || []),
     enabled: false,
   });
 
@@ -101,12 +99,6 @@ const MedicineMemo: React.FC = () => {
     setSelectedPrescribedMedicineRowIds,
   } = usePrescribedMedicineTableStore();
 
-  const dispatch = useAppDispatch();
-  useEffect(() => {
-    // 새로고침이 되었을 때도 active tab 을 잃지 않도록 컴포넌트 load 시 dispatch
-    dispatch(changeActiveTab("/consult/medicineMemo")); // 해당 tab의 url
-  }, []);
-
   useEffect(() => {
     // API 호출
     searchMedicationByKeywordQuery.refetch();
@@ -114,62 +106,69 @@ const MedicineMemo: React.FC = () => {
       // 처방 의약품 데이터 셋팅
       if (
         selectMedicationRecordListBySessionIdQuery.isSuccess &&
-        JSON.stringify(originalData) === "[]"
+        JSON.stringify(originalData) === '[]'
       ) {
-        setHttpStatus &&
+        if (setHttpStatus)
           setHttpStatus(
             selectMedicationRecordListBySessionIdQuery.data?.status || 0,
           );
-        setOriginalData &&
+        if (setOriginalData)
           setOriginalData([
             ...(selectMedicationRecordListBySessionIdQuery.data?.data?.data ||
               []),
           ]);
 
-        console.log("jw, medicineMemo:: originalData updated!!");
+        console.log('jw, medicineMemo:: originalData updated!!');
 
         // 의약품 테이블 zustand 데이터 세팅
-        selectMedicationRecordListBySessionIdQuery.data?.data?.data?.map(
-          (item) => {
-            if (
-              item.divisionCode ===
-              SelectMedicationRecordHistResDivisionCodeEnum.Prescription
-            ) {
-              addPrescribedMedicineRow({
-                id: item.rowId,
-                col1: item.usageStatusCode,
-                col2: item.medicationName,
-                col3: item.usageObject,
-                col4: item.prescriptionDate,
-                col5: item.prescriptionDays,
-              });
-            } else if (
-              item.divisionCode ===
-              SelectMedicationRecordHistResDivisionCodeEnum.Otc
-            ) {
-              addNormalMedicineRow({
-                id: item.rowId,
-                col1: item.usageStatusCode,
-                col2: item.medicationName,
-                col3: item.usageObject,
-                col4: item.prescriptionDate,
-                col5: item.prescriptionDays,
-              });
-            }
-          },
-        );
+        (
+          selectMedicationRecordListBySessionIdQuery.data?.data
+            ?.data as SelectMedicationRecordHistRes[]
+        )?.map((item) => {
+          if (
+            item.divisionCode ===
+            SelectMedicationRecordHistResDivisionCodeEnum.Prescription
+          ) {
+            addPrescribedMedicineRow({
+              id: item.rowId,
+              col1: item.usageStatusCode,
+              col2: item.medicationName,
+              col3: item.usageObject,
+              col4: item.prescriptionDate,
+              col5: item.prescriptionDays,
+            });
+          } else if (
+            item.divisionCode ===
+            SelectMedicationRecordHistResDivisionCodeEnum.Otc
+          ) {
+            addNormalMedicineRow({
+              id: item.rowId,
+              col1: item.usageStatusCode,
+              col2: item.medicationName,
+              col3: item.usageObject,
+              col4: item.prescriptionDate,
+              col5: item.prescriptionDays,
+            });
+          }
+        });
       }
     });
-  }, [originalData]);
+  }, [selectMedicationRecordListBySessionIdQuery.isSuccess]);
+
+  useEffect(() => {
+    // if (keyword.length > 1) {
+    searchMedicationByKeywordQuery.refetch();
+    // }
+  }, [keyword]);
 
   const columns: GridColDef[] = [
     {
-      field: "col1",
-      headerName: "사용상태",
+      field: 'col1',
+      headerName: '사용상태',
       flex: 1,
       editable: true,
-      type: "singleSelect",
-      valueOptions: ["상시 복용", "필요 시 복용", "복용 중단"],
+      type: 'singleSelect',
+      valueOptions: ['상시 복용', '필요 시 복용', '복용 중단'],
       renderCell: (params) => {
         return (
           params.value || <span className="text-gray-400 italic">선택</span>
@@ -179,16 +178,16 @@ const MedicineMemo: React.FC = () => {
       // cellClassName: "!pl-6",
     },
     {
-      field: "col2",
-      headerName: "성분명 / 상품명",
+      field: 'col2',
+      headerName: '성분명 / 상품명',
       flex: 1,
-      cellClassName: "!relative !h-full !overflow-visible",
+      cellClassName: '!relative !h-full !overflow-visible',
       editable: true,
       renderCell: (params) => {
         return (
           <div className="truncate max-w-full">
             {params.value || (
-              <span className="text-gray-400 italic">{"성분명 / 상품명"}</span>
+              <span className="text-gray-400 italic">{'성분명 / 상품명'}</span>
             )}
           </div>
         );
@@ -198,7 +197,7 @@ const MedicineMemo: React.FC = () => {
           <SearchComponent
             items={
               searchMedicationByKeywordQuery.data?.data?.data?.map(
-                (item) => item.itemName || "",
+                (item) => item.itemName || '',
               ) || []
             }
             placeholder="성분명 / 상품명"
@@ -209,20 +208,23 @@ const MedicineMemo: React.FC = () => {
                 value: item,
               });
             }}
+            onChangeInputValue={(value) => {
+              setKeyword(value);
+            }}
           />
         );
       },
     },
     {
       ...createDefaultTextColumn({
-        field: "col3",
-        headerName: "약물 사용 목적",
+        field: 'col3',
+        headerName: '약물 사용 목적',
       }),
       editable: true,
     },
     {
-      field: "col4",
-      headerName: "처방 날짜",
+      field: 'col4',
+      headerName: '처방 날짜',
       editable: false,
       flex: 1,
       renderCell: (params) => {
@@ -233,7 +235,7 @@ const MedicineMemo: React.FC = () => {
               handleClicked={(date) => {
                 updatePrescribedMedicineRowById({
                   ...params.row,
-                  col4: date ? moment(date).format("YYYY-MM-DD") : "",
+                  col4: date ? moment(date).format('YYYY-MM-DD') : '',
                 });
               }}
             />
@@ -243,43 +245,94 @@ const MedicineMemo: React.FC = () => {
     },
     {
       ...createDefaultNumberColumn({
-        field: "col5",
-        headerName: "처방 일수",
-        unitName: "일",
+        field: 'col5',
+        headerName: '처방 일수',
+        unitName: '일',
       }),
       editable: true,
     },
   ];
 
   const test = () => {
-    console.log("originalData", originalData);
-    console.log("prescribedMedicineRows", prescribedMedicineRows);
+    console.log('originalData', originalData);
+    console.log('prescribedMedicineRows', prescribedMedicineRows);
 
-    // prescribedMedicineRows 에 수정되어 저장돼있는걸 editedData 에 이쁘게 넣어주기
+    // prescribedMedicineRows와 normalMedicineRows 에 수정되어 저장돼있는걸 editedData 에 이쁘게 넣어주기
     editedData?.map((item) => {
-      const idx = prescribedMedicineRows.findIndex(
+      // 처방의약품
+      const prescribedIdx = prescribedMedicineRows.findIndex(
         (row) => row.id === item.rowId,
       );
-
-      // 조회해온 데이터를 수정한 경우
-      if (idx !== -1) {
-        item.usageStatusCode = prescribedMedicineRows[idx].col1;
-        item.medicationName = prescribedMedicineRows[idx].col2;
-        item.usageObject = prescribedMedicineRows[idx].col3;
-        item.prescriptionDate = prescribedMedicineRows[idx].col4;
-        item.prescriptionDays = prescribedMedicineRows[idx].col5;
+      // 조회해온 처방의약품을 수정한 경우
+      if (prescribedIdx !== -1) {
+        item.usageStatusCode = prescribedMedicineRows[prescribedIdx].col1;
+        item.name = prescribedMedicineRows[prescribedIdx].col2;
+        item.usageObject = prescribedMedicineRows[prescribedIdx].col3;
+        item.prescriptionDate = prescribedMedicineRows[prescribedIdx].col4;
+        item.prescriptionDays = prescribedMedicineRows[prescribedIdx].col5;
       }
+
+      // 일반의약품
+      const normalIdx = normalMedicineRows.findIndex(
+        (row) => row.id === item.rowId,
+      );
+      // 조회해온 일반의약품을 수정한 경우
+      if (normalIdx !== -1) {
+        item.usageStatusCode = normalMedicineRows[normalIdx].col1;
+        item.name = normalMedicineRows[normalIdx].col2;
+        item.usageObject = normalMedicineRows[normalIdx].col3;
+        item.prescriptionDate = normalMedicineRows[normalIdx].col4;
+        item.prescriptionDays = normalMedicineRows[normalIdx].col5;
+      }
+
       // 모든 row에 대해 medicationId 를 넣어주기 (있는 경우에만)
       item.medicationId =
         searchMedicationByKeywordQuery.data?.data?.data?.find(
-          (medication) => medication.itemName === item.medicationName,
-        )?.id || "";
+          (medication) => medication.itemName === item.name,
+        )?.id || '';
     });
 
-    console.log("수정된 editedData", editedData);
+    // 추가된 처방의약품과 일반의약품을 editedData 에 넣어주기
+    prescribedMedicineRows.forEach((row) => {
+      if (editedData?.findIndex((item) => item.rowId === row.id) === -1) {
+        editedData?.push({
+          rowId: row.id,
+          divisionCode:
+            SelectMedicationRecordHistResDivisionCodeEnum.Prescription,
+          usageStatusCode: row.col1,
+          name: row.col2,
+          usageObject: row.col3,
+          prescriptionDate: row.col4,
+          prescriptionDays: row.col5,
+          medicationId:
+            searchMedicationByKeywordQuery.data?.data?.data?.find(
+              (medication) => medication.itemName === row.col2,
+            )?.id || '',
+        });
+      }
+    });
+    normalMedicineRows.forEach((row) => {
+      if (editedData?.findIndex((item) => item.rowId === row.id) === -1) {
+        editedData?.push({
+          rowId: row.id,
+          divisionCode: SelectMedicationRecordHistResDivisionCodeEnum.Otc,
+          usageStatusCode: row.col1,
+          name: row.col2,
+          usageObject: row.col3,
+          prescriptionDate: row.col4,
+          prescriptionDays: row.col5,
+          medicationId:
+            searchMedicationByKeywordQuery.data?.data?.data?.find(
+              (medication) => medication.itemName === row.col2,
+            )?.id || '',
+        });
+      }
+    });
 
-    // editted Data 에 있는 값으로 API 호출
-    // 현재 단계에서 데이터 잘 받고 editedData 에 잘 들어가는지 확인 후 등록 API 호출
+    console.log('수정된 editedData', editedData);
+
+    // edited Data 에 있는 값으로 API 호출
+    addAndUpdateMedicationRecordHistQuery.refetch();
   };
 
   return (
@@ -313,10 +366,10 @@ const MedicineMemo: React.FC = () => {
               withAddButton
               onClickAddButton={() => {
                 addPrescribedMedicineRow({
-                  col1: "",
-                  col2: "",
-                  col3: "",
-                  col4: "",
+                  col1: '',
+                  col2: '',
+                  col3: '',
+                  col4: '',
                   col5: null,
                 });
               }}
@@ -352,10 +405,10 @@ const MedicineMemo: React.FC = () => {
               withAddButton
               onClickAddButton={() => {
                 addNormalMedicineRow({
-                  col1: "",
-                  col2: "",
-                  col3: "",
-                  col4: "",
+                  col1: '',
+                  col2: '',
+                  col3: '',
+                  col4: '',
                   col5: null,
                 });
               }}
@@ -367,7 +420,7 @@ const MedicineMemo: React.FC = () => {
           <p
             className="text-subtitle2 font-bold text-grayscale-90 mt-8"
             onClick={test}>
-            유용한 사이트
+            유용한 사이트 (TEST : 여기를 클릭하여 의약물 등록 API 호출)
           </p>
           <div className="mt-6">
             <img
