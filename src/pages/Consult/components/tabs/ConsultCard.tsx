@@ -50,7 +50,7 @@ const ConsultCard: React.FC = () => {
         console.log("jw, consultCard:: originalData updated!!");
       }
     });
-  }, [originalData]);
+  }, [ consultCardQuery.isSuccess ]);
 
   return (
     <>
