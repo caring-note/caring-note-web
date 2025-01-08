@@ -22,6 +22,8 @@ import { GridColDef } from "@mui/x-data-grid";
 import { useQuery } from "@tanstack/react-query";
 import { useEffect } from "react";
 import GrayContainer from "../GrayContainer";
+import DatePickerComponent from "@/components/ui/datepicker";
+import moment from "moment";
 
 const MedicineMemo: React.FC = () => {
   const counselSessionId = "TEST-COUNSEL-SESSION-01"; // TODO : 다른 곳에서 전달받아야됨
@@ -212,11 +214,25 @@ const MedicineMemo: React.FC = () => {
       editable: true,
     },
     {
-      ...createDefaultDateColumn({
-        field: "col4",
-        headerName: "처방 날짜",
-      }),
-      editable: true,
+      field: "col4",
+      headerName: "처방 날짜",
+      editable: false,
+      flex: 1,
+      renderCell: (params) => {
+        return (
+          <div className="w-full h-full flex items-center justify-center ">
+            <DatePickerComponent
+              initialDate={params.value ? new Date(params.value) : undefined}
+              handleClicked={(date) => {
+                updatePrescribedMedicineRowById({
+                  ...params.row,
+                  col4: date ? moment(date).format("YYYY-MM-DD") : "",
+                });
+              }}
+            />
+          </div>
+        );
+      },
     },
     {
       ...createDefaultNumberColumn({
