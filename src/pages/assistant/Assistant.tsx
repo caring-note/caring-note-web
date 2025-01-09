@@ -1,6 +1,6 @@
-import arrowForwardIcon from "@/assets/icon/24/arrowback.outlined.black.svg";
-import TableComponent from "@/components/common/TableComponent";
-import { Button } from "@/components/ui/button";
+import arrowForwardIcon from '@/assets/icon/24/arrowback.outlined.black.svg';
+import TableComponent from '@/components/common/TableComponent';
+import { Button } from '@/components/ui/button';
 import {
   Dialog,
   DialogContent,
@@ -8,20 +8,18 @@ import {
   DialogHeader,
   DialogOverlay,
   DialogTitle,
-} from "@/components/ui/dialog";
-import { useSelectCounselSessionList } from "@/hooks/useCounselSessionQuery";
-import { useCounselSessionStore } from "@/store/counselSessionStore";
-import {
-  createDefaultTextColumn
-} from "@/utils/TableUtils";
-import { GridColDef } from "@mui/x-data-grid";
-import { useEffect, useState } from "react";
-import { useNavigate } from "react-router-dom";
-import AgreementDetails2Dialog from "./AgreementDetails2Dialog";
-import AgreementDetails3Dialog from "./AgreementDetails3Dialog";
-import AgreementDetailsDialog from "./AgreementDetailsDialog";
+} from '@/components/ui/dialog';
+import { useSelectCounselSessionList } from '@/hooks/useCounselSessionQuery';
+import { useCounselSessionStore } from '@/store/counselSessionStore';
+import { createDefaultTextColumn } from '@/utils/TableUtils';
+import { GridColDef } from '@mui/x-data-grid';
+import { useEffect, useState } from 'react';
+import { useNavigate } from 'react-router-dom';
+import InformationThirdParties from '@/pages/Assistant/dialogs/InformationThirdParties';
+import ExpiredMedications from '@/pages/Assistant/dialogs/ExpiredMedications';
+import InformationUse from '@/pages/Assistant/dialogs/InformationUse';
 
-const AssistantView = () => {
+const Assistant = () => {
   const [isOpen, setIsOpen] = useState(false);
   const [isDetailsDialogOpen, setIsDetailsDialogOpen] = useState(false);
   const [isDetails2DialogOpen, setIsDetails2DialogOpen] = useState(false);
@@ -31,7 +29,7 @@ const AssistantView = () => {
   const { params, setParams } = useCounselSessionStore();
   const fetchParams = {
     ...params,
-    baseDate: params?.baseDate || "2024-12-31",
+    baseDate: params?.baseDate || '2025-01-05',
     size: params?.size || 10,
   };
 
@@ -44,23 +42,23 @@ const AssistantView = () => {
   const columns: GridColDef[] = [
     {
       ...createDefaultTextColumn({
-        field: "col1",
-        headerName: "예약 시각",
+        field: 'col1',
+        headerName: '예약 시각',
       }),
     },
     {
       ...createDefaultTextColumn({
-        field: "col2",
-        headerName: "상담 일자",
+        field: 'col2',
+        headerName: '상담 일자',
       }),
     },
     {
-      field: "col3",
-      headerName: "상담 진행",
+      field: 'col3',
+      headerName: '상담 진행',
       flex: 1,
       renderCell: (params) => {
         // TODO : 할당 여부에 따라 버튼 diable 처리 (아래는 임시 코드)
-        return params.value === "SCHEDULED" ? (
+        return params.value === 'SCHEDULED' ? (
           <h2 className="text-black">예약</h2>
         ) : (
           <h2 className="text-primary-50">미예약</h2>
@@ -69,22 +67,22 @@ const AssistantView = () => {
     },
     {
       ...createDefaultTextColumn({
-        field: "col4",
-        headerName: "내담자명",
+        field: 'col4',
+        headerName: '내담자명',
       }),
     },
     {
-      field: "col5",
-      headerName: "기초 상담 카드",
+      field: 'col5',
+      headerName: '기초 상담 카드',
       flex: 1,
       renderCell: (params) => {
         // TODO : 할당 여부에 따라 버튼 diable 처리 (아래는 임시 코드)
-        return params.value !== "RECORDED" ? (
-          <Button variant={"primary"} onClick={handleOpen}>
+        return params.value !== 'RECORDED' ? (
+          <Button variant={'primary'} onClick={handleOpen}>
             카드 작성
           </Button>
         ) : (
-          <Button variant={"secondary"} disabled>
+          <Button variant={'secondary'} disabled>
             작성 완료
           </Button>
         );
@@ -107,14 +105,14 @@ const AssistantView = () => {
   };
   useEffect(() => {
     // data-scroll-locked 제거
-    document.body.removeAttribute("data-scroll-locked");
+    document.body.removeAttribute('data-scroll-locked');
   });
   return (
     <div>
       <div className="flex flex-col items-center justify-center pt-20 pb-20 bg-primary-30">
         <p className="w-full font-bold text-h2 text-primary-70 pl-28">
           박진완님, <br />
-          오늘도 힘찬 하루를 보내세요!{" "}
+          오늘도 힘찬 하루를 보내세요!{' '}
         </p>
       </div>
       <div className="flex flex-col items-center justify-center pt-20 bg-grayscale-3">
@@ -234,25 +232,25 @@ const AssistantView = () => {
 
           <DialogFooter className="justify-center">
             <Button
-              className={"w-full bg-primary-50 text-white h-12"}
-              onClick={() => navigate("/assistant/view/basicInfo")}>
+              className={'w-full bg-primary-50 text-white h-12'}
+              onClick={() => navigate('/assistant/info')}>
               전부 동의하고 시작하기
             </Button>
           </DialogFooter>
         </DialogContent>
       </Dialog>
 
-      <AgreementDetailsDialog
+      <InformationUse
         isDetailOpen={isDetailsDialogOpen}
         mainOpen={() => setIsOpen(true)}
         onClose={() => setIsDetailsDialogOpen(false)}
       />
-      <AgreementDetails2Dialog
+      <InformationThirdParties
         isDetailOpen={isDetails2DialogOpen}
         mainOpen={() => setIsOpen(true)}
         onClose={() => setIsDetails2DialogOpen(false)}
       />
-      <AgreementDetails3Dialog
+      <ExpiredMedications
         isDetailOpen={isDetails3DialogOpen}
         mainOpen={() => setIsOpen(true)}
         onClose={() => setIsDetails3DialogOpen(false)}
@@ -261,4 +259,4 @@ const AssistantView = () => {
   );
 };
 
-export default AssistantView;
+export default Assistant;
