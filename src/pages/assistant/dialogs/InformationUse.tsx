@@ -4,8 +4,8 @@ import {
   DialogHeader,
   DialogOverlay,
   DialogTitle,
-} from "@/components/ui/dialog";
-import arrowForwardIcon from "@/assets/icon/24/arrowback.outlined.black.svg";
+} from '@/components/ui/dialog';
+import arrowForwardIcon from '@/assets/icon/24/arrowback.outlined.black.svg';
 
 type AgreementDetailDialogTypes = {
   isDetailOpen: boolean;
@@ -13,7 +13,7 @@ type AgreementDetailDialogTypes = {
   onClose: () => void;
 };
 
-const AgreementDetailsDialog = ({
+const InformationUse = ({
   isDetailOpen,
   mainOpen,
   onClose,
@@ -75,4 +75,4 @@ const AgreementDetailsDialog = ({
     </Dialog>
   );
 };
-export default AgreementDetailsDialog;
+export default InformationUse;
