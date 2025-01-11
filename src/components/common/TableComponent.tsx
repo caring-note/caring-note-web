@@ -10,6 +10,7 @@ import classNames from "classnames";
 import React from "react";
 
 type TableComponentProps = {
+  className?: string;
   tableKey: string;
   rows: GridRowsProp;
   columns: GridColDef[];
@@ -21,6 +22,7 @@ type TableComponentProps = {
 };
 
 const TableComponent: React.FC<TableComponentProps> = ({
+  className,
   tableKey,
   rows,
   columns,
@@ -34,7 +36,7 @@ const TableComponent: React.FC<TableComponentProps> = ({
   const memoizedColumns = React.useMemo(() => columns, [columns]);
 
   return (
-    <div>
+    <div className={className}>
       <DataGrid
         key={tableKey}
         className={classNames(

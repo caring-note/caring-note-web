@@ -50,6 +50,7 @@ const NavigationLeft = () => {
         menuIcon={<PatientBlackIcon width={24} height={24} />}
         activteMenuIcon={<PatientBlueIcon width={24} height={24} />}
         menuName="내담자관리"
+        onClick={() => navigate('/client-management')}
       />
       <NavigationLeftMenu
         menuIcon={<AdminBlackIcon width={24} height={24} />}

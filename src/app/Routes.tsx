@@ -1,3 +1,4 @@
+import ClientManagement from "@/pages/\bClientManagement";
 import AssistantBasicInfo from "@/pages/assistant/AssistantBasicInfo";
 import AssistantHealthInfo from "@/pages/assistant/AssistantHealthInfo";
 import AssistantHome from "@/pages/assistant/AssistantHome";
@@ -65,11 +66,24 @@ const Routes = () => {
       },
     ],
   };
+
+  const clientManagementRoute: AppRouteObject = {
+    path: "/client-management",
+    element: <Layout />,
+    children: [
+      {
+        path: "",
+        element: <ClientManagement />,
+      },
+    ],
+  };
+
   const routes: AppRouteObject[] = [
     noMatchRoutes,
     mainRoutes,
     consultRoutes,
     assistantRoutes,
+    clientManagementRoute,
   ];
 
   return useRoutes(routes);

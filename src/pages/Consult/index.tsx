@@ -1,9 +1,8 @@
-import { useEffect, useState, lazy, Suspense } from "react";
-import Button from "@/components/Button";
 import { CounseleeControllerApi, CounselSessionControllerApi } from "@/api/api";
-import { useQuery } from "@tanstack/react-query";
+import Button from "@/components/Button";
 import useConsultTabStore, { ConsultTab } from "@/store/consultTabStore";
-import { set } from "date-fns";
+import { useQuery } from "@tanstack/react-query";
+import { lazy, Suspense, useEffect, useState } from "react";
 
 const PastConsult = lazy(
   () => import("@/pages/Consult/components/tabs/PastConsult"),
