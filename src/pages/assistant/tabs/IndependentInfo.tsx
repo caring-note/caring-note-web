@@ -1,41 +1,41 @@
-import CardContainer from "@/components/common/CardContainer";
-import { Button } from "@/components/ui/button";
-import { Input } from "@/components/ui/input";
-import { Label } from "@/components/ui/label";
-import TabContentContainer from "@/components/consult/TabContentContainer";
-import { useEffect, useState } from "react";
-import { useAppDispatch } from "@/app/reduxHooks";
-import { changeActiveTab } from "@/reducers/tabReducer";
+import CardContainer from '@/components/common/CardContainer';
+import { Button } from '@/components/ui/button';
+import { Input } from '@/components/ui/input';
+import { Label } from '@/components/ui/label';
+import TabContentContainer from '@/components/consult/TabContentContainer';
+import { useEffect, useState } from 'react';
+import { useAppDispatch } from '@/app/reduxHooks';
+import { changeActiveTab } from '@/reducers/tabReducer';
 
 type handleOptionChangeTypes =
-  | "selectedMobility"
-  | "selectedAbility"
-  | "selectedEvacuation"
-  | "selectedSight"
-  | "selectedHearing"
-  | "selectedCommunication"
-  | "selectedUsingKorean";
+  | 'selectedMobility'
+  | 'selectedAbility'
+  | 'selectedEvacuation'
+  | 'selectedSight'
+  | 'selectedHearing'
+  | 'selectedCommunication'
+  | 'selectedUsingKorean';
 
-const IswalkingTypes = ["외상 및 보행불가", "자립보행 가능", "이동장비 필요"];
-const walkingTools = ["지팡이", "워커", "휠체어", "기타"];
+const IswalkingTypes = ['외상 및 보행불가', '자립보행 가능', '이동장비 필요'];
+const walkingTools = ['지팡이', '워커', '휠체어', '기타'];
 const evacuationMethods = [
-  "자립 화장실 사용",
-  "화장실 유도",
-  "이동식 변기 사용",
-  "기저귀 사용",
-  "소변통 사용",
-  "기타",
+  '자립 화장실 사용',
+  '화장실 유도',
+  '이동식 변기 사용',
+  '기저귀 사용',
+  '소변통 사용',
+  '기타',
 ];
-const sightTypes = ["잘 보임", "잘 안 보인", "안 보임", "안경 사용"];
-const hearingTypes = ["잘 들림", "잘 안 들림", "안 들림", "보청기 사용"];
-const communicationTypes = ["소통 가능함", "대강 가능함", "불가능"];
-const usingKoreanTypes = ["읽기 가능", "쓰기 가능"];
+const sightTypes = ['잘 보임', '잘 안 보인', '안 보임', '안경 사용'];
+const hearingTypes = ['잘 들림', '잘 안 들림', '안 들림', '보청기 사용'];
+const communicationTypes = ['소통 가능함', '대강 가능함', '불가능'];
+const usingKoreanTypes = ['읽기 가능', '쓰기 가능'];
 
-const AssistantLivingInfo = () => {
+const IndependentInfo = () => {
   // 새로고침이 되었을 때도 active tab 을 잃지 않도록 컴포넌트 load 시 dispatch
   const dispatch = useAppDispatch();
   useEffect(() => {
-    dispatch(changeActiveTab("/assistant/view/livingInfo")); // 해당 tab의 url
+    dispatch(changeActiveTab('/assistant/view/livingInfo')); // 해당 tab의 url
   }, []);
   const [formData, setFormData] = useState({
     selectedAbility: [] as string[],
@@ -45,8 +45,8 @@ const AssistantLivingInfo = () => {
     selectedHearing: [] as string[],
     selectedCommunication: [] as string[],
     selectedUsingKorean: [] as string[],
-    equipInfo: "",
-    evacuationDetails: "",
+    equipInfo: '',
+    evacuationDetails: '',
   });
   const handleOptionChange = (option: string, key: handleOptionChangeTypes) => {
     setFormData((prev) => ({
@@ -65,7 +65,7 @@ const AssistantLivingInfo = () => {
       <TabContentContainer>
         {/* 보행 입력 */}
         <div className="flex items-start justify-between space-x-4">
-          <CardContainer title={"보행"} variant="error">
+          <CardContainer title={'보행'} variant="error">
             {/* 보행 여부 */}
             <div className="inline-block p-4">
               <Label htmlFor="walking" className="font-bold">
@@ -82,13 +82,13 @@ const AssistantLivingInfo = () => {
                     type="button"
                     variant={
                       formData.selectedAbility.includes(walking)
-                        ? "secondary"
-                        : "outline"
+                        ? 'secondary'
+                        : 'outline'
                     }
                     className="p-3 font-medium rounded-lg"
                     size="lg"
                     onClick={() =>
-                      handleOptionChange(walking, "selectedAbility")
+                      handleOptionChange(walking, 'selectedAbility')
                     }>
                     {walking}
                   </Button>
@@ -112,13 +112,13 @@ const AssistantLivingInfo = () => {
                     type="button"
                     variant={
                       formData.selectedMobility.includes(tool)
-                        ? "secondary"
-                        : "outline"
+                        ? 'secondary'
+                        : 'outline'
                     }
                     className="p-3 font-medium rounded-lg"
                     size="lg"
                     onClick={() =>
-                      handleOptionChange(tool, "selectedMobility")
+                      handleOptionChange(tool, 'selectedMobility')
                     }>
                     {tool}
                   </Button>
@@ -127,7 +127,7 @@ const AssistantLivingInfo = () => {
             </div>
 
             {/* 기타 */}
-            {formData.selectedMobility.includes("기타") && (
+            {formData.selectedMobility.includes('기타') && (
               <div className="p-4 mb-6">
                 <Label htmlFor="equipInfo" className="font-bold">
                   기타
@@ -147,7 +147,7 @@ const AssistantLivingInfo = () => {
 
         {/* 배변 */}
         <div className="flex items-start justify-between space-x-4">
-          <CardContainer title={"배변"}>
+          <CardContainer title={'배변'}>
             {/* 배변 처리 방식 */}
             <div className="w-full p-4">
               <Label htmlFor="evacuationMethods" className="font-bold">
@@ -165,13 +165,13 @@ const AssistantLivingInfo = () => {
                     type="button"
                     variant={
                       formData.selectedEvacuation.includes(evacuation)
-                        ? "secondary"
-                        : "outline"
+                        ? 'secondary'
+                        : 'outline'
                     }
                     className="p-3 font-medium rounded-lg"
                     size="lg"
                     onClick={() =>
-                      handleOptionChange(evacuation, "selectedEvacuation")
+                      handleOptionChange(evacuation, 'selectedEvacuation')
                     }>
                     {evacuation}
                   </Button>
@@ -180,7 +180,7 @@ const AssistantLivingInfo = () => {
             </div>
 
             {/* 기타 */}
-            {formData.selectedEvacuation.includes("기타") && (
+            {formData.selectedEvacuation.includes('기타') && (
               <div className="p-4 mb-6">
                 <Label htmlFor="evacuationDetails" className="font-bold">
                   기타
@@ -200,7 +200,7 @@ const AssistantLivingInfo = () => {
 
         {/* 의사소통 입력 */}
         <div className="flex items-start justify-between space-x-4">
-          <CardContainer title={"의사소통 정도"}>
+          <CardContainer title={'의사소통 정도'}>
             {/* 시력 */}
             <div className="w-full p-4">
               <Label htmlFor="sight" className="font-bold">
@@ -217,12 +217,12 @@ const AssistantLivingInfo = () => {
                     type="button"
                     variant={
                       formData.selectedSight.includes(sight)
-                        ? "secondary"
-                        : "outline"
+                        ? 'secondary'
+                        : 'outline'
                     }
                     className="p-3 font-medium rounded-lg"
                     size="lg"
-                    onClick={() => handleOptionChange(sight, "selectedSight")}>
+                    onClick={() => handleOptionChange(sight, 'selectedSight')}>
                     {sight}
                   </Button>
                 ))}
@@ -245,13 +245,13 @@ const AssistantLivingInfo = () => {
                     type="button"
                     variant={
                       formData.selectedHearing.includes(hearing)
-                        ? "secondary"
-                        : "outline"
+                        ? 'secondary'
+                        : 'outline'
                     }
                     className="p-3 font-medium rounded-lg"
                     size="lg"
                     onClick={() =>
-                      handleOptionChange(hearing, "selectedHearing")
+                      handleOptionChange(hearing, 'selectedHearing')
                     }>
                     {hearing}
                   </Button>
@@ -275,13 +275,13 @@ const AssistantLivingInfo = () => {
                     type="button"
                     variant={
                       formData.selectedCommunication.includes(communication)
-                        ? "secondary"
-                        : "outline"
+                        ? 'secondary'
+                        : 'outline'
                     }
                     className="p-3 font-medium rounded-lg"
                     size="lg"
                     onClick={() =>
-                      handleOptionChange(communication, "selectedCommunication")
+                      handleOptionChange(communication, 'selectedCommunication')
                     }>
                     {communication}
                   </Button>
@@ -305,13 +305,13 @@ const AssistantLivingInfo = () => {
                     type="button"
                     variant={
                       formData.selectedUsingKorean.includes(useKorean)
-                        ? "secondary"
-                        : "outline"
+                        ? 'secondary'
+                        : 'outline'
                     }
                     className="p-3 font-medium rounded-lg"
                     size="lg"
                     onClick={() =>
-                      handleOptionChange(useKorean, "selectedUsingKorean")
+                      handleOptionChange(useKorean, 'selectedUsingKorean')
                     }>
                     {useKorean}
                   </Button>
@@ -324,4 +324,4 @@ const AssistantLivingInfo = () => {
     </>
   );
 };
-export default AssistantLivingInfo;
+export default IndependentInfo;

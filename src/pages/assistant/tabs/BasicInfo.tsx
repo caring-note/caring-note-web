@@ -1,40 +1,40 @@
-import Badge from "@/components/common/Badge";
-import { Button } from "@/components/ui/button";
-import { Input } from "@/components/ui/input";
-import { Label } from "@/components/ui/label";
-import TabContentContainer from "@/components/consult/TabContentContainer";
-import InfoBlueIcon from "@/assets/icon/24/info.filled.blue.svg";
-import { useEffect, useState } from "react";
-import { useAppDispatch } from "../../app/reduxHooks";
-import CardContainer from "../../components/common/CardContainer";
-import { changeActiveTab } from "../../reducers/tabReducer";
+import Badge from '@/components/common/Badge';
+import { Button } from '@/components/ui/button';
+import { Input } from '@/components/ui/input';
+import { Label } from '@/components/ui/label';
+import TabContentContainer from '@/components/consult/TabContentContainer';
+import InfoBlueIcon from '@/assets/icon/24/info.filled.blue.svg';
+import { useEffect, useState } from 'react';
+import { useAppDispatch } from '../../../app/reduxHooks';
+import CardContainer from '../../../components/common/CardContainer';
+import { changeActiveTab } from '../../../reducers/tabReducer';
 
-const insuranceTypes = ["건강보험", "의료급여", "보훈", "비급여"];
-const consultationCounts = ["1회차", "2회차", "3회차", "4회차", "5회차 이상"];
+const insuranceTypes = ['건강보험', '의료급여', '보훈', '비급여'];
+const consultationCounts = ['1회차', '2회차', '3회차', '4회차', '5회차 이상'];
 const consultationGoals = [
-  "약물 부작용 상담",
-  "생활습관 관리",
-  "증상/질병에 대한 이해",
-  "복용약물에 대한 검토",
-  "기타",
+  '약물 부작용 상담',
+  '생활습관 관리',
+  '증상/질병에 대한 이해',
+  '복용약물에 대한 검토',
+  '기타',
 ];
 
-const AssistantBasicInfo = () => {
+const BasicInfo = () => {
   // 새로고침이 되었을 때도 active tab 을 잃지 않도록 컴포넌트 load 시 dispatch
   const dispatch = useAppDispatch();
   useEffect(() => {
-    dispatch(changeActiveTab("/assistant/view/basicInfo")); // 해당 tab의 url
+    dispatch(changeActiveTab('/assistant/view/basicInfo')); // 해당 tab의 url
   }, []);
 
   const [formData, setFormData] = useState({
-    name: "",
-    birthDate: "",
-    insuranceType: "건강보험",
-    consultationCount: "2회차",
-    lastConsultationDate: "",
+    name: '',
+    birthDate: '',
+    insuranceType: '건강보험',
+    consultationCount: '2회차',
+    lastConsultationDate: '',
     goals: [] as string[],
-    specialNotes: "",
-    medications: "",
+    specialNotes: '',
+    medications: '',
   });
 
   const toggleGoal = (goal: string) => {
@@ -66,7 +66,7 @@ const AssistantBasicInfo = () => {
         {/* 박진완 : CardContainer 리팩토링 완료! 사용법은 ConsultCard.tsx 를 참고하시면 편해용 */}
         <div className="flex items-start justify-between space-x-4">
           {/* 기본정보 입력 */}
-          <CardContainer title={"기본정보"} variant="grayscale">
+          <CardContainer title={'기본정보'} variant="grayscale">
             {/* 성명 */}
             <div className="inline-block w-1/4 p-4">
               <Label htmlFor="name" className="font-bold">
@@ -109,7 +109,7 @@ const AssistantBasicInfo = () => {
                     id="insuranceType"
                     type="button"
                     variant={
-                      formData.insuranceType === type ? "secondary" : "outline"
+                      formData.insuranceType === type ? 'secondary' : 'outline'
                     }
                     className="p-3 mt-3 font-medium rounded-lg"
                     size="lg"
@@ -135,8 +135,8 @@ const AssistantBasicInfo = () => {
                     type="button"
                     variant={
                       formData.consultationCount === count
-                        ? "secondary"
-                        : "outline"
+                        ? 'secondary'
+                        : 'outline'
                     }
                     className="p-3 mt-3 font-medium rounded-lg"
                     size="lg"
@@ -168,7 +168,7 @@ const AssistantBasicInfo = () => {
 
         {/* 상담 목적 및 특이사항 */}
         <div className="flex items-start justify-between space-x-4 ">
-          <CardContainer title={"상담 목적 및 특이사항"}>
+          <CardContainer title={'상담 목적 및 특이사항'}>
             {/* 상담 목적 */}
             <div className="inline-block p-4">
               <Label htmlFor="goal" className="font-bold">
@@ -184,7 +184,7 @@ const AssistantBasicInfo = () => {
                     id="goal"
                     type="button"
                     variant={
-                      formData.goals.includes(goal) ? "secondary" : "outline"
+                      formData.goals.includes(goal) ? 'secondary' : 'outline'
                     }
                     className="p-3 font-medium rounded-lg"
                     size="lg"
@@ -230,4 +230,4 @@ const AssistantBasicInfo = () => {
     </>
   );
 };
-export default AssistantBasicInfo;
+export default BasicInfo;
