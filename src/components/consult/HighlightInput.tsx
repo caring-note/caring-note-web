@@ -4,14 +4,38 @@ import Tooltip from "@/components/Tooltip";
 import { changeEditorState } from "@/reducers/editorStateReducer";
 import eraserBlack from "@/assets/icon/24/erase.outlined.black.svg";
 import highlightpenBlack from "@/assets/icon/24/highlighter.outlined.black.svg";
-import { Editor, EditorState, Modifier } from "draft-js";
+import { Editor, EditorState, Modifier, ContentState } from "draft-js";
 import "draft-js/dist/Draft.css";
 import React from "react";
+import { useSelectMedicineConsult } from "@/hooks/useMedicineConsultQuery";
+import { useMedicineConsultStore} from "@/store/medicineConsultStore";
+import { useEffect } from "react";
+
+
 
 const HighlightInput: React.FC = () => {
   const dispatch = useAppDispatch();
-  const editorState = useAppSelector((state) => state.editorState.editorState);
+  //const editorState = useAppSelector((state) => state.editorState.editorState);
+
   const containerRef = React.useRef<HTMLDivElement>(null);
+
+  const counselSessionId = "TEST-COUNSEL-SESSION-01";
+  const { medicineConsult, setMedicationConsult } = useMedicineConsultStore();
+  const { data, isLoading, isError } = useSelectMedicineConsult(counselSessionId);
+  const editorState = medicineConsult.counselRecord
+    ? EditorState.createWithContent(ContentState.createFromText(medicineConsult.counselRecord))
+    : EditorState.createEmpty();
+  
+  useEffect(() => {
+  if (data) {
+    setMedicationConsult({
+      counselSessionId: counselSessionId,
+      medicationCounselId: data.medicationCounselId || '',
+      counselRecord: data.counselRecord || '',
+      counselRecordHighlights: data.counselRecordHighlights || [],
+    });
+  }
+}, [data, counselSessionId]); 
 
   // 하이라이트 버튼 핸들러
   const applyHighlight = () => {
