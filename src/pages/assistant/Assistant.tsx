@@ -1,64 +1,82 @@
-import arrowForwardIcon from '@/assets/icon/24/arrowback.outlined.black.svg';
 import TableComponent from '@/components/common/TableComponent';
 import { Button } from '@/components/ui/button';
-import {
-  Dialog,
-  DialogContent,
-  DialogFooter,
-  DialogHeader,
-  DialogOverlay,
-  DialogTitle,
-} from '@/components/ui/dialog';
+
 import { useSelectCounselSessionList } from '@/hooks/useCounselSessionQuery';
-import { useCounselSessionStore } from '@/store/counselSessionStore';
+import {
+  useCounselSessionStore,
+  useDetailCounselSessionStore,
+} from '@/store/counselSessionStore';
 import { createDefaultTextColumn } from '@/utils/TableUtils';
 import { GridColDef } from '@mui/x-data-grid';
 import { useEffect, useState } from 'react';
+
+import {
+  SelectCounselSessionListItem,
+  SelectCounselSessionListItemCardRecordStatusEnum,
+  SelectCounselSessionListItemStatusEnum,
+} from '@/api/api';
+import Index from '@/pages/Assistant/dialogs/Index';
+import { useCounseleeConsentQueryId } from '@/hooks/useCounselAgreeQuery';
 import { useNavigate } from 'react-router-dom';
-import InformationThirdParties from '@/pages/Assistant/dialogs/InformationThirdParties';
-import ExpiredMedications from '@/pages/Assistant/dialogs/ExpiredMedications';
-import InformationUse from '@/pages/Assistant/dialogs/InformationUse';
 
 const Assistant = () => {
-  const [isOpen, setIsOpen] = useState(false);
-  const [isDetailsDialogOpen, setIsDetailsDialogOpen] = useState(false);
-  const [isDetails2DialogOpen, setIsDetails2DialogOpen] = useState(false);
-  const [isDetails3DialogOpen, setIsDetails3DialogOpen] = useState(false);
   const navigate = useNavigate();
+  const [isOpen, setIsOpen] = useState(false);
 
-  const { params, setParams } = useCounselSessionStore();
+  const { params } = useCounselSessionStore();
+
   const fetchParams = {
     ...params,
-    baseDate: params?.baseDate || '2025-01-05',
-    size: params?.size || 10,
+    size: params?.size || 15,
+  };
+  const { data: items } = useSelectCounselSessionList(fetchParams);
+
+  const setDetail = useDetailCounselSessionStore((state) => state.setDetail);
+  const detail = useDetailCounselSessionStore((state) => state.detail);
+
+  // 항상 Hook을 최상위에서 호출
+  const { data, isLoading } = useCounseleeConsentQueryId(
+    detail?.counselSessionId || undefined,
+    detail?.counseleeId || undefined,
+    {
+      enabled: !!detail, // detail이 존재할 때만 요청 실행
+    },
+  );
+  const handleRegisterCard = (row: SelectCounselSessionListItem) => {
+    setDetail(row);
   };
 
-  const {
-    data: items,
-    isLoading,
-    error,
-  } = useSelectCounselSessionList(fetchParams);
+  useEffect(() => {
+    if (!isLoading && data) {
+      if (data.status === 200) {
+        navigate('/assistant/info');
+      } else {
+        setIsOpen(true);
+      }
+    }
+  }, [isLoading, data, setIsOpen]);
 
   const columns: GridColDef[] = [
     {
       ...createDefaultTextColumn({
-        field: 'col1',
+        field: 'scheduledTime',
         headerName: '예약 시각',
       }),
     },
     {
       ...createDefaultTextColumn({
-        field: 'col2',
+        field: 'scheduledDate',
         headerName: '상담 일자',
       }),
     },
     {
-      field: 'col3',
+      field: 'status',
       headerName: '상담 진행',
       flex: 1,
       renderCell: (params) => {
         // TODO : 할당 여부에 따라 버튼 diable 처리 (아래는 임시 코드)
-        return params.value === 'SCHEDULED' ? (
+        return params.value ===
+          SelectCounselSessionListItemStatusEnum.Scheduled ? (
           <h2 className="text-black">예약</h2>
         ) : (
           <h2 className="text-primary-50">미예약</h2>
@@ -67,18 +85,21 @@ const Assistant = () => {
     },
     {
       ...createDefaultTextColumn({
-        field: 'col4',
+        field: 'counselorName',
         headerName: '내담자명',
       }),
     },
     {
-      field: 'col5',
+      field: 'cardRecordStatus',
       headerName: '기초 상담 카드',
       flex: 1,
       renderCell: (params) => {
         // TODO : 할당 여부에 따라 버튼 diable 처리 (아래는 임시 코드)
-        return params.value !== 'RECORDED' ? (
-          <Button variant={'primary'} onClick={handleOpen}>
+        return params.value !==
+          SelectCounselSessionListItemCardRecordStatusEnum.Recorded ? (
+          <Button
+            variant={'primary'}
+            onClick={() => handleRegisterCard(params.row)}>
             카드 작성
           </Button>
         ) : (
@@ -91,18 +112,21 @@ const Assistant = () => {
   ];
 
   const testRows =
-    items?.map((item) => ({
-      id: item.counselSessionId,
-      col1: item.scheduledTime,
-      col2: item.scheduledDate,
-      col3: item.status,
-      col4: item.counselorName,
-      col5: item.cardRecordStatus,
+    items?.map((item: SelectCounselSessionListItem) => ({
+      id: item.counselSessionId + '+' + (item.counseleeId ?? ''),
+      counselSessionId: item.counselSessionId,
+      counseleeId: item.counseleeId,
+      scheduledTime: item.scheduledTime,
+      scheduledDate: item.scheduledDate,
+      status: item.status,
+      counselorName: item.counselorName,
+      cardRecordStatus: item.cardRecordStatus,
     })) || [];
 
   const handleOpen = () => {
     setIsOpen(!isOpen);
   };
+
   useEffect(() => {
     // data-scroll-locked 제거
     document.body.removeAttribute('data-scroll-locked');
@@ -174,87 +198,7 @@ const Assistant = () => {
           </div>
         </div>
       </div>
-
-      <Dialog open={isOpen} onOpenChange={handleOpen}>
-        <DialogOverlay />
-        <DialogContent className="w-[480px] h-[350px] flex flex-col justify-between">
-          <DialogHeader className="pt-2 border-none">
-            <DialogTitle className="text-2xl font-bold text-grayscale-100">
-              개인정보 수집 동의서를 작성해주세요.
-            </DialogTitle>
-          </DialogHeader>
-
-          <div className="p-5 space-y-3 bg-grayscale-3">
-            <div
-              className="flex items-center justify-between cursor-pointer"
-              onClick={() => {
-                setIsDetailsDialogOpen(true);
-                setIsOpen(false);
-              }}>
-              <h2 className="ml-2 text-grayscale-90">
-                개인정보 수집 · 이용 내역 동의
-              </h2>
-              <img
-                src={arrowForwardIcon}
-                className="rotate-180 cursor-pointer"
-              />
-            </div>
-            <div
-              className="flex items-center justify-between cursor-pointer"
-              onClick={() => {
-                setIsDetails2DialogOpen(true);
-                setIsOpen(false);
-              }}>
-              <h2 className="ml-2 text-grayscale-90">
-                개인정보의 제 3자 제공 동의
-              </h2>
-
-              <img
-                src={arrowForwardIcon}
-                className="rotate-180 cursor-pointer"
-              />
-            </div>
-            <div
-              className="flex items-center justify-between cursor-pointer"
-              onClick={() => {
-                setIsDetails3DialogOpen(true);
-                setIsOpen(false);
-              }}>
-              <h2 className="ml-2 text-grayscale-90">
-                폐의약품 수거에 관한 동의
-              </h2>
-              <img
-                src={arrowForwardIcon}
-                className="rotate-180 cursor-pointer"
-              />
-            </div>
-          </div>
-
-          <DialogFooter className="justify-center">
-            <Button
-              className={'w-full bg-primary-50 text-white h-12'}
-              onClick={() => navigate('/assistant/info')}>
-              전부 동의하고 시작하기
-            </Button>
-          </DialogFooter>
-        </DialogContent>
-      </Dialog>
-
-      <InformationUse
-        isDetailOpen={isDetailsDialogOpen}
-        mainOpen={() => setIsOpen(true)}
-        onClose={() => setIsDetailsDialogOpen(false)}
-      />
-      <InformationThirdParties
-        isDetailOpen={isDetails2DialogOpen}
-        mainOpen={() => setIsOpen(true)}
-        onClose={() => setIsDetails2DialogOpen(false)}
-      />
-      <ExpiredMedications
-        isDetailOpen={isDetails3DialogOpen}
-        mainOpen={() => setIsOpen(true)}
-        onClose={() => setIsDetails3DialogOpen(false)}
-      />
+      <Index isOpen={isOpen} handleOpen={handleOpen} />
     </div>
   );
 };
