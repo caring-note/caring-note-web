@@ -1,8 +1,8 @@
-import { CounselSessionControllerApi } from "@/api/api";
-import { useQuery } from "@tanstack/react-query";
+import { CounselSessionControllerApi } from '@/api/api';
+import { useQuery } from '@tanstack/react-query';
 
 interface FetchParams {
-  baseDate: string;
+  baseDate?: string;
   cursor?: string;
   size: number;
 }
@@ -24,7 +24,6 @@ const selectCounselSessionList = async (params: FetchParams) => {
 //실제 사용하는 커스텀 훅
 export const useSelectCounselSessionList = (params: FetchParams) =>
   useQuery({
-    queryKey: ["dataItems", params],
+    queryKey: ['dataItems', params],
     queryFn: () => selectCounselSessionList(params),
-    enabled: !!params.baseDate,
   });
