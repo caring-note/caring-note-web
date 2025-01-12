@@ -12,20 +12,16 @@ import { useMedicineConsultStore} from "@/store/medicineConsultStore";
 import { useEffect,useState } from "react";
 
 
-
 const HighlightInput: React.FC = () => {
   const dispatch = useAppDispatch();
-  // const editorState = useAppSelector((state) => state.editorState.editorState);
+  const editorState = useAppSelector((state) => state.editorState.editorState);
 
   const containerRef = React.useRef<HTMLDivElement>(null);
 
   const counselSessionId = "TEST-COUNSEL-SESSION-01";
   const { medicineConsult, setMedicationConsult } = useMedicineConsultStore();
   const { data, isLoading, isError } = useSelectMedicineConsult(counselSessionId);
-  const [editorState, setEditorState] = useState(() =>
-    EditorState.createEmpty()
-  );
-    const styleMap = {
+  const styleMap = {
     HIGHLIGHT: {
       backgroundColor: "#FFBD14",
     },
@@ -47,18 +43,18 @@ const HighlightInput: React.FC = () => {
      });
     
        // ContentState 초기화
-      const contentState = ContentState.createFromText(data.counselRecord || "");
+      const contentState = ContentState.createFromText(medicineConsult.counselRecord || "");
 
       // 특정 하이라이트 설정 (데이터가 있다면 처리)
       let contentStateWithHighlight = contentState;
 
       if (
-        data.counselRecordHighlights?.length &&
-        data.counselRecord // 추가 확인
+        medicineConsult.counselRecordHighlights?.length &&
+        medicineConsult.counselRecord // 추가 확인
       ) {
-        data.counselRecordHighlights.forEach((highlight) => {
-          const start = data.counselRecord
-            ? data.counselRecord.indexOf(highlight)
+        medicineConsult.counselRecordHighlights.forEach((highlight) => {
+          const start = medicineConsult.counselRecord
+            ? medicineConsult.counselRecord.indexOf(highlight)
             : -1; // 안전 처리
           const end = start + highlight.length;
 
@@ -82,8 +78,7 @@ const HighlightInput: React.FC = () => {
       const newEditorState = EditorState.createWithContent(
       contentStateWithHighlight
       );
-
-      setEditorState(newEditorState);
+      dispatch(changeEditorState(newEditorState));
     }
   }, [data, counselSessionId]); 
 
@@ -91,6 +86,8 @@ const HighlightInput: React.FC = () => {
   const applyHighlight = () => {
     const contentState = editorState.getCurrentContent();
     const selectionState = editorState.getSelection();
+    console.log("컨텐츠 스테이트:", contentState.getPlainText());
+    console.log("selectionState:", selectionState.toString());
     if (selectionState.isCollapsed()) return;
 
     // 아래 주석은 유지보수 때를 위해 남김. 10시간의 삽질 끝에 얻은 코드
