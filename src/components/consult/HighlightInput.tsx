@@ -4,38 +4,88 @@ import Tooltip from "@/components/Tooltip";
 import { changeEditorState } from "@/reducers/editorStateReducer";
 import eraserBlack from "@/assets/icon/24/erase.outlined.black.svg";
 import highlightpenBlack from "@/assets/icon/24/highlighter.outlined.black.svg";
-import { Editor, EditorState, Modifier, ContentState } from "draft-js";
+import { Editor, EditorState, Modifier, ContentState, SelectionState } from "draft-js";
 import "draft-js/dist/Draft.css";
 import React from "react";
 import { useSelectMedicineConsult } from "@/hooks/useMedicineConsultQuery";
 import { useMedicineConsultStore} from "@/store/medicineConsultStore";
-import { useEffect } from "react";
+import { useEffect,useState } from "react";
 
 
 
 const HighlightInput: React.FC = () => {
   const dispatch = useAppDispatch();
-  //const editorState = useAppSelector((state) => state.editorState.editorState);
+  // const editorState = useAppSelector((state) => state.editorState.editorState);
 
   const containerRef = React.useRef<HTMLDivElement>(null);
 
   const counselSessionId = "TEST-COUNSEL-SESSION-01";
   const { medicineConsult, setMedicationConsult } = useMedicineConsultStore();
   const { data, isLoading, isError } = useSelectMedicineConsult(counselSessionId);
-  const editorState = medicineConsult.counselRecord
-    ? EditorState.createWithContent(ContentState.createFromText(medicineConsult.counselRecord))
-    : EditorState.createEmpty();
-  
+  const [editorState, setEditorState] = useState(() =>
+    EditorState.createEmpty()
+  );
+    const styleMap = {
+    HIGHLIGHT: {
+      backgroundColor: "#FFBD14",
+    },
+    CLEAR: {
+      backgroundColor: "#FFFFFF",
+    },
+  };
+
+
   useEffect(() => {
-  if (data) {
-    setMedicationConsult({
-      counselSessionId: counselSessionId,
-      medicationCounselId: data.medicationCounselId || '',
-      counselRecord: data.counselRecord || '',
-      counselRecordHighlights: data.counselRecordHighlights || [],
-    });
-  }
-}, [data, counselSessionId]); 
+
+    if (data) {
+      
+      setMedicationConsult({
+       counselSessionId: counselSessionId,
+        medicationCounselId: data.medicationCounselId || '',
+       counselRecord: data.counselRecord || '',
+       counselRecordHighlights: data.counselRecordHighlights || [],
+     });
+    
+       // ContentState 초기화
+      const contentState = ContentState.createFromText(data.counselRecord || "");
+
+      // 특정 하이라이트 설정 (데이터가 있다면 처리)
+      let contentStateWithHighlight = contentState;
+
+      if (
+        data.counselRecordHighlights?.length &&
+        data.counselRecord // 추가 확인
+      ) {
+        data.counselRecordHighlights.forEach((highlight) => {
+          const start = data.counselRecord
+            ? data.counselRecord.indexOf(highlight)
+            : -1; // 안전 처리
+          const end = start + highlight.length;
+
+        if (start !== -1) {
+            const selectionState = SelectionState.createEmpty(
+              contentState.getFirstBlock().getKey()
+            ).merge({
+              anchorOffset: start,
+              focusOffset: end,
+            });
+          
+            contentStateWithHighlight = Modifier.applyInlineStyle(
+              contentStateWithHighlight,
+              selectionState,
+              "HIGHLIGHT"
+            );
+          }
+        });
+      }
+      
+      const newEditorState = EditorState.createWithContent(
+      contentStateWithHighlight
+      );
+
+      setEditorState(newEditorState);
+    }
+  }, [data, counselSessionId]); 
 
   // 하이라이트 버튼 핸들러
   const applyHighlight = () => {
@@ -92,14 +142,7 @@ const HighlightInput: React.FC = () => {
     dispatch(changeEditorState(newEditorState));
   };
 
-  const styleMap = {
-    HIGHLIGHT: {
-      backgroundColor: "#FFBD14",
-    },
-    CLEAR: {
-      backgroundColor: "#FFFFFF",
-    },
-  };
+
 
   // 현재 하이라이트된 텍스트 추출
   const getHighlightedText = () => {
