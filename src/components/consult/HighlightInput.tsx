@@ -9,7 +9,7 @@ import "draft-js/dist/Draft.css";
 import React from "react";
 import { useSelectMedicineConsult } from "@/hooks/useMedicineConsultQuery";
 import { useMedicineConsultStore} from "@/store/medicineConsultStore";
-import { useEffect,useState } from "react";
+import { useEffect} from "react";
 
 
 const HighlightInput: React.FC = () => {
@@ -19,8 +19,10 @@ const HighlightInput: React.FC = () => {
   const containerRef = React.useRef<HTMLDivElement>(null);
 
   const counselSessionId = "TEST-COUNSEL-SESSION-01";
-  const { medicineConsult, setMedicationConsult } = useMedicineConsultStore();
-  const { data, isLoading, isError } = useSelectMedicineConsult(counselSessionId);
+  const { setMedicationConsult
+        , setCounselRecordHighlights
+        ,setCounselRecord } = useMedicineConsultStore();
+  const { data } = useSelectMedicineConsult(counselSessionId);
   const styleMap = {
     HIGHLIGHT: {
       backgroundColor: "#FFBD14",
@@ -43,18 +45,18 @@ const HighlightInput: React.FC = () => {
      });
     
        // ContentState 초기화
-      const contentState = ContentState.createFromText(medicineConsult.counselRecord || "");
+      const contentState = ContentState.createFromText(data.counselRecord || "");
 
       // 특정 하이라이트 설정 (데이터가 있다면 처리)
       let contentStateWithHighlight = contentState;
 
       if (
-        medicineConsult.counselRecordHighlights?.length &&
-        medicineConsult.counselRecord // 추가 확인
+        data.counselRecordHighlights?.length &&
+        data.counselRecord // 추가 확인
       ) {
-        medicineConsult.counselRecordHighlights.forEach((highlight) => {
-          const start = medicineConsult.counselRecord
-            ? medicineConsult.counselRecord.indexOf(highlight)
+        data.counselRecordHighlights.forEach((highlight) => {
+          const start = data.counselRecord
+            ? data.counselRecord.indexOf(highlight)
             : -1; // 안전 처리
           const end = start + highlight.length;
 
@@ -79,29 +81,15 @@ const HighlightInput: React.FC = () => {
       contentStateWithHighlight
       );
       dispatch(changeEditorState(newEditorState));
+
     }
-  }, [data, counselSessionId]); 
+  }, [data]); 
 
   // 하이라이트 버튼 핸들러
   const applyHighlight = () => {
     const contentState = editorState.getCurrentContent();
     const selectionState = editorState.getSelection();
-    console.log("컨텐츠 스테이트:", contentState.getPlainText());
-    console.log("selectionState:", selectionState.toString());
     if (selectionState.isCollapsed()) return;
-
-    // 아래 주석은 유지보수 때를 위해 남김. 10시간의 삽질 끝에 얻은 코드
-    // console.log("컨텐츠 스테이트:", contentState.getPlainText());
-    // console.log("selectionState:", selectionState.toString());
-    // console.log(
-    //   "방금 하이라이트한 텍스트:",
-    //   contentState
-    //     .getPlainText()
-    //     .substring(
-    //       selectionState.getAnchorOffset(),
-    //       selectionState.getFocusOffset(),
-    //     ),
-    // );
 
     const newContentState = Modifier.applyInlineStyle(
       contentState,
@@ -113,9 +101,9 @@ const HighlightInput: React.FC = () => {
       newContentState,
       "change-inline-style",
     );
-
-    // setEditorState(newEditorState);
     dispatch(changeEditorState(newEditorState));
+
+    setCounselRecordHighlights(getHighlightedText()||[]);
   };
 
   // 하이라이트 버튼 핸들러
@@ -135,8 +123,8 @@ const HighlightInput: React.FC = () => {
       "change-inline-style",
     );
 
-    // setEditorState(newEditorState);
     dispatch(changeEditorState(newEditorState));
+    setCounselRecordHighlights(getHighlightedText()||[]);
   };
 
 
@@ -149,15 +137,12 @@ const HighlightInput: React.FC = () => {
     const yellowSpans = Array.from(
       containerRef.current.querySelectorAll("span"),
     ).filter(
-      (span: any) =>
+      (span) =>
         getComputedStyle(span).backgroundColor === "rgb(255, 189, 20)", // #FFBD14
     );
 
-    yellowSpans.forEach((span: any) => {
-      console.log("현재 하이라이트된 텍스트:\n", span.textContent);
-    });
-
-    // TODO : 추출한 텍스트를 String[]으로 저장하여 API로 전송
+    return yellowSpans.map((span) => span.textContent || "")
+  
   };
 
   return (
@@ -171,6 +156,7 @@ const HighlightInput: React.FC = () => {
           placeholder={`상담 내용을 기록하세요`}
           onChange={(editorState) => {
             dispatch(changeEditorState(editorState));
+            setCounselRecord(editorState.getCurrentContent().getPlainText());
           }}
           customStyleMap={styleMap}
         />
