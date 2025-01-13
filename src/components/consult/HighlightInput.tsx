@@ -83,7 +83,7 @@ const HighlightInput: React.FC = () => {
       dispatch(changeEditorState(newEditorState));
 
     }
-  }, [data]); 
+  }, [data,dispatch,setMedicationConsult]); 
 
   // 하이라이트 버튼 핸들러
   const applyHighlight = () => {
